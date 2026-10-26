@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 15 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 19 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -69,6 +69,14 @@ Google · `/aprovar-post` publica blog + Instagram + Facebook num comando.
 `/anuncio-google` monta a campanha inteira em CSV pronto pra importar
 no Google Ads Editor · `/relatorio-ads` lê os exports de Google + Meta
 e devolve relatório semanal com alertas e recomendações.
+
+**Vender serviço de IA pra lojas** — do lead ao cliente que renova
+`/prospectar-lojas` monta lista de lojas por nicho e região com nota de
+oportunidade e gancho de abordagem · `/diagnostico-loja` gera diagnóstico
+gratuito em PDF com os pontos de perda e quanto custam por mês ·
+`/proposta-servico` monta proposta com três pacotes em cima do diagnóstico
+(e cria `_memoria/servicos.md` na primeira vez) · `/relatorio-resultados`
+fecha o mês do cliente com antes/depois e retorno estimado.
 
 **Produção** — ferramentas do dia a dia
 `/analisar-dados` lê CSV/XLSX/PDF e gera resumo executivo ·
