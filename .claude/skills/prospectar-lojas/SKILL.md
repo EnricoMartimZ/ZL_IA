@@ -6,7 +6,8 @@ description: >
   uma nota de oportunidade — quanto a loja está perdendo de venda por falta de IA/marketing.
   Entrega planilha ordenada com o motivo de cada loja estar na lista e o gancho de abordagem.
   Use quando o usuário pedir "prospectar lojas", "achar clientes", "lista de lojas", "quem eu
-  abordo", "lojas em [cidade]", "leads de [nicho]", ou /prospectar-lojas.
+  abordo", "lojas em [cidade]", "leads de [nicho]", ou /prospectar-lojas. Empresas que vendem pra outras
+  empresas (indústria, distribuidora, transportadora, contabilidade...): usar /prospectar-b2b.
 ---
 
 # /prospectar-lojas — Lista de lojas com nota de oportunidade

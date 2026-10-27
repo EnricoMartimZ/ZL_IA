@@ -52,7 +52,7 @@ Do Google Meu Negócio, Instagram e site atual (se houver):
 - Cores do logo/fachada/Instagram (pra montar o `:root`)
 - O diferencial que eles mesmos repetem ("desde 1998", "atendimento em casa", "laboratório próprio")
 
-Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Anotar também a coordenada da porta (Google Maps) — com ela o `scripts/mapa-ruas.js` gera o mapa animado do bairro da loja, que impressiona muito na demo.
+Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Prospect B2B (veio do `/prospectar-b2b`): trocar o botão e o painel "Agendar" por "Pedir orçamento" (serviço/produto, empresa, quantidade ou prazo) e usar os prints da auditoria como "antes" na mensagem. Anotar também a coordenada da porta (Google Maps) — com ela o `scripts/mapa-ruas.js` gera o mapa animado do bairro da loja, que impressiona muito na demo.
 
 ### Passo 2 — Escolher o hero
 
