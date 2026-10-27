@@ -125,7 +125,9 @@ function mensagem(c, i) {
   } else if (f.tipo === 'nota') {
     meio = `Vi a ${loja} no Google: ${f.fato}. Na lista do Google o cliente compara as estrelas lado a lado, e quem tem nota maior leva.`;
   } else {
-    meio = `Vi a ${loja} no Google: nota ${c.nota}, ótimo sinal. Só que são ${f.fato}${L.antes ? `, que aparece antes na busca "${c.busca}"` : ''}. No Google, quem tem mais avaliação aparece primeiro e fica com o cliente.`;
+    // "ótimo sinal" só quando a nota é boa mesmo: o dono sabe que 4,2 não é
+    const elogio = num(c.nota) >= 4.7 ? `nota ${c.nota}, ótimo sinal. Só que são` : `nota ${c.nota} e`;
+    meio = `Vi a ${loja} no Google: ${elogio} ${f.fato}${L.antes ? `, que aparece antes na busca "${c.busca}"` : ''}. No Google, quem tem mais avaliação aparece primeiro e fica com o cliente.`;
   }
   return `${ab}\n\n${meio}\n\n${fe} ${SAIDA}`;
 }
