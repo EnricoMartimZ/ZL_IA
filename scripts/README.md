@@ -13,6 +13,7 @@ Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chr
 | `postar-instagram.js` | `/aprovar-post` | Publica carrossel ou post único no Instagram |
 | `postar-facebook.js` | `/aprovar-post` | Publica as fotos num post da Página do Facebook |
 | `lib/meta.js` | scripts de postagem | Funções comuns da Meta Graph API |
+| `kie.js` | `/foto-produto`, `/video-ia` | Gera imagem, vídeo e lip sync pelo kie.ai (motor do Open Higgsfield AI); sobe arquivos locais marcados com `@` |
 
 ```bash
 node scripts/render.js marketing/conteudo/<pasta>/carrossel.html --png marketing/conteudo/<pasta>/instagram
@@ -21,7 +22,9 @@ node --env-file=.env scripts/gerar-imagem.js "PROMPT" marketing/conteudo/<pasta>
 node --env-file=.env scripts/postar-instagram.js marketing/conteudo/<slug>-<data> --dry-run
 ```
 
-`--dry-run` nos scripts de postagem mostra as chamadas à API sem publicar nada — use pra conferir antes da primeira vez.
+`/video-reels` não usa script daqui: roda o CLI do HyperFrames (`npx hyperframes`, precisa de Node 22+ e FFmpeg).
+
+`--dry-run` nos scripts de postagem e no `kie.js` mostra as chamadas à API sem publicar nada — use pra conferir antes da primeira vez.
 
 ## Pré-requisitos comuns
 
@@ -32,6 +35,7 @@ A maioria dos scripts depende de:
 **.env** na raiz do projeto (copie o `.env.example`; o `.env` está no `.gitignore`):
 ```bash
 OPENAI_API_KEY=sk-...               # pra gerar-imagem.js
+KIE_API_KEY=...                     # pra kie.js (/foto-produto, /video-ia)
 META_PAGE_ACCESS_TOKEN=...          # pra postar-instagram.js + postar-facebook.js
 META_PAGE_ID=...
 META_IG_USER_ID=...

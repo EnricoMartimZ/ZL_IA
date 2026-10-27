@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 21 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 24 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -84,6 +84,13 @@ fecha o mês do cliente com antes/depois e retorno estimado · `/funil` mostra
 todas as lojas por etapa e quem precisa de follow-up hoje, com mensagem
 pronta · `/aprendizado` registra por que cada venda fechou ou foi perdida e
 vira regra pras outras skills.
+
+**Foto e vídeo com IA** — entregas que a loja vê na hora
+`/foto-produto` transforma foto de celular em foto de catálogo, lifestyle ou
+sazonal mantendo o produto idêntico (kie.ai ou Higgsfield) · `/video-ia`
+anima foto de produto e faz apresentador falar com lip sync · `/video-reels`
+monta reels e TikToks 9:16 com o HyperFrames, inclusive um vídeo por produto
+a partir de uma planilha.
 
 **Produção** — ferramentas do dia a dia
 `/analisar-dados` lê CSV/XLSX/PDF e gera resumo executivo ·
