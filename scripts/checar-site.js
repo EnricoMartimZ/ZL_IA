@@ -28,7 +28,7 @@ const EXEMPLOS = [
   'DOMINIO', 'Marca ·', 'MARCA', 'Marca', 'Serviço principal', 'Serviço dois', 'Serviço três', 'Serviço quatro',
   'Serviço cinco', 'Rua Exemplo', 'Cidade/UF', '00000-000', '0000-0000', '00.000.000', '5500000000000',
   'Nome S.', 'Frase real de uma avaliação', 'Descrever a foto', 'TROCAR PELA FOTO', 'Benefício concreto',
-  '000 avaliações', 'O que acontece nessa etapa', 'Uma que fale de atendimento',
+  '000 avaliações', 'O que acontece nessa etapa', 'Uma que fale de atendimento', 'NOME-DO-SERVIÇO',
   'Uma frase do que a marca', 'Duas frases', 'Resposta real', 'Etapa um', '{{',
 ];
 
@@ -57,6 +57,7 @@ async function servir(pasta) {
 }
 
 const achados = []; // { nivel: 'erro'|'aviso'|'ok', pagina, item, detalhe }
+const site = { contato: null, privacidade: null }; // modo de contato (app.js) e texto da página de privacidade
 const add = (nivel, pagina, item, detalhe = '') => achados.push({ nivel, pagina, item, detalhe });
 
 async function checarPagina(browser, url, base, visitadas, fila) {
@@ -107,7 +108,7 @@ async function checarPagina(browser, url, base, visitadas, fila) {
           robots: meta('meta[name="robots"]'), canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '',
           ogImg: meta('meta[property="og:image"]'), ogTitulo: meta('meta[property="og:title"]'), viewport: meta('meta[name="viewport"]'),
           favicon: !!document.querySelector('link[rel~="icon"]'), h1: document.querySelectorAll('h1').length,
-          jsonld, imgs, links, textos,
+          jsonld, imgs, links, textos, contato: window.__contato || null, corpo: document.body.textContent,
         };
       });
 
@@ -132,6 +133,17 @@ async function checarPagina(browser, url, base, visitadas, fila) {
         else if (/aggregateRating/.test(JSON.stringify(j))) add('aviso', nome, 'JSON-LD com aggregateRating', 'avaliação própria em LocalBusiness é contra as regras do Google');
       });
       if (nome === '/' && !ehDemo && info.jsonld.length === 0) add('aviso', nome, 'Sem dados estruturados (JSON-LD)', 'perde endereço/horário no Google');
+
+      // modo de contato: orçamento (B2B) sem sobra de "agendar"; demo nunca coleta dado por formulário
+      if (info.contato) {
+        site.contato ||= info.contato;
+        if (info.contato.modo === 'orcamento') {
+          const sobra = info.corpo.match(/[^.\n]{0,40}(\bagend|hora marcada|\bmarcar\b)[^.\n]{0,30}/i);
+          if (sobra) add('aviso', nome, 'Texto de agenda no modo orçamento', `"${sobra[0].trim()}" — trocar ou marcar com data-orcamento`);
+        }
+        if (ehDemo && info.contato.envio === 'formulario' && nome === '/') add('erro', nome, 'Demo com formulário de orçamento ligado', 'demo não coleta dado de quem visita: deixar CONFIG.orcamento.formulario vazio');
+      }
+      if (/privacidade/.test(nome)) site.privacidade = info.corpo;
 
       // imagens de exemplo do modelo (arquivos exemplo-*), inclusive a de compartilhamento
       if (/exemplo/.test(info.ogImg)) exemplos.add(info.ogImg.replace(/^https?:\/\/[^/]+/, '') + ' (og:image)');
@@ -170,6 +182,26 @@ async function checarPagina(browser, url, base, visitadas, fila) {
       if (mb > 5) add('aviso', nome, `Página pesada: ${mb.toFixed(1)} MB`, 'comprimir modelo 3D (Draco) e fotos (WebP)');
       if (tempoLoad > 6000) add('aviso', nome, `Demorou ${(tempoLoad / 1000).toFixed(1)} s pra carregar`);
     }
+
+    // painel de agenda/orçamento: abre e cabe na tela
+    const painel = await page.evaluate(async () => {
+      const b = document.querySelector('[data-abrir-agenda]');
+      if (!b) return null;
+      b.click();
+      const p = document.querySelector('.agenda-painel');
+      const dentro = () => {
+        const r = p.getBoundingClientRect();
+        return document.querySelector('.agenda')?.classList.contains('aberta') && r.left >= -1 && r.right <= innerWidth + 1;
+      };
+      // espera o painel terminar de deslizar (o hero pesa e atrasa a animação)
+      for (let i = 0; p && i < 30 && !dentro(); i++) await new Promise((r) => setTimeout(r, 100));
+      const ok = !!p && dentro();
+      const vaza = p ? p.scrollWidth > p.clientWidth + 1 : false;
+      document.querySelector('[data-fechar-agenda]')?.click();
+      return { ok, vaza };
+    });
+    if (painel && !painel.ok) add('erro', nome, `O painel de ${site.contato?.modo === 'orcamento' ? 'orçamento' : 'agenda'} não abriu (${disp})`);
+    if (painel?.vaza) add('aviso', nome, `O painel de contato rola pro lado (${disp})`);
 
     // celular: rolagem lateral
     if (disp === 'celular') {
@@ -223,6 +255,10 @@ try {
       const noSitemap = locs.map((l) => { try { return new URL(l).pathname; } catch { return l; } });
       paginas.filter((p) => !/privacidade/.test(p) && !noSitemap.includes(p)).forEach((p) => add('aviso', 'sitemap.xml', 'Página fora do sitemap', p));
     }
+  }
+
+  if (site.contato?.envio === 'formulario' && site.privacidade !== null && !/formul/i.test(site.privacidade)) {
+    add('aviso', '/privacidade.html', 'Privacidade não fala do formulário de orçamento', 'colar o item comentado no HTML, com o nome do serviço');
   }
 
   // relatório

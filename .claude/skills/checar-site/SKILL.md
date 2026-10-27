@@ -46,7 +46,7 @@ Ele abre cada página (segue os links internos) em desktop 1440 px e celular 390
 3. Rodar de novo até sair "✅ Nada bloqueando a entrega"
 4. Conferência humana que o script não faz — abrir o site e checar:
    - [ ] O 3D (ou a foto do hero) está bonito no celular e não cobre o título
-   - [ ] A agenda abre e o WhatsApp que abre é o **do cliente**, com a mensagem certa
+   - [ ] A agenda (ou o pedido de orçamento) abre e o WhatsApp que abre é o **do cliente**, com a mensagem certa. Orçamento por formulário: mandar um pedido de teste no site publicado e ver chegar no e-mail da empresa
    - [ ] Preços, horários e endereço batem com o que o cliente passou
    - [ ] Fotos são reais (ou marcadas como ilustrativas) e todas autorizadas
    - [ ] O texto soa como o cliente fala (`_memoria/preferencias.md` do cliente)

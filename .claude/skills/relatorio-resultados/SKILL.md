@@ -81,7 +81,7 @@ Só indicadores ligados ao pacote contratado. Tabela:
 | Alcance Instagram | ... | ... | ... | |
 | Mensagens no WhatsApp/Direct | ... | ... | ... | |
 | Vendas (se informado) | ... | ... | ... | |
-| Site: cliques no WhatsApp / agendamentos enviados | ... | ... | ... | |
+| Site: cliques no WhatsApp / agendamentos ou pedidos de orçamento enviados | ... | ... | ... | |
 | Site: cliques e impressões no Google (Search Console) | ... | ... | ... | |
 
 Escolher **um destaque do mês**: o número que mais melhorou e que o dono entende sem explicação.

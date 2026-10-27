@@ -32,4 +32,26 @@ Não é "um site bonito". É **um canal de pedido de orçamento**:
 - Perfil no Google completo, página no LinkedIn atualizada
 - Relatório mensal: pedidos de orçamento que vieram do site e do Google
 
-Modelo: `/site-premium` com tema e tom mais sóbrios, hero em sequência mostrando o processo (a peça bruta → usinada → inspecionada → entregue) e a agenda trocada por "Pedir orçamento".
+Modelo: `/site-premium` com tema e tom mais sóbrios, hero em sequência mostrando o processo (a peça bruta → usinada → inspecionada → entregue) e `contato: 'orcamento'` no `app.js` (painel "Pedir orçamento").
+
+## Pergunta do orçamento por nicho
+
+A primeira coisa que o vendedor pergunta vira o campo `orcamento.quantidade` (e o exemplo, `exemploQuantidade`). Os serviços do painel são os produtos/serviços do site; a cidade, quando a entrega ou a obra muda o preço.
+
+| Nicho | `quantidade` | `exemploQuantidade` | `cidade` |
+|---|---|---|---|
+| Indústria / usinagem | Peça, material e quantidade | ex: eixo em aço 1045, 500 un/mês | Cidade da entrega |
+| Distribuidora / atacado | Produtos e volume | ex: 20 caixas de luva nitrílica por mês | Cidade da entrega |
+| Transportadora | Origem, destino e carga | ex: Campinas → BH, 8 paletes, 4 t | `''` (já está na rota) |
+| Construtora / engenharia | Tipo e tamanho da obra | ex: galpão de 1.200 m² | Cidade da obra |
+| Energia solar empresarial | Conta de luz média | ex: R$ 6.000 por mês | Cidade da instalação |
+| Elétrica / ar-condicionado comercial | O que precisa e onde | ex: 12 splits num escritório de 400 m² | Cidade |
+| Segurança eletrônica | Tipo de local e tamanho | ex: galpão com 2 portarias | Cidade |
+| Facilities | Área ou número de postos | ex: 3 postos de portaria 24 h | Cidade |
+| Uniformes / EPI | Peças e quantidade | ex: 150 camisas polo bordadas | Cidade da entrega |
+| Gráfica / embalagens | Produto, tamanho e quantidade | ex: 5.000 caixas 20×20×10 | Cidade da entrega |
+| Contabilidade | Regime e tamanho da empresa | ex: Simples, 12 funcionários | `''` |
+| TI / suporte gerenciado | Computadores e usuários | ex: 35 máquinas, 1 servidor | Cidade |
+| Laboratório / calibração | Ensaio ou instrumento e quantidade | ex: 40 manômetros | Cidade |
+| Locação de equipamentos | Equipamento e período | ex: 2 plataformas por 30 dias | Cidade da obra |
+| Medicina do trabalho | Funcionários e serviço | ex: PCMSO pra 80 funcionários | Cidade |

@@ -119,7 +119,7 @@ Adicionar cada empresa em `vendas/funil.md`, nicho com prefixo **B2B ·**, etapa
 
 Fechar no chat com o top 5 (empresa, potencial, oportunidade, gancho) e:
 
-> "Pros 3 primeiros vale mandar a abordagem já com uma prévia: `/site-demo` (com 'Pedir orçamento' no lugar de agendar). Quer que eu monte?"
+> "Pros 3 primeiros vale mandar a abordagem já com uma prévia: `/site-demo` com o modo 'Pedir orçamento' (`contato: 'orcamento'`) e a pergunta do nicho. Quer que eu monte?"
 
 ---
 

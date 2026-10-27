@@ -46,6 +46,7 @@ Zero ❌ e conferência humana do `/checar-site` feita. Confirmar com o usuário
 Antes do deploy, no site:
 - Trocar `DOMINIO` pelo domínio final em todos os arquivos (canonical, og, JSON-LD, sitemap, robots)
 - `app.js` → `medicao`: Plausible (sem cookies) ou GA4/Pixel do cliente (o aviso de cookies aparece sozinho)
+- Orçamento por formulário (`orcamento.formulario`): o formulário criado na conta **da empresa**, e o item do formulário colado na `privacidade.html`
 - `sitemap.xml` com todas as páginas e `lastmod` de hoje
 
 ### Passo 2 — Deploy
@@ -88,7 +89,7 @@ Criar `clientes/<Nome>/site/ENTREGA.md`:
 - Domínio: registrado em nome de <cliente> no Registro.br, vence em <data>
 - DNS: <onde está> · registros: <lista>
 - Search Console: propriedade do cliente (<email>), eu como usuário · sitemap enviado em <data>
-- Medição: <Plausible/GA4/Pixel> · eventos: clique_whatsapp, agenda_aberta, agenda_enviada, clique_telefone
+- Medição: <Plausible/GA4/Pixel> · eventos: clique_whatsapp, agenda_aberta, agenda_enviada (ou orcamento_aberto, orcamento_enviado), clique_telefone, clique_rota
 - Google Meu Negócio e Instagram com o link: ok
 - Checagem: CHECAGEM.md (0 ❌) · PageSpeed celular: <nota>
 - Pendências do cliente: <fotos, depoimentos...>
@@ -106,7 +107,7 @@ O site avulso paga uma vez; a manutenção paga todo mês. Oferecer junto com a 
 - Hospedagem e domínio monitorados (avisar antes de vencer)
 - Até N ajustes de texto, preço, foto ou horário
 - `checar-site` no site publicado e correção do que aparecer
-- Relatório de resultados do site: cliques no WhatsApp, agendamentos enviados, visitas e buscas no Google (Search Console) — entra no `/relatorio-resultados`
+- Relatório de resultados do site: cliques no WhatsApp, agendamentos (ou pedidos de orçamento) enviados, visitas e buscas no Google (Search Console) — entra no `/relatorio-resultados`
 - Uma melhoria por mês a partir dos números (ex: página nova de serviço que as pessoas buscam)
 
 **Rotina mensal** (todo dia 1º, por cliente):

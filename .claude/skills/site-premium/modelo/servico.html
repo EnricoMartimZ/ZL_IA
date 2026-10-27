@@ -42,7 +42,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Quanto tempo leva?", "acceptedAnswer": { "@type": "Answer", "text": "Resposta real, com número." } },
-        { "@type": "Question", "name": "Precisa agendar?", "acceptedAnswer": { "@type": "Answer", "text": "Resposta real." } },
+        { "@type": "Question", "name": "Como funciona o atendimento?", "acceptedAnswer": { "@type": "Answer", "text": "Resposta real." } },
         { "@type": "Question", "name": "Quanto custa?", "acceptedAnswer": { "@type": "Answer", "text": "A partir de R$ 390, dependendo de..." } }
       ]
     },
@@ -69,7 +69,7 @@
     <a href="./#processo">Processo</a>
     <a href="./#avaliacoes">Avaliações</a>
   </nav>
-  <button class="btn btn-claro" data-abrir-agenda data-servico="Serviço principal">Agendar</button>
+  <button class="btn btn-claro" data-abrir-agenda data-servico="Serviço principal" data-orcamento="Pedir orçamento">Agendar</button>
 </header>
 
 <main>
@@ -81,7 +81,7 @@
         <h1 class="display" data-editar>Serviço <br><span class="contorno">principal.</span></h1>
         <p class="lead" data-editar>Duas frases: o problema que resolve e o resultado que o cliente vê. Citar a cidade uma vez, naturalmente.</p>
         <p class="preco"><small>a partir de</small> <b data-editar>R$ 390</b> <small data-editar>· leva cerca de 4 h</small></p>
-        <button class="btn btn-ouro" data-abrir-agenda data-servico="Serviço principal">Agendar este serviço</button>
+        <button class="btn btn-ouro" data-abrir-agenda data-servico="Serviço principal" data-orcamento="Pedir orçamento">Agendar este serviço</button>
       </div>
       <img src="img/exemplo-foto-1.svg" alt="Descrever a foto real do serviço" data-editar>
     </div>
@@ -99,17 +99,17 @@
 
   <section class="secao">
     <p class="eyebrow reveal">Perguntas frequentes</p>
-    <h2 class="display reveal" data-editar>Antes de <br><span class="contorno">agendar.</span></h2>
+    <h2 class="display reveal" data-editar>Antes de <br><span class="contorno" data-orcamento="cotar.">agendar.</span></h2>
     <div class="faq">
       <details><summary data-editar>Quanto tempo leva?</summary><p data-editar>Resposta real, com número.</p></details>
-      <details><summary data-editar>Precisa agendar?</summary><p data-editar>Resposta real.</p></details>
+      <details><summary data-editar>Como funciona o atendimento?</summary><p data-editar>Resposta real.</p></details>
       <details><summary data-editar>Quanto custa?</summary><p data-editar>A partir de R$ 390, dependendo de...</p></details>
     </div>
   </section>
 
   <section class="final">
-    <h2 class="display grande reveal" data-editar>Bora <span class="ouro">marcar?</span></h2>
-    <button class="btn btn-ouro reveal" data-abrir-agenda data-servico="Serviço principal">Agendar meu horário</button>
+    <h2 class="display grande reveal" data-editar>Bora <span class="ouro" data-orcamento="cotar?">marcar?</span></h2>
+    <button class="btn btn-ouro reveal" data-abrir-agenda data-servico="Serviço principal" data-orcamento="Pedir orçamento">Agendar meu horário</button>
   </section>
 </main>
 

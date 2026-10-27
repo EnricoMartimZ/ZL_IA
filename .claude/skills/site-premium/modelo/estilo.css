@@ -250,6 +250,7 @@ body.demo .nav { top: 26px; }
 .agenda.aberta .agenda-fundo { opacity: 1; }
 .agenda-painel { position: absolute; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--bg-2); border-left: 1px solid var(--line); padding: 28px; overflow-y: auto; display: flex; flex-direction: column; gap: 22px; transform: translateX(100%); transition: transform .5s var(--ease); }
 .agenda.aberta .agenda-painel { transform: none; }
+.agenda-painel > * { flex-shrink: 0; } /* formulário mais alto que a tela rola, não espreme */
 .agenda-painel header { display: flex; justify-content: space-between; align-items: center; }
 .agenda-painel header .eyebrow { margin: 0; }
 .fechar { font-size: 28px; line-height: 1; color: var(--muted); }
@@ -263,7 +264,20 @@ legend { font: 400 11px/1 var(--mono); letter-spacing: .16em; text-transform: up
 .opcoes input:checked + span { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .opcoes input:focus-visible + span { outline: 2px solid var(--accent); }
 .campo { display: grid; gap: 8px; font: 400 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
-.campo input { height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 400 16px var(--display); letter-spacing: 0; text-transform: none; }
+.campo input, .campo textarea { height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 400 16px var(--display); letter-spacing: 0; text-transform: none; }
+.campo textarea { height: auto; min-height: 92px; padding: 12px 14px; line-height: 1.45; resize: vertical; }
+.campo input::placeholder, .campo textarea::placeholder { color: var(--fraco); }
+.campo input:focus-visible, .campo textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.campo small { font-size: 10px; letter-spacing: .12em; color: var(--fraco); margin-left: 6px; }
+.mel { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.nota-lgpd { font-size: 12px; color: var(--muted); margin-top: -12px; }
+.nota-lgpd a, .pedido-erro a { text-decoration: underline; text-underline-offset: 3px; }
+.pedido-erro { font-size: 14px; padding: 12px 14px; border-radius: 10px; border: 1px solid color-mix(in srgb, #e5484d 50%, transparent); background: color-mix(in srgb, #e5484d 10%, transparent); }
+.pedido-erro[hidden], .pedido-ok[hidden] { display: none; }
+.pedido-ok { display: grid; gap: 14px; }
+.pedido-ok h3 { font: italic 800 clamp(26px, 3vw, 34px)/1.05 var(--display); text-transform: uppercase; }
+.pedido-ok p { color: var(--muted); }
+.agenda-painel.enviado > :not(header):not(.pedido-ok) { display: none; }
 
 /* ---------- reveal ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }

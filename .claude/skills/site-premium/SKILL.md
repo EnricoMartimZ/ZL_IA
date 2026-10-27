@@ -4,10 +4,11 @@ description: >
   Cria um site premium pra uma loja ou serviço local, com um hero cinematográfico que conta a transformação
   que o cliente compra (antes → depois) — cenas geradas por IA costuradas com transições em WebGL (padrão),
   modelo 3D em Three.js, ou foto — visual de alto padrão (uma cor de destaque,
-  títulos enormes, rótulos monoespaçados), agenda que abre o WhatsApp com a mensagem pronta e deploy
+  títulos enormes, rótulos monoespaçados), agenda que abre o WhatsApp com a mensagem pronta — ou, pra
+  empresa B2B, um painel "Pedir orçamento" (WhatsApp ou formulário que chega no e-mail) — e deploy
   estático na Vercel ou Netlify. Parte de um modelo pronto e testado em modelo/. Use quando o usuário pedir
   "site", "landing page", "site premium", "site com 3D", "site profissional", "site que pareça caro",
-  "site pro cliente X", ou /site-premium.
+  "site pro cliente X", "site pra empresa", "site com pedido de orçamento", "site pra indústria", ou /site-premium.
 ---
 
 # /site-premium — Site de alto padrão com hero cinematográfico
@@ -79,6 +80,24 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 | **Página de serviço** | `servico.html` copiada como `servico-<nome>.html` | Cada serviço que as pessoas buscam no Google ("lentes multifocais campinas") |
 | **Loja online** | link comentado no `<nav>` do `index.html` | Loja com Nuvemshop/Shopify |
 | **Mapa animado** | seção `#onde` + `mapa.json` (padrão) | Todo negócio com endereço físico. Só online: apagar a seção, o link "Onde fica" e o `mapa.js` |
+| **Agenda** | `contato: 'agenda'` no `app.js` (padrão): serviço → dia → período → nome → WhatsApp | Loja, estética, oficina, clínica: quem vende horário |
+| **Pedir orçamento** | `contato: 'orcamento'`: o que precisa → quantidade → prazo → empresa → nome → WhatsApp. Troca sozinho os textos com `data-orcamento` | **B2B** (indústria, distribuidora, transportadora, construtora, instaladora) e serviço sob medida. Ver o bloco abaixo |
+| **Orçamento por e-mail** | `contato: 'orcamento'` + `orcamento.formulario` com a URL do Formspree ou Web3Forms | Empresa que tem comercial no e-mail ou quer o pedido registrado. Nunca em demo |
+
+### Modo "Pedir orçamento" (B2B)
+
+O comprador de empresa não marca horário: ele cota. O painel pergunta o que o vendedor pergunta primeiro e manda o pedido pronto.
+
+- **`contato: 'orcamento'`** troca o painel e todo texto marcado com `data-orcamento="..."` (menu, botões, pílula, fim da página, FAQ, privacidade). Texto novo que fale de agenda: marcar com `data-orcamento` ou reescrever. O `/checar-site` avisa se sobrar "agendar" ou "hora marcada"
+- **`orcamento.quantidade`** = a pergunta do nicho, com o exemplo em `exemploQuantidade` (tabela "Pergunta do orçamento" em `.claude/skills/prospectar-b2b/nichos.md`): "Origem, destino e peso" na transportadora, "Conta de luz média" na energia solar, "Área da obra" na construtora. `''` tira o campo; o mesmo vale pra `cidade`
+- **`orcamento.prazos`** sem nenhum marcado de saída (o vendedor quer a resposta real) e **`resposta`** com o prazo que a empresa cumpre de verdade
+- **Envio:** com `formulario` vazio o pedido abre no WhatsApp comercial, formatado. Com formulário:
+  1. Criar o formulário **na conta da empresa** (Formspree: formspree.io → New form → copiar a URL `https://formspree.io/f/...`; Web3Forms: web3forms.com → e-mail comercial → chave em `camposFixos: { access_key: '...' }` com `formulario: 'https://api.web3forms.com/submit'`)
+  2. O painel passa a pedir e-mail e telefone, mostra a linha da LGPD e uma tela de "pedido recebido"; se o envio falhar, oferece o WhatsApp com o pedido inteiro
+  3. Em `privacidade.html`, trocar o item "Pedido de orçamento" pelo que está comentado logo abaixo dele, com o nome do serviço
+  4. Depois de publicar, mandar **um pedido de teste real** e confirmar que chegou no e-mail da empresa (o Formspree pede pra confirmar o e-mail no primeiro envio)
+- **Medição:** `orcamento_aberto` e `orcamento_enviado` (com `servico`, `prazo` e `canal`); no Pixel da Meta vira `Lead`
+- **Resto do site pra B2B** (`design.md` §5): tema sóbrio, prova com clientes atendidos, certificações e capacidade, uma página por produto/serviço
 
 ### Passo 3 — Montar o site
 
@@ -87,7 +106,7 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 3. **`estilo.css`** → trocar só o `:root` do tema escolhido (cores da marca; fontes se a marca tiver)
 4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title de cada página = serviço + cidade + marca
 5. **`DOMINIO`** → buscar e trocar em todos os arquivos (canonical, og, JSON-LD, `sitemap.xml`, `robots.txt`). Sem domínio ainda: deixar e trocar no `/publicar-site`
-6. **`app.js`** → `CONFIG`: WhatsApp, serviços (os mesmos nomes dos cards), períodos, dias fechados, **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
+6. **`app.js`** → `CONFIG`: WhatsApp, `contato` (`'agenda'` ou `'orcamento'`), serviços (os mesmos nomes dos cards), `agenda` (períodos, dias fechados) **ou** `orcamento` (pergunta do nicho, prazos, resposta, formulário), **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
 7. **Hero** → no `index.html`, os blocos `.beat` (um por capítulo: título em duas frases curtas, linha técnica, o último com o botão) e o rótulo `.tag-ia`. Modo sequência: `hero-seq.js` → `CONFIG.cenas` e `CONFIG.passos` (ver `cenas.md` §4). Modo 3D: `hero3d.js` → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
 8. **`img/`** → fotos reais (WebP, ~1600 px no lado maior) no lugar de **todo arquivo `exemplo-*`** (galeria, fundo dos cards de serviço em `style="--foto: url(...)"`, hero foto, cenas); `og.png` 1200×630 no lugar do `og-exemplo.png` (gerar com `og/og.html` desta skill: `node scripts/render.js .claude/skills/site-premium/og/og.html --png <pasta> --size 1200x630`); `favicon.svg` com a inicial da marca. O `/checar-site` acusa qualquer `exemplo-*` que sobrar
 9. **Onde fica (mapa)** → pegar a coordenada da porta da loja no Google Maps (botão direito → copiar coordenadas) e gerar as ruas e a rota:
@@ -118,7 +137,7 @@ Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e
 - [ ] Em cada etapa o título lê bem e não cobre o assunto da cena (sequência: ajustar `foco`/`zoom` do passo; 3D: afastar `cam`). Pra parar numa etapa: no console, `__hero.pausar(); __hero.ir(<segundos>)`
 - [ ] No celular, o assunto de cada cena aparece (a tela corta as laterais — ajustar `foco`)
 - [ ] Mapa: a loja está no lugar certo, a rota faz sentido (não atravessa quarteirão, começa numa rua conhecida) e o "Como chegar" abre a loja no Google Maps. Pra parar numa fase: `__mapa.pausar(); __mapa.ir(<segundos>)`
-- [ ] Agenda abre, monta a mensagem e abre o WhatsApp certo (no `localhost`, o console mostra cada evento `[medir]`)
+- [ ] Agenda (ou pedido de orçamento) abre, monta a mensagem e abre o WhatsApp certo (no `localhost`, o console mostra cada evento `[medir]`). Orçamento por formulário: o envio de teste fica pro site publicado
 - [ ] Grade de serviços sem card sobrando sozinho
 - [ ] Desligar o WebGL mostra o fundo alternativo e o site continua usável
 

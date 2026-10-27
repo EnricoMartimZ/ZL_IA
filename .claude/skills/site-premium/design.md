@@ -59,6 +59,11 @@ Referência estudada: um site premium de estética automotiva.
 - Um só verbo de ação no site inteiro ("Agendar"), repetido no menu, no fim e no WhatsApp flutuante.
 - Agenda em painel lateral (serviço → dia → período → nome) que abre o WhatsApp com a mensagem pronta.
   Sem formulário de contato genérico.
+- **B2B: "Pedir orçamento" no lugar de "Agendar"** (`contato: 'orcamento'`). O mesmo painel, com as perguntas que o
+  vendedor faz primeiro: o que precisa, quantidade (a pergunta do nicho), prazo, empresa, nome. Nada de
+  "fale conosco" com campo "mensagem" — formulário genérico vira e-mail sem resposta. A prova muda: clientes
+  atendidos (com autorização), certificações (ISO, NR, acreditação), capacidade (máquinas, frota, m²) e
+  prazo de resposta cumprido, em vez de "1 cliente por vez".
 - WhatsApp flutuante só aparece depois do hero (não compete com o 3D).
 - **Avaliações como prova grande:** o título da seção é a nota e o número reais ("5,0 em 582 avaliações."),
   com botão pro perfil no Google e 4–6 avaliações reais (nome abreviado, estrelas, "Google · há 3 meses").
@@ -89,4 +94,4 @@ Referência estudada: um site premium de estética automotiva.
 - Title de cada página = **serviço + cidade + marca** ("Lentes multifocais em Campinas · <marca>"). O h1 pode ser criativo; o title não.
 - Dados estruturados (JSON-LD) com o tipo mais específico do negócio, endereço, horário e coordenadas — é o que alimenta o Google e o Maps. Nunca `aggregateRating` com avaliações do Google.
 - Uma página por serviço importante, com perguntas frequentes reais (viram resultado no Google).
-- Todo botão que gera contato é medido (`clique_whatsapp`, `agenda_enviada`...). Site que não mede não justifica mensalidade.
+- Todo botão que gera contato é medido (`clique_whatsapp`, `agenda_enviada`, `orcamento_enviado`...). Site que não mede não justifica mensalidade.

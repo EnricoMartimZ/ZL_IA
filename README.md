@@ -95,7 +95,7 @@ a partir de uma planilha.
 **Sites** — a vitrine que vale dinheiro
 `/site-premium` cria site com hero cinematográfico que conta o antes → depois do
 serviço — cenas geradas por IA costuradas com transições (padrão), 3D ou foto —, visual escuro de alto padrão e agenda pelo
-WhatsApp — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
+WhatsApp (ou "Pedir orçamento" pra empresa B2B) — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
 e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-demo` monta uma prévia do site da loja antes de vender
 (marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de
 exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com
