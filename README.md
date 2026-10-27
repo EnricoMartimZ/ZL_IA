@@ -96,7 +96,7 @@ a partir de uma planilha.
 `/site-premium` cria site com hero cinematográfico que conta o antes → depois do
 serviço — cenas geradas por IA costuradas com transições (padrão), 3D ou foto —, visual escuro de alto padrão e agenda pelo
 WhatsApp — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
-e medição de cliques · `/site-demo` monta uma prévia do site da loja antes de vender
+e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-demo` monta uma prévia do site da loja antes de vender
 (marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de
 exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com
 domínio, Search Console e Google Meu Negócio, e organiza a manutenção mensal.

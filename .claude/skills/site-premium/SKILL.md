@@ -21,6 +21,7 @@ Referência: um site premium de estética automotiva — primeira versão com 3D
 - **Modelo pronto:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Regras de design:** `.claude/skills/site-premium/design.md` — ler antes de mexer no visual
 - **Cenas de IA do hero:** `.claude/skills/site-premium/cenas.md` — roteiro, prompts e geração consistente (com `scripts/kie.js` ou Higgsfield)
+- **Mapa da seção "Onde fica":** `scripts/mapa-ruas.js` (ruas reais do OpenStreetMap + rota até a loja) e `modelo/mapa.js` (a animação)
 - **Cliente:** `clientes/<Nome>/` — `CLAUDE.md`, briefing, fotos (`fotos/` do `/foto-produto` se houver)
 - **Diagnóstico:** `vendas/diagnosticos/<slug>/dados.md` (avaliações reais, nota, diferenciais)
 - **Tom de voz:** `_memoria/preferencias.md` e o do cliente
@@ -77,6 +78,7 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 | **Tema claro** | `data-tema="claro"` + cores no bloco `:root[data-tema="claro"]` | Clínica, ótica, confeitaria, infantil, pet, moda feminina |
 | **Página de serviço** | `servico.html` copiada como `servico-<nome>.html` | Cada serviço que as pessoas buscam no Google ("lentes multifocais campinas") |
 | **Loja online** | link comentado no `<nav>` do `index.html` | Loja com Nuvemshop/Shopify |
+| **Mapa animado** | seção `#onde` + `mapa.json` (padrão) | Todo negócio com endereço físico. Só online: apagar a seção, o link "Onde fica" e o `mapa.js` |
 
 ### Passo 3 — Montar o site
 
@@ -88,10 +90,15 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 6. **`app.js`** → `CONFIG`: WhatsApp, serviços (os mesmos nomes dos cards), períodos, dias fechados, **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
 7. **Hero** → no `index.html`, os blocos `.beat` (um por capítulo: título em duas frases curtas, linha técnica, o último com o botão) e o rótulo `.tag-ia`. Modo sequência: `hero-seq.js` → `CONFIG.cenas` e `CONFIG.passos` (ver `cenas.md` §4). Modo 3D: `hero3d.js` → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
 8. **`img/`** → fotos reais (WebP, ~1600 px no lado maior) no lugar de **todo arquivo `exemplo-*`** (galeria, fundo dos cards de serviço em `style="--foto: url(...)"`, hero foto, cenas); `og.png` 1200×630 no lugar do `og-exemplo.png` (gerar com `og/og.html` desta skill: `node scripts/render.js .claude/skills/site-premium/og/og.html --png <pasta> --size 1200x630`); `favicon.svg` com a inicial da marca. O `/checar-site` acusa qualquer `exemplo-*` que sobrar
-9. **Avaliações** → nota e número **reais** do perfil no Google (no dia), 4 a 6 avaliações reais copiadas com nome abreviado e data, e o link do perfil no botão "Ver todas no Google"
-10. **`privacidade.html`** → dados do cliente; sem GA4/Pixel, apagar a seção de cookies
-11. **`sitemap.xml`** → uma `<url>` por página indexável
-12. Apagar os comentários de instrução do topo dos arquivos
+9. **Onde fica (mapa)** → pegar a coordenada da porta da loja no Google Maps (botão direito → copiar coordenadas) e gerar as ruas e a rota:
+   ```bash
+   node scripts/mapa-ruas.js --loja <lat,lon> --saida clientes/<Nome>/site/mapa.json
+   ```
+   O carro sai sozinho de uma avenida a uns 400–550 m; pra escolher de onde (a avenida que todo mundo conhece, a saída do shopping): `--de <lat,lon>`. Depois, no `index.html`: `data-mapa="mapa.json"` e `data-loja="<nome curto da loja>"` no `.mapa-caixa`, endereço, horário e o link "Como chegar" com `destination=<lat,lon>`. Apagar o `mapa-exemplo.json`. O crédito "© OpenStreetMap contributors" fica (é exigência da licença dos dados)
+10. **Avaliações** → nota e número **reais** do perfil no Google (no dia), 4 a 6 avaliações reais copiadas com nome abreviado e data, e o link do perfil no botão "Ver todas no Google"
+11. **`privacidade.html`** → dados do cliente; sem GA4/Pixel, apagar a seção de cookies
+12. **`sitemap.xml`** → uma `<url>` por página indexável
+13. Apagar os comentários de instrução do topo dos arquivos
 
 ### Passo 4 — Ver e conferir
 
@@ -110,6 +117,7 @@ Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e
 - [ ] Preloader some e o hero aparece; todos os capítulos funcionam (clicar em cada um) e o play/pause
 - [ ] Em cada etapa o título lê bem e não cobre o assunto da cena (sequência: ajustar `foco`/`zoom` do passo; 3D: afastar `cam`). Pra parar numa etapa: no console, `__hero.pausar(); __hero.ir(<segundos>)`
 - [ ] No celular, o assunto de cada cena aparece (a tela corta as laterais — ajustar `foco`)
+- [ ] Mapa: a loja está no lugar certo, a rota faz sentido (não atravessa quarteirão, começa numa rua conhecida) e o "Como chegar" abre a loja no Google Maps. Pra parar numa fase: `__mapa.pausar(); __mapa.ir(<segundos>)`
 - [ ] Agenda abre, monta a mensagem e abre o WhatsApp certo (no `localhost`, o console mostra cada evento `[medir]`)
 - [ ] Grade de serviços sem card sobrando sozinho
 - [ ] Desligar o WebGL mostra o fundo alternativo e o site continua usável

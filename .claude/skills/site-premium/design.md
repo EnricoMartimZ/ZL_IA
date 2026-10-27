@@ -63,6 +63,10 @@ Referência estudada: um site premium de estética automotiva.
 - **Avaliações como prova grande:** o título da seção é a nota e o número reais ("5,0 em 582 avaliações."),
   com botão pro perfil no Google e 4–6 avaliações reais (nome abreviado, estrelas, "Google · há 3 meses").
 - **Cards de serviço com foto real** no fundo, escurecida embaixo pro texto ler — mostra o serviço sendo feito.
+- **"Onde fica" como peça de marca, não um iframe do Google Maps:** mapa noturno com as ruas reais do bairro, o
+  carro sai sujo de uma avenida conhecida, segue a rota dourada "comendo" os pontos até a loja e sai brilhando.
+  Repete a história do hero. Ao lado: endereço, horário e "Como chegar" (abre o Google Maps). Leve: um JSON de
+  ~30 KB e um canvas, sem chave de API e sem o peso do Maps embutido.
 
 ## 6. Honestidade (é parte do "premium")
 

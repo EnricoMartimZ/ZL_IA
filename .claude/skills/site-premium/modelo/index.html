@@ -85,6 +85,7 @@
     <a href="#servicos">Serviços</a>
     <a href="#processo">Processo</a>
     <a href="#avaliacoes">Avaliações</a>
+    <a href="#onde">Onde fica</a>
     <!-- loja online (Nuvemshop, Shopify...): <a href="https://loja..." target="_blank" rel="noopener" data-medir="clique_loja">Loja</a> -->
   </nav>
   <button class="btn btn-claro" data-abrir-agenda>Agendar</button>
@@ -194,6 +195,29 @@
     </div>
   </section>
 
+  <!-- Onde fica: ruas reais em volta da loja (OpenStreetMap). Gerar o mapa.json com:
+       node scripts/mapa-ruas.js --loja <lat,lon> --saida <pasta-do-site>/mapa.json
+       e trocar data-mapa pra "mapa.json". data-loja = nome que aparece na etiqueta e no painel. -->
+  <section class="secao" id="onde">
+    <p class="eyebrow reveal">Onde fica</p>
+    <h2 class="display reveal" data-editar>Chega como está. <br><span class="contorno">Sai novo.</span></h2>
+    <div class="mapa-caixa reveal" data-mapa="mapa-exemplo.json" data-loja="Marca">
+      <canvas aria-label="Mapa animado: um carro sai sujo pelas ruas do bairro, chega na loja e sai brilhando" data-editar></canvas>
+      <div class="mapa-painel nota-mono" aria-live="off"><span data-mapa-status>Saindo sujo…</span><span><b data-mapa-pontos>0</b> pontos da rota</span></div>
+      <div class="mapa-cartao">
+        <p class="eyebrow" data-editar>Marca · serviço premium</p>
+        <h3 data-editar>Rua Exemplo, 123</h3>
+        <p data-editar>Bairro · Cidade/UF</p>
+        <p class="nota-mono" data-editar>seg–sex 8h–18h · sáb 8h–12h · dom fechado</p>
+        <div class="mapa-botoes">
+          <a class="btn btn-ouro" href="https://www.google.com/maps/dir/?api=1&amp;destination=LATITUDE,LONGITUDE" target="_blank" rel="noopener" data-medir="clique_rota" data-editar>Como chegar</a>
+          <button class="btn btn-linha" data-abrir-agenda>Agendar</button>
+        </div>
+      </div>
+      <p class="mapa-credito nota-mono">Ruas: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</p>
+    </div>
+  </section>
+
   <section class="final" id="agendar">
     <p class="eyebrow reveal">Agenda</p>
     <h2 class="display grande reveal" data-editar>Seu momento <br>de <span class="ouro">brilhar.</span></h2>
@@ -212,6 +236,7 @@
 
 <script src="app.js" defer></script>
 <script src="hero-seq.js" defer></script>
+<script src="mapa.js" defer></script>
 <script type="module" src="hero3d.js"></script>
 </body>
 </html>

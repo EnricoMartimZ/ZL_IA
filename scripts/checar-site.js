@@ -157,7 +157,7 @@ async function checarPagina(browser, url, base, visitadas, fila) {
       for (const l of info.links) {
         if (l.blank && !/noopener|noreferrer/.test(l.rel)) add('aviso', nome, 'Link _blank sem rel="noopener"', l.cru);
         if (/^https:\/\/wa\.me\//.test(l.href) && /wa\.me\/\d*0{6,}/.test(l.href)) add('erro', nome, 'WhatsApp de exemplo', l.cru);
-        if (/LINK-DO-|[?&]cid=0\b|instagram\.com\/perfil\b/.test(l.cru)) add('erro', nome, 'Link de exemplo', l.cru);
+        if (/LINK-DO-|LATITUDE,LONGITUDE|[?&]cid=0\b|instagram\.com\/perfil\b/.test(l.cru)) add('erro', nome, 'Link de exemplo', l.cru);
         if (/^tel:/.test(l.cru) && /0{6,}/.test(l.cru)) add('erro', nome, 'Telefone de exemplo', l.cru);
         if (l.href.startsWith(base)) {
           const limpo = l.href.split('#')[0];
