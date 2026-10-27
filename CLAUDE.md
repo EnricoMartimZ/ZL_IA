@@ -38,6 +38,16 @@ Antes de executar qualquer tarefa, verificar se existe skill relevante
 em `.claude/skills/`. Se encontrar, seguir as instruções da skill. Se
 não encontrar, executar a tarefa normalmente.
 
+**O usuário não decora comando.** Ele fala do jeito normal ("acha
+metalúrgicas com site ruim", "fechei com a ótica", "quem eu chamo hoje?")
+e a skill certa entra sozinha, sem pedir pra ele digitar `/nome`. A cada
+mensagem, o hook `.claude/hooks/gatilhos.mjs` compara o texto com o mapa
+`.claude/gatilhos.json` e avisa quais skills bateram (aparece como
+"⚡ /skill"). O aviso é uma pista: usar a skill quando o pedido for
+mesmo aquilo, e também quando o contexto pedir sem palavra-chave (um
+print de avaliação colado → `/responder-avaliacoes`; uma planilha →
+`/analisar-dados`). Na dúvida sobre o que existe: `/menu`.
+
 Ao concluir uma tarefa que não tinha skill mas parece repetível (o
 usuário provavelmente vai pedir de novo no futuro), perguntar:
 
@@ -115,3 +125,7 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+6. Adicionar a skill em `.claude/gatilhos.json` (grupo, quando, 2–3
+   frases de exemplo e os gatilhos) e testar com
+   `echo '{"prompt":"<frase>"}' | node .claude/hooks/gatilhos.mjs`.
+   Sem isso ela não dispara sozinha nem aparece no `/menu`

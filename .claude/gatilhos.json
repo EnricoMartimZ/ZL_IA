@@ -1,0 +1,468 @@
+{
+  "_como_funciona": "Mapa de gatilhos das skills. O hook .claude/hooks/gatilhos.mjs compara cada mensagem (minúscula, sem acento) com os 'gatilhos' e sugere ao Claude as skills que bateram. Um gatilho em texto basta sozinho; uma lista [a, b] exige todas as partes. Skill nova = entrada nova aqui (o /menu também lê este arquivo).",
+  "skills": [
+    {
+      "skill": "prospectar-b2b",
+      "grupo": "Achar clientes",
+      "quando": "achar empresas B2B (indústria, distribuidora, transportadora, construtora...) com site ruim ou presença fraca, com nota, print e mensagem de abordagem",
+      "exemplos": [
+        "acha metalúrgicas com site ruim em Sorocaba",
+        "quero clientes B2B em Campinas",
+        "quais empresas daqui têm site velho?",
+        "tem empresa de energia solar aqui sem site?"
+      ],
+      "gatilhos": [
+        "\\bb2b\\b",
+        "site(s)? (ruim|ruins|velho|velhos|antigo|antigos|desatualizad|feio|feios|quebrad)",
+        "sem presenca (digital|no google|no instagram)|presenca (digital )?(fraca|ruim)",
+        [
+          "\\b(industria|metalurgic|usinagem|fabrica|distribuidora|atacad|transportadora|logistica|construtora|engenharia|energia solar|solar|seguranca eletronica|monitoramento|facilities|terceiriza|uniformes?|epi|grafica|embalage|contabilidade|contador|advocacia|escritorios?|laboratorio|calibracao|locacao|locadora|medicina do trabalho|suporte de ti|software house|fornecedor|empresas)",
+          "(prospect|achar|acha|encontr|mapear|mapeia|lista|abordar|leads?|clientes?|quem (eu )?(abordo|abordar)|sem site)"
+        ]
+      ]
+    },
+    {
+      "skill": "prospectar-lojas",
+      "grupo": "Achar clientes",
+      "quando": "montar lista de lojas do varejo (pet shop, barbearia, ótica, clínica...) pra vender IA e marketing, com nota de oportunidade",
+      "exemplos": [
+        "prospecta pet shops em Campinas",
+        "quais lojas do bairro eu posso abordar?"
+      ],
+      "gatilhos": [
+        "prospectar loja",
+        [
+          "\\b(lojas?|comercio|varejo|pet ?shops?|barbearias?|saloes|salao|clinicas?|restaurantes?|academias?|oticas?|padarias?|lanchonetes?|farmacias?)\\b",
+          "(prospect|achar|acha|encontr|mapear|lista|abordar|leads?|novos clientes|quem (eu )?(abordo|abordar)|sem site|oferecer)"
+        ]
+      ]
+    },
+    {
+      "skill": "diagnostico-loja",
+      "grupo": "Achar clientes",
+      "quando": "diagnóstico gratuito de uma loja específica (onde perde venda e quanto custa), em PDF, pra usar como isca",
+      "exemplos": [
+        "faz o diagnóstico da ótica",
+        "onde essa loja tá perdendo venda?"
+      ],
+      "gatilhos": [
+        "diagnostic",
+        "onde (a loja|ela|eles|essa loja|essa empresa) (ta|esta) perdendo",
+        "isca (de venda|gratis|gratuita)",
+        "analisa(r)? (essa|a) (loja|empresa)"
+      ]
+    },
+    {
+      "skill": "site-demo",
+      "grupo": "Achar clientes",
+      "quando": "prévia do site da loja/empresa antes de vender, marcada como demonstração, com a mensagem pro dono",
+      "exemplos": [
+        "monta uma demo do site da metalúrgica",
+        "quero mostrar um site pronto pro dono antes de vender"
+      ],
+      "gatilhos": [
+        "\\bdemo\\b",
+        "demonstrac",
+        "previa do site",
+        "site (pra|para) (mostrar|apresentar|vender)",
+        "mostrar (um |o )?site (antes|pro dono|pro cliente)",
+        "mostrar .{0,25}site.{0,40}(antes|pro dono|pro cliente|pra empresa)",
+        "site.{0,40}antes de (vender|fechar)"
+      ]
+    },
+    {
+      "skill": "proposta-servico",
+      "grupo": "Fechar a venda",
+      "quando": "proposta comercial com 3 pacotes, preço, prazo e retorno estimado, em PDF",
+      "exemplos": [
+        "monta a proposta pra ótica",
+        "quanto eu cobro desse cliente?"
+      ],
+      "gatilhos": [
+        "\\bproposta\\b",
+        "quanto (eu )?(cobr|devo cobrar|cobro)",
+        "precific",
+        "pacotes? (de servico|de preco|essencial|completo)",
+        "orcamento (pro|pra|para o|para a|do) (cliente|loja|empresa|dono)"
+      ]
+    },
+    {
+      "skill": "funil",
+      "grupo": "Fechar a venda",
+      "quando": "painel de vendas: em que etapa está cada loja, quem precisa de follow-up hoje (com a mensagem pronta) e mover etapas",
+      "exemplos": [
+        "como tá o funil?",
+        "quem eu preciso chamar hoje?",
+        "a metalúrgica respondeu"
+      ],
+      "gatilhos": [
+        "\\bfunil\\b",
+        "follow.?up",
+        "pipeline",
+        "quem (eu )?(preciso|tenho que|devo) (chamar|cobrar|responder|ligar)",
+        "\\brespondeu\\b",
+        "mandei (a |o )?(proposta|demo|diagnostico|mensagem|email)",
+        "status (das|dos) (lojas|clientes|propostas|leads|empresas)",
+        "\\b(mandei|enviei|liguei pr[oa])\\b"
+      ]
+    },
+    {
+      "skill": "aprendizado",
+      "grupo": "Fechar a venda",
+      "quando": "registrar por que uma venda fechou ou foi perdida, pra vender melhor nas próximas",
+      "exemplos": [
+        "fechei com a ótica",
+        "perdi a metalúrgica, disseram que tá caro"
+      ],
+      "gatilhos": [
+        "\\bfechei\\b",
+        "\\bfechou (com|o contrato|negocio)",
+        "\\bperdi (a|o|essa|esse) (loja|cliente|venda|empresa|negocio)",
+        "(nao|n) (quis|quiseram|fechou|fecharam)",
+        "o que (aprendi|funcionou|deu certo) nas vendas"
+      ]
+    },
+    {
+      "skill": "email-profissional",
+      "grupo": "Fechar a venda",
+      "quando": "rascunhar um e-mail profissional no tom certo",
+      "exemplos": [
+        "escreve um email pro dono da metalúrgica",
+        "como eu respondo esse email?"
+      ],
+      "gatilhos": [
+        [
+          "\\be-?mails?\\b",
+          "(escrev|redig|respond|faz|faca|monta|rascunh|manda)"
+        ]
+      ]
+    },
+    {
+      "skill": "site-premium",
+      "grupo": "Entregar: site",
+      "quando": "site premium com hero cinematográfico, agenda ou pedido de orçamento (B2B), SEO e medição",
+      "exemplos": [
+        "cria o site da ótica",
+        "site pra uma indústria com pedido de orçamento"
+      ],
+      "gatilhos": [
+        "site premium|landing page",
+        "site profissional|site (que pareca|com cara de) caro",
+        [
+          "\\b(site|pagina)\\b",
+          "\\b(cria|criar|faz|fazer|faco|monta|montar|novo|nova|3d|hero|orcamento|preciso (de )?um|quero um)\\b"
+        ]
+      ]
+    },
+    {
+      "skill": "checar-site",
+      "grupo": "Entregar: site",
+      "quando": "conferir o site antes de entregar ou publicar: erros, texto de exemplo esquecido, SEO, imagens, celular",
+      "exemplos": [
+        "confere se o site tá pronto",
+        "checa o site antes de mandar"
+      ],
+      "gatilhos": [
+        "(checa|checar|confere|conferir|revisa|revisar|testa|testar|verifica|verificar) (o |esse |este )?site",
+        "site (ta|esta) (pronto|ok|certo|bom)",
+        "antes de (entregar|publicar|mandar) (o )?site"
+      ]
+    },
+    {
+      "skill": "publicar-site",
+      "grupo": "Entregar: site",
+      "quando": "colocar o site no ar com domínio próprio, Search Console, medição e o plano de manutenção",
+      "exemplos": [
+        "coloca o site da Ótica no ar",
+        "liga o domínio que o cliente comprou"
+      ],
+      "gatilhos": [
+        "(publica|publicar|sobe|subir|coloca|colocar|bota|botar) (o )?site",
+        "site no ar",
+        "\\bdominio\\b|\\bdns\\b|registro\\.br",
+        "\\bvercel\\b|\\bnetlify\\b",
+        "search console",
+        "manutencao (do|de|mensal do) site"
+      ]
+    },
+    {
+      "skill": "carrossel",
+      "grupo": "Entregar: conteúdo",
+      "quando": "carrossel ou post visual pra Instagram/LinkedIn com a identidade da marca e a legenda",
+      "exemplos": [
+        "faz um carrossel sobre limpeza de sofá",
+        "post pro Instagram da Ótica"
+      ],
+      "gatilhos": [
+        "carross",
+        "\\bpost(s)? (pro|pra|para o|no|de) (instagram|insta|linkedin|feed)",
+        "conteudo (pro|pra|para o|no) (instagram|insta|linkedin|feed)"
+      ]
+    },
+    {
+      "skill": "foto-produto",
+      "grupo": "Entregar: conteúdo",
+      "quando": "transformar foto de celular do produto em foto profissional (fundo de catálogo, cena, versão sazonal)",
+      "exemplos": [
+        "melhora as fotos dos óculos",
+        "fundo branco nessas fotos pro Mercado Livre"
+      ],
+      "gatilhos": [
+        "fotos? (de|do|dos|da|das) produto",
+        "fundo (branco|de catalogo|infinito|neutro)",
+        "foto(s)? profissiona",
+        "melhora(r)? (a |as |essas )?fotos?",
+        "fotos? (pro|para o|pra) (catalogo|marketplace|mercado livre|shopee|site)"
+      ]
+    },
+    {
+      "skill": "video-ia",
+      "grupo": "Entregar: conteúdo",
+      "quando": "vídeo com IA: animar foto de produto, cena do zero ou pessoa falando (lip sync)",
+      "exemplos": [
+        "anima essa foto do produto",
+        "vídeo com um apresentador falando da promoção"
+      ],
+      "gatilhos": [
+        "video (com|de|por|feito com) ia",
+        "anima(r)? (essa |a |as )?fotos?",
+        "lip ?sync|avatar (falando|que fala)",
+        "(text|image|imagem|foto).?(to|pra|para).?video",
+        "\\b(anima|animar|anime)\\b"
+      ]
+    },
+    {
+      "skill": "video-reels",
+      "grupo": "Entregar: conteúdo",
+      "quando": "reels, stories e TikTok verticais com gancho, legenda animada e a marca",
+      "exemplos": [
+        "faz um reels da promoção",
+        "vídeo vertical do antes e depois"
+      ],
+      "gatilhos": [
+        "\\breels?\\b",
+        "\\bstor(y|ies)\\b",
+        "tiktok",
+        "video (vertical|curto|de oferta|de promocao|pro instagram)"
+      ]
+    },
+    {
+      "skill": "publicar-tema",
+      "grupo": "Entregar: conteúdo",
+      "quando": "artigo de blog + carrossel + legendas, tudo amarrado a partir de um tema",
+      "exemplos": [
+        "publica um tema sobre manutenção de ar-condicionado"
+      ],
+      "gatilhos": [
+        "publicar (um )?tema",
+        "\\bblog\\b",
+        "artigo (de|pro|no|para o) (blog|site)"
+      ]
+    },
+    {
+      "skill": "aprovar-post",
+      "grupo": "Entregar: conteúdo",
+      "quando": "aprovar e publicar um post da fila no blog, Instagram e Facebook",
+      "exemplos": [
+        "aprova o post do tema X",
+        "pode publicar o post"
+      ],
+      "gatilhos": [
+        "aprova(r)? (o )?post",
+        "(publica|publicar|posta|postar) (o )?post",
+        "pode (postar|publicar)"
+      ]
+    },
+    {
+      "skill": "responder-avaliacoes",
+      "grupo": "Entregar: conteúdo",
+      "quando": "responder avaliações do Google de um jeito humano",
+      "exemplos": [
+        "responde essas avaliações",
+        "chegou uma avaliação ruim no Google"
+      ],
+      "gatilhos": [
+        "respond\\w* (a |as |essa |essas |uma )?(avaliac|review)",
+        "(avaliac|review)\\w* (nova|novas|negativa|negativas|ruim|ruins)",
+        "reclamou no google"
+      ]
+    },
+    {
+      "skill": "seo",
+      "grupo": "Entregar: Google e anúncios",
+      "quando": "SEO, GEO e palavras-chave: aparecer no Google e nas IAs",
+      "exemplos": [
+        "como a Ótica aparece no Google?",
+        "pesquisa de palavras-chave pra transportadora"
+      ],
+      "gatilhos": [
+        "\\bseo\\b",
+        "\\bgeo\\b",
+        "palavras?.chave",
+        "aparecer (no|na|nas) (google|chatgpt|gemini|perplexity|ias?|busca)",
+        "primeira pagina( do google)?",
+        "ranque",
+        "aparec\\w* no google"
+      ]
+    },
+    {
+      "skill": "anuncio-google",
+      "grupo": "Entregar: Google e anúncios",
+      "quando": "campanha de Google Ads pronta pra importar (grupos, anúncios, palavras negativas)",
+      "exemplos": [
+        "monta uma campanha de Google Ads pra metalúrgica"
+      ],
+      "gatilhos": [
+        "google ads",
+        "anuncios? (no|do|pro|para o) google",
+        "campanha (no|do|de) google",
+        "ads editor"
+      ]
+    },
+    {
+      "skill": "relatorio-ads",
+      "grupo": "Entregar: Google e anúncios",
+      "quando": "relatório de anúncios pagos (Google e Meta) com alertas e o que mudar",
+      "exemplos": [
+        "como foram os anúncios essa semana?",
+        "relatório da campanha do Meta"
+      ],
+      "gatilhos": [
+        [
+          "(relatorio|como (foram|estao|tao|ta|esta)|desempenho|performance|resultado)",
+          "\\b(ads|anuncios?|campanhas?|trafego|meta ads|facebook ads)\\b"
+        ]
+      ]
+    },
+    {
+      "skill": "relatorio-resultados",
+      "grupo": "Manter o cliente",
+      "quando": "relatório mensal do cliente: o que foi entregue, antes e depois, retorno e plano do mês",
+      "exemplos": [
+        "relatório do mês da ótica",
+        "mostrar o resultado pro cliente"
+      ],
+      "gatilhos": [
+        [
+          "(relatorio|resultados?)",
+          "(mensal|do mes|do cliente|da loja|pro cliente|pra loja)"
+        ],
+        "prestar contas",
+        "mostrar (o )?resultado (pro|para o|ao) cliente"
+      ]
+    },
+    {
+      "skill": "analisar-dados",
+      "grupo": "Organizar",
+      "quando": "analisar um arquivo de dados (CSV, planilha) e resumir o que importa",
+      "exemplos": [
+        "analisa essa planilha de vendas"
+      ],
+      "gatilhos": [
+        [
+          "(analis|resum|o que (mostra|dizem|diz))",
+          "\\b(csv|planilha|excel|xlsx|dados|arquivo|json)\\b"
+        ]
+      ]
+    },
+    {
+      "skill": "novo-projeto",
+      "grupo": "Organizar",
+      "quando": "criar a pasta de um cliente ou projeto novo com o CLAUDE.md dele",
+      "exemplos": [
+        "novo cliente: uma ótica",
+        "começar o projeto da metalúrgica"
+      ],
+      "gatilhos": [
+        "novo (projeto|cliente)",
+        "comecar (o |um )?projeto"
+      ]
+    },
+    {
+      "skill": "abrir",
+      "grupo": "Organizar",
+      "quando": "começar o dia: carrega a memória do negócio e resume o que está em jogo",
+      "exemplos": [
+        "bom dia",
+        "abrir"
+      ],
+      "gatilhos": [
+        "^(bom dia|boa tarde|boa noite)[!. ]*$",
+        "^abrir\\b",
+        "comecar o dia"
+      ]
+    },
+    {
+      "skill": "menu",
+      "grupo": "Organizar",
+      "quando": "mostrar o que o sistema sabe fazer, com frases de exemplo, e sugerir o próximo passo",
+      "exemplos": [
+        "o que você sabe fazer?",
+        "esqueci o comando",
+        "o que eu faço agora?"
+      ],
+      "gatilhos": [
+        "o que (voce|vc|tu) (sabe|consegue|pode) fazer",
+        "quais (sao )?(as )?(skills|comandos|funcoes)",
+        "^menu\\b|^ajuda\\b|^help\\b",
+        "(nao (sei|lembro)|esqueci) (o |a |qual )?(comando|skill|nome)",
+        "por onde (eu )?comec",
+        "o que (eu )?(faco|fazer) (agora|hoje)",
+        "\\b(comandos?|skills?)\\b"
+      ]
+    },
+    {
+      "skill": "mapear-rotinas",
+      "grupo": "Organizar",
+      "quando": "achar tarefas repetitivas e criar skills pra elas",
+      "exemplos": [
+        "o que dá pra automatizar no meu dia?"
+      ],
+      "gatilhos": [
+        "automatiz",
+        "tarefas? repetitiva",
+        "mapear (as )?rotinas"
+      ]
+    },
+    {
+      "skill": "atualizar",
+      "grupo": "Organizar",
+      "quando": "atualizar a memória e o contexto do negócio",
+      "exemplos": [
+        "atualiza a memória"
+      ],
+      "gatilhos": [
+        "atualiza(r)? (a )?memoria",
+        "atualiza(r)? (o )?contexto",
+        "varre(r)? o projeto"
+      ]
+    },
+    {
+      "skill": "salvar",
+      "grupo": "Organizar",
+      "quando": "salvar o trabalho no GitHub (ZL_IA)",
+      "exemplos": [
+        "salva no GitHub"
+      ],
+      "gatilhos": [
+        "^salva(r)?\\b",
+        "salva(r)? no github",
+        "\\bcommit\\b|\\bpush\\b",
+        "backup"
+      ]
+    },
+    {
+      "skill": "instalar",
+      "grupo": "Organizar",
+      "quando": "primeira configuração do MazyOS (empresa, tom de voz, identidade visual)",
+      "exemplos": [
+        "instalar o MazyOS"
+      ],
+      "gatilhos": [
+        "instala(r)? o (mazyos|sistema)",
+        "primeiro setup",
+        "configurar o (mazyos|sistema)"
+      ]
+    }
+  ]
+}

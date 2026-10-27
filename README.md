@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 29 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 30 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -53,6 +53,14 @@ memória e configura o sistema. Depois disso, é só usar.
 ---
 
 ## O sistema
+
+**Não precisa decorar comando.** Fala do jeito normal — "acha metalúrgicas
+com site ruim em Sorocaba", "fechei com a ótica", "quem eu chamo hoje?" — e a
+skill certa entra sozinha (aparece "⚡ /skill"). Quem decide é o mapa
+`.claude/gatilhos.json`, lido a cada mensagem pelo hook
+`.claude/hooks/gatilhos.mjs`. Esqueceu o que existe? Pergunta "o que você sabe
+fazer?" (`/menu`): ele lista tudo por objetivo, com frase de exemplo, e diz o
+que fazer hoje olhando o funil.
 
 **Núcleo** — o jeito de operar o dia a dia
 `/abrir` carrega o contexto antes de cada sessão de trabalho · `/salvar`
