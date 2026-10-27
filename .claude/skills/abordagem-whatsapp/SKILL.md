@@ -59,7 +59,8 @@ Mostrar no chat a tabela do `lote.md` e 3 mensagens de exemplo. **Só enviar dep
    - `navigate` pra `https://web.whatsapp.com/send?phone=<whatsapp>&text=<mensagem codificada com encodeURIComponent>`
    - esperar a conversa carregar; se aparecer "número de telefone compartilhado via url é inválido", marcar `status: "sem whatsapp"` e seguir
    - conferir que o texto na caixa é o aprovado, enviar (Enter) e conferir que a mensagem apareceu na conversa com o relógio/visto
-   - marcar `status: "enviada"`, `enviado_em` no `fila.json` e a loja no `vendas/funil.md` como **abordada** (próximo passo: ver resposta em 2 dias)
+   - registrar com `node ../../../.claude/skills/abordagem-whatsapp/marcar.cjs <índice> enviada "<observação>"` (rodando da pasta do lote): atualiza o `fila.json` e põe a loja no `vendas/funil.md` como **abordada** (próximo passo: ver resposta em 2 dias). Resposta automática ("agradece seu contato") não conta como resposta: anotar na observação
+   - **reler a mensagem antes de clicar em enviar**: se algo estiver errado (elogio a nota baixa, nome cortado), não enviar — marcar `segurada` e corrigir pro próximo lote
    - **esperar 2 a 5 minutos** (aleatório) antes da próxima
 3. **Limites:** no máximo **20 por dia** (começar com 10 nos primeiros dias de um número novo). Parar na hora se o WhatsApp mostrar aviso, pedir verificação ou começar a falhar
 4. Ao terminar, resumo no chat: quantas foram, quais falharam e por quê
