@@ -16,6 +16,7 @@ Primeiro passo do funil de venda do serviço. Não é lista fria de telefone —
 ## Dependências
 
 - **Contexto:** `_memoria/empresa.md` (o que você vende, pra quem), `_memoria/estrategia.md` (nicho/região em foco)
+- **Aprendizados:** `_memoria/vendas-aprendizados.md` se existir — priorizar nichos e ganchos que já converteram, evitar os que só deram "sem resposta"
 - **Serviços:** `_memoria/servicos.md` se existir (o que você resolve — define quais problemas pontuam)
 - **Pesquisa:** busca web pública (Google, Google Maps, Instagram, site da loja)
 - **Histórico:** `vendas/prospeccao/` (criar se não existir) — pra não repetir loja já abordada
@@ -95,6 +96,8 @@ Gerar `vendas/prospeccao/<YYYY-MM-DD>-<nicho>-<regiao>.xlsx` (usar a skill de XL
 `Prioridade | Loja | Nota | Capacidade de pagar | Gancho | Instagram | Site | Telefone/WhatsApp | Google (nota/avaliações) | Endereço | Status`
 
 Ordenar por nota decrescente. Coluna `Status` começa como "a abordar".
+
+Adicionar cada loja nova em `vendas/funil.md` na etapa **a abordar** (formato em `/funil`). Loja que já está no funil não entra de novo.
 
 Salvar também um `.md` com o mesmo conteúdo resumido (o `/atualizar` e o `/diagnostico-loja` leem mais fácil).
 

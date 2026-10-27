@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 19 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 21 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -36,6 +36,10 @@ code .
 ```
 
 Na janela do VS Code que abrir: terminal integrado → `claude` → `/instalar`.
+
+**Para carrossel e PDFs** (diagnóstico, proposta, relatório), instale uma vez
+o Playwright: `npm run setup` na raiz. Chaves de API (OpenAI, Meta) vão num
+`.env` — copie o `.env.example`. O `.env` nunca vai pro GitHub.
 
 ---
 
@@ -76,7 +80,10 @@ oportunidade e gancho de abordagem · `/diagnostico-loja` gera diagnóstico
 gratuito em PDF com os pontos de perda e quanto custam por mês ·
 `/proposta-servico` monta proposta com três pacotes em cima do diagnóstico
 (e cria `_memoria/servicos.md` na primeira vez) · `/relatorio-resultados`
-fecha o mês do cliente com antes/depois e retorno estimado.
+fecha o mês do cliente com antes/depois e retorno estimado · `/funil` mostra
+todas as lojas por etapa e quem precisa de follow-up hoje, com mensagem
+pronta · `/aprendizado` registra por que cada venda fechou ou foi perdida e
+vira regra pras outras skills.
 
 **Produção** — ferramentas do dia a dia
 `/analisar-dados` lê CSV/XLSX/PDF e gera resumo executivo ·

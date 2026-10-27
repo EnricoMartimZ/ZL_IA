@@ -1,0 +1,15 @@
+{
+  "name": "mazyos",
+  "private": true,
+  "type": "module",
+  "description": "Scripts de apoio das skills do MazyOS",
+  "scripts": {
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -16,10 +16,12 @@ Peça central do funil. O lojista não compra "IA" — compra o fim de um proble
 ## Dependências
 
 - **Contexto:** `_memoria/empresa.md`, `_memoria/preferencias.md` (tom de voz)
+- **Aprendizados:** `_memoria/vendas-aprendizados.md` se existir — usar os pontos de perda que mais pesaram em vendas fechadas
 - **Serviços:** `_memoria/servicos.md` se existir (cada problema apontado deve ter um serviço seu que resolve)
 - **Visual:** `identidade/design-guide.md` (o PDF sai com a sua marca, não a da loja)
 - **Entrada opcional:** linha da planilha de `/prospectar-lojas` em `vendas/prospeccao/`
-- **Render:** Playwright (mesmo do `/carrossel`) pra HTML → PDF
+- **Modelo:** `.claude/skills/diagnostico-loja/modelo.html` (layout pronto, só trocar os `{{CAMPOS}}`)
+- **Render:** `scripts/render.js` (Playwright — se faltar, rodar `npm run setup` na raiz)
 
 ---
 
@@ -79,7 +81,7 @@ Regras da estimativa:
 
 ### Passo 4 — Montar o documento
 
-HTML em `vendas/diagnosticos/<slug-loja>/diagnostico.html`, aplicando `identidade/design-guide.md`. Estrutura:
+Copiar `modelo.html` dessa skill pra `vendas/diagnosticos/<slug-loja>/diagnostico.html`, trocar as cores do `:root` pelas de `identidade/design-guide.md` (se estiver em branco, manter as do modelo) e preencher os `{{CAMPOS}}`. Não deixar nenhum `{{...}}` no arquivo final. Estrutura do modelo:
 
 ```
 [Logo do usuário]                                   Diagnóstico gratuito · <data>
@@ -105,9 +107,11 @@ Limite: **2 páginas A4**. Se passar, cortar pontos, não diminuir fonte.
 
 ### Passo 5 — Render em PDF
 
-Criar `render-pdf.js` na pasta (Playwright, `page.pdf({ format: 'A4', printBackground: true })`). Reaproveitar `node_modules` de pasta anterior se existir — não rodar `npm install` toda vez.
+```bash
+node scripts/render.js vendas/diagnosticos/<slug-loja>/diagnostico.html --pdf vendas/diagnosticos/<slug-loja>/diagnostico-<slug-loja>.pdf
+```
 
-Saída: `vendas/diagnosticos/<slug-loja>/diagnostico-<slug-loja>.pdf`
+Abrir o PDF e conferir: no máximo 2 páginas, nada cortado, nenhum `{{` sobrando.
 
 Salvar também `dados.md` com toda a coleta bruta e as premissas (o `/proposta-servico` lê daqui).
 
@@ -121,7 +125,7 @@ Duas versões: uma pra pedir permissão antes de mandar, outra pra mandar direto
 
 ### Passo 7 — Entrega
 
-Mostrar no chat: resumo de 3 linhas, faixa de perda estimada, caminho do PDF e as mensagens. Atualizar `Status` da loja na planilha de prospecção pra "diagnóstico pronto", se existir.
+Mostrar no chat: resumo de 3 linhas, faixa de perda estimada, caminho do PDF e as mensagens. Atualizar a loja em `vendas/funil.md` pra etapa **diagnóstico pronto** (criar a linha se não existir).
 
 > "Se ele responder, roda `/proposta-servico <loja>` que eu monto a proposta em cima desse diagnóstico."
 

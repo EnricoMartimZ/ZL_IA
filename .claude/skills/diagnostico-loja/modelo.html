@@ -1,0 +1,149 @@
+<!doctype html>
+<!--
+  Modelo do /diagnostico-loja. Copiar pra vendas/diagnosticos/<slug-loja>/diagnostico.html,
+  trocar os {{CAMPOS}} e as cores do :root pelas de identidade/design-guide.md.
+  Repetir o bloco .ponto para cada ponto de perda (3 a 5). Máximo 2 páginas A4.
+  Render: node scripts/render.js <html> --pdf <saida.pdf>
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Diagnóstico — {{LOJA}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #FAFAF7;
+    --texto: #16161A;
+    --muted: #6B6B73;
+    --destaque: #1F4FFF;
+    --alerta: #D9480F;
+    --card: #FFFFFF;
+    --linha: #E6E4DE;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--texto); background: var(--fundo); font-size: 10.5pt; line-height: 1.5; }
+  .pagina { width: 210mm; min-height: 297mm; padding: 16mm 18mm; page-break-after: always; display: flex; flex-direction: column; }
+  .pagina:last-child { page-break-after: auto; }
+
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12mm; }
+  header img { height: 28px; }
+  .marca { font-weight: 800; letter-spacing: -0.02em; font-size: 13pt; }
+  .meta { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.22em; color: var(--muted); }
+
+  .eyebrow { font-size: 8pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.28em; color: var(--destaque); margin-bottom: 3mm; }
+  h1 { font-size: 30pt; font-weight: 900; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 4mm; }
+  .resumo { font-size: 12.5pt; color: var(--muted); max-width: 150mm; margin-bottom: 9mm; }
+
+  .perda { background: var(--texto); color: var(--fundo); border-radius: 10px; padding: 7mm 8mm; margin-bottom: 9mm; display: flex; justify-content: space-between; align-items: center; gap: 8mm; }
+  .perda .rotulo { font-size: 9pt; font-weight: 600; opacity: 0.75; max-width: 60mm; }
+  .perda .valor { font-size: 24pt; font-weight: 900; letter-spacing: -0.03em; white-space: nowrap; }
+  .perda .valor small { font-size: 10pt; font-weight: 600; opacity: 0.75; }
+
+  .ponto { display: grid; grid-template-columns: 11mm 1fr; gap: 4mm; padding: 5mm 0; border-top: 1px solid var(--linha); break-inside: avoid; }
+  .num { font-size: 20pt; font-weight: 900; color: var(--destaque); line-height: 1; letter-spacing: -0.04em; }
+  .ponto h2 { font-size: 13pt; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2mm; }
+  .ponto dl { display: grid; grid-template-columns: 30mm 1fr; gap: 1.2mm 4mm; }
+  .ponto dt { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); padding-top: 0.6mm; }
+  .ponto dd.fato { font-weight: 600; }
+  .ponto dd.resolve { color: var(--destaque); font-weight: 600; }
+
+  h3 { font-size: 13pt; font-weight: 800; letter-spacing: -0.02em; margin: 6mm 0 3mm; }
+  ol.acoes { padding-left: 5mm; }
+  ol.acoes li { margin-bottom: 1.5mm; }
+
+  .premissas { margin-top: auto; padding-top: 6mm; font-size: 7.5pt; color: var(--muted); border-top: 1px solid var(--linha); }
+  .premissas p { margin-bottom: 1mm; }
+
+  .cta { margin-top: 7mm; background: var(--card); border: 1px solid var(--linha); border-radius: 10px; padding: 6mm 8mm; display: flex; justify-content: space-between; align-items: center; }
+  .cta strong { font-size: 13pt; font-weight: 800; letter-spacing: -0.02em; }
+  .cta .contato { text-align: right; font-size: 9.5pt; color: var(--muted); }
+  .cta .contato b { color: var(--texto); }
+</style>
+</head>
+<body>
+
+<section class="pagina">
+  <header>
+    <!-- Trocar por <img src="../../../identidade/logo.png" alt="{{SEU_NEGOCIO}}"> se houver logo -->
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">Diagnóstico gratuito · {{DATA}}</div>
+  </header>
+
+  <div class="eyebrow">{{NICHO}} · {{CIDADE}}</div>
+  <h1>{{LOJA}}</h1>
+  <p class="resumo">{{RESUMO_UMA_FRASE}}</p>
+
+  <div class="perda">
+    <div class="rotulo">Quanto isso pode estar custando em vendas (estimativa, premissas no fim)</div>
+    <div class="valor">R$ {{PERDA_MIN}} – {{PERDA_MAX}} <small>/mês</small></div>
+  </div>
+
+  <!-- Repetir para cada ponto de perda, do maior pro menor -->
+  <article class="ponto">
+    <div class="num">01</div>
+    <div>
+      <h2>{{TITULO_PONTO}}</h2>
+      <dl>
+        <dt>O que acontece</dt><dd class="fato">{{FATO_COM_NUMERO}}</dd>
+        <dt>Por que custa</dt><dd>{{POR_QUE_CUSTA_VENDA}}</dd>
+        <dt>Comparação</dt><dd>{{COMPARACAO_CONCORRENTE}}</dd>
+        <dt>O que resolve</dt><dd class="resolve">{{O_QUE_A_IA_RESOLVE}}</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ponto">
+    <div class="num">02</div>
+    <div>
+      <h2>{{TITULO_PONTO}}</h2>
+      <dl>
+        <dt>O que acontece</dt><dd class="fato">{{FATO_COM_NUMERO}}</dd>
+        <dt>Por que custa</dt><dd>{{POR_QUE_CUSTA_VENDA}}</dd>
+        <dt>Comparação</dt><dd>{{COMPARACAO_CONCORRENTE}}</dd>
+        <dt>O que resolve</dt><dd class="resolve">{{O_QUE_A_IA_RESOLVE}}</dd>
+      </dl>
+    </div>
+  </article>
+
+  <article class="ponto">
+    <div class="num">03</div>
+    <div>
+      <h2>{{TITULO_PONTO}}</h2>
+      <dl>
+        <dt>O que acontece</dt><dd class="fato">{{FATO_COM_NUMERO}}</dd>
+        <dt>Por que custa</dt><dd>{{POR_QUE_CUSTA_VENDA}}</dd>
+        <dt>Comparação</dt><dd>{{COMPARACAO_CONCORRENTE}}</dd>
+        <dt>O que resolve</dt><dd class="resolve">{{O_QUE_A_IA_RESOLVE}}</dd>
+      </dl>
+    </div>
+  </article>
+</section>
+
+<section class="pagina">
+  <header>
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">{{LOJA}} · 2/2</div>
+  </header>
+
+  <h3>O que eu faria nos primeiros 30 dias</h3>
+  <ol class="acoes">
+    <li>{{ACAO_1}}</li>
+    <li>{{ACAO_2}}</li>
+    <li>{{ACAO_3}}</li>
+  </ol>
+
+  <div class="cta">
+    <strong>Quer conversar 15 minutos sobre isso?</strong>
+    <div class="contato"><b>{{SEU_NOME}}</b><br>{{SEU_WHATSAPP}} · {{SEU_EMAIL}}</div>
+  </div>
+
+  <div class="premissas">
+    <p><b>Premissas da estimativa:</b> {{PREMISSAS}}</p>
+    <p><b>Fontes:</b> {{FONTES_E_DATAS}}</p>
+    <p>Números de perda são estimativas conservadoras a partir de dados públicos e médias do nicho, não garantia de resultado.</p>
+  </div>
+</section>
+
+</body>
+</html>

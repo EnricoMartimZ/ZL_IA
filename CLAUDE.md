@@ -17,6 +17,8 @@ e estiverem preenchidos):
 1. `_memoria/empresa.md` — quem é o usuário, o que faz, como funciona o negócio
 2. `_memoria/preferencias.md` — tom de voz, estilo de escrita, o que evitar
 3. `_memoria/estrategia.md` — foco atual, prioridades, prazos
+4. `_memoria/servicos.md` — o que você vende pras lojas e por quanto
+5. `_memoria/vendas-aprendizados.md` — o que já funcionou e o que não funcionou nas vendas
 
 Usar essas informações como base pra qualquer resposta ou decisão. Ao
 sugerir prioridades, formatos ou abordagens, considerar o foco atual

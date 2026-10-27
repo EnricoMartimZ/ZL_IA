@@ -17,7 +17,7 @@ Skill central de criação de conteúdo visual. Pega um tema → entrega HTMLs e
 - **Identidade visual:** `identidade/design-guide.md` — LER ANTES de criar qualquer visual
 - **Contexto do negócio:** `_memoria/empresa.md`
 - **Tom de voz:** `_memoria/preferencias.md`
-- **Playwright:** pra renderizar HTML em PNG (`npx playwright screenshot` ou via `render.js`)
+- **Render:** `scripts/render.js` (Playwright — se faltar, rodar `npm run setup` na raiz)
 - **OpenAI API (opcional):** pra gerar fotos realistas — só se o cliente tiver chave configurada
 - **Outputs vão em:** `marketing/conteudo/<tipo>-<tema>-<YYYY-MM-DD>/`
 
@@ -205,10 +205,11 @@ Se não tiver o script ainda, instruir o usuário a configurar `OPENAI_API_KEY` 
    </div>
    ```
 
-2. Criar `render.js` na mesma pasta — script Node com Playwright que abre o HTML e tira screenshot de cada `.slide` em 1080x1350. Pode reutilizar `node_modules` de uma pasta anterior (não precisa rodar `npm install` toda vez):
+2. Renderizar cada `.slide` em PNG 1080x1350 com o script da raiz:
 ```bash
-NODE_PATH="<pasta-com-node_modules>/node_modules" node render.js
+node scripts/render.js marketing/conteudo/<pasta>/carrossel.html --png marketing/conteudo/<pasta>/instagram
 ```
+   TikTok/Reels (só quando pedido): `--png .../tiktok --size 1080x1920`, com os slides do HTML em 1080x1920.
 
 3. Mostrar slide 1, 2 e o CTA final renderizados. Se aprovado, mostrar os intermediários.
 
@@ -219,7 +220,6 @@ marketing/conteudo/<tipo>-<tema>-<YYYY-MM-DD>/
   texto.md              ← texto aprovado + legenda
   foto-<nome>.png       ← fotos geradas por IA (se houver)
   carrossel.html
-  render.js
   instagram/
     slide-01.png → slide-NN.png
   tiktok/ (se pedido — formato 9:16)
@@ -248,6 +248,6 @@ Se sim, chamar `/publicar-tema` com o mesmo tema.
 - Fotos IA: sempre pedir aprovação antes de usar no carrossel
 - Fotos IA: prompts em inglês
 - Fotos IA: nunca gerar fotos de pessoas/rostos identificáveis
-- HTMLs: um único arquivo `carrossel.html` com todos os slides + `render.js` na mesma pasta. Inline CSS
-- Render: reutilizar `node_modules` quando possível (não rodar `npm install` em cada pasta)
+- HTMLs: um único arquivo `carrossel.html` com todos os slides. Inline CSS
+- Render: sempre via `scripts/render.js` (não criar script de render por pasta)
 - Não repetir layout entre slides — usar variação visual

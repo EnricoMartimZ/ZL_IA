@@ -22,7 +22,8 @@ O cliente não cancela serviço que ele vê funcionando. Esse relatório mostra,
 - **Histórico:** `clientes/<Nome>/resultados/` (relatórios anteriores)
 - **Entradas do mês:** exports e prints que o usuário soltar em `dados/` ou na pasta do cliente (Google Meu Negócio, Instagram Insights, Analytics, Shopify/Nuvemshop, Google/Meta Ads)
 - **Visual:** `identidade/design-guide.md`
-- **Render:** Playwright pra HTML → PDF
+- **Modelo:** `.claude/skills/relatorio-resultados/modelo.html`
+- **Render:** `scripts/render.js` (se faltar o Playwright, `npm run setup` na raiz)
 
 ---
 
@@ -105,7 +106,7 @@ Se o cliente está consistentemente bem e usando pouco do pacote, ou pedindo coi
 
 ### Passo 7 — Documento e render
 
-HTML em `clientes/<Nome>/resultados/<YYYY-MM>/relatorio.html`, com `identidade/design-guide.md`:
+Copiar `modelo.html` dessa skill pra `clientes/<Nome>/resultados/<YYYY-MM>/relatorio.html`, aplicar as cores de `identidade/design-guide.md` e preencher os `{{CAMPOS}}` (nenhum pode sobrar). Estrutura do modelo:
 
 ```
 [Logo]                                         Resultados · <loja> · <mês/ano>
@@ -117,7 +118,11 @@ Quanto voltou             conta do retorno (ou "ainda em formação" no mês 1)
 Próximo mês               3 ações
 ```
 
-Limite: 2 páginas. PDF: `clientes/<Nome>/resultados/<YYYY-MM>/resultados-<slug>-<YYYY-MM>.pdf`
+Limite: 2 páginas. PDF:
+
+```bash
+node scripts/render.js clientes/<Nome>/resultados/<YYYY-MM>/relatorio.html --pdf clientes/<Nome>/resultados/<YYYY-MM>/resultados-<slug>-<YYYY-MM>.pdf
+```
 
 Salvar `clientes/<Nome>/resultados/<YYYY-MM>/dados.md` com frontmatter:
 
@@ -139,6 +144,8 @@ Esse frontmatter alimenta a comparação do mês seguinte.
 ### Passo 8 — Entrega
 
 Mostrar no chat: destaque, tabela antes/depois resumida, caminho do PDF, e a mensagem de envio pro cliente (curta, começando pelo destaque). Separado, só pro usuário: alertas (entrega abaixo do prometido, indicador caindo, oportunidade de upgrade).
+
+Se o mês trouxe um resultado forte (ou um problema que ameaça a renovação), oferecer registrar em `/aprendizado` — é o que mostra quais entregas realmente geram resultado por nicho.
 
 ---
 

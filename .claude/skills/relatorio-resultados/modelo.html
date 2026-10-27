@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+  Modelo do /relatorio-resultados. Copiar pra clientes/<Nome>/resultados/<YYYY-MM>/relatorio.html,
+  trocar os {{CAMPOS}} e as cores do :root pelas de identidade/design-guide.md.
+  Nas variações use a classe "sobe", "cai" ou "igual" (para indicador em que cair é bom,
+  como tempo de resposta, inverter). Máximo 2 páginas A4.
+  Render: node scripts/render.js <html> --pdf <saida.pdf>
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Resultados — {{LOJA}} — {{MES_ANO}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #FAFAF7;
+    --texto: #16161A;
+    --muted: #6B6B73;
+    --destaque: #1F4FFF;
+    --sobe: #1B8A4B;
+    --cai: #C92A2A;
+    --card: #FFFFFF;
+    --linha: #E6E4DE;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--texto); background: var(--fundo); font-size: 10pt; line-height: 1.5; }
+  .pagina { width: 210mm; min-height: 297mm; padding: 16mm 18mm; page-break-after: always; display: flex; flex-direction: column; }
+  .pagina:last-child { page-break-after: auto; }
+
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 11mm; }
+  .marca { font-weight: 800; letter-spacing: -0.02em; font-size: 13pt; }
+  .meta { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); }
+
+  .eyebrow { font-size: 8pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.28em; color: var(--destaque); margin-bottom: 3mm; }
+  h1 { font-size: 26pt; font-weight: 900; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 8mm; }
+  h2 { font-size: 13pt; font-weight: 800; letter-spacing: -0.02em; margin: 8mm 0 3mm; }
+
+  .destaque { background: var(--texto); color: var(--fundo); border-radius: 10px; padding: 8mm; display: grid; grid-template-columns: auto 1fr; gap: 8mm; align-items: center; }
+  .destaque .numero { font-size: 40pt; font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
+  .destaque p { font-size: 12pt; font-weight: 500; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  th { text-align: left; font-size: 7.5pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); padding: 2mm 0; border-bottom: 1.5px solid var(--texto); }
+  td { padding: 2.4mm 0; border-bottom: 1px solid var(--linha); }
+  th:not(:first-child), td:not(:first-child) { text-align: right; }
+  td:first-child { font-weight: 600; }
+  .sobe { color: var(--sobe); font-weight: 700; }
+  .cai { color: var(--cai); font-weight: 700; }
+  .igual { color: var(--muted); }
+  .sobe::before { content: '▲ '; }
+  .cai::before { content: '▼ '; }
+
+  .retorno { background: var(--card); border: 1px solid var(--linha); border-radius: 10px; padding: 6mm 7mm; }
+  .retorno .conta { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 9pt; color: var(--muted); white-space: pre-line; margin-top: 2mm; }
+  .retorno .linha-final { display: flex; justify-content: space-between; margin-top: 4mm; padding-top: 3mm; border-top: 1px solid var(--linha); font-weight: 800; font-size: 11pt; }
+
+  ol.acoes { padding-left: 5mm; }
+  ol.acoes li { margin-bottom: 2mm; }
+  .nota { font-size: 7.5pt; color: var(--muted); margin-top: auto; padding-top: 6mm; }
+</style>
+</head>
+<body>
+
+<section class="pagina">
+  <header>
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">Resultados · {{MES_ANO}}</div>
+  </header>
+
+  <div class="eyebrow">{{PACOTE}} · mês {{NUMERO_DO_MES}}</div>
+  <h1>{{LOJA}}</h1>
+
+  <div class="destaque">
+    <div class="numero">{{NUMERO_DESTAQUE}}</div>
+    <p>{{FRASE_DESTAQUE}}</p>
+  </div>
+
+  <h2>O que fizemos</h2>
+  <table>
+    <tr><th>Entrega</th><th>Prometido</th><th>Feito</th></tr>
+    <tr><td>{{ENTREGA}}</td><td>{{PROMETIDO}}</td><td>{{FEITO}}</td></tr>
+    <tr><td>{{ENTREGA}}</td><td>{{PROMETIDO}}</td><td>{{FEITO}}</td></tr>
+    <tr><td>{{ENTREGA}}</td><td>{{PROMETIDO}}</td><td>{{FEITO}}</td></tr>
+  </table>
+
+  <h2>Como evoluiu</h2>
+  <table>
+    <tr><th>Indicador</th><th>Início</th><th>Mês anterior</th><th>Este mês</th><th>Variação</th></tr>
+    <tr><td>{{INDICADOR}}</td><td>{{INICIO}}</td><td>{{ANTERIOR}}</td><td>{{ATUAL}}</td><td class="sobe">{{VARIACAO}}</td></tr>
+    <tr><td>{{INDICADOR}}</td><td>{{INICIO}}</td><td>{{ANTERIOR}}</td><td>{{ATUAL}}</td><td class="sobe">{{VARIACAO}}</td></tr>
+    <tr><td>{{INDICADOR}}</td><td>{{INICIO}}</td><td>{{ANTERIOR}}</td><td>{{ATUAL}}</td><td class="igual">{{VARIACAO}}</td></tr>
+    <tr><td>{{INDICADOR}}</td><td>{{INICIO}}</td><td>{{ANTERIOR}}</td><td>{{ATUAL}}</td><td class="cai">{{VARIACAO}}</td></tr>
+  </table>
+</section>
+
+<section class="pagina">
+  <header>
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">{{LOJA}} · 2/2</div>
+  </header>
+
+  <h2>Quanto voltou</h2>
+  <div class="retorno">
+    <div>{{FRASE_RETORNO}}</div>
+    <div class="conta">{{CONTA_DO_RETORNO}}</div>
+    <div class="linha-final"><span>Retorno estimado no mês</span><span>R$ {{RETORNO}} · investimento R$ {{INVESTIMENTO}}</span></div>
+  </div>
+
+  <h2>Próximo mês</h2>
+  <ol class="acoes">
+    <li>{{ACAO_1}}</li>
+    <li>{{ACAO_2}}</li>
+    <li>{{ACAO_3}}</li>
+  </ol>
+
+  <p class="nota">Fontes: {{FONTES}}. Valores de retorno marcados como estimativa usam as premissas acima; vendas informadas pela loja são números reais.</p>
+</section>
+
+</body>
+</html>

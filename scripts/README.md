@@ -2,20 +2,26 @@
 
 Scripts Node.js e Python que as skills chamam quando precisam fazer coisas fora do alcance da IA pura (gerar imagem, postar em rede social, renderizar HTML em PNG).
 
-A pasta vem **vazia** — cada skill que precisa de script tem instrução de como criar (e geralmente é um único setup por integração que você vai ativar).
+Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chromium.
 
-## Scripts comuns
+## Scripts
 
-Conforme você for ativando skills, isso aqui vai sendo populado. Lista do que cada skill espera encontrar:
-
-| Skill | Script esperado | O que faz |
+| Script | Usado por | O que faz |
 |---|---|---|
-| `/carrossel` (com foto IA) | `gerar-imagem.js` | Gera foto realista via OpenAI API (DALL-E 3) |
-| `/carrossel` (render PNG) | `render.js` (gerado por carrossel, fica na pasta do conteúdo) | Playwright tira screenshot 1080x1350 de cada slide |
-| `/aprovar-post` | `postar-instagram.js` | Publica carrossel no Instagram via Meta Graph API |
-| `/aprovar-post` | `postar-facebook.js` | Publica carrossel no Facebook via Meta Graph API |
-| `/anuncio-google` | (nenhum — gera CSV direto) | — |
-| `/relatorio-ads` | (lê CSV exportado das plataformas) | — |
+| `render.js` | `/carrossel`, `/diagnostico-loja`, `/proposta-servico`, `/relatorio-resultados` | HTML → PNG (um por `.slide`) ou PDF A4 |
+| `gerar-imagem.js` | `/carrossel` (foto IA) | Gera foto via OpenAI Images API (`gpt-image-1`) |
+| `postar-instagram.js` | `/aprovar-post` | Publica carrossel ou post único no Instagram |
+| `postar-facebook.js` | `/aprovar-post` | Publica as fotos num post da Página do Facebook |
+| `lib/meta.js` | scripts de postagem | Funções comuns da Meta Graph API |
+
+```bash
+node scripts/render.js marketing/conteudo/<pasta>/carrossel.html --png marketing/conteudo/<pasta>/instagram
+node scripts/render.js vendas/propostas/<loja>/proposta.html --pdf vendas/propostas/<loja>/proposta-<loja>.pdf
+node --env-file=.env scripts/gerar-imagem.js "PROMPT" marketing/conteudo/<pasta>/foto.png
+node --env-file=.env scripts/postar-instagram.js marketing/conteudo/<slug>-<data> --dry-run
+```
+
+`--dry-run` nos scripts de postagem mostra as chamadas à API sem publicar nada — use pra conferir antes da primeira vez.
 
 ## Pré-requisitos comuns
 
@@ -23,7 +29,7 @@ A maioria dos scripts depende de:
 
 **Node.js 20+** instalado na máquina
 
-**.env** na raiz do projeto com as chaves de API:
+**.env** na raiz do projeto (copie o `.env.example`; o `.env` está no `.gitignore`):
 ```bash
 OPENAI_API_KEY=sk-...               # pra gerar-imagem.js
 META_PAGE_ACCESS_TOKEN=...          # pra postar-instagram.js + postar-facebook.js

@@ -1,0 +1,171 @@
+<!doctype html>
+<!--
+  Modelo do /proposta-servico. Copiar pra vendas/propostas/<slug-loja>/proposta.html,
+  trocar os {{CAMPOS}} e as cores do :root pelas de identidade/design-guide.md.
+  Três pacotes sempre; o do meio leva a classe "recomendado". Máximo 3 páginas A4.
+  Render: node scripts/render.js <html> --pdf <saida.pdf>
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Proposta — {{LOJA}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #FAFAF7;
+    --texto: #16161A;
+    --muted: #6B6B73;
+    --destaque: #1F4FFF;
+    --card: #FFFFFF;
+    --linha: #E6E4DE;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--texto); background: var(--fundo); font-size: 10pt; line-height: 1.5; }
+  .pagina { width: 210mm; min-height: 297mm; padding: 16mm 16mm; page-break-after: always; display: flex; flex-direction: column; }
+  .pagina:last-child { page-break-after: auto; }
+
+  header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8mm; }
+  .marca { font-weight: 800; letter-spacing: -0.02em; font-size: 13pt; }
+  .meta { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); text-align: right; }
+
+  .eyebrow { font-size: 8pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.28em; color: var(--destaque); margin-bottom: 3mm; }
+  h1 { font-size: 26pt; font-weight: 900; line-height: 1.02; letter-spacing: -0.04em; margin-bottom: 4mm; }
+  h2 { font-size: 12pt; font-weight: 800; letter-spacing: -0.02em; margin: 5mm 0 2mm; }
+
+  .encontrado { list-style: none; border-top: 1px solid var(--linha); }
+  .encontrado li { display: flex; justify-content: space-between; gap: 6mm; padding: 1.8mm 0; border-bottom: 1px solid var(--linha); }
+  .encontrado li span:last-child { color: var(--muted); white-space: nowrap; }
+  .muda { font-size: 11pt; max-width: 160mm; }
+
+  .pacotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4mm; margin-top: 4mm; }
+  .pacote { overflow-wrap: anywhere; background: var(--card); border: 1px solid var(--linha); border-radius: 10px; padding: 4.5mm 4.5mm; display: flex; flex-direction: column; break-inside: avoid; }
+  .pacote.recomendado { border: 2px solid var(--destaque); }
+  .selo { font-size: 7pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--destaque); height: 3.5mm; margin-bottom: 1mm; }
+  .pacote h3 { font-size: 14pt; font-weight: 900; letter-spacing: -0.03em; }
+  .pacote .resolve { font-size: 8.5pt; color: var(--muted); margin: 0.5mm 0 2.5mm; }
+  .preco { font-size: 17pt; font-weight: 900; letter-spacing: -0.03em; }
+  .preco small { font-size: 9pt; font-weight: 600; color: var(--muted); }
+  .setup { font-size: 8pt; color: var(--muted); margin-bottom: 3mm; }
+  .pacote ul { list-style: none; font-size: 8.5pt; line-height: 1.35; margin-bottom: 2.5mm; }
+  .pacote ul li { padding: 0.6mm 0 0.6mm 4mm; position: relative; }
+  .pacote ul li::before { content: ''; position: absolute; left: 0; top: 2.1mm; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--destaque); }
+  .pacote ul.fora li { color: var(--muted); }
+  .pacote ul.fora li::before { background: var(--linha); }
+  .rotulo { font-size: 7pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin-bottom: 1mm; }
+  .retorno { margin-top: auto; padding-top: 2.5mm; border-top: 1px solid var(--linha); font-size: 8.5pt; }
+  .retorno b { font-size: 10pt; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; }
+  td { padding: 2.4mm 0; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  td:first-child { width: 34mm; font-weight: 700; }
+
+  .proximo { margin-top: auto; background: var(--texto); color: var(--fundo); border-radius: 10px; padding: 7mm 8mm; display: flex; justify-content: space-between; align-items: center; gap: 8mm; }
+  .proximo strong { font-size: 13pt; font-weight: 800; letter-spacing: -0.02em; max-width: 100mm; }
+  .proximo .contato { text-align: right; font-size: 9.5pt; opacity: 0.85; }
+  .nota { font-size: 7.5pt; color: var(--muted); margin-top: 4mm; }
+</style>
+</head>
+<body>
+
+<section class="pagina">
+  <header>
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">Proposta · {{DATA}}<br>Válida até {{VALIDADE}}</div>
+  </header>
+
+  <div class="eyebrow">Proposta para</div>
+  <h1>{{LOJA}}</h1>
+
+  <h2>O que encontramos no diagnóstico</h2>
+  <ul class="encontrado">
+    <li><span>1. {{PONTO_1}}</span><span>{{FATO_1}}</span></li>
+    <li><span>2. {{PONTO_2}}</span><span>{{FATO_2}}</span></li>
+    <li><span>3. {{PONTO_3}}</span><span>{{FATO_3}}</span></li>
+  </ul>
+  <p class="nota">Perda estimada: R$ {{PERDA_MIN}} – {{PERDA_MAX}} por mês (premissas no diagnóstico).</p>
+
+  <h2>O que muda</h2>
+  <p class="muda">{{RESULTADO_EM_LINGUAGEM_DO_DONO}}</p>
+
+  <h2>Pacotes</h2>
+  <div class="pacotes">
+    <div class="pacote">
+      <div class="selo"></div>
+      <h3>Essencial</h3>
+      <p class="resolve">Resolve o ponto {{PONTOS_ESSENCIAL}}</p>
+      <div class="preco">R$ {{PRECO_ESSENCIAL}} <small>/mês</small></div>
+      <div class="setup">Setup R$ {{SETUP_ESSENCIAL}} · implantação em {{PRAZO_ESSENCIAL}}</div>
+      <div class="rotulo">Inclui por mês</div>
+      <ul><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li></ul>
+      <div class="rotulo">Não inclui</div>
+      <ul class="fora"><li>{{FORA_ESCOPO}}</li></ul>
+      <div class="retorno">Se paga com <b>{{VENDAS_EQUILIBRIO_ESSENCIAL}} vendas</b> a mais por mês</div>
+    </div>
+
+    <div class="pacote recomendado">
+      <div class="selo">Mais escolhido</div>
+      <h3>Crescimento</h3>
+      <p class="resolve">Resolve os pontos {{PONTOS_CRESCIMENTO}}</p>
+      <div class="preco">R$ {{PRECO_CRESCIMENTO}} <small>/mês</small></div>
+      <div class="setup">Setup R$ {{SETUP_CRESCIMENTO}} · implantação em {{PRAZO_CRESCIMENTO}}</div>
+      <div class="rotulo">Inclui por mês</div>
+      <ul><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li></ul>
+      <div class="rotulo">Não inclui</div>
+      <ul class="fora"><li>{{FORA_ESCOPO}}</li></ul>
+      <div class="retorno">Se paga com <b>{{VENDAS_EQUILIBRIO_CRESCIMENTO}} vendas</b> a mais por mês</div>
+    </div>
+
+    <div class="pacote">
+      <div class="selo"></div>
+      <h3>Completo</h3>
+      <p class="resolve">Todos os pontos + {{EXTRA_COMPLETO}}</p>
+      <div class="preco">R$ {{PRECO_COMPLETO}} <small>/mês</small></div>
+      <div class="setup">Setup R$ {{SETUP_COMPLETO}} · implantação em {{PRAZO_COMPLETO}}</div>
+      <div class="rotulo">Inclui por mês</div>
+      <ul><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li><li>{{ENTREGA}}</li></ul>
+      <div class="rotulo">Não inclui</div>
+      <ul class="fora"><li>{{FORA_ESCOPO}}</li></ul>
+      <div class="retorno">Se paga com <b>{{VENDAS_EQUILIBRIO_COMPLETO}} vendas</b> a mais por mês</div>
+    </div>
+  </div>
+  <p class="nota">"Se paga com" considera ticket médio de R$ {{TICKET_MEDIO}}. É ponto de equilíbrio, não promessa de resultado.</p>
+</section>
+
+<section class="pagina">
+  <header>
+    <div class="marca">{{SEU_NEGOCIO}}</div>
+    <div class="meta">{{LOJA}} · 2/2</div>
+  </header>
+
+  <h2>Como funciona</h2>
+  <table>
+    <tr><td>Semana 1</td><td>{{SEMANA_1}}</td></tr>
+    <tr><td>Semana 2</td><td>{{SEMANA_2}}</td></tr>
+    <tr><td>Semanas 3–4</td><td>{{SEMANAS_3_4}}</td></tr>
+    <tr><td>Fim do mês 1</td><td>Primeiro relatório de resultados, com o antes e depois</td></tr>
+  </table>
+
+  <h2>O que preciso de vocês</h2>
+  <table>
+    <tr><td>Acessos</td><td>{{ACESSOS}}</td></tr>
+    <tr><td>Material</td><td>{{MATERIAL}}</td></tr>
+    <tr><td>Tempo</td><td>{{TEMPO_DO_DONO}}</td></tr>
+  </table>
+
+  <h2>Condições</h2>
+  <table>
+    <tr><td>Pagamento</td><td>{{PAGAMENTO}}</td></tr>
+    <tr><td>Fidelidade</td><td>{{FIDELIDADE}}</td></tr>
+    <tr><td>Cancelamento</td><td>{{CANCELAMENTO}}</td></tr>
+    <tr><td>Validade</td><td>Esta proposta vale até {{VALIDADE}}</td></tr>
+  </table>
+
+  <div class="proximo">
+    <strong>Responde qual pacote faz sentido que eu já agendo a implantação.</strong>
+    <div class="contato"><b>{{SEU_NOME}}</b><br>{{SEU_WHATSAPP}} · {{SEU_EMAIL}}</div>
+  </div>
+</section>
+
+</body>
+</html>

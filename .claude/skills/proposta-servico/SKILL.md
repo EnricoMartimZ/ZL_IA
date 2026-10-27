@@ -16,10 +16,12 @@ Transforma o diagnóstico em decisão. A proposta não explica o que é IA — m
 ## Dependências
 
 - **Contexto:** `_memoria/empresa.md`, `_memoria/preferencias.md`
+- **Aprendizados:** `_memoria/vendas-aprendizados.md` se existir — qual pacote mais fecha, objeções frequentes no nicho, faixa de preço aceita
 - **Catálogo e preços:** `_memoria/servicos.md` (criado no Passo 0 se não existir)
 - **Diagnóstico:** `vendas/diagnosticos/<slug-loja>/dados.md` e o PDF (se não existir, avisar e oferecer rodar `/diagnostico-loja` antes)
 - **Visual:** `identidade/design-guide.md`
-- **Render:** Playwright pra HTML → PDF (mesmo do `/diagnostico-loja`)
+- **Modelo:** `.claude/skills/proposta-servico/modelo.html`
+- **Render:** `scripts/render.js` (se faltar o Playwright, `npm run setup` na raiz)
 
 ---
 
@@ -36,7 +38,7 @@ Qualquer informação da conversa com o lojista (orçamento, prioridade, objeç�
 
 ### Passo 0 — Catálogo de serviços (só na primeira vez)
 
-Se `_memoria/servicos.md` não existe, entrevistar uma pergunta por vez:
+Se `_memoria/servicos.md` não existe ou ainda está com os campos em branco, entrevistar uma pergunta por vez:
 
 1. "Quais serviços você entrega hoje ou quer vender? (ex: resposta de avaliações, gestão de Google Meu Negócio, conteúdo/carrossel, descrições de produto, anúncios, atendimento com IA no WhatsApp, relatório mensal)"
 2. "Quanto tempo cada um te toma por mês, por loja?"
@@ -99,7 +101,7 @@ Formular como **ponto de equilíbrio** ("se paga com 9 vendas a mais por mês"),
 
 ### Passo 4 — Montar o documento
 
-HTML em `vendas/propostas/<slug-loja>/proposta.html`, com `identidade/design-guide.md`. Estrutura:
+Copiar `modelo.html` dessa skill pra `vendas/propostas/<slug-loja>/proposta.html`, aplicar as cores de `identidade/design-guide.md` no `:root` e preencher os `{{CAMPOS}}` (nenhum pode sobrar). Estrutura do modelo:
 
 ```
 [Logo]                                              Proposta · <loja> · <data> · válida por 15 dias
@@ -121,13 +123,13 @@ Limite: 3 páginas A4.
 
 ### Passo 5 — Render e mensagem
 
-- PDF: `vendas/propostas/<slug-loja>/proposta-<slug-loja>.pdf`
+- PDF: `node scripts/render.js vendas/propostas/<slug-loja>/proposta.html --pdf vendas/propostas/<slug-loja>/proposta-<slug-loja>.pdf`
 - Mensagem de envio no tom de `_memoria/preferencias.md`, curta, que puxa pra uma decisão ("Qual dos três faz mais sentido pra vocês agora?"), não pra "qualquer dúvida estou à disposição"
 - Salvar `resumo.md` com pacotes, preços, data e validade (o `/relatorio-resultados` usa o pacote fechado como referência do que foi prometido)
 
 ### Passo 6 — Entrega
 
-Mostrar no chat: os três pacotes em tabela, o caminho do PDF e a mensagem. Atualizar `Status` na planilha de prospecção pra "proposta enviada", se existir.
+Mostrar no chat: os três pacotes em tabela, o caminho do PDF e a mensagem. Atualizar a loja em `vendas/funil.md` pra etapa **proposta enviada**, com o valor do pacote recomendado e próximo passo em 3 dias.
 
 > "Quando ele fechar, roda `/novo-projeto` pra criar a pasta do cliente — e no fim do primeiro mês, `/relatorio-resultados`."
 
