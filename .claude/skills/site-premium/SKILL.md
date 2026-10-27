@@ -58,15 +58,30 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 - Comprimir: `npx @gltf-transform/cli optimize entrada.glb saida.glb --compress draco --texture-compress webp` (alvo < 3 MB)
 - Sem modelo ainda: o modelo pronto tem um objeto de demonstração; serve pra aprovar o visual
 
+### Variações do modelo
+
+| Escolha | Como | Quando |
+|---|---|---|
+| **Hero 3D** | `data-modo="3d"` no `#palco` (padrão) | Transformação clara + modelo .glb bom. Pacote mais caro |
+| **Hero foto** | `data-modo="foto"` + foto real em `img/hero.*` (o Three.js nem é baixado) | Sem modelo 3D, orçamento menor, demo rápida |
+| **Tema escuro** | `data-tema="escuro"` no `<html>` (padrão) | Automotivo, barbearia, bar, tecnologia, luxo |
+| **Tema claro** | `data-tema="claro"` + cores no bloco `:root[data-tema="claro"]` | Clínica, ótica, confeitaria, infantil, pet, moda feminina |
+| **Página de serviço** | `servico.html` copiada como `servico-<nome>.html` | Cada serviço que as pessoas buscam no Google ("lentes multifocais campinas") |
+| **Loja online** | link comentado no `<nav>` do `index.html` | Loja com Nuvemshop/Shopify |
+
 ### Passo 3 — Montar o site
 
 1. Copiar `modelo/` inteiro pra `clientes/<Nome>/site/`
-2. **`estilo.css`** → trocar só o `:root` (cores da marca; fontes se a marca tiver)
-3. **`index.html`** → trocar todo elemento com `data-editar` (título da página, meta tags, textos, avaliações, endereço). Títulos seguindo `design.md` §2: curtos, maiúsculos, com ponto final
-4. **`app.js`** → `CONFIG`: WhatsApp, serviços, períodos, dias fechados
-5. **`hero3d.js`** → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`
-6. **`img/`** → fotos reais (WebP, ~1600 px no lado maior) no lugar dos SVGs de exemplo; `og.jpg` 1200×630 pra compartilhamento
-7. Apagar os comentários de instrução do topo dos arquivos
+2. **Variações** acima: modo do hero, tema, quais páginas de serviço
+3. **`estilo.css`** → trocar só o `:root` do tema escolhido (cores da marca; fontes se a marca tiver)
+4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title de cada página = serviço + cidade + marca
+5. **`DOMINIO`** → buscar e trocar em todos os arquivos (canonical, og, JSON-LD, `sitemap.xml`, `robots.txt`). Sem domínio ainda: deixar e trocar no `/publicar-site`
+6. **`app.js`** → `CONFIG`: WhatsApp, serviços (os mesmos nomes dos cards), períodos, dias fechados, **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
+7. **`hero3d.js`** (modo 3D) → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
+8. **`img/`** → fotos reais (WebP, ~1600 px no lado maior) no lugar dos SVGs; `og.png` 1200×630 (gerar com `og/og.html` desta skill: `node scripts/render.js .claude/skills/site-premium/og/og.html --png <pasta> --size 1200x630`); `favicon.svg` com a inicial da marca
+9. **`privacidade.html`** → dados do cliente; sem GA4/Pixel, apagar a seção de cookies
+10. **`sitemap.xml`** → uma `<url>` por página indexável
+11. Apagar os comentários de instrução do topo dos arquivos
 
 ### Passo 4 — Ver e conferir
 
@@ -74,24 +89,25 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 python3 -m http.server 4173 --directory clientes/<Nome>/site
 ```
 
-Abrir `http://localhost:4173` e conferir, no desktop (1440 px) **e** no celular (390 px):
+Rodar o **`/checar-site`** (pega texto de exemplo esquecido, WhatsApp de exemplo, erros, 404, SEO, imagens, rolagem lateral):
 
-- [ ] Preloader some e o 3D aparece; todos os capítulos funcionam (clicar em cada um) e o play/pause
+```bash
+node scripts/checar-site.js clientes/<Nome>/site --saida clientes/<Nome>/site/CHECAGEM.md
+```
+
+Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e** no celular (390 px):
+
+- [ ] Preloader some e o hero aparece; no 3D, todos os capítulos funcionam e o play/pause
 - [ ] Na etapa mais próxima da câmera, o objeto não cobre o título (se cobrir, afastar `cam` daquele capítulo)
-- [ ] Nenhum `{{`, "Marca", "Serviço dois", "Cidade" ou texto de exemplo sobrando: `grep -rn "data-editar" index.html` e revisar cada um
-- [ ] Agenda abre, monta a mensagem e abre o WhatsApp certo
-- [ ] Console sem erros; nenhuma imagem 404
+- [ ] Agenda abre, monta a mensagem e abre o WhatsApp certo (no `localhost`, o console mostra cada evento `[medir]`)
 - [ ] Grade de serviços sem card sobrando sozinho
-- [ ] Desligar o WebGL (ou testar num navegador sem) mostra o fundo alternativo e o site continua usável
+- [ ] Desligar o WebGL mostra o fundo alternativo e o site continua usável
 
 ### Passo 5 — Publicar
 
-Hospedagem estática, grátis pra começar:
+Com o cliente aprovando a versão: **`/publicar-site`** — deploy, domínio, Search Console, Google Meu Negócio, documento de entrega e oferta de manutenção mensal. **Publicar só com o "ok" do usuário** — o site vai pro ar com o nome do cliente.
 
-- **Vercel:** `npx vercel deploy clientes/<Nome>/site --prod` (pede login na primeira vez)
-- **Netlify:** arrastar a pasta `site/` em app.netlify.com/drop
-
-Depois: domínio do cliente, Google Search Console e o link do site no Google Meu Negócio e na bio do Instagram. **Publicar só com o "ok" do usuário** — o site vai pro ar com o nome do cliente.
+Ainda não é cliente? A versão de venda é o **`/site-demo`**.
 
 ### Passo 6 — Entrega
 

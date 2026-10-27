@@ -1,0 +1,124 @@
+<!doctype html>
+<!--
+  Página de um serviço — é ela que ranqueia no Google pra "serviço + cidade".
+  Uma por serviço importante: copiar como servico-<nome>.html, ligar no card do index.html
+  e adicionar no sitemap.xml. Trocar todo data-editar e o JSON-LD.
+-->
+<html lang="pt-BR" data-tema="escuro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-editar>Serviço principal em Cidade · Marca</title>
+<meta name="description" content="O que é o serviço, quanto tempo leva e por que fazer com a Marca — em Cidade, com hora marcada." data-editar>
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://DOMINIO/servico.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://DOMINIO/servico.html">
+<meta property="og:title" content="Serviço principal em Cidade · Marca" data-editar>
+<meta property="og:description" content="Uma frase do serviço." data-editar>
+<meta property="og:image" content="https://DOMINIO/img/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,800;1,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<!-- Serviço + perguntas frequentes: o Google pode mostrar as perguntas direto no resultado -->
+<script type="application/ld+json" data-editar>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Serviço principal",
+      "description": "O que é o serviço em uma frase.",
+      "areaServed": { "@type": "City", "name": "Cidade" },
+      "provider": { "@type": "LocalBusiness", "name": "Marca", "url": "https://DOMINIO/" },
+      "offers": { "@type": "Offer", "priceCurrency": "BRL", "price": "390" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Quanto tempo leva?", "acceptedAnswer": { "@type": "Answer", "text": "Resposta real, com número." } },
+        { "@type": "Question", "name": "Precisa agendar?", "acceptedAnswer": { "@type": "Answer", "text": "Resposta real." } },
+        { "@type": "Question", "name": "Quanto custa?", "acceptedAnswer": { "@type": "Answer", "text": "A partir de R$ 390, dependendo de..." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://DOMINIO/" },
+        { "@type": "ListItem", "position": 2, "name": "Serviço principal", "item": "https://DOMINIO/servico.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="./" aria-label="Início">
+    <span class="logo-nome" data-editar>MARCA</span>
+    <span class="logo-sub" data-editar>serviço premium</span>
+  </a>
+  <nav class="links">
+    <a href="./#servicos">Serviços</a>
+    <a href="./#processo">Processo</a>
+    <a href="./#depoimentos">Clientes</a>
+  </nav>
+  <button class="btn btn-claro" data-abrir-agenda data-servico="Serviço principal">Agendar</button>
+</header>
+
+<main>
+  <section class="pagina-topo">
+    <p class="migalha"><a href="./">Início</a> / <span data-editar>Serviço principal</span></p>
+    <div class="servico-hero">
+      <div>
+        <p class="eyebrow" data-editar>Serviço · Cidade</p>
+        <h1 class="display" data-editar>Serviço <br><span class="contorno">principal.</span></h1>
+        <p class="lead" data-editar>Duas frases: o problema que resolve e o resultado que o cliente vê. Citar a cidade uma vez, naturalmente.</p>
+        <p class="preco"><small>a partir de</small> <b data-editar>R$ 390</b> <small data-editar>· leva cerca de 4 h</small></p>
+        <button class="btn btn-ouro" data-abrir-agenda data-servico="Serviço principal">Agendar este serviço</button>
+      </div>
+      <img src="img/foto-1.svg" alt="Descrever a foto real do serviço" data-editar>
+    </div>
+  </section>
+
+  <section class="secao">
+    <p class="eyebrow reveal">O que inclui</p>
+    <ul class="inclui">
+      <li class="reveal"><b data-editar>Etapa um</b><span data-editar>O que é feito e por quê, em uma frase.</span></li>
+      <li class="reveal"><b data-editar>Etapa dois</b><span data-editar>O que é feito e por quê, em uma frase.</span></li>
+      <li class="reveal"><b data-editar>Etapa três</b><span data-editar>O que é feito e por quê, em uma frase.</span></li>
+      <li class="reveal"><b data-editar>Etapa quatro</b><span data-editar>O que é feito e por quê, em uma frase.</span></li>
+    </ul>
+  </section>
+
+  <section class="secao">
+    <p class="eyebrow reveal">Perguntas frequentes</p>
+    <h2 class="display reveal" data-editar>Antes de <br><span class="contorno">agendar.</span></h2>
+    <div class="faq">
+      <details><summary data-editar>Quanto tempo leva?</summary><p data-editar>Resposta real, com número.</p></details>
+      <details><summary data-editar>Precisa agendar?</summary><p data-editar>Resposta real.</p></details>
+      <details><summary data-editar>Quanto custa?</summary><p data-editar>A partir de R$ 390, dependendo de...</p></details>
+    </div>
+  </section>
+
+  <section class="final">
+    <h2 class="display grande reveal" data-editar>Bora <span class="ouro">marcar?</span></h2>
+    <button class="btn btn-ouro reveal" data-abrir-agenda data-servico="Serviço principal">Agendar meu horário</button>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="logo"><span class="logo-nome" data-editar>MARCA</span><span class="logo-sub" data-editar>serviço premium</span></div>
+  <address data-editar>Rua Exemplo, 123 · Bairro · Cidade/UF<br>seg–sex 8h–18h · sáb 8h–12h<br><a href="tel:+5500000000000" data-medir="clique_telefone">(00) 00000-0000</a></address>
+  <p class="nota-mono"><span data-editar>© 2026 Marca · CNPJ 00.000.000/0001-00</span> · <a href="privacidade.html">Privacidade</a></p>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>

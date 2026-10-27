@@ -13,6 +13,7 @@ Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chr
 | `postar-instagram.js` | `/aprovar-post` | Publica carrossel ou post único no Instagram |
 | `postar-facebook.js` | `/aprovar-post` | Publica as fotos num post da Página do Facebook |
 | `lib/meta.js` | scripts de postagem | Funções comuns da Meta Graph API |
+| `checar-site.js` | `/checar-site`, `/site-demo`, `/publicar-site` | Confere um site (pasta ou URL): erros, 404, texto de exemplo, SEO, imagens, celular. Sai com código 1 se houver erro que bloqueia |
 | `kie.js` | `/foto-produto`, `/video-ia` | Gera imagem, vídeo e lip sync pelo kie.ai (motor do Open Higgsfield AI); sobe arquivos locais marcados com `@` |
 
 ```bash

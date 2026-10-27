@@ -10,8 +10,8 @@ Referência estudada: um site premium de estética automotiva.
   no rótulo das seções, no preço, no botão final e numa palavra do último título. Em nenhum outro lugar.
 - Uma segunda cor só como **brilho de fundo** (radial grande e desfocado), nunca em texto ou botão.
 - Linhas divisórias em branco com 9% de opacidade (`rgba(255,255,255,.09)`). Nada de bordas cinza sólidas.
-- Marca com identidade clara (salão rosa, por exemplo)? Pode inverter pra fundo claro, mas a regra é a mesma:
-  base neutra + um destaque.
+- Marca com identidade clara (clínica, confeitaria, salão)? Tema claro pronto: `<html data-tema="claro">` —
+  fundo off-white (`#f6f4ef`), texto quase preto, um destaque. Mesma regra: base neutra + um destaque.
 
 ## 2. Tipografia: duas vozes
 
@@ -65,3 +65,10 @@ Referência estudada: um site premium de estética automotiva.
 - Sem WebGL → fundo em degradê no lugar, site continua funcionando.
 - Modelo .glb comprimido (Draco), idealmente < 3 MB. Fotos em WebP/AVIF com `loading="lazy"`.
 - Meta tags de compartilhamento (`og:title`, `og:image` 1200×630) — o link no WhatsApp também vende.
+
+## 8. Ser encontrado e provar resultado
+
+- Title de cada página = **serviço + cidade + marca** ("Lentes multifocais em Campinas · <marca>"). O h1 pode ser criativo; o title não.
+- Dados estruturados (JSON-LD) com o tipo mais específico do negócio, endereço, horário e coordenadas — é o que alimenta o Google e o Maps. Nunca `aggregateRating` com avaliações do Google.
+- Uma página por serviço importante, com perguntas frequentes reais (viram resultado no Google).
+- Todo botão que gera contato é medido (`clique_whatsapp`, `agenda_enviada`...). Site que não mede não justifica mensalidade.

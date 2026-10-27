@@ -1,16 +1,14 @@
 // Modelo /site-premium — hero 3D que conta a transformação do serviço.
 // Three.js r160 via importmap (sem build). Por cliente, trocar só o CONFIG:
 // o modelo (.glb do produto), as cores e os capítulos da história.
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+// Com data-modo="foto" no #palco, o Three.js nem é baixado: o hero usa img/hero.*.
+let THREE, GLTFLoader, DRACOLoader, RoomEnvironment;
 
 const CONFIG = {
   modelo: null,            // ex: 'modelos/produto.glb' — null usa o objeto de demonstração
   tamanho: 2.4,            // maior medida do objeto na cena, em metros
   girarModelo: -0.5,       // rotação inicial (radianos)
-  corFundo: 0x0d0f14,
+  corFundo: null,          // null = usa --bg-2 do estilo.css (acompanha o tema claro/escuro)
   corSujeira: 0x6b5a45,    // a cor do "antes" (sujeira, desgaste, poeira)
   corDestaque: 0xf2b33a,   // luz quente de destaque
   corLed: 0xe8eeff,
@@ -64,25 +62,34 @@ function semWebGL(motivo) {
   liberarPagina();
 }
 
-// ---------- renderer ----------
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: !ehCelular, powerPreference: 'high-performance' });
-} catch (e) {
-  semWebGL(e.message);
+// ---------- modo ----------
+if (palco.dataset.modo === 'foto') {
+  palco.classList.add('modo-foto');
+  document.getElementById('capitulos').hidden = true;
+  liberarPagina();
+} else {
+  iniciar().catch((e) => semWebGL(e.message));
 }
 
-if (renderer) iniciar().catch((e) => semWebGL(e.message));
-
 async function iniciar() {
+  progresso(0.05, 'carregando o 3D');
+  THREE = await import('three');
+  ({ GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js'));
+  ({ DRACOLoader } = await import('three/addons/loaders/DRACOLoader.js'));
+  ({ RoomEnvironment } = await import('three/addons/environments/RoomEnvironment.js'));
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !ehCelular, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio || 1, ehCelular ? 1.5 : 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
 
+  const corCss = getComputedStyle(document.documentElement).getPropertyValue('--bg-2').trim();
+  const fundo = new THREE.Color(CONFIG.corFundo ?? (corCss || '#0d0f14'));
+  const claro = fundo.getHSL({}).l > 0.5;
   const cena = new THREE.Scene();
-  cena.background = new THREE.Color(CONFIG.corFundo);
-  cena.fog = new THREE.Fog(CONFIG.corFundo, 12, 30);
+  cena.background = fundo.clone();
+  cena.fog = new THREE.Fog(fundo, 12, 30);
   const camera = new THREE.PerspectiveCamera(32, 1, 0.05, 100);
 
   // reflexos: um "estúdio" virtual que a superfície espelha (sem arquivo HDR)
@@ -93,14 +100,14 @@ async function iniciar() {
   // ---------- estúdio ----------
   const chao = new THREE.Mesh(
     new THREE.CircleGeometry(30, 64),
-    new THREE.MeshStandardMaterial({ color: 0x14171d, roughness: 0.32, metalness: 0.3, envMapIntensity: 0.6 }),
+    new THREE.MeshStandardMaterial({ color: fundo.clone().offsetHSL(0, 0, claro ? -0.06 : 0.015), roughness: 0.32, metalness: claro ? 0.05 : 0.3, envMapIntensity: 0.6 }),
   );
   chao.rotation.x = -Math.PI / 2;
   cena.add(chao);
 
   const parede = new THREE.Mesh(
     new THREE.CylinderGeometry(14, 14, 10, 64, 1, true, Math.PI * 0.75, Math.PI * 1.5),
-    new THREE.MeshStandardMaterial({ color: 0x1b1f26, roughness: 0.85, side: THREE.BackSide }),
+    new THREE.MeshStandardMaterial({ color: fundo.clone().offsetHSL(0, 0, claro ? -0.02 : 0.04), roughness: 0.85, side: THREE.BackSide }),
   );
   parede.position.y = 5;
   cena.add(parede);
@@ -120,7 +127,7 @@ async function iniciar() {
     c.width = c.height = 128;
     const g = c.getContext('2d');
     const grad = g.createRadialGradient(64, 64, 4, 64, 64, 64);
-    grad.addColorStop(0, 'rgba(0,0,0,.75)');
+    grad.addColorStop(0, claro ? 'rgba(0,0,0,.35)' : 'rgba(0,0,0,.75)');
     grad.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = grad;
     g.fillRect(0, 0, 128, 128);

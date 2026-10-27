@@ -44,6 +44,7 @@ Datas sempre `YYYY-MM-DD`. `Valor/mês` vazio até existir proposta.
 | respondeu | lojista respondeu | mandar diagnóstico ou marcar conversa — hoje |
 | diagnóstico pronto | `/diagnostico-loja` gerou o PDF | enviar — hoje |
 | diagnóstico enviado | mandou o PDF | perguntar o que achou em 2 dias |
+| demo enviada | mandou o link do `/site-demo` | perguntar o que achou em 2 dias; tirar do ar em 30 dias se não fechar |
 | reunião | conversa marcada ou feita | proposta em até 1 dia após a reunião |
 | proposta enviada | `/proposta-servico` | cobrar em 3 dias |
 | negociando | pediu ajuste, desconto, prazo | responder em 1 dia |
