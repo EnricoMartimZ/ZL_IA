@@ -49,7 +49,7 @@ Do Google Meu Negócio, Instagram e site atual (se houver):
 - Serviços e o carro-chefe (o que mais aparece nos posts e avaliações)
 - 4–6 fotos boas que a loja publicou (local, trabalho, equipe — sem cliente identificável)
 - 3 avaliações reais, as mais específicas
-- Cores do logo/fachada/Instagram (pra montar o `:root`)
+- **Identidade:** rodar o `/identidade-loja` → `vendas/marcas/<slug>/` (cores, logo, fontes, frases). Sem site, pedir ao usuário prints do Instagram, do logo e da fachada — **não escolher cor pelo nome da loja**
 - O diferencial que eles mesmos repetem ("desde 1998", "atendimento em casa", "laboratório próprio")
 
 Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Prospect B2B (veio do `/prospectar-b2b`): `contato: 'orcamento'` no `app.js` (troca o painel e os botões pra "Pedir orçamento"), com a pergunta do nicho em `orcamento.quantidade` (tabela em `prospectar-b2b/nichos.md`) e `formulario` **vazio**, e usar os prints da auditoria como "antes" na mensagem. Anotar também a coordenada da porta (Google Maps) — com ela o `scripts/mapa-ruas.js` gera o mapa animado do bairro da loja, que impressiona muito na demo.
@@ -80,7 +80,7 @@ Tema: claro ou escuro conforme a marca (`design.md` §1).
 ### Passo 4 — Conferir
 
 ```bash
-node scripts/checar-site.js vendas/demos/<slug> --demo --saida vendas/demos/<slug>/CHECAGEM.md
+node scripts/checar-site.js vendas/demos/<slug> --demo --marca vendas/marcas/<slug>/marca.json --saida vendas/demos/<slug>/CHECAGEM.md
 ```
 
 Zero ❌. Abrir no celular e no desktop e olhar como o dono vai olhar: o nome dele está certo? A foto mais bonita está no topo?

@@ -1,10 +1,12 @@
 // Confere um site antes de entregar: erros, texto de exemplo esquecido, SEO, imagens, celular, links.
 //
 // Uso:
-//   node scripts/checar-site.js <pasta-do-site | https://url> [--demo] [--saida relatorio.md]
+//   node scripts/checar-site.js <pasta-do-site | https://url> [--demo] [--marca marca.json] [--saida relatorio.md]
 //
 // Pasta: sobe um servidor local temporário. URL: confere o site publicado.
 // --demo: site de demonstração (/site-demo) — exige noindex em vez de proibir.
+// --marca: identidade da loja (scripts/extrair-marca.js). Erro se o site não usa a cor da marca,
+//   aviso se o logo não aparece no topo. Sem a flag, procura <pasta>/../marca/marca.json.
 // Sai com código 1 se houver ❌ (erro que bloqueia a entrega).
 
 import { chromium } from 'playwright';
@@ -14,9 +16,10 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 const argv = process.argv.slice(2);
-const alvo = argv.find((a) => !a.startsWith('--') && argv[argv.indexOf(a) - 1] !== '--saida');
+const alvo = argv.find((a, i) => !a.startsWith('--') && !['--saida', '--marca'].includes(argv[i - 1]));
 const ehDemo = argv.includes('--demo');
 const saida = argv.includes('--saida') ? argv[argv.indexOf('--saida') + 1] : null;
+let arqMarca = argv.includes('--marca') ? argv[argv.indexOf('--marca') + 1] : null;
 if (!alvo) {
   console.error('uso: node scripts/checar-site.js <pasta | url> [--demo] [--saida relatorio.md]');
   process.exit(1);
@@ -57,6 +60,26 @@ async function servir(pasta) {
 }
 
 const achados = []; // { nivel: 'erro'|'aviso'|'ok', pagina, item, detalhe }
+
+// identidade da loja: o site usa a cor e o logo dela, não um visual genérico
+if (!arqMarca && !/^https?:\/\//.test(alvo)) {
+  const vizinho = path.join(alvo, '..', 'marca', 'marca.json');
+  if (existsSync(vizinho)) arqMarca = vizinho;
+}
+const marca = arqMarca ? JSON.parse(await readFile(arqMarca, 'utf8')) : null;
+function conferirMarca(info, nome) {
+  const rgb = (h) => (/^#[0-9a-f]{6}$/i.test(h) ? [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)) : null);
+  const destaque = marca.cores?.destaque;
+  if (destaque) {
+    const a = rgb(info.accent), b = rgb(destaque);
+    if (!a) add('aviso', nome, 'Não deu pra ler a cor de destaque do site (--accent)', `a da marca é ${destaque}`);
+    else if (Math.hypot(...a.map((v, i) => v - b[i])) > 40) {
+      add(marca.decisoes ? 'aviso' : 'erro', nome, 'O site não usa a cor da marca', `--accent é ${info.accent}, a da marca é ${destaque} (${path.basename(path.dirname(arqMarca))}/marca.md). Se a troca foi de propósito, registrar o motivo em "decisoes" no marca.json`);
+    }
+  }
+  if (marca.decisoes) add('aviso', nome, 'Identidade com decisão registrada', String(marca.decisoes));
+  if (marca.logo && !info.logoTopo.length) add('aviso', nome, 'Logo da loja não aparece no topo', `existe em ${marca.logo.arquivo}; nome em texto só se o logo não ler bem`);
+}
 const site = { contato: null, privacidade: null }; // modo de contato (app.js) e texto da página de privacidade
 const add = (nivel, pagina, item, detalhe = '') => achados.push({ nivel, pagina, item, detalhe });
 
@@ -109,6 +132,8 @@ async function checarPagina(browser, url, base, visitadas, fila) {
           ogImg: meta('meta[property="og:image"]'), ogTitulo: meta('meta[property="og:title"]'), viewport: meta('meta[name="viewport"]'),
           favicon: !!document.querySelector('link[rel~="icon"]'), h1: document.querySelectorAll('h1').length,
           jsonld, imgs, links, textos, contato: window.__contato || null, corpo: document.body.textContent,
+          accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+          logoTopo: [...document.querySelectorAll('header img, .nav img, header svg, .nav svg')].map((i) => i.currentSrc || i.src || 'svg'),
         };
       });
 
@@ -144,6 +169,7 @@ async function checarPagina(browser, url, base, visitadas, fila) {
         if (ehDemo && info.contato.envio === 'formulario' && nome === '/') add('erro', nome, 'Demo com formulário de orçamento ligado', 'demo não coleta dado de quem visita: deixar CONFIG.orcamento.formulario vazio');
       }
       if (/privacidade/.test(nome)) site.privacidade = info.corpo;
+      if (nome === '/' && marca) conferirMarca(info, nome);
 
       // imagens de exemplo do modelo (arquivos exemplo-*), inclusive a de compartilhamento
       if (/exemplo/.test(info.ogImg)) exemplos.add(info.ogImg.replace(/^https?:\/\/[^/]+/, '') + ' (og:image)');

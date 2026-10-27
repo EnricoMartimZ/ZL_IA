@@ -138,6 +138,24 @@
       ]
     },
     {
+      "skill": "identidade-loja",
+      "grupo": "Entregar: site",
+      "quando": "levantar cores, logo, fontes e frases da loja (site, prints do Instagram, fachada) antes de qualquer site ou demo, pra não sair genérico",
+      "exemplos": [
+        "pega a identidade visual da ótica",
+        "quais são as cores da metalúrgica?",
+        "te mandei o logo e os prints da loja"
+      ],
+      "gatilhos": [
+        "identidade (visual|da marca|da loja)",
+        "(cores|cor|paleta|fonte|fontes) (da|do|dessa|desse) (loja|marca|cliente|empresa)",
+        "\\blogo (da|do|dessa|desse) (loja|marca|cliente|empresa)",
+        "manter a marca|seguir a marca|(muito |ficar |site )generic",
+        "(mandei|segue|te mandei|enviei) (o |os |as )?(logo|prints?|fotos? da fachada)",
+        "\\b(logo|logotipo|logomarca|fachada)\\b|prints? do (instagram|insta|perfil)"
+      ]
+    },
+    {
       "skill": "site-premium",
       "grupo": "Entregar: site",
       "quando": "site premium com hero cinematográfico, agenda ou pedido de orçamento (B2B), SEO e medição",

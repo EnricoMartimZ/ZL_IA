@@ -20,6 +20,7 @@ Referência: um site premium de estética automotiva — primeira versão com 3D
 ## Dependências
 
 - **Modelo pronto:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
+- **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
 - **Regras de design:** `.claude/skills/site-premium/design.md` — ler antes de mexer no visual
 - **Cenas de IA do hero:** `.claude/skills/site-premium/cenas.md` — roteiro, prompts e geração consistente (com `scripts/kie.js` ou Higgsfield)
 - **Mapa da seção "Onde fica":** `scripts/mapa-ruas.js` (ruas reais do OpenStreetMap + rota até a loja) e `modelo/mapa.js` (a animação)
@@ -39,7 +40,7 @@ Puxar o que já existe (pasta do cliente, diagnóstico) e perguntar só o que fa
 1. Nome, cidade, WhatsApp, endereço e horário
 2. Serviços (o principal + 4) e preço "a partir de" do principal
 3. O diferencial que vira a pílula de escassez ("1 por vez", "só com hora marcada", "atendimento em casa")
-4. Cores e logo (ou `identidade/design-guide.md` da loja)
+4. Cores e logo: **rodar o `/identidade-loja`** (site atual + logo + prints do Instagram/fachada). Nunca escolher cor por conta própria
 5. 4+ fotos reais do lugar/trabalho e 3 avaliações reais do Google
 6. **A transformação** — ver Passo 2
 
@@ -103,7 +104,7 @@ O comprador de empresa não marca horário: ele cota. O painel pergunta o que o 
 
 1. Copiar `modelo/` inteiro pra `clientes/<Nome>/site/`
 2. **Variações** acima: modo do hero, tema, quais páginas de serviço
-3. **`estilo.css`** → trocar só o `:root` do tema escolhido (cores da marca; fontes se a marca tiver)
+3. **`estilo.css`** → colar o `:root` sugerido no `marca.md` da loja (tema claro ou escuro conforme a marca, base escura da marca no `--bg`; fonte de título da marca se for Google Font). Logo real no `.logo` do topo e do rodapé; frases da loja (`frases` do `marca.json`) no hero e nos títulos. Checklist completo no Passo 5 do `/identidade-loja`
 4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title de cada página = serviço + cidade + marca
 5. **`DOMINIO`** → buscar e trocar em todos os arquivos (canonical, og, JSON-LD, `sitemap.xml`, `robots.txt`). Sem domínio ainda: deixar e trocar no `/publicar-site`
 6. **`app.js`** → `CONFIG`: WhatsApp, `contato` (`'agenda'` ou `'orcamento'`), serviços (os mesmos nomes dos cards), `agenda` (períodos, dias fechados) **ou** `orcamento` (pergunta do nicho, prazos, resposta, formulário), **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
@@ -128,7 +129,7 @@ python3 -m http.server 4173 --directory clientes/<Nome>/site
 Rodar o **`/checar-site`** (pega texto de exemplo esquecido, WhatsApp de exemplo, erros, 404, SEO, imagens, rolagem lateral):
 
 ```bash
-node scripts/checar-site.js clientes/<Nome>/site --saida clientes/<Nome>/site/CHECAGEM.md
+node scripts/checar-site.js clientes/<Nome>/site --marca clientes/<Nome>/marca/marca.json --saida clientes/<Nome>/site/CHECAGEM.md
 ```
 
 Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e** no celular (390 px):

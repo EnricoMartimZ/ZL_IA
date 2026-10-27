@@ -14,7 +14,7 @@ Skill central de criação de conteúdo visual. Pega um tema → entrega HTMLs e
 
 ## Dependências
 
-- **Identidade visual:** `identidade/design-guide.md` — LER ANTES de criar qualquer visual
+- **Identidade visual:** `identidade/design-guide.md` — LER ANTES de criar qualquer visual. **Conteúdo pra uma loja cliente:** usar a identidade dela (`clientes/<Nome>/marca/marca.md` ou `vendas/marcas/<slug>/`, do `/identidade-loja`), não a sua
 - **Contexto do negócio:** `_memoria/empresa.md`
 - **Tom de voz:** `_memoria/preferencias.md`
 - **Render:** `scripts/render.js` (Playwright — se faltar, rodar `npm run setup` na raiz)

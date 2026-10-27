@@ -6,7 +6,7 @@ Referência estudada: um site premium de estética automotiva.
 ## 1. Cor: escuro + um destaque
 
 - Fundo quase preto, não preto puro: `#07080b` (base) e `#0d0f14` (segundo plano).
-- **Uma** cor de destaque da marca, de preferência em degradê sutil (`--accent-grad`). Ela aparece no logo,
+- **Uma** cor de destaque **da marca da loja** (a do `marca.json` do `/identidade-loja`, nunca escolhida por gosto), de preferência em degradê sutil (`--accent-grad`). Se a marca tem uma base escura (marinho, vinho), ela substitui o quase preto. Ela aparece no logo,
   no rótulo das seções, no preço, no botão final e numa palavra do último título. Em nenhum outro lugar.
 - Uma segunda cor só como **brilho de fundo** (radial grande e desfocado), nunca em texto ou botão.
 - Linhas divisórias em branco com 9% de opacidade (`rgba(255,255,255,.09)`). Nada de bordas cinza sólidas.

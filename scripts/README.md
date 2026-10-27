@@ -15,6 +15,7 @@ Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chr
 | `lib/meta.js` | scripts de postagem | Funções comuns da Meta Graph API |
 | `checar-site.js` | `/checar-site`, `/site-demo`, `/publicar-site` | Confere um site (pasta ou URL): erros, 404, texto de exemplo, SEO, imagens, celular. Sai com código 1 se houver erro que bloqueia |
 | `auditar-site.js` | `/prospectar-b2b` (e qualquer prospecção) | Audita o site de prospects em lote: nota de 0 a 100 com os motivos (sem HTTPS, quebrado no celular, © antigo, sem orçamento...) e prints de desktop e celular |
+| `extrair-marca.js` | `/identidade-loja` (antes de `/site-premium` e `/site-demo`) | Tira a identidade da loja do site atual e de prints/logo: cores com papel (fundo, texto, destaque, base escura), logo recortado, fontes, frases e redes. Gera `marca.json`, `marca.md` com o `:root` pronto e o quadro `marca.png` |
 | `mapa-ruas.js` | `/site-premium` (seção "Onde fica") | Baixa as ruas reais em volta da loja (OpenStreetMap), calcula a rota de carro até ela e salva o `mapa.json` da animação |
 | `kie.js` | `/foto-produto`, `/video-ia` | Gera imagem, vídeo e lip sync pelo kie.ai (motor do Open Higgsfield AI); sobe arquivos locais marcados com `@` |
 

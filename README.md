@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 30 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 31 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -107,6 +107,9 @@ monta reels e TikToks 9:16 com o HyperFrames, inclusive um vídeo por produto
 a partir de uma planilha.
 
 **Sites** — a vitrine que vale dinheiro
+`/identidade-loja` levanta a marca da loja antes de tudo — cores com o papel de cada
+uma, logo recortado, fontes e as frases que ela usa, do site atual e de prints do
+Instagram e da fachada — e o `/checar-site` acusa site que não usa a cor da marca ·
 `/site-premium` cria site com hero cinematográfico que conta o antes → depois do
 serviço — cenas geradas por IA costuradas com transições (padrão), 3D ou foto —, visual escuro de alto padrão e agenda pelo
 WhatsApp (ou "Pedir orçamento" pra empresa B2B) — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
