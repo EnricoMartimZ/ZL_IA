@@ -93,8 +93,8 @@ monta reels e TikToks 9:16 com o HyperFrames, inclusive um vídeo por produto
 a partir de uma planilha.
 
 **Sites** — a vitrine que vale dinheiro
-`/site-premium` cria site de uma página com hero 3D (Three.js) que conta o
-antes → depois do serviço, visual escuro de alto padrão e agenda pelo
+`/site-premium` cria site com hero cinematográfico que conta o antes → depois do
+serviço — cenas geradas por IA costuradas com transições (padrão), 3D ou foto —, visual escuro de alto padrão e agenda pelo
 WhatsApp — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
 e medição de cliques · `/site-demo` monta uma prévia do site da loja antes de vender
 (marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de

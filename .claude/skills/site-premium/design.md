@@ -35,11 +35,23 @@ Referência estudada: um site premium de estética automotiva.
 
 ## 4. Movimento
 
-- O 3D do hero é o show. **Todo o resto é quieto**: só elementos subindo 28 px e aparecendo ao rolar,
+- O hero é o show. **Todo o resto é quieto**: só elementos subindo 28 px e aparecendo ao rolar,
   em 1 s, com curva suave (`cubic-bezier(.2,.7,.1,1)`).
 - Menu transparente no hero, vira vidro fosco (`backdrop-filter: blur`) depois dele.
 - Hover discreto: botão sobe 2 px; foto da galeria cresce 4% em 1,2 s.
-- Respeitar `prefers-reduced-motion`: sem animação, 3D parado no último capítulo.
+- Respeitar `prefers-reduced-motion`: sem animação, hero parado na última cena.
+
+### O hero cinematográfico (o que a referência ensinou)
+
+- **Uma história em 4–5 etapas**, não um loop decorativo: chega → serviço → detalhe → acabamento → entrega.
+- **Cada etapa com seu título**, alternando esquerda e direita: duas frases curtas, a segunda em contorno
+  ("HORA DE / LAVAR.", "SWIRLS FORA. / BRILHO SELADO.", "CHAVE NA MÃO. / QUEIXO NO CHÃO."), uma linha técnica em
+  mono embaixo, e o botão de agendar **só na última** — quando o cliente já viu o resultado.
+- **Transição com significado:** a linha de luz *é* a limpeza; o círculo que cresce *é* o polimento; o mergulho
+  *é* o "olha de perto". Escolher a transição pelo que ela diz, não por ser bonita.
+- Câmera sempre se movendo um pouco (aproximação lenta de 2–5% por cena). Nada fica parado.
+- Barra embaixo com play/pause e os capítulos clicáveis, com o progresso de cada um preenchendo.
+- Fotorrealismo vence 3D estilizado: cliente de loja local reconhece foto, não render.
 
 ## 5. Conversão
 
@@ -48,7 +60,9 @@ Referência estudada: um site premium de estética automotiva.
 - Agenda em painel lateral (serviço → dia → período → nome) que abre o WhatsApp com a mensagem pronta.
   Sem formulário de contato genérico.
 - WhatsApp flutuante só aparece depois do hero (não compete com o 3D).
-- Depoimentos **reais** do Google, com nome abreviado e estrelas.
+- **Avaliações como prova grande:** o título da seção é a nota e o número reais ("5,0 em 582 avaliações."),
+  com botão pro perfil no Google e 4–6 avaliações reais (nome abreviado, estrelas, "Google · há 3 meses").
+- **Cards de serviço com foto real** no fundo, escurecida embaixo pro texto ler — mostra o serviço sendo feito.
 
 ## 6. Honestidade (é parte do "premium")
 

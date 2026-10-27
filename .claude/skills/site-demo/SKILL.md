@@ -57,7 +57,7 @@ Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item.
 ### Passo 2 — Escolher o hero
 
 - **Foto** (`data-modo="foto"`) — padrão da demo: mais rápido, usa a melhor foto real da loja
-- **3D** — só quando o nicho tem uma transformação clara e existe modelo .glb genérico com licença (ver tabela no `/site-premium`). É o que mais impressiona; vale pra lojas com bom potencial de fechar (nota alta na prospecção)
+- **Sequência** (`data-modo="sequencia"`) — cenas geradas por IA (`.claude/skills/site-premium/cenas.md`). É o que mais impressiona e foi o que o site de referência usou; custa algumas gerações de imagem. Vale pra lojas com bom potencial de fechar (nota alta na prospecção). Rótulo "imagens geradas por IA · ilustrativas" obrigatório
 
 Tema: claro ou escuro conforme a marca (`design.md` §1).
 

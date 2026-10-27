@@ -5,7 +5,8 @@
   - DOMINIO: buscar "DOMINIO" em todos os arquivos (canonical, og, sitemap, robots, JSON-LD)
   - cores e fontes: estilo.css (:root) — tema claro: data-tema="claro" no <html>
   - WhatsApp, serviços, horários, medição: app.js (CONFIG)
-  - hero: data-modo="3d" (hero3d.js, CONFIG) ou data-modo="foto" (img/hero.*, sem 3D) no #palco
+  - hero (no #palco): data-modo="sequencia" (imagens de IA + transições, hero-seq.js — padrão),
+    "3d" (modelo .glb, hero3d.js) ou "foto" (uma foto, img/hero.*). Títulos de cada etapa: blocos .beat
   Rodar local: python3 -m http.server 4173  (módulos ES não abrem via file://)
   Conferir antes de entregar: node scripts/checar-site.js <pasta>
 -->
@@ -22,7 +23,7 @@
 <meta property="og:url" content="https://DOMINIO/">
 <meta property="og:title" content="Marca · Serviço em Cidade" data-editar>
 <meta property="og:description" content="Uma frase do que a marca entrega." data-editar>
-<meta property="og:image" content="https://DOMINIO/img/og.png">
+<meta property="og:image" content="https://DOMINIO/img/og-exemplo.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#07080b">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -46,7 +47,7 @@
   "name": "Marca",
   "description": "Uma frase do que a marca entrega.",
   "url": "https://DOMINIO/",
-  "image": "https://DOMINIO/img/og.png",
+  "image": "https://DOMINIO/img/og-exemplo.png",
   "telephone": "+55-00-00000-0000",
   "priceRange": "$$",
   "address": {
@@ -83,7 +84,7 @@
   <nav class="links">
     <a href="#servicos">Serviços</a>
     <a href="#processo">Processo</a>
-    <a href="#depoimentos">Clientes</a>
+    <a href="#avaliacoes">Avaliações</a>
     <!-- loja online (Nuvemshop, Shopify...): <a href="https://loja..." target="_blank" rel="noopener" data-medir="clique_loja">Loja</a> -->
   </nav>
   <button class="btn btn-claro" data-abrir-agenda>Agendar</button>
@@ -91,19 +92,42 @@
 
 <main id="topo">
 
-  <!-- HERO: data-modo="3d" conta a transformação em 3D; data-modo="foto" usa img/hero.* (mais leve e barato) -->
+  <!-- HERO: a transformação que o cliente compra, em etapas.
+       data-modo="sequencia" (padrão): cenas geradas por IA + transições — ver hero-seq.js e cenas.md
+       data-modo="3d": modelo .glb — hero3d.js  ·  data-modo="foto": uma foto real em img/hero.* -->
   <section class="hero" id="hero">
-    <div class="palco" id="palco" data-modo="3d">
-      <canvas id="hero3d" aria-label="Animação 3D ilustrativa do serviço"></canvas>
-      <img class="palco-foto" src="img/hero.svg" alt="" aria-hidden="true">
+    <div class="palco" id="palco" data-modo="sequencia">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <img class="palco-foto" src="img/exemplo-hero.svg" alt="" aria-hidden="true">
       <div class="palco-fallback" aria-hidden="true"></div>
     </div>
-    <div class="hero-txt">
-      <p class="eyebrow" data-editar>Cidade · desde 2019</p>
-      <h1 class="display" data-editar>Pode vir <br><span class="contorno">como está.</span></h1>
-      <p class="hero-sub" data-editar>A gente cuida do resto.</p>
-      <p class="nota-mono" data-editar>animação 3D ilustrativa</p>
+    <!-- Um título por capítulo, na mesma ordem dos capítulos. Alternar beat-esq / beat-dir.
+         O primeiro (com o h1) é o que aparece no modo foto e pro Google. O último leva o botão. -->
+    <div class="beats">
+      <div class="beat beat-esq on">
+        <p class="eyebrow" data-editar>Cidade · desde 2019</p>
+        <h1 class="display" data-editar>Pode vir <br><span class="contorno">como está.</span></h1>
+        <p class="hero-sub" data-editar>A gente cuida do resto.</p>
+      </div>
+      <div class="beat beat-dir">
+        <h2 class="display" data-editar>Hora de <br><span class="contorno">limpar.</span></h2>
+        <p class="hero-sub" data-editar>O que acontece nessa etapa, em uma frase técnica e curta.</p>
+      </div>
+      <div class="beat beat-esq">
+        <h2 class="display" data-editar>Olha de <br><span class="contorno">perto.</span></h2>
+        <p class="hero-sub" data-editar>O detalhe que ninguém vê — e que a gente não deixa passar.</p>
+      </div>
+      <div class="beat beat-dir">
+        <h2 class="display" data-editar>Defeito fora. <br><span class="contorno">Brilho selado.</span></h2>
+        <p class="hero-sub" data-editar>O acabamento que faz durar.</p>
+      </div>
+      <div class="beat beat-esq">
+        <h2 class="display" data-editar>Chave na mão. <br><span class="contorno">Queixo no chão.</span></h2>
+        <p class="hero-sub" data-editar>Um cliente por vez, só com hora marcada.</p>
+        <button class="btn btn-ouro" data-abrir-agenda>Agendar meu horário</button>
+      </div>
     </div>
+    <p class="tag-ia nota-mono" data-editar>Imagens geradas por IA · ilustrativas</p>
     <div class="capitulos" id="capitulos">
       <button class="play" id="play" aria-label="Pausar animação">
         <svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
@@ -131,10 +155,11 @@
         <p class="preco"><small>a partir de</small> <b data-editar>R$ 390</b></p>
         <span class="ver-mais">ver detalhes →</span>
       </a>
-      <article class="card reveal"><span class="idx">02</span><h3 data-editar>Serviço dois</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
-      <article class="card reveal"><span class="idx">03</span><h3 data-editar>Serviço três</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
-      <article class="card reveal"><span class="idx">04</span><h3 data-editar>Serviço quatro</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
-      <article class="card reveal"><span class="idx">05</span><h3 data-editar>Serviço cinco</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <!-- com-foto: foto real do serviço sendo feito (ou do resultado) no fundo do card -->
+      <article class="card com-foto reveal" style="--foto: url(img/exemplo-foto-2.svg)"><span class="idx">02</span><h3 data-editar>Serviço dois</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card com-foto reveal" style="--foto: url(img/exemplo-foto-3.svg)"><span class="idx">03</span><h3 data-editar>Serviço três</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card com-foto reveal" style="--foto: url(img/exemplo-foto-4.svg)"><span class="idx">04</span><h3 data-editar>Serviço quatro</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card com-foto reveal" style="--foto: url(img/exemplo-foto-1.svg)"><span class="idx">05</span><h3 data-editar>Serviço cinco</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
       <!-- 1 destaque + 4 cards fecha a grade de 4 colunas; pra mais serviços, adicionar de 4 em 4.
            Card com página própria: trocar <article> por <a href="servico-x.html"> (ver servico.html). -->
     </div>
@@ -145,19 +170,27 @@
     <h2 class="display reveal" data-editar>Feito <br><span class="contorno">com calma.</span></h2>
     <p class="lead reveal" data-editar>Duas frases sobre o diferencial do lugar: equipamento, cuidado, o que ninguém mais faz na cidade.</p>
     <div class="galeria">
-      <figure class="g1 reveal"><img src="img/foto-1.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>O espaço</figcaption></figure>
-      <figure class="g2 reveal"><img src="img/foto-2.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Detalhe</figcaption></figure>
-      <figure class="g3 reveal"><img src="img/foto-3.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Antes e depois</figcaption></figure>
-      <figure class="g4 reveal"><img src="img/foto-4.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Entrega</figcaption></figure>
+      <figure class="g1 reveal"><img src="img/exemplo-foto-1.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>O espaço</figcaption></figure>
+      <figure class="g2 reveal"><img src="img/exemplo-foto-2.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Detalhe</figcaption></figure>
+      <figure class="g3 reveal"><img src="img/exemplo-foto-3.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Antes e depois</figcaption></figure>
+      <figure class="g4 reveal"><img src="img/exemplo-foto-4.svg" alt="Descrever a foto" loading="lazy" data-editar><figcaption data-editar>Entrega</figcaption></figure>
     </div>
   </section>
 
-  <section class="secao" id="depoimentos">
-    <p class="eyebrow reveal">Clientes · avaliações do Google</p>
-    <div class="depos">
-      <blockquote class="reveal"><p data-editar>"Frase real de uma avaliação, a mais específica que existir."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
-      <blockquote class="reveal"><p data-editar>"Outra avaliação real, de preferência citando um resultado."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
-      <blockquote class="reveal"><p data-editar>"Uma terceira, curta."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
+  <!-- Avaliações: nota e número REAIS do Google (copiar do perfil no dia), 4 a 6 avaliações reais e o link do perfil -->
+  <section class="secao" id="avaliacoes">
+    <div class="cabeca-secao">
+      <div>
+        <p class="eyebrow reveal">Avaliações no Google</p>
+        <h2 class="display reveal" data-editar>4,9 em <br><span class="contorno">000 avaliações.</span></h2>
+      </div>
+      <a class="btn btn-linha reveal" href="https://www.google.com/maps/place/LINK-DO-PERFIL" target="_blank" rel="noopener" data-editar>Ver todas no Google</a>
+    </div>
+    <div class="aval-trilha">
+      <figure class="aval reveal"><span class="estrelas" aria-label="5 estrelas">★★★★★</span><blockquote data-editar>“Frase real de uma avaliação, a mais específica que existir.”</blockquote><figcaption><b data-editar>Nome S.</b><span data-editar>Google · há 3 meses</span></figcaption></figure>
+      <figure class="aval reveal"><span class="estrelas" aria-label="5 estrelas">★★★★★</span><blockquote data-editar>“Outra avaliação real, de preferência citando um resultado.”</blockquote><figcaption><b data-editar>Nome S.</b><span data-editar>Google · há 5 meses</span></figcaption></figure>
+      <figure class="aval reveal"><span class="estrelas" aria-label="5 estrelas">★★★★★</span><blockquote data-editar>“Uma que fale de atendimento ou prazo.”</blockquote><figcaption><b data-editar>Nome S.</b><span data-editar>Google · há 8 meses</span></figcaption></figure>
+      <figure class="aval reveal"><span class="estrelas" aria-label="5 estrelas">★★★★★</span><blockquote data-editar>“Uma curta.”</blockquote><figcaption><b data-editar>Nome S.</b><span data-editar>Google · há 1 ano</span></figcaption></figure>
     </div>
   </section>
 
@@ -175,9 +208,10 @@
   <p class="nota-mono"><span data-editar>© 2026 Marca · CNPJ 00.000.000/0001-00</span> · <a href="privacidade.html">Privacidade</a></p>
 </footer>
 
-<p class="aviso" data-editar>Fotos reais do estúdio · animação 3D ilustrativa</p>
+<p class="aviso" data-editar>Fotos reais do estúdio · imagens do topo geradas por IA, ilustrativas</p>
 
 <script src="app.js" defer></script>
+<script src="hero-seq.js" defer></script>
 <script type="module" src="hero3d.js"></script>
 </body>
 </html>

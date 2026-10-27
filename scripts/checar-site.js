@@ -28,6 +28,7 @@ const EXEMPLOS = [
   'DOMINIO', 'Marca ·', 'MARCA', 'Marca', 'Serviço principal', 'Serviço dois', 'Serviço três', 'Serviço quatro',
   'Serviço cinco', 'Rua Exemplo', 'Cidade/UF', '00000-000', '0000-0000', '00.000.000', '5500000000000',
   'Nome S.', 'Frase real de uma avaliação', 'Descrever a foto', 'TROCAR PELA FOTO', 'Benefício concreto',
+  '000 avaliações', 'O que acontece nessa etapa', 'Uma que fale de atendimento',
   'Uma frase do que a marca', 'Duas frases', 'Resposta real', 'Etapa um', '{{',
 ];
 
@@ -68,7 +69,9 @@ async function checarPagina(browser, url, base, visitadas, fila) {
     let bytes = 0;
     page.on('pageerror', (e) => erros.push(e.message));
     page.on('console', (m) => { if (m.type() === 'error') erros.push(m.text()); });
+    const exemplos = new Set();
     page.on('response', async (r) => {
+      if (r.url().startsWith(base) && /\/exemplo-|-exemplo\./.test(r.url())) exemplos.add(r.url().replace(base, '/'));
       if (r.status() >= 400) falhas.push(`${r.status()} ${r.url().replace(base, '/')}`);
       const len = Number(r.headers()['content-length'] || 0);
       bytes += len;
@@ -130,6 +133,10 @@ async function checarPagina(browser, url, base, visitadas, fila) {
       });
       if (nome === '/' && !ehDemo && info.jsonld.length === 0) add('aviso', nome, 'Sem dados estruturados (JSON-LD)', 'perde endereço/horário no Google');
 
+      // imagens de exemplo do modelo (arquivos exemplo-*), inclusive a de compartilhamento
+      if (/exemplo/.test(info.ogImg)) exemplos.add(info.ogImg.replace(/^https?:\/\/[^/]+/, '') + ' (og:image)');
+      if (exemplos.size) add('erro', nome, 'Imagem de exemplo do modelo', [...exemplos].join(' · '));
+
       // texto de exemplo
       const escapar = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const sobras = EXEMPLOS.filter((e) => (/^\p{L}+$/u.test(e)
@@ -150,6 +157,7 @@ async function checarPagina(browser, url, base, visitadas, fila) {
       for (const l of info.links) {
         if (l.blank && !/noopener|noreferrer/.test(l.rel)) add('aviso', nome, 'Link _blank sem rel="noopener"', l.cru);
         if (/^https:\/\/wa\.me\//.test(l.href) && /wa\.me\/\d*0{6,}/.test(l.href)) add('erro', nome, 'WhatsApp de exemplo', l.cru);
+        if (/LINK-DO-|[?&]cid=0\b|instagram\.com\/perfil\b/.test(l.cru)) add('erro', nome, 'Link de exemplo', l.cru);
         if (/^tel:/.test(l.cru) && /0{6,}/.test(l.cru)) add('erro', nome, 'Telefone de exemplo', l.cru);
         if (l.href.startsWith(base)) {
           const limpo = l.href.split('#')[0];

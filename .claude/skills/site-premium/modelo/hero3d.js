@@ -40,6 +40,7 @@ const plPct = document.getElementById('plPct');
 const plRotulo = document.getElementById('plRotulo');
 const capLista = document.getElementById('capLista');
 const btnPlay = document.getElementById('play');
+const beats = [...document.querySelectorAll('.hero .beat')];
 const ehCelular = matchMedia('(max-width: 900px)').matches;
 const semMovimento = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -63,7 +64,9 @@ function semWebGL(motivo) {
 }
 
 // ---------- modo ----------
-if (palco.dataset.modo === 'foto') {
+if (palco.dataset.modo === 'sequencia') {
+  // quem cuida do hero é o hero-seq.js
+} else if (palco.dataset.modo === 'foto') {
   palco.classList.add('modo-foto');
   document.getElementById('capitulos').hidden = true;
   liberarPagina();
@@ -343,6 +346,7 @@ async function iniciar() {
     camera.position.copy(camPos);
     camera.lookAt(camAlvo);
 
+    beats.forEach((b, i) => b.classList.toggle('on', i === Math.min(e.i, beats.length - 1)));
     botoes.forEach((b, i) => {
       b.classList.toggle('ativo', i === e.i);
       b.style.setProperty('--p', i < e.i ? 1 : i === e.i ? clamp((t - i * dur) / dur) : 0);
