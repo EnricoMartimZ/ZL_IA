@@ -1,0 +1,161 @@
+<!doctype html>
+<!--
+  Modelo do /site-premium. Copiar a pasta inteira pra clientes/<Nome>/site/ e trocar:
+  - textos (todo texto marcado com data-editar)
+  - cores e fontes em estilo.css (:root)
+  - WhatsApp, serviços e horários em app.js (CONFIG)
+  - história 3D em hero3d.js (CONFIG)
+  Rodar local: python3 -m http.server 4173  (módulos ES não abrem via file://)
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-editar>Marca · Serviço em Cidade</title>
+<meta name="description" content="Uma frase do que a marca entrega, pra quem e onde." data-editar>
+<meta property="og:title" content="Marca · Serviço em Cidade" data-editar>
+<meta property="og:description" content="Uma frase do que a marca entrega." data-editar>
+<meta property="og:image" content="img/og.jpg">
+<meta name="theme-color" content="#07080b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,800;1,900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body class="is-loading in-hero">
+
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pl-marca" data-editar>MARCA</div>
+  <div class="pl-barra"><span id="plBarra"></span></div>
+  <div class="pl-info"><span id="plRotulo">preparando o estúdio</span><span id="plPct">0%</span></div>
+</div>
+
+<header class="nav">
+  <a class="logo" href="#topo" aria-label="Início">
+    <span class="logo-nome" data-editar>MARCA</span>
+    <span class="logo-sub" data-editar>serviço premium</span>
+  </a>
+  <span class="pill"><i></i><span data-editar>1 cliente por vez · só com hora marcada</span></span>
+  <nav class="links">
+    <a href="#servicos">Serviços</a>
+    <a href="#processo">Processo</a>
+    <a href="#depoimentos">Clientes</a>
+  </nav>
+  <button class="btn btn-claro" data-abrir-agenda>Agendar</button>
+</header>
+
+<main id="topo">
+
+  <!-- HERO 3D: o palco conta a transformação que o cliente compra -->
+  <section class="hero" id="hero">
+    <div class="palco" id="palco">
+      <canvas id="hero3d" aria-label="Animação 3D ilustrativa do serviço"></canvas>
+      <div class="palco-fallback" aria-hidden="true"></div>
+    </div>
+    <div class="hero-txt">
+      <p class="eyebrow" data-editar>Cidade · desde 2019</p>
+      <h1 class="display" data-editar>Pode vir <br><span class="contorno">como está.</span></h1>
+      <p class="hero-sub" data-editar>A gente cuida do resto.</p>
+      <p class="nota-mono" data-editar>animação 3D ilustrativa</p>
+    </div>
+    <div class="capitulos" id="capitulos">
+      <button class="play" id="play" aria-label="Pausar animação">
+        <svg viewBox="0 0 24 24" class="i-pause"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+        <svg viewBox="0 0 24 24" class="i-play"><path d="M8 5l11 7-11 7z"/></svg>
+      </button>
+      <div class="cap-lista" id="capLista"></div>
+    </div>
+  </section>
+
+  <section class="prova">
+    <div class="num reveal"><b data-editar>4,9</b><span data-editar>nota no Google</span></div>
+    <div class="num reveal"><b data-editar>+1.200</b><span data-editar>clientes atendidos</span></div>
+    <div class="num reveal"><b data-editar>7 anos</b><span data-editar>no mesmo endereço</span></div>
+    <div class="num reveal"><b data-editar>1 por vez</b><span data-editar>atenção total</span></div>
+  </section>
+
+  <section class="secao" id="servicos">
+    <p class="eyebrow reveal">Serviços</p>
+    <h2 class="display reveal" data-editar>O que sai <br><span class="contorno">daqui.</span></h2>
+    <div class="grade">
+      <article class="card destaque reveal">
+        <span class="idx">01</span>
+        <h3 data-editar>Serviço principal</h3>
+        <p data-editar>O que é, em uma frase, e o que o cliente ganha com isso.</p>
+        <p class="preco"><small>a partir de</small> <b data-editar>R$ 390</b></p>
+      </article>
+      <article class="card reveal"><span class="idx">02</span><h3 data-editar>Serviço dois</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card reveal"><span class="idx">03</span><h3 data-editar>Serviço três</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card reveal"><span class="idx">04</span><h3 data-editar>Serviço quatro</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <article class="card reveal"><span class="idx">05</span><h3 data-editar>Serviço cinco</h3><p data-editar>Benefício concreto em uma frase curta.</p></article>
+      <!-- 1 destaque + 4 cards fecha a grade de 4 colunas; pra mais serviços, adicionar de 4 em 4 -->
+    </div>
+  </section>
+
+  <section class="secao" id="processo">
+    <p class="eyebrow reveal">Processo · fotos reais</p>
+    <h2 class="display reveal" data-editar>Feito <br><span class="contorno">com calma.</span></h2>
+    <p class="lead reveal" data-editar>Duas frases sobre o diferencial do lugar: equipamento, cuidado, o que ninguém mais faz na cidade.</p>
+    <div class="galeria">
+      <figure class="g1 reveal"><img src="img/foto-1.svg" alt="Descrever a foto" loading="lazy"><figcaption data-editar>O espaço</figcaption></figure>
+      <figure class="g2 reveal"><img src="img/foto-2.svg" alt="Descrever a foto" loading="lazy"><figcaption data-editar>Detalhe</figcaption></figure>
+      <figure class="g3 reveal"><img src="img/foto-3.svg" alt="Descrever a foto" loading="lazy"><figcaption data-editar>Antes e depois</figcaption></figure>
+      <figure class="g4 reveal"><img src="img/foto-4.svg" alt="Descrever a foto" loading="lazy"><figcaption data-editar>Entrega</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="secao" id="depoimentos">
+    <p class="eyebrow reveal">Clientes · avaliações do Google</p>
+    <div class="depos">
+      <blockquote class="reveal"><p data-editar>"Frase real de uma avaliação, a mais específica que existir."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
+      <blockquote class="reveal"><p data-editar>"Outra avaliação real, de preferência citando um resultado."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
+      <blockquote class="reveal"><p data-editar>"Uma terceira, curta."</p><cite data-editar>Nome S. · ★★★★★</cite></blockquote>
+    </div>
+  </section>
+
+  <section class="final" id="agendar">
+    <p class="eyebrow reveal">Agenda</p>
+    <h2 class="display grande reveal" data-editar>Seu momento <br>de <span class="ouro">brilhar.</span></h2>
+    <p class="lead centro reveal" data-editar>Atendimento só com hora marcada. Escolhe o serviço e o dia que a gente confirma no WhatsApp.</p>
+    <button class="btn btn-ouro reveal" data-abrir-agenda>Agendar meu horário</button>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="logo"><span class="logo-nome" data-editar>MARCA</span><span class="logo-sub" data-editar>serviço premium</span></div>
+  <address data-editar>Rua Exemplo, 123 · Bairro · Cidade/UF<br>seg–sex 8h–18h · sáb 8h–12h</address>
+  <p class="nota-mono" data-editar>© 2026 Marca · CNPJ 00.000.000/0001-00</p>
+</footer>
+
+<a class="wa-flutuante" id="waFlutuante" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.8-.1 1.3z"/></svg>
+</a>
+
+<aside class="agenda" id="agenda" aria-hidden="true">
+  <div class="agenda-fundo" data-fechar-agenda></div>
+  <form class="agenda-painel" id="agendaForm">
+    <header>
+      <p class="eyebrow">Agendar</p>
+      <button type="button" class="fechar" data-fechar-agenda aria-label="Fechar">×</button>
+    </header>
+    <fieldset><legend>Serviço</legend><div class="opcoes" id="agServicos"></div></fieldset>
+    <fieldset><legend>Dia</legend><div class="opcoes dias" id="agDias"></div></fieldset>
+    <fieldset><legend>Período</legend><div class="opcoes" id="agPeriodos"></div></fieldset>
+    <label class="campo">Seu nome<input name="nome" required autocomplete="name"></label>
+    <button class="btn btn-ouro largo" type="submit">Confirmar no WhatsApp</button>
+    <p class="nota-mono">horário confirmado pela equipe</p>
+  </form>
+</aside>
+
+<p class="aviso" data-editar>Fotos reais do estúdio · animação 3D ilustrativa</p>
+
+<script src="app.js" defer></script>
+<script type="module" src="hero3d.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 24 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 25 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -91,6 +91,11 @@ sazonal mantendo o produto idêntico (kie.ai ou Higgsfield) · `/video-ia`
 anima foto de produto e faz apresentador falar com lip sync · `/video-reels`
 monta reels e TikToks 9:16 com o HyperFrames, inclusive um vídeo por produto
 a partir de uma planilha.
+
+**Sites** — a vitrine que vale dinheiro
+`/site-premium` cria site de uma página com hero 3D (Three.js) que conta o
+antes → depois do serviço, visual escuro de alto padrão e agenda pelo
+WhatsApp — a partir de um modelo pronto, publicado na Vercel ou Netlify.
 
 **Produção** — ferramentas do dia a dia
 `/analisar-dados` lê CSV/XLSX/PDF e gera resumo executivo ·

@@ -40,7 +40,7 @@ Qualquer informação da conversa com o lojista (orçamento, prioridade, objeç�
 
 Se `_memoria/servicos.md` não existe ou ainda está com os campos em branco, entrevistar uma pergunta por vez:
 
-1. "Quais serviços você entrega hoje ou quer vender? (ex: resposta de avaliações, gestão de Google Meu Negócio, conteúdo/carrossel, descrições de produto, anúncios, atendimento com IA no WhatsApp, fotos de produto com IA, vídeos curtos/reels, relatório mensal)"
+1. "Quais serviços você entrega hoje ou quer vender? (ex: resposta de avaliações, gestão de Google Meu Negócio, conteúdo/carrossel, descrições de produto, anúncios, atendimento com IA no WhatsApp, fotos de produto com IA, vídeos curtos/reels, site premium com 3D, relatório mensal)"
 2. "Quanto tempo cada um te toma por mês, por loja?"
 3. "Quanto você quer ganhar por hora, no mínimo?"
 4. "Quais ferramentas pagas cada serviço usa? (valor mensal)"
