@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 31 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 32 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -117,6 +117,13 @@ e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-dem
 (marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de
 exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com
 domínio, Search Console e Google Meu Negócio, e organiza a manutenção mensal.
+
+**Abordagem em lote** — muitas lojas, mensagem curta
+`/abordagem-whatsapp` busca negócios de vários nichos no Google Maps, acha o ponto fraco
+que o dono confere em 10 segundos (sem site, poucas avaliações perto do líder do nicho,
+site quebrado), escreve uma mensagem curta e diferente pra cada um e, depois da sua
+aprovação, envia pelo seu WhatsApp Web devagar e com limite diário. PDF e demo só pra
+quem responder.
 
 **Prospecção B2B** — onde o ticket é maior
 `/prospectar-b2b` mapeia indústrias, distribuidoras, transportadoras e outras

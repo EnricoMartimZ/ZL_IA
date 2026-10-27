@@ -2,6 +2,24 @@
   "_como_funciona": "Mapa de gatilhos das skills. O hook .claude/hooks/gatilhos.mjs compara cada mensagem (minúscula, sem acento) com os 'gatilhos' e sugere ao Claude as skills que bateram. Um gatilho em texto basta sozinho; uma lista [a, b] exige todas as partes. Skill nova = entrada nova aqui (o /menu também lê este arquivo).",
   "skills": [
     {
+      "skill": "abordagem-whatsapp",
+      "grupo": "Achar clientes",
+      "quando": "achar muitas lojas de vários nichos com ponto fraco, escrever uma mensagem curta pra cada e mandar pelo WhatsApp depois da sua aprovação (diagnóstico só pra quem responder)",
+      "exemplos": [
+        "acha lojas de vários nichos e manda mensagem",
+        "monta mais um lote de abordagem",
+        "quem respondeu as mensagens?"
+      ],
+      "gatilhos": [
+        "(varias|muitas|mais|diferentes) (lojas|empresas|negocios|nichos)",
+        "\\b(lote|em massa|em lote)\\b",
+        "(abordagem|abordar).{0,20}(whats|zap|varias|lote)",
+        "quem respondeu (as|a|minhas|minha)? ?mensage",
+        "(mandar|manda|enviar|envia|disparar|dispara|disparo)\\b.{0,30}(whats|zap)",
+        "(mandar|manda|enviar|envia|disparar|dispara)\\b.{0,20}mensagens.{0,30}(lojas|empresas|negocios|elas|eles)"
+      ]
+    },
+    {
       "skill": "prospectar-b2b",
       "grupo": "Achar clientes",
       "quando": "achar empresas B2B (indústria, distribuidora, transportadora, construtora...) com site ruim ou presença fraca, com nota, print e mensagem de abordagem",

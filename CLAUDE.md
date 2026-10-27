@@ -131,5 +131,6 @@ Quando o usuário pedir skill nova:
 5. Seguir o fluxo da skill-creator nativa do Claude Code
 6. Adicionar a skill em `.claude/gatilhos.json` (grupo, quando, 2–3
    frases de exemplo e os gatilhos) e testar com
-   `echo '{"prompt":"<frase>"}' | node .claude/hooks/gatilhos.mjs`.
+   `echo '{"prompt":"<frase>"}' | node .claude/hooks/gatilhos.mjs`, e pôr 1–2 frases
+   em `.claude/hooks/gatilhos.teste.mjs` (rodar: `node .claude/hooks/gatilhos.teste.mjs`).
    Sem isso ela não dispara sozinha nem aparece no `/menu`
