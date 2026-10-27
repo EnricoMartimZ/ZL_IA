@@ -27,6 +27,12 @@ Detectar com `git rev-parse --is-inside-work-tree`. Se falhar:
    - Se sim: rodar `git init`, criar commit inicial, e `gh repo create <nome> --private --source=. --push`.
    - Se não: instruir o usuário a instalar `gh` (https://cli.github.com/) ou criar o repo manualmente em github.com/new e voltar com a URL.
 
+### O que vai e o que não vai
+
+O GitHub guarda **só o sistema**: skills, scripts, modelos, `CLAUDE.md`, `identidade/`. O `.gitignore` deixa de fora o trabalho do dia a dia, que fica só neste computador: `_memoria/`, `clientes/`, `vendas/`, `projetos/`, `saidas/`, `dados/` e o `.env`. Nunca forçar (`git add -f`) arquivo dessas pastas.
+
+Ao salvar, lembrar em uma linha: "Clientes, funil e memória não vão pro GitHub — faça backup dessas pastas por fora de vez em quando (HD ou Drive)."
+
 ### Commits seguintes (já configurado)
 
 1. Rodar `git status`. Se não tiver mudanças, responder "Tá tudo sincronizado, sem mudança nova" e parar.

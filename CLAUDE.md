@@ -20,6 +20,10 @@ e estiverem preenchidos):
 4. `_memoria/servicos.md` — o que você vende pras lojas e por quanto
 5. `_memoria/vendas-aprendizados.md` — o que já funcionou e o que não funcionou nas vendas
 
+A pasta `_memoria/` é só deste computador (não vai pro GitHub). Se um
+arquivo dela não existir (clone novo), criar copiando o modelo de
+`templates/memoria/` antes de usar.
+
 Usar essas informações como base pra qualquer resposta ou decisão. Ao
 sugerir prioridades, formatos ou abordagens, considerar o foco atual
 descrito em `estrategia.md`.

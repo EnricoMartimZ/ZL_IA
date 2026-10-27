@@ -54,6 +54,12 @@ memória e configura o sistema. Depois disso, é só usar.
 
 ## O sistema
 
+**O que fica onde.** O GitHub guarda só o sistema (skills, scripts, modelos). Seu
+trabalho — `_memoria/`, `clientes/`, `vendas/`, `saidas/`, `dados/`, `.env` — fica
+só no seu computador e nunca é enviado; o backup dessas pastas é por fora (HD ou
+Drive). Num computador novo: `git clone`, `npm run setup`, copiar o `.env` e
+abrir o Claude na pasta. Pra pegar as novidades: `git pull`.
+
 **Não precisa decorar comando.** Fala do jeito normal — "acha metalúrgicas
 com site ruim em Sorocaba", "fechei com a ótica", "quem eu chamo hoje?" — e a
 skill certa entra sozinha (aparece "⚡ /skill"). Quem decide é o mapa

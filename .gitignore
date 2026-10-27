@@ -29,3 +29,12 @@ dados/*
 .env
 .env.*
 !.env.example
+
+# Seu trabalho fica só neste computador (o GitHub guarda só o sistema).
+# Backup dessas pastas é por fora: copiar pra um HD ou pro Drive de vez em quando.
+_memoria/
+clientes/
+vendas/
+projetos/
+saidas/*
+!saidas/README.md

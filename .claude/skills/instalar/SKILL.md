@@ -28,6 +28,8 @@ Conferir se algum arquivo de memória já está preenchido (não é placeholder)
 - `_memoria/empresa.md`
 - `_memoria/preferencias.md`
 - `_memoria/estrategia.md`
+
+(`_memoria/` não vai pro GitHub. Num clone novo ela não existe: copiar os modelos de `templates/memoria/` pra `_memoria/` antes de preencher.)
 - `identidade/design-guide.md`
 
 Se algum já tiver conteúdo real, perguntar:
