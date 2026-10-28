@@ -54,9 +54,17 @@ Do Google Meu Negócio, Instagram e site atual (se houver):
 
 Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Prospect B2B (veio do `/prospectar-b2b`): `contato: 'orcamento'` no `app.js` (troca o painel e os botões pra "Pedir orçamento"), com a pergunta do nicho em `orcamento.quantidade` (tabela em `prospectar-b2b/nichos.md`) e `formulario` **vazio**, e usar os prints da auditoria como "antes" na mensagem. Anotar também a coordenada da porta (Google Maps) — com ela o `scripts/mapa-ruas.js` gera o mapa animado do bairro da loja, que impressiona muito na demo.
 
-### Passo 2 — Escolher o hero
+### Passo 2 — Conceito e abertura
 
-- **Foto** (`data-modo="foto"`) — padrão da demo: mais rápido, usa a melhor foto real da loja
+A demo também tem conceito próprio — é ela que faz o dono pensar "isso é a minha empresa". Versão rápida do
+`.claude/skills/site-premium/direcao.md`: matéria-prima em `vendas/demos/<slug>/conceito.md`, **dois** conceitos
+(não três), o usuário escolhe, e checar o `clientes/_conceitos.md` pra não repetir o mundo e a técnica das últimas
+demos. A técnica-assinatura sai pronta de `.claude/skills/site-premium/tecnicas/` (fluxo, partículas, linhas, raio-X,
+zoom contínuo) e entra num palco logo na abertura; o resto da demo pode usar o modelo com o visual do mundo.
+
+Sem tempo ou material pra conceito (demo no mesmo dia, nenhuma foto boa): as duas aberturas do modelo, que são o mundo Noturno:
+
+- **Foto** (`data-modo="foto"`) — mais rápido, usa a melhor foto real da loja
 - **Sequência** (`data-modo="sequencia"`) — cenas geradas por IA (`.claude/skills/site-premium/cenas.md`). É o que mais impressiona e foi o que o site de referência usou; custa algumas gerações de imagem. Vale pra lojas com bom potencial de fechar (nota alta na prospecção). Rótulo "imagens geradas por IA · ilustrativas" obrigatório
 
 Tema: claro ou escuro conforme a marca (`design.md` §1).

@@ -1,0 +1,80 @@
+/* Técnicas do /site-premium — só a mecânica. Cor, fonte e espaçamento vêm do mundo escolhido
+   (mundos.md), por variáveis: --tec-tinta (cor dos traços e rótulos), --tec-fundo, --tec-mono. */
+
+:root {
+  --tec-tinta: currentColor;
+  --tec-fundo: transparent;
+  --tec-mono: ui-monospace, "JetBrains Mono", monospace;
+  --tec-ease: cubic-bezier(.2, .7, .1, 1);
+}
+
+/* ---------- palco: seção alta + quadro preso na tela ---------- */
+.palco { position: relative; }
+.palco-quadro { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.tec-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+[data-cap] { opacity: 0; transform: translateY(18px); transition: opacity .7s var(--tec-ease), transform .9s var(--tec-ease); pointer-events: none; }
+[data-cap].ativo { opacity: 1; transform: none; pointer-events: auto; }
+
+/* ---------- HUD: cantos, cruzes e réguas (ar de instrumento / planta técnica) ---------- */
+.hud { position: absolute; inset: clamp(12px, 2.4vw, 32px); pointer-events: none; z-index: 5; }
+.hud::before, .hud::after { content: ""; position: absolute; width: 14px; height: 14px; border: 1px solid var(--tec-tinta); opacity: .55; }
+.hud::before { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.hud::after { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+.hud-cruz { position: absolute; width: 11px; height: 11px; opacity: .6; }
+.hud-cruz::before, .hud-cruz::after { content: ""; position: absolute; background: var(--tec-tinta); }
+.hud-cruz::before { left: 5px; top: 0; width: 1px; height: 11px; }
+.hud-cruz::after { top: 5px; left: 0; height: 1px; width: 11px; }
+.hud-linha-h, .hud-linha-v { position: absolute; background: var(--tec-tinta); opacity: .14; }
+.hud-linha-h { left: 0; right: 0; height: 1px; }
+.hud-linha-v { top: 0; bottom: 0; width: 1px; }
+.hud-rotulo { position: absolute; font: 500 10px/1.3 var(--tec-mono); letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
+
+/* ---------- linhas: desenho que se constrói ---------- */
+.tec-linhas { width: 100%; height: 100%; overflow: visible; }
+.tec-linhas :is(path, line, polyline, polygon, circle, rect, ellipse) { fill: none; stroke: var(--tec-tinta); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.tec-linhas .tec-construcao * { stroke-width: .6; opacity: .35; }
+.tec-linhas [data-preencher] { transition: fill .8s var(--tec-ease); }
+.tec-linhas [data-preencher].preenchido { fill: var(--tec-tinta); fill-opacity: .12; }
+.tec-linhas [data-depois] { fill: var(--tec-tinta); stroke: none; font: 500 12px var(--tec-mono); letter-spacing: .14em; opacity: 0; transition: opacity .6s; }
+.tec-linhas [data-depois].visivel { opacity: .8; }
+
+/* ---------- zoom contínuo ---------- */
+.zoom-camada { position: absolute; left: 50%; top: 50%; transform-origin: 50% 50%; overflow: hidden; will-change: transform; }
+.zoom-moldura .zoom-camada { box-shadow: 0 30px 80px rgba(0, 0, 0, calc(clamp(0, var(--e, 0) * -1, 1) * .45)); }
+.zoom-camada img { width: 100%; height: 100%; display: block; }
+
+/* ---------- raio-X ---------- */
+.raiox { position: relative; overflow: hidden; touch-action: pan-y; cursor: crosshair; }
+.raiox > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.raiox-dentro { clip-path: circle(0 at 50% 50%); }
+.raiox::after { /* aro da lente */
+  content: ""; position: absolute; left: calc(var(--lx, 50%) - var(--lr, 0px)); top: calc(var(--ly, 50%) - var(--lr, 0px));
+  width: calc(var(--lr, 0px) * 2); height: calc(var(--lr, 0px) * 2); border-radius: 50%;
+  border: 1px solid var(--tec-tinta); opacity: .5; pointer-events: none;
+}
+.raiox-total::after { opacity: 0; }
+.raiox-varredura { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(180deg, transparent 0 46%, color-mix(in srgb, var(--tec-tinta) 35%, transparent) 50%, transparent 54% 100%); background-size: 100% 220%; }
+.raiox-total .raiox-varredura { animation: raiox-varre 1.4s var(--tec-ease) 1; }
+@keyframes raiox-varre { 0% { opacity: .9; background-position: 0 120%; } 100% { opacity: 0; background-position: 0 -20%; } }
+.raiox-botao { position: absolute; left: 16px; bottom: 16px; z-index: 3; display: inline-flex; gap: 10px; align-items: center; padding: 9px 14px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--tec-tinta) 40%, transparent); background: color-mix(in srgb, var(--tec-fundo) 60%, transparent); color: var(--tec-tinta); font: 500 11px var(--tec-mono); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(8px); }
+.raiox-botao span { width: 26px; height: 14px; border-radius: 99px; border: 1px solid currentColor; position: relative; }
+.raiox-botao span::after { content: ""; position: absolute; top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: currentColor; transition: transform .3s; }
+.raiox-botao[aria-pressed="true"] span::after { transform: translateX(12px); }
+.raiox-ponto { position: absolute; z-index: 2; transform: translate(-50%, -50%); background: none; border: 0; padding: 0; color: var(--tec-tinta); cursor: pointer; }
+.raiox-mais { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid currentColor; background: color-mix(in srgb, var(--tec-fundo) 55%, transparent); font: 400 16px/1 var(--tec-mono); transition: transform .3s var(--tec-ease); }
+.raiox-ponto.aberto .raiox-mais { transform: rotate(45deg); }
+.raiox-ficha { position: absolute; left: 34px; top: -6px; width: max-content; max-width: 220px; padding: 10px 12px; text-align: left; background: color-mix(in srgb, var(--tec-fundo) 85%, transparent); border: 1px solid color-mix(in srgb, var(--tec-tinta) 25%, transparent); font: 400 12px/1.45 var(--tec-mono); opacity: 0; transform: translateY(6px); transition: .35s var(--tec-ease); pointer-events: none; backdrop-filter: blur(10px); }
+.raiox-ficha b { display: block; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 10px; margin-bottom: 4px; }
+.raiox-ponto.aberto .raiox-ficha { opacity: 1; transform: none; }
+
+/* ---------- texto ---------- */
+.t-corte { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+.t-corte > span { display: inline-block; transform: translateY(108%); transition: transform 1s var(--tec-ease) calc(var(--i) * 45ms); }
+.visto .t-corte > span { transform: none; }
+[data-revelar] { opacity: 0; transform: translateY(24px); transition: opacity 1s var(--tec-ease), transform 1s var(--tec-ease); }
+[data-revelar].visto { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-corte > span, [data-revelar], [data-cap] { transform: none !important; transition: none !important; }
+  [data-revelar] { opacity: 1; }
+}

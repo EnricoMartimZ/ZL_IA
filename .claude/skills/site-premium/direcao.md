@@ -1,0 +1,122 @@
+# Direção criativa — um conceito por empresa
+
+O site premium não sai de um modelo com as cores trocadas. Cada empresa ganha **um conceito**: uma ideia
+tirada do que ela faz (ou do nome dela) que decide o mundo visual, a técnica-assinatura, a interação e a
+história. É isso que os sites de referência (`referencias.md`) têm em comum: nenhum deles poderia ser de
+outra empresa.
+
+O `modelo/` continua sendo a **infraestrutura** (agenda/orçamento no WhatsApp, SEO, JSON-LD, medição, LGPD,
+página de serviço, mapa). A **cara** é feita do zero a partir do conceito, com as peças de `tecnicas/` e as
+regras do mundo escolhido (`mundos.md`).
+
+---
+
+## Passo A — Matéria-prima (10 minutos, antes de pensar em tela)
+
+Responder por escrito, em `clientes/<Nome>/conceito.md` (ou `vendas/demos/<slug>/conceito.md` na demo):
+
+1. **O que a empresa transforma ou move?** Não o serviço, a *matéria*: ar, calor, metal, papel e tinta, água, luz, pedra, tempo, sinal, papelada, dor. (Ar-condicionado move *ar* e *calor*. Gráfica move *tinta* sobre *papel*. Contabilidade move *papelada* até virar *tranquilidade*.)
+2. **O que o cliente sente antes e depois?** Uma palavra cada (abafado → leve; inseguro → vigiado; perdido → em ordem).
+3. **O que o nome ou o logo sugere?** Às vezes o conceito está ali (um nome de árvore, de pedra, de animal, uma sigla com som).
+4. **Qual é a prova física?** Números reais, certificações, máquinas, anos, obras, avaliações.
+5. **Onde o cliente decide?** (celular no Instagram, comprador de empresa no desktop, síndico no WhatsApp) — decide o peso da técnica.
+
+## Passo B — Três conceitos, o usuário escolhe um
+
+Escrever **três conceitos bem diferentes entre si** (mundos diferentes, técnicas diferentes) e mostrar ao usuário
+antes de construir. Formato de cada um:
+
+```
+CONCEITO — <nome curto>
+Metáfora: <uma frase: "o site é ___">
+Mundo: <mundos.md>          Técnica-assinatura: <tecnicas/>      Interação: <o que o visitante FAZ>
+História (capítulos): 1 … → 2 … → 3 … → 4 …
+Tipografia: <título> + <rótulo>     Paleta: <papel de cada cor da marca>
+Detalhe de marca: <loader, carimbo, etiqueta, cursor…>
+Não vai ter: <o que fica de fora de propósito>
+Por que vende: <ligação com o que o cliente compra>
+```
+
+**Interação** é o que torna o site memorável: ligar o raio-X, arrastar o termostato e ver o ar mudar, girar a
+peça, ouvir o produto, desenhar a planta rolando. Todo conceito precisa de uma.
+
+## Passo C — Não repetir
+
+Antes de mostrar os três, ler o registro local **`clientes/_conceitos.md`** (fica só neste computador). Um conceito
+novo **não pode repetir, em relação aos 3 últimos sites**:
+
+- o mesmo **mundo**;
+- a mesma **técnica-assinatura**;
+- o mesmo **par tipográfico**;
+- a mesma **estrutura de primeira dobra** (ex.: "título gigante à esquerda + objeto à direita").
+
+Depois de aprovado, acrescentar uma linha no registro:
+
+```
+| data | ramo (genérico) | conceito | mundo | técnica | par tipográfico | primeira dobra | pasta |
+```
+
+## Passo D — Primeira dobra antes do resto
+
+Construir só o **palco de abertura** (primeira dobra + o primeiro capítulo da técnica) e mostrar ao usuário.
+Aprovado, o resto do site segue o mesmo sistema. Conceito que não convence na primeira dobra não melhora
+com mais seções.
+
+---
+
+## Regras do conceito
+
+- **Um truque, profundo.** Uma técnica-assinatura bem feita, ligada à história, vale mais que cinco efeitos. O resto do site é quieto e serve a ela.
+- **O movimento significa algo.** O ar esfria *porque* o serviço é climatização; a planta se desenha *porque* a empresa projeta. Efeito sem significado é enfeite: cortar.
+- **Pouco texto, muito específico.** Frases curtas que só aquela empresa diria. Números reais.
+- **A técnica nunca esconde a conversão.** O botão de agendar/pedir orçamento aparece cedo e fica fácil no celular.
+- **Celular é o palco principal** em loja local: a interação precisa funcionar com o dedo (raio-X por toque, termostato arrastável).
+- **Honestidade:** imagem gerada por IA, 3D e "dentro do produto" ilustrado são rotulados.
+- **Nada de nome de cliente em arquivo versionado**: o conceito e o registro ficam em `clientes/` e `vendas/` (locais).
+
+---
+
+## Ideias por ramo (ponto de partida, não receita)
+
+Dois caminhos por ramo, em mundos diferentes. Inventar um terceiro a partir do Passo A é sempre melhor.
+
+| Ramo | Matéria | Caminho 1 | Caminho 2 |
+|---|---|---|---|
+| Ar-condicionado / climatização | ar, calor | **Do abafado ao leve** — Laboratório; *fluxo* quente→frio na rolagem; termostato arrastável muda o ar; ficha técnica em mono | **Por dentro do split** — Instrumento; *raio-X* do aparelho (serpentina, filtro, dreno) com pontos "+" do que a higienização limpa; anéis = BTUs |
+| Energia solar | luz, fótons | **O caminho do sol** — Ambiente; degradê do amanhecer ao meio-dia por capítulo; *partículas* (fótons) caindo e virando a conta de luz zerada | **A conta que encolhe** — Laboratório; arrastar a conta de luz e ver painéis/economia; especificações e garantia em mono |
+| Segurança eletrônica | olhar, perímetro | **Vigília** — Instrumento; radar varrendo o mapa do bairro, rótulos de câmera em colchetes, *texto que decodifica* | **Planta protegida** — Planta técnica; *linhas* desenham o imóvel e os pontos de câmera/sensor; raio de cobertura |
+| Gráfica / comunicação visual | tinta, papel | **CMYK** — Cor cheia; as quatro cores entram uma a uma e formam a imagem (*partículas* por cor); cursor-pincel | **Da prova à fachada** — Galeria pintada; *zoom contínuo* da fachada da cidade até a fibra do papel impresso |
+| Serralheria / estruturas metálicas | metal, solda | **Faísca** — Noturno; *partículas* como fagulhas que formam a peça; luz de solda | **Projeto e aço** — Planta técnica; *linhas* desenham o portão/estrutura, depois a foto real preenche |
+| Usinagem / metalúrgica | metal, precisão | **Mícron** — Laboratório; *zoom contínuo* da fábrica até a peça e até a tolerância medida; especificações | **Peça girando** — Cor cheia; peça (PNG/3D) com *raio-X* das cotas |
+| Transportadora / logística | rota, tempo | **Rede** — Instrumento; mapa com *fluxo* de rotas acendendo cidades; prazos em mono | **Uma carga, uma história** — Galeria pintada; *zoom contínuo* da carga ao destino |
+| Contabilidade | papelada, ordem | **Do caos à ordem** — Laboratório; *partículas* de papéis soltos que se alinham numa grade | **Livro-razão** — Editorial impresso; colunas de revista, números que contam |
+| Advocacia | causa, proteção | **Pilar** — Editorial impresso; serifada, citações como manchete | **Balança** — Galeria pintada; metáfora pintada em *zoom contínuo* |
+| Marmoraria | pedra, veio | **O veio** — Cor cheia ou Galeria; distorção/zoom na textura real da pedra até a bancada pronta | **Bloco à bancada** — Planta técnica; *linhas* do corte + foto preenchendo |
+| Vidraçaria | luz, transparência | **Refração** — Laboratório claro; receita *distorção WebGL* (vidro) sobre a foto | **Vão aberto** — Planta; *linhas* do caixilho, depois a vista atrás do vidro |
+| Construtora / arquitetura | espaço | **Prancha** — Planta técnica; *linhas* + carimbo no rodapé | **Do terreno à chave** — Galeria; *zoom contínuo* da obra |
+| Móveis planejados | madeira, medida | **Sob medida** — Planta técnica; o ambiente se desenha e ganha textura | **Gaveta aberta** — Cor cheia; *raio-X* do armário (organização interna) |
+| Dedetizadora | invisível, proteção | **O que você não vê** — Instrumento; *raio-X* da casa mostrando onde ficam as pragas; varredura | **Barreira** — Laboratório; *partículas* que formam a barreira em volta da casa |
+| Clínica estética / dermatologia | pele, luz | **Textura** — Galeria (serifada, fotos macro); *zoom contínuo* até a pele | **Protocolo** — Laboratório; etapas como ficha técnica |
+| Odontologia | sorriso, precisão | **Escala** — Laboratório; *linhas* do alinhamento | **Raio-X** — Instrumento; raio-X dentário estilizado |
+| Ótica | visão, foco | **Foco** — Ambiente; desfoque → foco na rolagem (CSS `filter` com `--p`) | **Lente** — Cor cheia; *raio-X* = olhar através da lente |
+| Pet shop | cuidado, cheiro | **Banho** — Cor cheia; *partículas* de espuma que formam o pet | **Diário do pet** — Editorial; fotos reais grandes |
+| Estética automotiva | brilho | **Noturno cinematográfico** (o modelo) | **Por baixo da pintura** — *raio-X* da lataria (vitrificação, camadas) |
+| Barbearia / salão | lâmina, ritual | **Ritual** — Editorial em preto e um metal | **Navalha** — Noturno com *linhas* desenhando o corte |
+| Restaurante / confeitaria | sabor, calor | **Mesa posta** — Galeria; *zoom contínuo* da rua ao prato | **Receita** — Editorial; ingredientes que contam |
+| Academia | energia | **Pulso** — Cor cheia; *fluxo* rápido com o ritmo | **Antes do espelho** — Noturno |
+
+---
+
+## Exemplo completo (genérico)
+
+```
+CONCEITO — Do abafado ao leve
+Metáfora: o site é o ar da sala mudando.
+Mundo: Laboratório (escuro → creme)   Técnica: fluxo   Interação: arrastar o termostato de 32 °C a 22 °C
+História: 1 Calor parado (fluxo laranja, caótico) → 2 A instalação (linhas do split + cotas) →
+          3 A limpeza (raio-X do filtro antes/depois) → 4 Conforto (fluxo azul, laminar; botão de agendar)
+Tipografia: Inter Tight 400/600 + JetBrains Mono     Paleta: fundo grafite/creme; azul da marca só no ar frio e no botão
+Detalhe de marca: termômetro em mono no canto que acompanha a rolagem (32 °C → 22 °C)
+Não vai ter: foto de banco de família sorrindo no sofá; título em maiúsculas gigantes
+Por que vende: o cliente compra a sensação de alívio; o site faz ele sentir a temperatura caindo.
+```

@@ -1,9 +1,14 @@
 # Guia de design — site premium
 
-O que faz um site parecer caro não é efeito: é **restrição**. Cada regra abaixo tira alguma coisa.
-Referência estudada: um site premium de estética automotiva.
+O que faz um site parecer caro não é efeito: é **restrição** a serviço de **um conceito**. O visual de cada site
+vem da direção criativa (`direcao.md`) e do mundo escolhido (`mundos.md`) — nunca deste arquivo copiado de novo.
 
-## 1. Cor: escuro + um destaque
+- **§1 a §4** detalham o mundo *Noturno cinematográfico* (o `modelo/`). Nos outros mundos, valem a ideia de
+  restrição (poucas cores com papel definido, duas vozes tipográficas, muito espaço, movimento com significado) e
+  as regras do mundo em `mundos.md`.
+- **§5 a §8** (conversão, honestidade, desempenho, ser encontrado) valem pra **todo** site, em qualquer mundo.
+
+## 1. Cor: escuro + um destaque (mundo Noturno)
 
 - Fundo quase preto, não preto puro: `#07080b` (base) e `#0d0f14` (segundo plano).
 - **Uma** cor de destaque **da marca da loja** (a do `marca.json` do `/identidade-loja`, nunca escolhida por gosto), de preferência em degradê sutil (`--accent-grad`). Se a marca tem uma base escura (marinho, vinho), ela substitui o quase preto. Ela aparece no logo,
@@ -13,7 +18,7 @@ Referência estudada: um site premium de estética automotiva.
 - Marca com identidade clara (clínica, confeitaria, salão)? Tema claro pronto: `<html data-tema="claro">` —
   fundo off-white (`#f6f4ef`), texto quase preto, um destaque. Mesma regra: base neutra + um destaque.
 
-## 2. Tipografia: duas vozes
+## 2. Tipografia: duas vozes (mundo Noturno; nos outros, o par do mundo)
 
 | Papel | Fonte | Como |
 |---|---|---|
@@ -33,7 +38,7 @@ Referência estudada: um site premium de estética automotiva.
 - Grade de 4 colunas: 1 destaque (2×2) + 4 cards fecha certinho. Mais serviços: de 4 em 4. Nunca sobrar card sozinho.
 - Faixa de prova logo depois do hero: 4 números grandes (nota no Google, clientes, anos, diferencial).
 
-## 4. Movimento
+## 4. Movimento (mundo Noturno; nos outros, a técnica-assinatura é o show e o resto é quieto)
 
 - O hero é o show. **Todo o resto é quieto**: só elementos subindo 28 px e aparecendo ao rolar,
   em 1 s, com curva suave (`cubic-bezier(.2,.7,.1,1)`).

@@ -1,0 +1,191 @@
+<!doctype html>
+<!--
+  Vitrine das técnicas do /site-premium. Não é um site: é a bancada de teste.
+  Rodar: python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas  → http://localhost:4174/demo.html
+  As imagens do zoom e do raio-X são desenhadas aqui mesmo (canvas), só pra testar a mecânica.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Técnicas · bancada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tecnicas.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<style>
+  :root { --tec-tinta: #dfe9ef; --tec-fundo: #05080c; --tec-mono: "JetBrains Mono", monospace; }
+  * { box-sizing: border-box; }
+  html { background: #05080c; color: #dfe9ef; }
+  body { margin: 0; font: 400 17px/1.5 "Inter Tight", system-ui, sans-serif; }
+  .intro { min-height: 100svh; display: grid; place-content: center; padding: 8vw; position: relative; }
+  .intro h1 { font: 400 clamp(48px, 9vw, 150px)/.92 "Instrument Serif", serif; margin: 0; letter-spacing: -.02em; }
+  .intro p { font: 500 11px var(--tec-mono); letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
+  .rot { position: absolute; z-index: 4; font: 500 11px/1.4 var(--tec-mono); letter-spacing: .2em; text-transform: uppercase; }
+  .cap { position: absolute; z-index: 4; left: 6vw; bottom: 12vh; max-width: 560px; }
+  .cap h2 { font: 400 clamp(36px, 6vw, 88px)/.95 "Instrument Serif", serif; margin: 0 0 12px; }
+  .cap p { font: 500 11px var(--tec-mono); letter-spacing: .18em; text-transform: uppercase; opacity: .7; margin: 0; }
+  .claro { background: #efece5; color: #15130f; --tec-tinta: #15130f; --tec-fundo: #efece5; }
+  .claro .cap { left: auto; right: 6vw; text-align: right; }
+  .planta { position: absolute; inset: 8vh 6vw 18vh; }
+  .vitrine { padding: 14vh 6vw; display: grid; gap: 40px; }
+  .vitrine h2 { font: 400 clamp(36px, 5vw, 72px)/.95 "Instrument Serif", serif; margin: 0; }
+  #produto { width: min(100%, 1100px); border-radius: 18px; }
+  .numeros { display: flex; flex-wrap: wrap; gap: 6vw; padding: 10vh 6vw 20vh; }
+  .numeros b { display: block; font: 800 clamp(44px, 7vw, 96px)/1 "Inter Tight"; letter-spacing: -.03em; }
+  .numeros span { font: 500 11px var(--tec-mono); letter-spacing: .2em; text-transform: uppercase; opacity: .6; }
+</style>
+</head>
+<body>
+
+<section class="intro">
+  <div class="hud"><span class="hud-rotulo" style="top:0;right:0" data-embaralhar>Bancada · 07 técnicas</span></div>
+  <p data-embaralhar>Fluxo · Partículas · Linhas · Zoom · Raio-X · Texto · Palco</p>
+  <h1 data-dividir="palavras">Cada empresa merece o seu próprio truque.</h1>
+</section>
+
+<!-- 1. FLUXO: calor → conforto -->
+<section class="palco" data-telas="4" id="s-fluxo">
+  <div class="palco-quadro" id="q-fluxo">
+    <div class="hud"><span class="hud-rotulo" style="top:0;left:24px">01 · Fluxo</span><span class="hud-rotulo" style="bottom:0;left:24px" id="temp">32 °C</span></div>
+    <div class="cap" data-cap><h2>Calor parado.</h2><p>p 0.00 → 0.33 · turbulência alta</p></div>
+    <div class="cap" data-cap><h2>O ar começa a correr.</h2><p>p 0.33 → 0.66 · esfriando</p></div>
+    <div class="cap" data-cap><h2>Conforto.</h2><p>p 0.66 → 1.00 · laminar</p></div>
+  </div>
+</section>
+
+<!-- 2. PARTÍCULAS: nuvem → palavra → ondas → esfera -->
+<section class="palco" data-telas="5" id="s-part">
+  <div class="palco-quadro" id="q-part">
+    <div class="hud"><span class="hud-rotulo" style="top:0;left:24px">02 · Partículas</span></div>
+    <div class="cap" data-cap><h2>Névoa.</h2><p>forma: nuvem</p></div>
+    <div class="cap" data-cap><h2>Vira marca.</h2><p>forma: texto</p></div>
+    <div class="cap" data-cap><h2>Vira onda.</h2><p>forma: anéis</p></div>
+    <div class="cap" data-cap><h2>Vira peça.</h2><p>forma: esfera</p></div>
+  </div>
+</section>
+
+<!-- 3. LINHAS: planta que se constrói (fundo claro) -->
+<section class="palco claro" data-telas="3" id="s-linhas">
+  <div class="palco-quadro">
+    <div class="hud"><span class="hud-rotulo" style="top:0;left:24px">03 · Linhas</span></div>
+    <svg class="tec-linhas planta" id="planta" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
+      <rect x="300" y="180" width="600" height="300" rx="6" data-preencher />
+      <line x1="300" y1="250" x2="900" y2="250" />
+      <path d="M340 300 h520 M340 330 h520 M340 360 h520 M340 390 h520 M340 420 h520" />
+      <circle cx="820" cy="215" r="18" data-preencher />
+      <path d="M300 480 l-40 90 M900 480 l40 90" />
+      <path d="M260 600 h680" />
+      <path d="M300 140 v-20 h600 v20" />
+      <text x="600" y="110" text-anchor="middle" data-depois=".72">900 mm</text>
+      <text x="930" y="335" data-depois=".8">300 mm</text>
+      <text x="600" y="640" text-anchor="middle" data-depois=".9">VISTA FRONTAL · ESC 1:10</text>
+    </svg>
+    <div class="cap" data-cap data-de=".55" data-ate="1.01"><h2>Projeto antes da obra.</h2><p>traço a traço com a rolagem</p></div>
+  </div>
+</section>
+
+<!-- 4. ZOOM CONTÍNUO -->
+<section class="palco" data-telas="5" id="s-zoom">
+  <div class="palco-quadro" id="q-zoom">
+    <div class="hud" style="z-index:20"><span class="hud-rotulo" style="top:0;left:24px">04 · Zoom contínuo</span></div>
+  </div>
+</section>
+
+<!-- 5. RAIO-X -->
+<section class="vitrine">
+  <span class="rot" style="position:static">05 · Raio-X — passe o mouse, toque nos +, ligue o botão</span>
+  <h2 data-dividir="palavras">O que está por dentro.</h2>
+  <div id="produto"></div>
+</section>
+
+<!-- 6. TEXTO: contadores -->
+<section class="numeros">
+  <div data-revelar><b data-contar="582">0</b><span>avaliações</span></div>
+  <div data-revelar><b data-contar="4.9" data-casas="1">0</b><span>nota no Google</span></div>
+  <div data-revelar><b data-contar="13">0</b><span>anos</span></div>
+</section>
+
+<script type="module">
+  import { palco, rolagemSuave } from './palco.js';
+  import { fluxo } from './fluxo.js';
+  import { particulas } from './particulas.js';
+  import { linhas, construcao } from './linhas.js';
+  import { zoom } from './zoom.js';
+  import { raiox } from './raiox.js';
+  import { texto } from './texto.js';
+
+  rolagemSuave();
+  texto();
+
+  // 1
+  const f = fluxo(document.querySelector('#q-fluxo'));
+  const temp = document.querySelector('#temp');
+  palco(document.querySelector('#s-fluxo'), (p) => { f.progresso(p); temp.textContent = `${Math.round(32 - p * 10)} °C`; });
+
+  // 2
+  const pt = await particulas(document.querySelector('#q-part'), {
+    formas: [{ tipo: 'nuvem' }, { tipo: 'texto', texto: 'AR', fonte: '800 260px "Inter Tight"' }, { tipo: 'aneis', aneis: 5 }, { tipo: 'esfera' }],
+    cores: ['#7fd8ff', '#ffffff'],
+  });
+  palco(document.querySelector('#s-part'), pt.progresso);
+
+  // 3
+  const svg = document.querySelector('#planta');
+  construcao(svg, { colunas: 8, linhas: 5, circulos: 2 });
+  const l = linhas(svg, { espalhar: 0.7 });
+  palco(document.querySelector('#s-linhas'), l.progresso);
+
+  // 4 — imagens em cadeia: a última primeiro, cada anterior leva a seguinte no centro (1/fator)
+  const FATOR = 3.5;
+  const cenas = [['#1b2a3a', '#40607e', 'BAIRRO'], ['#3a2a1b', '#9a6a3e', 'FACHADA'], ['#16302a', '#3f8a72', 'BANCADA'], ['#2b1838', '#8a52b0', 'DETALHE']];
+  const urls = [];
+  let seguinte = null;
+  for (let j = cenas.length - 1; j >= 0; j--) {
+    const c = document.createElement('canvas'); c.width = 1600; c.height = 1000;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(800, 500, 50, 800, 500, 900); g.addColorStop(0, cenas[j][1]); g.addColorStop(1, cenas[j][0]);
+    x.fillStyle = g; x.fillRect(0, 0, 1600, 1000);
+    x.strokeStyle = 'rgba(255,255,255,.18)';
+    for (let i = 0; i < 40; i++) { x.beginPath(); x.arc(800, 500, 60 + i * 28, 0, Math.PI * 2); x.stroke(); }
+    x.fillStyle = 'rgba(255,255,255,.85)'; x.font = '500 34px JetBrains Mono'; x.fillText(`0${j + 1} · ${cenas[j][2]}`, 70, 110);
+    if (seguinte) { const w = 1600 / FATOR, h = 1000 / FATOR; x.drawImage(seguinte, 800 - w / 2, 500 - h / 2, w, h); }
+    seguinte = c;
+    urls.unshift(c.toDataURL('image/jpeg', 0.9));
+  }
+  const z = zoom(document.querySelector('#q-zoom'), urls, { fator: FATOR });
+  palco(document.querySelector('#s-zoom'), z.progresso);
+
+  // 5 — por fora e por dentro de uma "unidade" (desenho, mesmo enquadramento)
+  function unidade(dentro) {
+    const c = document.createElement('canvas'); c.width = 1600; c.height = 900;
+    const x = c.getContext('2d');
+    x.fillStyle = dentro ? '#071018' : '#d9dde0'; x.fillRect(0, 0, 1600, 900);
+    x.lineWidth = 3; x.strokeStyle = dentro ? '#7fd8ff' : '#9aa3a9'; x.fillStyle = dentro ? '#0b1a26' : '#f4f5f6';
+    x.beginPath(); x.roundRect(250, 260, 1100, 340, 40); x.fill(); x.stroke();
+    if (dentro) {
+      for (let k = 0; k < 9; k++) { x.beginPath(); for (let i = 0; i <= 900; i += 10) { const yy = 330 + k * 26 + Math.sin(i / 30) * 8; i ? x.lineTo(320 + i, yy) : x.moveTo(320, yy); } x.stroke(); }
+      x.beginPath(); x.arc(1240, 430, 80, 0, Math.PI * 2); x.stroke();
+      for (let a = 0; a < 6; a++) { x.beginPath(); x.moveTo(1240, 430); x.lineTo(1240 + Math.cos(a) * 78, 430 + Math.sin(a) * 78); x.stroke(); }
+    } else {
+      for (let i = 0; i < 26; i++) { x.beginPath(); x.moveTo(300, 540 + (i % 2)); x.lineTo(1300, 540 + (i % 2)); x.stroke(); }
+      x.fillStyle = '#7d878e'; x.font = '500 26px JetBrains Mono'; x.fillText('MODELO GENÉRICO', 300, 320);
+    }
+    return c.toDataURL('image/jpeg', 0.9);
+  }
+  raiox(document.querySelector('#produto'), {
+    fora: unidade(false), dentro: unidade(true),
+    pontos: [
+      { x: 40, y: 47, titulo: 'Serpentina', texto: 'Onde o calor sai do ar.' },
+      { x: 77, y: 48, titulo: 'Ventilador', texto: 'Empurra o ar pelo filtro.' },
+    ],
+  });
+</script>
+</body>
+</html>

@@ -1,27 +1,29 @@
 ---
 name: site-premium
 description: >
-  Cria um site premium pra uma loja ou serviço local, com um hero cinematográfico que conta a transformação
-  que o cliente compra (antes → depois) — cenas geradas por IA costuradas com transições em WebGL (padrão),
-  modelo 3D em Three.js, ou foto — visual de alto padrão (uma cor de destaque,
-  títulos enormes, rótulos monoespaçados), agenda que abre o WhatsApp com a mensagem pronta — ou, pra
-  empresa B2B, um painel "Pedir orçamento" (WhatsApp ou formulário que chega no e-mail) — e deploy
-  estático na Vercel ou Netlify. Parte de um modelo pronto e testado em modelo/. Use quando o usuário pedir
+  Cria um site premium com um conceito próprio pra cada empresa: tira do ramo (ou do nome) uma metáfora,
+  escolhe um mundo visual e uma técnica-assinatura (fluxo de ar, partículas que mudam de forma, planta que se
+  desenha, zoom contínuo entre cenas, raio-X do produto, cenas de IA, 3D) e monta a história pela rolagem —
+  nunca o mesmo visual de um site pro outro. Por baixo, a infraestrutura testada do modelo/: agenda que abre
+  o WhatsApp com a mensagem pronta ou, pra B2B, "Pedir orçamento" (WhatsApp ou e-mail), SEO, medição, LGPD
+  e deploy estático na Vercel ou Netlify. Use quando o usuário pedir
   "site", "landing page", "site premium", "site com 3D", "site profissional", "site que pareça caro",
   "site pro cliente X", "site pra empresa", "site com pedido de orçamento", "site pra indústria", ou /site-premium.
 ---
 
-# /site-premium — Site de alto padrão com hero cinematográfico
+# /site-premium — Um site com cara própria pra cada empresa
 
-O site vende pela primeira tela: o hero mostra o serviço acontecendo, em etapas (o carro chega sujo, uma linha de luz lava, a câmera mergulha no capô, o polimento tira os riscos, o carro sai brilhando no pôr do sol). Cada etapa tem seu próprio título. O resto do site é contido de propósito — é a restrição que faz parecer caro.
+Premium não é um visual: é **um conceito levado até o fim**. Os sites de referência (`referencias.md`) não poderiam trocar de logo entre si — a forma nasce do que a empresa faz. Então cada site começa por uma **direção criativa** (`direcao.md`): a matéria que a empresa move (ar, metal, tinta, luz, papelada), uma metáfora, um **mundo** visual (`mundos.md`) e **uma técnica-assinatura** (`tecnicas/`) com uma interação que o visitante lembra. Nunca o mesmo mundo e a mesma técnica em dois sites seguidos.
 
-Referência: um site premium de estética automotiva — primeira versão com 3D, segunda com cenas de IA. A segunda ficou melhor: parece foto, pesa menos e não depende de modelo 3D.
+O `modelo/` é a **infraestrutura** (agenda/orçamento, SEO, JSON-LD, medição, LGPD, mapa, páginas de serviço) e um dos mundos possíveis (o *Noturno cinematográfico*: hero em capítulos com cenas de IA). Não é o ponto de partida visual de todo site.
 
 ## Dependências
 
-- **Modelo pronto:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
+- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (8 sistemas visuais), `referencias.md` (o nível a atingir) e o registro local `clientes/_conceitos.md` (o que já foi usado)
+- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, texto, HUD. Catálogo e bancada de teste em `tecnicas/README.md` e `tecnicas/demo.html`
+- **Infraestrutura pronta:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
-- **Regras de design:** `.claude/skills/site-premium/design.md` — ler antes de mexer no visual
+- **Regras de design:** `.claude/skills/site-premium/design.md` — o que vale pra todo mundo (conversão, desempenho, SEO, honestidade) e o detalhe do mundo Noturno
 - **Cenas de IA do hero:** `.claude/skills/site-premium/cenas.md` — roteiro, prompts e geração consistente (com `scripts/kie.js` ou Higgsfield)
 - **Mapa da seção "Onde fica":** `scripts/mapa-ruas.js` (ruas reais do OpenStreetMap + rota até a loja) e `modelo/mapa.js` (a animação)
 - **Cliente:** `clientes/<Nome>/` — `CLAUDE.md`, briefing, fotos (`fotos/` do `/foto-produto` se houver)
@@ -44,7 +46,17 @@ Puxar o que já existe (pasta do cliente, diagnóstico) e perguntar só o que fa
 5. 4+ fotos reais do lugar/trabalho e 3 avaliações reais do Google
 6. **A transformação** — ver Passo 2
 
-### Passo 2 — A história do hero (o mais importante)
+### Passo 2 — Direção criativa (o mais importante)
+
+Seguir o `direcao.md`:
+
+1. **Matéria-prima** (o que a empresa move, antes → depois, o que o nome sugere, a prova física) em `clientes/<Nome>/conceito.md`
+2. **Três conceitos** bem diferentes (mundo + técnica-assinatura + interação + capítulos + tipografia + paleta + detalhe de marca), checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
+3. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
+
+A técnica sai de `tecnicas/` (testar a peça na `tecnicas/demo.html` antes, se for mexer nela). Técnica nova que o conceito pedir (distorção, vídeo pela rolagem, termostato arrastável…): escrever como módulo em `tecnicas/`, com `progresso(p)`, e pôr na bancada.
+
+#### Quando o conceito for o mundo Noturno cinematográfico (hero em capítulos)
 
 Definir em uma frase o **antes → depois** que o cliente compra, e de 4 a 5 capítulos. Cada capítulo vira uma etapa do hero com título próprio.
 
@@ -104,11 +116,11 @@ O comprador de empresa não marca horário: ele cota. O painel pergunta o que o 
 
 1. Copiar `modelo/` inteiro pra `clientes/<Nome>/site/`
 2. **Variações** acima: modo do hero, tema, quais páginas de serviço
-3. **`estilo.css`** → colar o `:root` sugerido no `marca.md` da loja (tema claro ou escuro conforme a marca, base escura da marca no `--bg`; fonte de título da marca se for Google Font). Logo real no `.logo` do topo e do rodapé; frases da loja (`frases` do `marca.json`) no hero e nos títulos. Checklist completo no Passo 5 do `/identidade-loja`
+3. **Visual do mundo escolhido** (`mundos.md`): reescrever o `estilo.css` com a paleta, as fontes e o layout do mundo — o `estilo.css` do modelo só serve como está no mundo Noturno. Copiar `tecnicas/` pra pasta do site e montar a história em palcos (`tecnicas/README.md`). Seções do modelo (prova, serviços, galeria, avaliações, mapa, final) podem mudar de forma, de ordem ou sair: o que fica obrigatório é o que converte e o que o Google lê (botão de agenda/orçamento, avaliações reais, endereço, JSON-LD). No mundo Noturno: colar o `:root` sugerido no `marca.md` da loja (tema claro ou escuro conforme a marca, base escura da marca no `--bg`; fonte de título da marca se for Google Font). Logo real no `.logo` do topo e do rodapé; frases da loja (`frases` do `marca.json`) no hero e nos títulos. Checklist completo no Passo 5 do `/identidade-loja`
 4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title de cada página = serviço + cidade + marca
 5. **`DOMINIO`** → buscar e trocar em todos os arquivos (canonical, og, JSON-LD, `sitemap.xml`, `robots.txt`). Sem domínio ainda: deixar e trocar no `/publicar-site`
 6. **`app.js`** → `CONFIG`: WhatsApp, `contato` (`'agenda'` ou `'orcamento'`), serviços (os mesmos nomes dos cards), `agenda` (períodos, dias fechados) **ou** `orcamento` (pergunta do nicho, prazos, resposta, formulário), **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
-7. **Hero** → no `index.html`, os blocos `.beat` (um por capítulo: título em duas frases curtas, linha técnica, o último com o botão) e o rótulo `.tag-ia`. Modo sequência: `hero-seq.js` → `CONFIG.cenas` e `CONFIG.passos` (ver `cenas.md` §4). Modo 3D: `hero3d.js` → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
+7. **Abertura** → nos outros mundos, é o palco da técnica-assinatura aprovado no Passo 2 (apagar `#palco`, `hero-seq.js` e `hero3d.js` se não forem usados). **Mundo Noturno:** no `index.html`, os blocos `.beat` (um por capítulo: título em duas frases curtas, linha técnica, o último com o botão) e o rótulo `.tag-ia`. Modo sequência: `hero-seq.js` → `CONFIG.cenas` e `CONFIG.passos` (ver `cenas.md` §4). Modo 3D: `hero3d.js` → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
 8. **`img/`** → fotos reais (WebP, ~1600 px no lado maior) no lugar de **todo arquivo `exemplo-*`** (galeria, fundo dos cards de serviço em `style="--foto: url(...)"`, hero foto, cenas); `og.png` 1200×630 no lugar do `og-exemplo.png` (gerar com `og/og.html` desta skill: `node scripts/render.js .claude/skills/site-premium/og/og.html --png <pasta> --size 1200x630`); `favicon.svg` com a inicial da marca. O `/checar-site` acusa qualquer `exemplo-*` que sobrar
 9. **Onde fica (mapa)** → pegar a coordenada da porta da loja no Google Maps (botão direito → copiar coordenadas) e gerar as ruas e a rota:
    ```bash
@@ -141,6 +153,8 @@ Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e
 - [ ] Agenda (ou pedido de orçamento) abre, monta a mensagem e abre o WhatsApp certo (no `localhost`, o console mostra cada evento `[medir]`). Orçamento por formulário: o envio de teste fica pro site publicado
 - [ ] Grade de serviços sem card sobrando sozinho
 - [ ] Desligar o WebGL mostra o fundo alternativo e o site continua usável
+- [ ] A técnica-assinatura funciona com o dedo no celular (raio-X por toque, palcos rolando sem travar) e respeita "reduzir movimento"
+- [ ] **Não parece o site anterior:** abrir lado a lado com o último do `clientes/_conceitos.md` — mundo, primeira dobra, tipografia e técnica diferentes
 
 ### Passo 5 — Publicar
 
@@ -150,14 +164,15 @@ Ainda não é cliente? A versão de venda é o **`/site-demo`**.
 
 ### Passo 6 — Entrega
 
-Mostrar no chat: link do preview/publicado, a frase da transformação, e o que ainda depende do cliente (fotos reais, modelo 3D definitivo, domínio). Registrar a entrega na pasta do cliente pro `/relatorio-resultados`.
+Mostrar no chat: link do preview/publicado, o conceito em uma frase, e o que ainda depende do cliente (fotos reais, modelo 3D definitivo, domínio). Registrar a entrega na pasta do cliente pro `/relatorio-resultados` e o conceito no `clientes/_conceitos.md` (uma linha, ramo genérico).
 
 ---
 
 ## Regras
 
-- **Ler `design.md` antes de mexer no visual.** Não adicionar cor, fonte ou animação fora do sistema.
-- **O hero conta o serviço.** Cena bonita sem história é enfeite — perguntar qual é a transformação.
+- **Conceito antes de tela.** Sem `conceito.md` aprovado, não começar o visual. Cada site com mundo e técnica-assinatura próprios; nunca dois seguidos iguais.
+- **Uma técnica-assinatura, profunda.** O movimento significa algo do negócio; efeito sem significado sai. Dentro do mundo escolhido, não adicionar cor, fonte ou animação fora do sistema.
+- **A história conta o serviço.** Cena bonita sem história é enfeite — perguntar qual é a transformação.
 - **Consistência nas cenas de IA:** mesma câmera, mesmo objeto, mesma luz. Cena que não bate, regerar.
 - **Licença de tudo:** modelo 3D, fotos, fontes. Na dúvida, não usar. Nada de marca/modelo reconhecível gerado por IA.
 - **Rótulos de honestidade ficam:** "imagens geradas por IA · ilustrativas" (ou "animação 3D ilustrativa") no hero, e fotos reais no resto do site.
