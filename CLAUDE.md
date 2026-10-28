@@ -134,3 +134,19 @@ Quando o usuário pedir skill nova:
    `echo '{"prompt":"<frase>"}' | node .claude/hooks/gatilhos.mjs`, e pôr 1–2 frases
    em `.claude/hooks/gatilhos.teste.mjs` (rodar: `node .claude/hooks/gatilhos.teste.mjs`).
    Sem isso ela não dispara sozinha nem aparece no `/menu`
+
+---
+
+## Clientes ficam só neste computador
+
+Nenhum dado de cliente ou prospect vai pro GitHub: nem funil, lotes,
+prints e telefones (já estão no `.gitignore`: `vendas/`, `clientes/`,
+`_memoria/`, `projetos/`, `saidas/`), nem **nome de loja ou empresa,
+real ou fictício**, em arquivo versionado — skills, exemplos, frases de
+gatilho, testes e mensagens de commit.
+
+- Em exemplo, usar termo genérico: `<loja>`, `<cliente>`, "a ótica",
+  "a metalúrgica". Nunca tirar exemplo do funil real
+- Nunca `git add -f` em arquivo das pastas locais
+- Antes de commit, olhar o `git diff --cached` procurando nome de empresa
+  ou pessoa
