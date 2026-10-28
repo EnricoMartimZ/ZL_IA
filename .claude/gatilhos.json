@@ -236,6 +236,24 @@
       ]
     },
     {
+      "skill": "carrossel-semanal",
+      "grupo": "Entregar: conteúdo",
+      "quando": "gerar sozinho, sem pausas, os carrosséis da semana (padrão 2) a partir da pauta, com PNGs, legenda e commit; feita pra rodar em rotina agendada e nunca publica",
+      "exemplos": [
+        "gera os carrosséis da semana",
+        "faz os posts da semana",
+        "automatiza os carrosséis toda segunda"
+      ],
+      "gatilhos": [
+        "carross.{0,30}seman",
+        [
+          "\\bseman",
+          "(carross|\\bposts?\\b|conteudo)"
+        ],
+        "(rotina|automatiz|agend).{0,30}(carross|\\bposts?\\b)"
+      ]
+    },
+    {
       "skill": "foto-produto",
       "grupo": "Entregar: conteúdo",
       "quando": "transformar foto de celular do produto em foto profissional (fundo de catálogo, cena, versão sazonal)",

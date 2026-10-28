@@ -16,7 +16,7 @@ const casos = [
   ['fechei com a ótica!!', 'aprendizado'], ['perdi a loja da esquina, disse que tá caro', 'aprendizado'],
   ['escreve um email pro dono da transportadora', 'email-profissional'], ['cria o site da ótica', 'site-premium'],
   ['preciso de um site pra uma indústria com pedido de orçamento', 'site-premium'], ['confere se o site tá pronto pra entregar', 'checar-site'],
-  ['coloca o site no ar com o domínio que ele comprou', 'publicar-site'], ['faz um carrossel sobre limpeza de sofá', 'carrossel'],
+  ['coloca o site no ar com o domínio que ele comprou', 'publicar-site'], ['faz um carrossel sobre limpeza de sofá', 'carrossel'], ['gera os carrosséis da semana', 'carrossel-semanal'], ['automatiza os posts do instagram toda segunda', 'carrossel-semanal'],
   ['melhora essas fotos dos óculos com fundo branco', 'foto-produto'], ['anima essa foto do produto', 'video-ia'],
   ['faz um reels da promoção de black friday', 'video-reels'], ['responde essas avaliações do google', 'responder-avaliacoes'],
   ['como a ótica tá aparecendo no google? queria aparecer na primeira página', 'seo'], ['monta uma campanha de google ads pra metalúrgica', 'anuncio-google'],
