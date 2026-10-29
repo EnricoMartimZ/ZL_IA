@@ -4,7 +4,9 @@
 // que ela mesma pode conferir.
 //
 // Uso:
-//   node scripts/montar-lote.js <pasta-da-prospeccao> [--max 20] [--sem-auditoria]
+//   node scripts/montar-lote.js <pasta-da-prospeccao> [--max 20] [--sem-auditoria] [--cidade "Santa Bárbara d'Oeste"] [--so-site]
+//   --cidade: cidade/região que aparece na apresentação (padrão Campinas)
+//   --so-site: só entra quem não tem site ou tem site ruim (avaliações e nota viram apoio, não motivo)
 //
 // Lê <pasta>/buscas/*.json e gera:
 //   lote.md (pra aprovar no chat) · fila.json (o que o envio usa) · lote.csv (planilha)
@@ -16,9 +18,11 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 
 const argv = process.argv.slice(2);
-const pasta = argv.find((a, i) => !a.startsWith('--') && argv[i - 1] !== '--max');
+const pasta = argv.find((a, i) => !a.startsWith('--') && !['--max', '--cidade'].includes(argv[i - 1]));
 const max = Number(argv.includes('--max') ? argv[argv.indexOf('--max') + 1] : 20);
 const auditar = !argv.includes('--sem-auditoria');
+const cidade = argv.includes('--cidade') ? argv[argv.indexOf('--cidade') + 1] : 'Campinas';
+const soSite = argv.includes('--so-site');
 if (!pasta || !existsSync(path.join(pasta, 'buscas'))) {
   console.error('uso: node scripts/montar-lote.js <pasta-com-buscas/> [--max 20] [--sem-auditoria]');
   process.exit(1);
@@ -27,7 +31,7 @@ if (!pasta || !existsSync(path.join(pasta, 'buscas'))) {
 // redes e franquias: decisão fora da loja, não compram de freelancer
 const REDES = /\b(petz|cobasi|gassi|99 [óo]ticas|[óo]ticas carol|[óo]ticas diniz|chilli beans|sunglass|atacad[ãa]o|bosch car service|alliancemk|smart ?fit|bluefit|o botic[áa]rio)\b/i;
 const num = (s) => Number(String(s).replace(',', '.')) || 0;
-const curto = (nome) => nome.split(/\s[|\-–]\s|\s\|/)[0].replace(/\s+(com[ée]rcio|ltda|me|eireli)\b.*$/i, '').replace(/\s+(campinas|sp|em campinas)$/i, '').split(/\s+/).slice(0, 4).join(' ').trim();
+const curto = (nome) => nome.split(/\s[|\-–]\s|\s\|/)[0].replace(/\s+(com[ée]rcio|ltda|me|eireli)\b.*$/i, '').replace(/\s+(em\s+)?(campinas|sp|santa b[áa]rbara( d.?oeste)?|sbo|americana|nova odessa|sumar[ée]|piracicaba|limeira)$/i, '').split(/\s+/).slice(0, 4).join(' ').trim();
 const km = (a, b) => Math.hypot((a.lat - b.lat) * 111, (a.lon - b.lon) * 111 * Math.cos(a.lat * Math.PI / 180));
 
 // celular = DDD + 9 + 8 dígitos (fixo não recebe WhatsApp). O endereço às vezes traz "Whats (19) 9..."
@@ -44,21 +48,38 @@ function tipoLink(u) {
   if (/instagram\.com/i.test(u)) return 'instagram';
   if (/facebook\.com/i.test(u)) return 'facebook';
   if (/linktr\.ee|linkbio|bio\.link/i.test(u)) return 'linktree';
+  if (/wa\.me|api\.whatsapp|whatsapp\.com/i.test(u)) return 'whatsapp';
   if (/4ucar|minhaautoagenda|webnode|wixsite|ueniweb|business\.site|lovable\.app|g\.page/i.test(u)) return 'pagina-generica';
   return 'site';
 }
-const ROTULO = { instagram: 'o site no perfil de vocês no Google é só o Instagram', facebook: 'o site no perfil de vocês no Google é só uma página do Facebook', linktree: 'o link no perfil de vocês no Google é um Linktree', 'pagina-generica': 'o site no perfil de vocês no Google é uma página genérica, sem a cara de vocês', nenhum: 'o perfil de vocês no Google não tem site' };
+const ROTULO = { instagram: 'o site no perfil de vocês no Google é só o Instagram', facebook: 'o site no perfil de vocês no Google é só uma página do Facebook', linktree: 'o link no perfil de vocês no Google é um Linktree', whatsapp: 'o link de site no perfil de vocês no Google só abre o WhatsApp', 'pagina-generica': 'o site no perfil de vocês no Google é uma página genérica, sem a cara de vocês', nenhum: 'o perfil de vocês no Google não tem site' };
 
 // ---------- ler buscas ----------
 const buscas = [];
 for (const f of (await readdir(path.join(pasta, 'buscas'))).filter((f) => f.endsWith('.json'))) {
   const b = JSON.parse(await readFile(path.join(pasta, 'buscas', f), 'utf8'));
+  // ler-maps.js devolve `lojas` (objetos); buscas antigas vêm em `L` (listas)
+  if (!b.L) b.L = (b.lojas || []).map((o) => [o.posicao, o.nome, o.nota, o.avaliacoes, o.categoria, o.endereco || '', o.telefone, o.site, o.lat, o.lon]);
   const lojas = b.L.map(([posicao, nome, nota, avaliacoes, categoria, endereco, telefone, site, lat, lon]) =>
     ({ posicao, nome, nota, avaliacoes: Number(avaliacoes) || 0, categoria, endereco: endereco.trim(), telefone, site, lat, lon, busca: b.busca }));
   // a lista só mostra o botão "site" em alguns nichos; sem isso, não dá pra afirmar "não tem site"
   const mostraSite = b.site_na_lista !== false && lojas.some((l) => l.site);
   buscas.push({ busca: b.busca, nicho: f.replace('.json', ''), lojas, mostraSite });
 }
+
+// link encurtado (bit.ly...) no perfil: seguir até o destino pra não chamar de "site fora do ar" um link de WhatsApp
+async function destino(u) {
+  for (let i = 0; i < 5; i++) {
+    try {
+      const r = await fetch(u, { redirect: 'manual', signal: AbortSignal.timeout(10000) });
+      const loc = r.headers.get('location');
+      if (!loc || r.status < 300 || r.status >= 400) return u;
+      u = new URL(loc, u).href;
+    } catch { return u; }
+  }
+  return u;
+}
+for (const b of buscas) for (const l of b.lojas) if (/bit\.ly|tinyurl|cutt\.ly|encurtador|abre\.ai|l\.ead\.me/i.test(l.site)) l.site = await destino(l.site);
 
 const median = (v) => { const s = v.filter((x) => !Number.isNaN(x)).sort((a, b) => a - b); return s[Math.floor(s.length / 2)] || 0; };
 
@@ -82,6 +103,18 @@ for (const b of buscas) {
   }
 }
 
+// motivo da auditoria → frase que cabe em "Abri ... e <frase>"
+function fraseSite(m) {
+  if (/não existe|fora do ar/.test(m)) return 'ele não abre';
+  if (/404/.test(m)) return 'ele mostra erro 404';
+  if (/manutenção/.test(m)) return 'ele mostra uma página de manutenção';
+  if (/não seguro/.test(m)) return 'o navegador avisa que ele é "não seguro"';
+  if (/rola pro lado/.test(m)) return 'a página fica mais larga que a tela e o texto sai cortado na lateral';
+  if (/não feito pra celular/.test(m)) return 'ele não se ajusta à tela do celular';
+  if (/minúscula/.test(m)) return 'a letra fica pequena demais pra ler';
+  return m.replace(/^o /, '');
+}
+
 // ---------- auditar os sites próprios (site ruim também é ponto fraco) ----------
 const comSite = candidatos.filter((c) => c.link === 'site');
 if (auditar && comSite.length) {
@@ -95,15 +128,15 @@ if (auditar && comSite.length) {
     if (!a) continue;
     c.auditoria = { nota: a.nota, motivos: a.motivos };
     const forte = a.motivos.find((m) => /não existe|fora do ar|404|não seguro|rola pro lado|não feito pra celular|minúscula|manutenção/.test(m));
-    if (a.nota >= 25 && forte) c.fracos.push({ tipo: 'site', peso: 25, fato: forte.replace(/^o /, '') });
+    if (a.nota >= 25 && forte) c.fracos.push({ tipo: 'site', peso: 25, fato: fraseSite(forte) });
   }
 }
 
 // ---------- mensagem (modelo diferente conforme o ponto fraco, com variação) ----------
 const ABERTURAS = [
-  'Oi, tudo bem? Aqui é o Enrico, trabalho com marketing com IA pra negócios aqui de Campinas.',
-  'Oi! Sou o Enrico, faço marketing com IA pra negócios de Campinas.',
-  'Oi, tudo certo? Enrico aqui, trabalho com presença online de negócios em Campinas.',
+  `Oi, tudo bem? Aqui é o Enrico, trabalho com marketing com IA pra negócios de ${cidade}.`,
+  `Oi! Sou o Enrico, faço marketing com IA pra negócios de ${cidade}.`,
+  `Oi, tudo certo? Enrico aqui, trabalho com presença online de negócios em ${cidade}.`,
 ];
 const FECHOS = [
   'Posso te mostrar em 5 minutos como virar esse jogo?',
@@ -112,7 +145,7 @@ const FECHOS = [
 ];
 const SAIDA = 'Se não fizer sentido, é só falar que não mando mais.';
 function mensagem(c, i) {
-  const f = [...c.fracos].sort((a, b) => b.peso - a.peso)[0];
+  const f = [...c.fracos].filter((x) => !soSite || x.tipo === 'link' || x.tipo === 'site').sort((a, b) => b.peso - a.peso)[0];
   const loja = curto(c.nome);
   const ab = ABERTURAS[i % ABERTURAS.length];
   const fe = FECHOS[(i + 1) % FECHOS.length];
@@ -121,7 +154,7 @@ function mensagem(c, i) {
   if (f.tipo === 'link') {
     meio = `Pesquisei "${c.busca}" no Google: a ${L.nome} aparece com ${L.avaliacoes} avaliações${L.temSite ? ' e site próprio' : ''}. A ${loja} tem ${c.avaliacoes} avaliações e nota ${c.nota}, mas ${f.fato}. Quem compara pelo celular acaba fechando com quem mostra mais.`;
   } else if (f.tipo === 'site') {
-    meio = `Abri o site da ${loja} pelo celular e ${f.fato}. Enquanto isso, a ${L.nome} aparece na busca "${c.busca}" com ${L.avaliacoes} avaliações. Esse detalhe faz o cliente ir pra outro lugar.`;
+    meio = `Abri pelo celular o site da ${loja} que está no Google: ${f.fato}. Enquanto isso, a ${L.nome} aparece na busca "${c.busca}" com ${L.avaliacoes} avaliações. Esse detalhe faz o cliente ir pra outro lugar.`;
   } else if (f.tipo === 'nota') {
     meio = `Vi a ${loja} no Google: ${f.fato}. Na lista do Google o cliente compara as estrelas lado a lado, e quem tem nota maior leva.`;
   } else {
@@ -133,7 +166,7 @@ function mensagem(c, i) {
 }
 
 // ---------- escolher o lote: os melhores de cada nicho, misturados ----------
-const pontuados = candidatos.filter((c) => c.fracos.length).map((c) => ({
+const pontuados = candidatos.filter((c) => c.fracos.length && (!soSite || c.fracos.some((f) => f.tipo === 'link' || f.tipo === 'site'))).map((c) => ({
   ...c, pontos: c.fracos.reduce((s, f) => s + f.peso, 0) + Math.min(20, Math.log10(c.avaliacoes + 1) * 8),
 }));
 const porNicho = Object.groupBy(pontuados.sort((a, b) => b.pontos - a.pontos), (c) => c.nicho);
