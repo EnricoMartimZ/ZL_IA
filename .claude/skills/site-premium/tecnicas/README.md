@@ -4,10 +4,10 @@ Peças de movimento prontas e testadas pra montar a experiência que o **conceit
 Cada site usa **uma técnica-assinatura**, no máximo duas. Elas não têm cor nem fonte: isso vem do
 mundo escolhido (`../mundos.md`).
 
-Bancada de teste com todas funcionando: `demo.html`.
+Duas bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas) e `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica, e as peças de interação pra testar com a mão).
 
 ```bash
-python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas   # → http://localhost:4174/demo.html
+python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas   # → http://localhost:4174/mostruario.html
 ```
 
 ## Como entram num site
@@ -47,6 +47,17 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
 | **Raio-X** | `raiox.js` | Foto por fora; lente que segue o mouse/dedo mostra por dentro; "+" com ficha técnica; botão liga o raio-X na tela toda | Produto/equipamento cujo valor está dentro: ar-condicionado, máquinas, fechaduras, painéis, colchões, carros | 2 imagens |
 | **Texto** | `texto.js` | Títulos que entram palavra a palavra (`data-dividir`), rótulos que se decodificam (`data-embaralhar`), números que contam (`data-contar`), blocos que sobem (`data-revelar`) | Todo site (é acabamento, não assinatura) | Levíssimo |
 | **HUD** | `tecnicas.css` | Cantos, cruzes, réguas e rótulos mono por cima de qualquer quadro (`.hud`, `.hud-cruz`, `.hud-linha-h/v`, `.hud-rotulo`) | Mundos Instrumento, Planta, Laboratório, Galeria pintada | CSS |
+| **Superfície** | `superficie.js` | A foto vira matéria: relevo com luz seguindo o dedo, água, vidro canelado ou ar quente, sem 3D nem mapa extra | Pedra, metal, couro, madeira, piscina, vidraçaria, churrasqueira, solda | WebGL puro, sem three |
+| **Pincel** | `pincel.js` | O visitante passa o dedo e descobre o "depois": limpa, pinta, revela. Com palco, pinta sozinho pela rolagem | Limpeza, higienização, pintura, funilaria, reforma, gráfica, dentista | Canvas 2D |
+| **Controle** | `controle.js` | Arrastar um valor (reta ou dial) muda a cena e já monta a mensagem do WhatsApp com o número | Conta de luz, termostato, metragem, convidados, plano | Levíssimo, com teclado |
+| **Território** | `territorio.js` | Mapa pra arrastar e aproximar, com pontos, fichas e estados. Com palco, vira passeio guiado | Loteamento, condomínio, rede de lojas, fazenda, turismo | CSS + imagem ou SVG |
+| **Arrastar** | `arrastar.js` | `faixa()`: fileira com inércia. `mesa()`: objetos soltos pra pegar e mover | Obras, cases, catálogo, cardápio; fotos, amostras | Levíssimo |
+| **Vinhetas** | `vinhetas.js` | Página de HQ lida pela rolagem: a câmera guia de quadro em quadro e no fim mostra a página toda | Marcas com humor e história: cerveja, hamburgueria, escola | CSS |
+| **Luz** | `luz.js` | O dia passa na tela: mancha de sol, sombra de folhas e cor da página mudam da manhã à noite | Padaria, café, pousada, decoração, "um dia com" | CSS, levíssimo |
+| **Sequência** | `sequencia.js` | Vídeo que anda com a rolagem (quadros em canvas ou `<video>`) | Processo filmado: solda, corte, forno, drone | 4–8 MB por 120 quadros |
+| **Abertura** | `abertura.js` | Logo se desenha, porcentagem real, cortina abre o site. Uma vez por visita, nunca segura além do `maximo` | Acabamento de qualquer site | Levíssimo |
+| **Trilho** | `trilho.js` | Índice lateral preso, um traço por capítulo com a sua cor. Fora do celular | Sites longos de produto ou serviço | Levíssimo |
+| **Acabamento** | `tecnicas.css`, `texto.js` | `.grao` (grão de filme), `.pilha` (cartões que empilham), `.bento` (blocos de tamanhos diferentes), `data-letreiro` (faixa sem fim), troca de página com `@view-transition` | Qualquer mundo | CSS |
 
 ### Material que cada uma precisa
 
@@ -59,18 +70,23 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
   3. Conferir: recortar o centro (1/3,5) da cena N, ampliar e comparar com a cena N+1.
   Sem como fazer outpainting: gerar as cenas soltas e usar `moldura: true` (vira um quadro dentro do outro, com troca suave). Fica bonito, mas não é o plano-sequência.
 - **Raio-X — par fora/dentro com o mesmo enquadramento.** Foto real (ou gerada) por fora → editar a mesma imagem pedindo a versão em corte/transparente mostrando os componentes, sem mexer em câmera e contorno. Pontos `x`/`y` em % da imagem. Rotular "ilustração" quando o "dentro" for gerado.
+- **Superfície:** foto de textura de perto, bem iluminada e sem gente (o claro vira alto e o escuro vira fundo). Pedir ao cliente a foto da pedra, da chapa, do couro; 1600 px bastam.
+- **Pincel:** par antes/depois com o mesmo enquadramento, como no raio-X, ou uma cor sólida no `antes` pra pintar do zero.
+- **Território:** planta real redesenhada em SVG (fica leve e nítida em qualquer zoom) ou imagem de pelo menos 2400 px. Lote, unidade ou loja com estado real: mapa desatualizado vende o que não existe.
+- **Vinhetas:** a arte de cada vinheta no mesmo traço. Página com tamanho fixo em px (1200 × 1500 funciona), porque a câmera é quem encaixa na tela.
+- **Sequência:** comandos de `ffmpeg` no topo do `sequencia.js`. No bruto, câmera parada ou movimento lento: tremido de celular fica pior quando o visitante controla o tempo.
+- **Abertura:** logo em SVG. Precisa do `<script>` no `<head>` descrito no topo do arquivo, senão o site pisca antes da cortina.
 
 ## Receitas que ainda não estão prontas (montar quando o conceito pedir)
 
-Escrever como módulo novo aqui, com `progresso(p)`, e pôr na bancada `demo.html`:
+Escrever como módulo novo aqui, com `progresso(p)`, e pôr na bancada `mostruario.html`:
 
-- **Distorção WebGL** (água, vidro, calor tremendo): textura da foto num plano, deslocamento por ruído/mapa normal, intensidade pela rolagem ou pelo mouse. Vidraçaria, piscina, estética, bebidas, calor.
-- **Vídeo pela rolagem**: vídeo curto com quadro-chave em todo quadro (`ffmpeg -g 1`), `video.currentTime = p * duração`. Processo filmado de verdade (solda, corte, montagem).
-- **Trilho de índice**: menu lateral com os capítulos empilhados, cada um com a cor do seu trecho, o atual aberto. Sites longos de produto/serviço.
-- **Galeria arrastável** (missões, obras, cases): faixa horizontal com inércia, arrastar com mouse/dedo.
 - **Som**: tela de entrada "com som / sem som"; ambiente sutil + clique. Só quando o produto *é* som/sensação (áudio, spa, música). Nunca tocar sem o clique.
 - **Cursor de marca**: cursor próprio que muda sobre elementos (lupa no raio-X, pincel na gráfica). Só desktop.
-- **Termostato/arrastar valor**: o visitante arrasta um controle (temperatura, conta de luz, metragem) e a cena responde. Vira a calculadora do orçamento.
+- **Nuvem de pontos**: foto de drone ou scan como pontos 3D, com a altura vinda do arquivo LIDAR ou da claridade da imagem. Terraplenagem, agrimensura, loteamento. Base: `particulas.js`.
+- **Galeria em disco 3D**: anel de cartões girando em CSS 3D. Cardápio, modelos, coleção.
+- **Menu de tela cheia**: transição por `clip-path` abrindo do botão. Sites com muitas páginas.
+- **Revelação por rolagem**: a imagem se desenha sob uma máscara de pincel, como uma pintura sendo feita. Base: `pincel.js`.
 
 ## Regras
 

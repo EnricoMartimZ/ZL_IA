@@ -1,0 +1,481 @@
+<!doctype html>
+<!--
+  Mostruário dos mundos 09 a 18 e das técnicas que vieram com eles. Não é um site: é a segunda bancada
+  (a primeira é demo.html). Cada dobra é um começo de site num mundo diferente, pra ver a distância
+  entre um e outro. A arte é toda desenhada aqui (SVG, canvas): só testa a mecânica e a linguagem.
+  Rodar: python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas  → http://localhost:4174/mostruario.html
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mundos · mostruário</title>
+<script>
+  document.documentElement.classList.add('abrindo');
+  setTimeout(() => document.documentElement.classList.remove('abrindo'), 4500);
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Narrow:wght@500;700&family=Archivo:wght@500;800&family=Bangers&family=Bowlby+One&family=Caveat+Brush&family=Caveat:wght@500;700&family=Comic+Neue:wght@700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tecnicas.css">
+<style>
+  :root { --tec-tinta: #f2efe9; --tec-fundo: #101010; --tec-mono: "JetBrains Mono", monospace; }
+  * { box-sizing: border-box; }
+  html { background: #101010; color: #f2efe9; }
+  body { margin: 0; font: 400 17px/1.5 "Inter Tight", system-ui, sans-serif; overflow-x: clip; }
+  h1, h2, h3, p { margin: 0; }
+  .selo { position: absolute; z-index: 8; left: clamp(16px, 3vw, 40px); top: clamp(14px, 2.4vw, 28px); padding: 4px 9px; background: #101010; color: #f2efe9; font: 500 10px/1.4 var(--tec-mono); letter-spacing: .12em; text-transform: uppercase; max-width: calc(100% - 32px); }
+  section { position: relative; }
+  .dobra { min-height: 100svh; overflow: hidden; }
+
+  .capa { min-height: 100svh; display: grid; align-content: end; gap: 22px; padding: clamp(16px, 4vw, 56px); padding-bottom: 8vh; }
+  .capa h1 { font: 800 clamp(46px, 10.5vw, 170px)/.9 "Inter Tight", sans-serif; letter-spacing: -.035em; }
+  .capa p { max-width: 58ch; opacity: .75; }
+  .capa ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; font: 500 11px var(--tec-mono); }
+  .capa li { padding: 4px 9px; border: 1px solid #f2efe933; }
+
+  /* 09 · Luz natural */
+  #q-luz { font-family: "Fraunces", serif; }
+  .luz-texto { position: absolute; z-index: 2; left: clamp(16px, 6vw, 96px); right: 16px; bottom: 13vh; max-width: 760px; min-height: 40vh; }
+  .luz-texto > div { position: absolute; left: 0; right: 0; bottom: 0; }
+  .luz-texto small { font: 500 12px var(--tec-mono); letter-spacing: .14em; }
+  .luz-texto h2 { font-weight: 300; font-size: clamp(38px, 6.8vw, 104px); line-height: 1; letter-spacing: -.02em; margin-top: 8px; }
+
+  /* 10 · Catálogo industrial */
+  #m-catalogo { background: #e2e0da; color: #111; padding: clamp(60px, 9vh, 96px) clamp(16px, 4vw, 56px) 7vh; font-family: "Archivo Narrow", sans-serif; --tec-tinta: #111; --tec-fundo: #e2e0da; }
+  .cat-topo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; border-top: 2px solid #111; padding-top: 10px; font: 400 12px/1.4 "IBM Plex Mono", monospace; }
+  .cat-topo > :first-child { grid-column: span 5; } .cat-topo > * { grid-column: span 3; } .cat-topo > :last-child { grid-column: span 1; text-align: right; }
+  #m-catalogo h2 { font: 700 clamp(58px, 15.5vw, 260px)/.82 "Archivo Narrow", sans-serif; letter-spacing: -.03em; margin: 3vh 0 5vh; text-transform: uppercase; }
+  .peca { width: clamp(230px, 24vw, 310px); border: 1px solid #111; background: #eeece7; font: 400 12px/1.4 "IBM Plex Mono", monospace; }
+  .peca header { display: flex; justify-content: space-between; padding: 7px 9px; border-bottom: 1px solid #111; }
+  .peca svg { display: block; width: 100%; aspect-ratio: 1; padding: 13%; fill: none; stroke: #111; stroke-width: 1.2; }
+  .peca dl { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; margin: 0; padding: 8px 9px; border-top: 1px solid #111; }
+  .peca dd { margin: 0; }
+  .peca.foco { background: #ff4f00; }
+
+  /* 11 · Cartaz de bairro */
+  #m-cartaz { background: #ffd500; color: #c8000f; padding-top: 72px; }
+  .faixa-oferta { background: #c8000f; color: #ffd500; font: 400 clamp(22px, 3.4vw, 42px)/1.3 "Caveat Brush", cursive; }
+  .faixa-oferta span { padding-right: .6em; }
+  #m-cartaz h2 { font: 400 clamp(84px, 21vw, 340px)/.82 "Bowlby One", sans-serif; text-align: center; letter-spacing: -.03em; padding: 3vh 12px 1vh; }
+  .cartazes { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 2.4vw, 30px); padding: 3vh 16px 8vh; }
+  .cartaz { width: clamp(240px, 27vw, 340px); padding: 16px 20px; background: #fff; color: #111; box-shadow: 0 10px 0 #0000001c; font-family: "Caveat Brush", cursive; rotate: var(--r); transition: rotate .3s; }
+  .cartaz:hover { rotate: 0deg; }
+  .cartaz b { display: block; font: 400 clamp(26px, 2.8vw, 38px)/1 "Caveat Brush", cursive; }
+  .cartaz strong { display: block; color: #c8000f; font: 400 clamp(62px, 7.6vw, 104px)/1 "Bowlby One", sans-serif; letter-spacing: -.04em; }
+  .cartaz sup { font-size: .38em; }
+  .cartaz em { font-style: normal; font-size: 20px; color: #444; }
+
+  /* 12 · Quadrinho */
+  #q-hq { background: #15120f; }
+  .hq-pagina { width: 1200px; height: 1500px; padding: 22px; background: #fff; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: 1.15fr 1fr 1.2fr; gap: 18px; font-family: "Comic Neue", sans-serif; color: #111; }
+  .hq-pagina figure { border: 6px solid #111; }
+  .hq-pagina svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .v1 { grid-column: 1 / 7; background: #ffc926 radial-gradient(#e89a00 28%, transparent 30%) 0 0 / 16px 16px; }
+  .v2 { grid-column: 1 / 3; background: #e4322b; }
+  .v3 { grid-column: 3 / 7; background: #1a7a55 radial-gradient(#0f6143 28%, transparent 30%) 0 0 / 14px 14px; }
+  .v4 { grid-column: 1 / 7; background: #2252c7; }
+  .legenda { position: absolute; left: 22px; top: 22px; padding: 8px 14px; background: #fff7c9; border: 4px solid #111; font-size: 30px; line-height: 1.1; }
+  .hq-balao { padding: 14px 24px; background: #fff; border: 5px solid #111; border-radius: 50%; font-size: 40px; line-height: 1.05; text-align: center; }
+  .onom { position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: -9deg; font: 400 124px/1 "Bangers", cursive; color: #ffe14d; -webkit-text-stroke: 4px #111; letter-spacing: .02em; }
+  .fim-hq { position: absolute; right: 44px; bottom: 34px; font: 400 96px/.95 "Bangers", cursive; color: #fff; -webkit-text-stroke: 3px #111; text-align: right; }
+
+  /* 13 · Álbum */
+  #m-album { background-color: #f6f2e8; background-image: linear-gradient(#2a6fd11c 1px, transparent 1px), linear-gradient(90deg, #2a6fd11c 1px, transparent 1px); background-size: 28px 28px; color: #2b2520; }
+  #m-album h2 { position: absolute; left: clamp(16px, 4vw, 56px); bottom: 5vh; z-index: 0; font: 700 clamp(46px, 8vw, 120px)/.95 "Caveat", cursive; max-width: 12ch; }
+  #album { position: absolute; inset: 60px 0 0; }
+  .foto { width: clamp(112px, 17vw, 230px); padding: 8px 8px 0; background: #fff; box-shadow: 0 8px 22px #0000002e; font: 500 clamp(18px, 2vw, 25px)/1 "Caveat", cursive; text-align: center; }
+  .foto div { aspect-ratio: 1; background: var(--c); }
+  .foto p { padding: 7px 0 9px; }
+  .foto::before { content: ""; position: absolute; left: 50%; top: -11px; width: 74px; height: 22px; translate: -50%; background: #f4dd8d99; rotate: -2deg; }
+
+  /* 14 · Museu de objetos */
+  #m-museu { background: #fff; color: #171717; font-family: "Cormorant Garamond", serif; display: grid; align-content: center; padding: 76px clamp(16px, 6vw, 96px) 40px; }
+  #m-museu h2 { font-weight: 300; font-style: italic; font-size: clamp(36px, 5vw, 76px); line-height: 1; }
+  .sala { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: clamp(20px, 5vw, 80px); margin-top: 6vh; }
+  .obra { display: grid; gap: 18px; justify-items: center; text-align: center; }
+  .obra svg { width: min(100%, 230px); aspect-ratio: 1; fill: none; stroke: #171717; stroke-width: 1; animation: flutua 6s ease-in-out infinite alternate; animation-delay: var(--a); filter: drop-shadow(0 30px 16px #0000001c); }
+  @keyframes flutua { from { transform: translateY(-8px) rotate(-1.2deg); } to { transform: translateY(8px) rotate(1.2deg); } }
+  .etiqueta { font: 400 11px/1.5 "Space Mono", monospace; }
+  .etiqueta b { display: block; font-weight: 400; opacity: .5; }
+
+  /* 15 · Cartografia */
+  #m-mapa { background: #ece6d8; color: #27302a; padding: 64px 0 0; --tec-tinta: #27302a; --tec-fundo: #f6f1e5; font-family: "Fraunces", serif; }
+  #m-mapa h2 { padding: 0 clamp(16px, 4vw, 56px) 16px; font-weight: 300; font-size: clamp(30px, 4.6vw, 66px); line-height: 1; }
+  #mapa { height: 78svh; }
+  .livre { --terr-cor: #2f8f5b; } .reservado { --terr-cor: #d98a1f; } .referencia { --terr-cor: #2e5e9e; }
+  #mapa .terr-ficha, #mapa .terr-ponto { font-family: "Inter Tight", sans-serif; }
+
+  /* 16 · Cartaz tipográfico */
+  #q-tipo { background: #f1eee7; color: #0b0b0b; display: grid; align-content: center; gap: .6vh; overflow: hidden; }
+  #q-tipo p { font: 400 clamp(84px, 24vw, 400px)/.98 "Anton", sans-serif; text-transform: uppercase; white-space: nowrap; }
+  .t1 { transform: translateX(calc(4vw - var(--p, 0) * 46vw)); }
+  .t2 { transform: translateX(calc(-62vw + var(--p, 0) * 58vw)); color: #e32213; }
+  .t3 { transform: translateX(calc(2vw - var(--p, 0) * 30vw)); }
+
+  /* 17 · Produto vivo */
+  #m-produto { background: #1438e0; color: #fff; padding: 76px clamp(16px, 4vw, 56px) 8vh; --tec-tinta: #fff; --tec-fundo: #1438e0; }
+  #m-produto h2 { font: 600 clamp(38px, 6.4vw, 104px)/.98 "Inter Tight", sans-serif; letter-spacing: -.035em; max-width: 15ch; margin-bottom: 5vh; }
+  .bento > div { position: relative; padding: 18px; border-radius: 20px; background: #fff; color: #0d1330; overflow: hidden; }
+  .bento small { display: block; font: 500 10px var(--tec-mono); letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-bottom: 8px; }
+  .bento b { font: 800 clamp(42px, 5.4vw, 84px)/1 "Inter Tight", sans-serif; letter-spacing: -.03em; }
+  .barras { position: absolute; left: 18px; right: 18px; bottom: 18px; height: 58%; display: flex; align-items: flex-end; gap: 6px; }
+  .barras i { flex: 1; height: var(--h); background: #1438e0; border-radius: 4px 4px 0 0; animation: sobe 1.2s var(--tec-ease) both; animation-delay: calc(var(--i) * 60ms); transform-origin: bottom; }
+  @keyframes sobe { from { transform: scaleY(0); } }
+  .conversa { display: grid; gap: 6px; font-size: 15px; line-height: 1.3; }
+  .conversa p { width: fit-content; max-width: 86%; padding: 8px 12px; border-radius: 14px; background: #eef0f8; animation: chega .6s var(--tec-ease) both; animation-timeline: view(); animation-range: entry 30% cover 34%; }
+  .conversa p:nth-child(even) { margin-left: auto; background: #1438e0; color: #fff; }
+  @keyframes chega { from { opacity: 0; transform: translateY(12px); } }
+  .escuro { background: #0d1330 !important; color: #fff !important; --tec-tinta: #fff; --tec-fundo: #0d1330; }
+
+  /* 18 · Luxo silencioso */
+  #m-luxo { background: #fbf8f3; color: #3c332c; font-family: "Cormorant Garamond", serif; display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(20px, 6vw, 96px); align-items: end; padding: 80px clamp(16px, 5vw, 72px) 7vh; }
+  #m-luxo h2 { font-weight: 300; font-size: clamp(42px, 6.2vw, 96px); line-height: .98; }
+  #m-luxo ol { list-style: none; margin: 5vh 0 0; padding: 0; font: 400 15px/1.5 "Inter Tight", sans-serif; display: grid; gap: 14px; max-width: 38ch; }
+  #m-luxo li span { display: block; opacity: .55; font-size: 12px; }
+  #lago { position: relative; height: min(76svh, 720px); border-radius: 999px 999px 0 0; overflow: hidden; }
+  @media (max-width: 760px) { #m-luxo { grid-template-columns: 1fr; } #lago { height: 56svh; } .cat-topo > :first-child { grid-column: span 12; } .cat-topo > * { grid-column: span 6; } .cat-topo > :last-child { display: none; } }
+
+  /* técnicas */
+  .tec { padding: 72px clamp(16px, 4vw, 56px) 8vh; display: grid; gap: 22px; }
+  .tec h2 { font: 400 clamp(34px, 5vw, 72px)/1 "Fraunces", serif; }
+  .tec p.d { max-width: 60ch; opacity: .75; }
+  #pedra { position: relative; height: 68svh; overflow: hidden; }
+  .modos { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modos button { min-height: 44px; padding: 8px 16px; border: 1px solid #f2efe955; border-radius: 99px; background: none; color: inherit; font: 500 12px var(--tec-mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+  .modos button[aria-pressed="true"] { background: #f2efe9; color: #101010; }
+  #sofa { height: 66svh; border-radius: 14px; --tec-tinta: #1b1d20; --tec-fundo: #f3f2ee; }
+  .painel { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: center; justify-items: center; }
+  #conta { width: 100%; }
+  #pedir { display: inline-flex; align-items: center; min-height: 48px; margin-top: 16px; padding: 0 22px; border-radius: 99px; background: #f2efe9; color: #101010; text-decoration: none; font-weight: 600; }
+  #s-seq .palco-quadro { background: #0b0806; }
+  .rodape { padding: 12vh clamp(16px, 4vw, 56px); font: 500 12px var(--tec-mono); opacity: .6; }
+</style>
+</head>
+<body>
+
+<section class="capa">
+  <h1 data-dividir="palavras">Dez mundos novos. Nenhum parecido.</h1>
+  <p>Cada dobra abaixo é o começo de um site em outro mundo, com a técnica que combina com ele. Depois vêm as peças soltas pra testar com a mão.</p>
+  <ol><li>Luz natural</li><li>Catálogo industrial</li><li>Cartaz de bairro</li><li>Quadrinho</li><li>Álbum</li><li>Museu de objetos</li><li>Cartografia</li><li>Cartaz tipográfico</li><li>Produto vivo</li><li>Luxo silencioso</li></ol>
+</section>
+
+<!-- 09 -->
+<section class="palco" data-telas="4" id="m-luz" data-capitulo="Luz natural" data-cor="#e9b872">
+  <div class="palco-quadro" id="q-luz">
+    <span class="selo">09 · Luz natural · padaria, café, pousada, decoração · técnica: luz</span>
+    <div class="luz-texto">
+      <div data-cap><small>5H40</small><h2>A primeira fornada sai antes do sol.</h2></div>
+      <div data-cap><small>12H10</small><h2>Ao meio-dia, a mesa já está cheia.</h2></div>
+      <div data-cap><small>19H30</small><h2>De noite, a luz baixa e sobra o cheiro.</h2></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="dobra" id="m-catalogo" data-capitulo="Catálogo industrial" data-cor="#ff4f00">
+  <span class="selo">10 · Catálogo industrial · ferragens, autopeças, distribuidora · técnica: faixa arrastável</span>
+  <div class="cat-topo"><span>CATÁLOGO GERAL · EDIÇÃO 2026</span><span>14.200 ITENS</span><span>PRONTA ENTREGA</span><span>P.01</span></div>
+  <h2>Tudo tem número.</h2>
+  <div id="pecas"></div>
+</section>
+
+<!-- 11 -->
+<section class="dobra" id="m-cartaz" data-capitulo="Cartaz de bairro" data-cor="#ffd500">
+  <span class="selo">11 · Cartaz de bairro · mercado, açougue, sacolão, lanchonete · técnica: letreiro</span>
+  <div class="faixa-oferta" data-letreiro data-volta="28">Só hoje · Enquanto durar · Fiado só amanhã · Entrega no bairro · </div>
+  <h2>Hoje tem.</h2>
+  <div class="cartazes">
+    <div class="cartaz" style="--r:-2.4deg"><b>Pão francês</b><strong><sup>R$</sup>0,00</strong><em>o quilo, saindo agora</em></div>
+    <div class="cartaz" style="--r:1.6deg"><b>Picanha limpa</b><strong><sup>R$</sup>0,00</strong><em>o quilo, peça inteira</em></div>
+    <div class="cartaz" style="--r:-1deg"><b>Banana prata</b><strong><sup>R$</sup>0,00</strong><em>a dúzia, na caixa</em></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="palco" data-telas="7" id="s-hq" data-capitulo="Quadrinho" data-cor="#e4322b">
+  <div class="palco-quadro" id="q-hq">
+    <span class="selo">12 · Quadrinho · cervejaria, hamburgueria, sorveteria, escola · técnica: vinhetas</span>
+    <div class="hq-pagina" data-pagina>
+      <figure class="v1" data-vinheta data-de="esquerda">
+        <svg viewBox="0 0 1156 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#d9d4cb" stroke="#111" stroke-width="7"><path d="M430 200h300v240H430z"/><path d="M400 200h360l-30-70H430z"/><path d="M730 260h80a30 30 0 0 1 0 110h-80"/></g><g fill="none" stroke="#111" stroke-width="7" stroke-linecap="round"><path d="M520 110c-24-34 24-44 0-84M590 110c-24-34 24-44 0-84M660 110c-24-34 24-44 0-84"/><path d="M470 260v130M530 260v130"/></g></svg>
+        <p class="legenda">Sábado, 14h.<br>A leva 42 acorda.</p>
+        <p class="hq-balao" style="right:60px;top:60px">Hoje vai.</p>
+      </figure>
+      <figure class="v2" data-vinheta data-de="cima"><span class="onom">TSSSS!</span></figure>
+      <figure class="v3" data-vinheta data-de="direita">
+        <svg viewBox="0 0 760 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#8fd14f" stroke="#111" stroke-width="7"><path d="M380 60c90 40 130 130 0 280C250 190 290 100 380 60z"/><path d="M380 60v280M340 140l40 40 40-40M320 210l60 50 60-50" fill="none"/></g></svg>
+        <p class="hq-balao" style="left:40px;bottom:36px">Mais lúpulo?</p>
+        <p class="hq-balao" style="right:40px;top:30px">Sempre.</p>
+      </figure>
+      <figure class="v4" data-vinheta data-de="baixo">
+        <svg viewBox="0 0 1156 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#111" stroke-width="7"><path d="M440 150h230l-20 290H460z" fill="#ffb627"/><path d="M670 210h40a40 40 0 0 1 40 40v70a40 40 0 0 1-40 40h-48" fill="none" stroke-width="14"/><path d="M420 150a44 44 0 0 1 30-76 62 62 0 0 1 106-20 54 54 0 0 1 96 24 40 40 0 0 1 28 72z" fill="#fff"/></g></svg>
+        <p class="fim-hq">Saiu a<br>leva 42.</p>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="dobra" id="m-album" data-capitulo="Álbum" data-cor="#2a6fd1">
+  <span class="selo">13 · Álbum · escola, buffet, fotógrafo, ONG, pet · técnica: mesa (arraste as fotos)</span>
+  <h2>Quem esteve aqui sabe.</h2>
+  <div id="album">
+    <div class="foto" data-x="15" data-y="25" data-r="-6"><div style="--c:linear-gradient(135deg,#f4a259,#bc4b51)"></div><p>primeiro dia</p></div>
+    <div class="foto" data-x="35" data-y="31" data-r="4"><div style="--c:linear-gradient(135deg,#8cb369,#3d5a40)"></div><p>horta da turma</p></div>
+    <div class="foto" data-x="55" data-y="22" data-r="-3"><div style="--c:linear-gradient(135deg,#5b8e7d,#114b5f)"></div><p>passeio</p></div>
+    <div class="foto" data-x="74" data-y="30" data-r="7"><div style="--c:linear-gradient(135deg,#f4e285,#f4a259)"></div><p>festa junina</p></div>
+    <div class="foto" data-x="60" data-y="72" data-r="-7"><div style="--c:linear-gradient(135deg,#bc4b51,#5c2a2d)"></div><p>formatura</p></div>
+    <div class="foto" data-x="81" data-y="74" data-r="3"><div style="--c:linear-gradient(135deg,#a6c8e0,#4a7ba6)"></div><p>recreio</p></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="dobra" id="m-museu" data-capitulo="Museu de objetos" data-cor="#171717">
+  <span class="selo">14 · Museu de objetos · relojoaria, joalheria, ótica, antiquário · técnica: objeto flutuante + ficha</span>
+  <h2>Três peças. Nenhuma pressa.</h2>
+  <div class="sala">
+    <div class="obra" style="--a:0s"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="58"/><circle cx="100" cy="100" r="50"/><path d="M100 100V62M100 100l26 14M78 42l6-30h32l6 30M78 158l6 30h32l6-30"/><path d="M100 56v6M100 138v6M56 100h6M138 100h6"/></svg><p class="etiqueta"><b>Nº 01</b>Relógio de corda, 1962<br>Restaurado em 40 horas</p></div>
+    <div class="obra" style="--a:-2s"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="62" cy="104" r="36"/><circle cx="138" cy="104" r="36"/><path d="M98 96c6-5 18-5 4 0 M26 96 8 78M174 96l18-18"/><path d="M98 98q2-6 4 0" /></svg><p class="etiqueta"><b>Nº 02</b>Armação de acetato<br>Feita à mão, série de 20</p></div>
+    <div class="obra" style="--a:-4s"><svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="124" r="52"/><circle cx="100" cy="124" r="44"/><path d="M78 74 100 48l22 26-22 16zM78 74h44M100 48v42"/></svg><p class="etiqueta"><b>Nº 03</b>Anel em ouro 18k<br>Pedra lapidada na casa</p></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section id="m-mapa" data-capitulo="Cartografia" data-cor="#2f8f5b">
+  <span class="selo">15 · Cartografia · loteamento, condomínio, rede de lojas, fazenda · técnica: território</span>
+  <h2>Escolha o seu lote andando pelo bairro.</h2>
+  <div id="mapa"></div>
+</section>
+
+<!-- 16 -->
+<section class="palco" data-telas="3" id="s-tipo" data-capitulo="Cartaz tipográfico" data-cor="#e32213">
+  <div class="palco-quadro" id="q-tipo">
+    <span class="selo">16 · Cartaz tipográfico · quem não tem foto boa: advocacia, consultoria, idiomas · técnica: palco + --p</span>
+    <p class="t1">Sem foto nenhuma.</p>
+    <p class="t2">Só a palavra certa.</p>
+    <p class="t3">Grande. Bem grande.</p>
+  </div>
+</section>
+
+<!-- 17 -->
+<section id="m-produto" data-capitulo="Produto vivo" data-cor="#1438e0">
+  <span class="selo">17 · Produto vivo · software, app, fintech, sistema próprio · técnica: bento + controle</span>
+  <h2>O sistema trabalha enquanto você lê isso.</h2>
+  <div class="bento">
+    <div class="b-3 b-alto"><small>Pedidos da semana</small><b data-contar="1284">0</b><div class="barras" id="barras"></div></div>
+    <div class="b-3"><small>Atendimento</small><div class="conversa"><p>Tem horário amanhã?</p><p>Tenho às 9h e às 14h.</p><p>Fico com as 9h.</p></div></div>
+    <div class="b-2 escuro"><small>Tempo de resposta</small><b>12 s</b></div>
+    <div class="b-4 escuro"><div id="planos"></div></div>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="dobra" id="m-luxo" data-capitulo="Luxo silencioso" data-cor="#b8a896">
+  <span class="selo">18 · Luxo silencioso · pousada, clínica, spa, imobiliária · técnica: superfície (água)</span>
+  <div>
+    <h2>Quase nada acontece. É esse o ponto.</h2>
+    <ol><li><span>(1)</span>Doze quartos, nenhum televisor.</li><li><span>(2)</span>Café servido quando você acordar.</li><li><span>(3)</span>A represa fica a quarenta passos.</li></ol>
+  </div>
+  <div id="lago"></div>
+</section>
+
+<!-- técnicas soltas -->
+<section class="tec" data-capitulo="Superfície" data-cor="#d8cdb9">
+  <h2>Superfície</h2>
+  <p class="d">A foto vira matéria, sem 3D. Mexa o mouse ou o dedo. Serve pra marmoraria, serralheria, couro, vidraçaria, piscina, churrasqueira.</p>
+  <div class="modos" id="modos"><button aria-pressed="true" data-modo="relevo">Relevo</button><button aria-pressed="false" data-modo="agua">Água</button><button aria-pressed="false" data-modo="vidro">Vidro</button><button aria-pressed="false" data-modo="calor">Calor</button></div>
+  <div id="pedra"></div>
+</section>
+
+<section class="tec" data-capitulo="Pincel" data-cor="#7fd8ff">
+  <h2>Pincel</h2>
+  <p class="d">O visitante faz a limpeza com a própria mão. Serve pra higienização, pintura, funilaria, reforma, gráfica.</p>
+  <div id="sofa"></div>
+</section>
+
+<section class="tec" data-capitulo="Controle" data-cor="#ffb347">
+  <h2>Controle</h2>
+  <p class="d">Arrastar o valor muda a cena e já monta a mensagem do WhatsApp com o número escolhido.</p>
+  <div class="painel">
+    <div id="termostato"></div>
+    <div style="width:100%"><div id="conta"></div><a id="pedir" href="#">Pedir no WhatsApp</a></div>
+  </div>
+</section>
+
+<section class="palco" data-telas="4" id="s-seq" data-capitulo="Sequência" data-cor="#ff7a2f">
+  <div class="palco-quadro" id="q-seq">
+    <span class="selo">Sequência · 48 quadros desenhados aqui, andando com a rolagem</span>
+  </div>
+</section>
+
+<p class="rodape">Fim do mostruário. Trilho à direita, abertura no carregamento e letreiro também são peças novas.</p>
+
+<script type="module">
+  import { palco, rolagemSuave } from './palco.js';
+  import { texto } from './texto.js';
+  import { abertura } from './abertura.js';
+  import { trilho } from './trilho.js';
+  import { dia } from './luz.js';
+  import { faixa, mesa } from './arrastar.js';
+  import { vinhetas } from './vinhetas.js';
+  import { territorio } from './territorio.js';
+  import { superficie } from './superficie.js';
+  import { pincel } from './pincel.js';
+  import { controle } from './controle.js';
+  import { sequencia } from './sequencia.js';
+
+  abertura({
+    logo: '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54"/><path d="M60 6v108M6 60h108M22 22l76 76M98 22 22 98"/></svg>',
+    fundo: '#101010', tinta: '#f2efe9', minimo: 900, maximo: 2200, umaVez: false,
+  });
+  rolagemSuave();
+  texto();
+  trilho();
+
+  const tela = (w, h, f, q = 0.9) => { const c = document.createElement('canvas'); c.width = w; c.height = h; f(c.getContext('2d'), w, h); return c.toDataURL('image/jpeg', q); };
+  const sorte = (i) => { const x = Math.sin(i * 127.1 + 3.3) * 43758.5453; return x - Math.floor(x); };
+
+  // 09
+  const d = dia(document.querySelector('#q-luz'), { folhas: true });
+  palco(document.querySelector('#m-luz'), d.progresso);
+
+  // 10
+  const pecas = [
+    ['M8 × 40', 'Parafuso sextavado', '<path d="M34 16h32l10 12-10 12H34L24 28z"/><path d="M42 40h16v44H42zM42 50l16 4M42 58l16 4M42 66l16 4M42 74l16 4"/>'],
+    ['M12', 'Porca autotravante', '<path d="M50 14l31 18v36L50 86 19 68V32z"/><circle cx="50" cy="50" r="20"/><circle cx="50" cy="50" r="15"/>'],
+    ['6205-2RS', 'Rolamento blindado', '<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="17"/><circle cx="50" cy="50" r="10"/>'],
+    ['3/4"', 'Registro de esfera', '<path d="M12 40h76v20H12zM36 40V26h28v14M50 26V12M36 12h44"/>'],
+    ['Ø 250', 'Disco de corte', '<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="6"/><path d="M50 12v12M88 50H76M50 88V76M12 50h12"/>'],
+    ['M10 × 80', 'Chumbador de expansão', '<path d="M42 10h16v80H42zM34 12h32M42 62l-8 26M58 62l8 26"/>'],
+  ];
+  document.querySelector('#pecas').innerHTML = pecas.map(([m, n, s], i) => `
+    <article class="peca${i === 2 ? ' foco' : ''}"><header><span>${String(i + 1).padStart(4, '0')}</span><span>${m}</span></header>
+    <svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>
+    <dl><dt>${n}</dt><dd></dd><dt>Em estoque</dt><dd>${(420 + i * 1370).toLocaleString('pt-BR')} un</dd></dl></article>`).join('');
+  faixa(document.querySelector('#pecas'));
+
+  // 12
+  palco(document.querySelector('#s-hq'), vinhetas(document.querySelector('#q-hq')).progresso);
+
+  // 13
+  mesa(document.querySelector('#album'));
+
+  // 15 — o loteamento é desenhado aqui: quadras cortadas em lotes, ruas e a represa
+  const W = 2400, H = 1600;
+  const quadras = [[280, 240, 8, 3], [1000, 200, 7, 4], [1660, 300, 6, 3], [240, 860, 6, 4], [1560, 900, 7, 4]];
+  let lotes = '', n = 0;
+  for (const [x, y, c, l] of quadras) {
+    for (let i = 0; i < c; i++) for (let j = 0; j < l; j++) {
+      const s = sorte(++n);
+      const f = s < 0.5 ? '#d7e6cf' : s < 0.72 ? '#f1d9ad' : '#d8d2c4';
+      lotes += `<rect x="${x + i * 84}" y="${y + j * 124}" width="80" height="120" fill="${f}" stroke="#27302a" stroke-opacity=".35"/>`;
+    }
+  }
+  const planta = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect width="${W}" height="${H}" fill="#e6e0d0"/>
+    <path d="M880 1600C860 1320 1010 1180 1190 1130s300-20 330 160c20 130-40 230-110 310z" fill="#a9cbdc"/>
+    <path d="M980 1600c0-200 120-340 270-370" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="4" stroke-dasharray="14 18"/>
+    <g fill="none" stroke="#fbf8f0" stroke-width="58" stroke-linecap="round"><path d="M-40 760H2440"/><path d="M930 -40V760"/><path d="M1560 760V1640"/><path d="M180 760V1640"/></g>
+    <g fill="none" stroke="#c9c0ab" stroke-width="2" stroke-dasharray="26 22"><path d="M-40 760H2440"/><path d="M930 -40V760"/></g>
+    ${lotes}
+    <g fill="#8fae7f" fill-opacity=".55">${Array.from({ length: 70 }, (_, i) => `<circle cx="${Math.round(sorte(i + 400) * W)}" cy="${Math.round(1140 + sorte(i + 900) * 460)}" r="${Math.round(12 + sorte(i) * 20)}"/>`).join('')}</g>
+  </svg>`;
+  territorio(document.querySelector('#mapa'), {
+    mapa: planta, largura: W, altura: H,
+    inicio: { x: 44, y: 40, zoom: 1.25 },
+    pontos: [
+      { id: 'portaria', x: 39, y: 47.5, titulo: 'Portaria', texto: 'Entrada única, 24 horas.', classe: 'referencia' },
+      { id: 'q1', x: 22, y: 30, titulo: 'Quadra A', texto: '12 lotes livres, de 250 a 300 m².', classe: 'livre', link: { href: '#', rotulo: 'Quero ver essa quadra →' } },
+      { id: 'q2', x: 56, y: 26, titulo: 'Quadra B', texto: '8 lotes livres, de frente pro sul.', classe: 'livre', link: { href: '#', rotulo: 'Quero ver essa quadra →' } },
+      { id: 'q5', x: 80, y: 74, titulo: 'Quadra E', texto: '4 reservados, 3 livres.', classe: 'reservado', link: { href: '#', rotulo: 'Entrar na fila →' } },
+      { id: 'represa', x: 50, y: 84, titulo: 'Represa', texto: 'Área comum, com trilha de 1,2 km.', classe: 'referencia' },
+    ],
+  });
+
+  // 17
+  document.querySelector('#barras').innerHTML = [34, 52, 41, 68, 57, 82, 96].map((h, i) => `<i style="--h:${h}%;--i:${i}"></i>`).join('');
+  controle(document.querySelector('#planos'), { de: 1, ate: 50, valor: 8, rotulo: 'Quantos atendentes?', formato: (v) => `R$ ${(v * 49).toLocaleString('pt-BR')}/mês` });
+
+  // 18 — um fim de tarde desenhado, só pra água ter o que refletir
+  const lagoImg = tela(1200, 1500, (x, w, h) => {
+    const g = x.createLinearGradient(0, 0, 0, h);
+    [[0, '#c9b7a6'], [.42, '#e9d6bd'], [.5, '#f6e7cf'], [.56, '#8f9c9a'], [1, '#3f514f']].forEach(([p, c]) => g.addColorStop(p, c));
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#4f5a50'; x.beginPath(); x.moveTo(0, h * .5);
+    for (let i = 0; i <= 24; i++) x.lineTo(i / 24 * w, h * (.47 - sorte(i) * .05 - Math.sin(i / 4) * .025));
+    x.lineTo(w, h * .5); x.fill();
+    x.globalAlpha = .34; x.save(); x.translate(0, h); x.scale(1, -1); x.drawImage(x.canvas, 0, h * .3, w, h * .2, 0, h * .3, w, h * .2); x.restore();
+  });
+  superficie(document.querySelector('#lago'), { imagem: lagoImg, modo: 'agua', cor: '#fff3df', forca: 0.8, alt: 'Represa no fim da tarde (desenho)' });
+
+  // superfície: pedra com veios desenhados
+  const marmore = tela(1600, 1000, (x, w, h) => {
+    x.fillStyle = '#d9d5cd'; x.fillRect(0, 0, w, h);
+    for (let i = 0; i < 260; i++) {
+      x.strokeStyle = `rgba(${sorte(i) > .8 ? '150,110,60' : '60,60,70'},${(.05 + sorte(i + 9) * .22).toFixed(2)})`;
+      x.lineWidth = .6 + sorte(i + 2) * 3.4;
+      let a = sorte(i + 5) * w, b = sorte(i + 6) * h;
+      x.beginPath(); x.moveTo(a, b);
+      for (let k = 0; k < 9; k++) { a += 60 + sorte(i * k + 1) * 120; b += (sorte(i + k * 3) - .36) * 150; x.lineTo(a, b); }
+      x.stroke();
+    }
+    for (let i = 0; i < 26000; i++) { x.fillStyle = `rgba(0,0,0,${(sorte(i) * .06).toFixed(3)})`; x.fillRect(sorte(i + .3) * w, sorte(i + .6) * h, 1.6, 1.6); }
+  });
+  const quadroPedra = document.querySelector('#pedra');
+  let sup = superficie(quadroPedra, { imagem: marmore, modo: 'relevo', cor: '#ffe9c9' });
+  document.querySelector('#modos').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    document.querySelectorAll('#modos button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    quadroPedra.innerHTML = '';
+    sup = superficie(quadroPedra, { imagem: marmore, modo: b.dataset.modo, cor: b.dataset.modo === 'calor' ? '#ff8a3c' : '#ffe9c9' });
+  });
+
+  // pincel: o mesmo sofá, sujo e limpo
+  const sofa = (sujo) => tela(1600, 900, (x, w, h) => {
+    x.fillStyle = '#e9e5dc'; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#b9b2a4'; x.fillRect(0, h * .84, w, h * .16);
+    x.fillStyle = sujo ? '#7b7263' : '#3f6f8f';
+    x.beginPath(); x.roundRect(230, 230, 1140, 340, 60); x.fill();
+    x.beginPath(); x.roundRect(170, 440, 1260, 280, 60); x.fill();
+    x.fillStyle = sujo ? '#6c6455' : '#4d7fa0';
+    [[250, 470], [640, 470], [1030, 470]].forEach(([a, b]) => { x.beginPath(); x.roundRect(a, b, 370, 130, 34); x.fill(); });
+    x.fillStyle = '#4a3f33'; [[240, 720], [1320, 720]].forEach(([a, b]) => x.fillRect(a, b, 40, 70));
+    if (sujo) for (let i = 0; i < 120; i++) {
+      x.fillStyle = `rgba(${sorte(i) > .5 ? '60,45,25' : '95,80,40'},${(.1 + sorte(i + 1) * .22).toFixed(2)})`;
+      x.beginPath(); x.ellipse(200 + sorte(i + 2) * 1200, 240 + sorte(i + 3) * 460, 16 + sorte(i + 4) * 70, 10 + sorte(i + 5) * 40, sorte(i + 6) * 3, 0, 7); x.fill();
+    }
+  });
+  pincel(document.querySelector('#sofa'), { antes: sofa(true), depois: sofa(false), alt: 'Sofá limpo depois da higienização (desenho)' });
+
+  // controle
+  const cena = document.querySelector('#termostato');
+  controle(cena, {
+    forma: 'dial', de: 32, ate: 18, passo: 1, valor: 28, rotulo: 'Sala', formato: (v) => `${v} °C`,
+    aoMudar: (v, t) => { cena.style.setProperty('--tec-tinta', `color-mix(in oklab, #ff8a3c, #7fd8ff ${Math.round(t * 100)}%)`); },
+  });
+  controle(document.querySelector('#conta'), {
+    de: 100, ate: 2000, passo: 50, valor: 450, rotulo: 'Sua conta de luz', formato: (v) => `R$ ${v.toLocaleString('pt-BR')}`,
+    link: document.querySelector('#pedir'),
+    whatsapp: { numero: '5500000000000', mensagem: (v, t) => `Oi! Minha conta de luz é ${t}. Quanto eu economizaria?` },
+  });
+
+  // sequência: 48 quadros de uma engrenagem girando, como se viessem de um vídeo
+  const quadrosSeq = Array.from({ length: 48 }, (_, q) => tela(800, 500, (x, w, h) => {
+    x.fillStyle = '#0b0806'; x.fillRect(0, 0, w, h);
+    const a = q / 48 * Math.PI * 2;
+    const g = x.createRadialGradient(w / 2, h / 2, 10, w / 2, h / 2, 280);
+    g.addColorStop(0, `rgba(255,${120 + q * 2},40,${.2 + q / 90})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    x.translate(w / 2, h / 2); x.rotate(a); x.strokeStyle = '#ffcfa0'; x.lineWidth = 3;
+    x.beginPath();
+    for (let i = 0; i < 24; i++) { const r = i % 2 ? 150 : 180, b = i / 24 * Math.PI * 2; x[i ? 'lineTo' : 'moveTo'](Math.cos(b) * r, Math.sin(b) * r); }
+    x.closePath(); x.stroke();
+    x.beginPath(); x.arc(0, 0, 44, 0, 7); x.stroke();
+  }, 0.8));
+  const seq = sequencia(document.querySelector('#q-seq'), { quadros: (i) => quadrosSeq[i], total: 48 });
+  palco(document.querySelector('#s-seq'), seq.progresso);
+</script>
+</body>
+</html>

@@ -2,9 +2,11 @@
 name: site-premium
 description: >
   Cria um site premium com um conceito próprio pra cada empresa: tira do ramo (ou do nome) uma metáfora,
-  escolhe um mundo visual e uma técnica-assinatura (fluxo de ar, partículas que mudam de forma, planta que se
-  desenha, zoom contínuo entre cenas, raio-X do produto, cenas de IA, 3D) e monta a história pela rolagem —
-  nunca o mesmo visual de um site pro outro. Por baixo, a infraestrutura testada do modelo/: agenda que abre
+  escolhe um entre 18 mundos visuais (de cartaz de mercado a luxo silencioso, de quadrinho a catálogo
+  industrial) e uma técnica-assinatura (fluxo de ar, partículas, planta que se desenha, zoom contínuo, raio-X,
+  luz do dia, mapa pra explorar, limpar com o dedo, foto que vira pedra ou água, cenas de IA, 3D) e monta a
+  história pela rolagem — nunca o mesmo visual de um site pro outro. Serve de padaria a mineradora, de
+  loteamento a software. Por baixo, a infraestrutura testada do modelo/: agenda que abre
   o WhatsApp com a mensagem pronta ou, pra B2B, "Pedir orçamento" (WhatsApp ou e-mail), SEO, medição, LGPD
   e deploy estático na Vercel ou Netlify. Use quando o usuário pedir
   "site", "landing page", "site premium", "site com 3D", "site profissional", "site que pareça caro",
@@ -19,8 +21,8 @@ O `modelo/` é a **infraestrutura** (agenda/orçamento, SEO, JSON-LD, medição,
 
 ## Dependências
 
-- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (8 sistemas visuais), `referencias.md` (o nível a atingir) e o registro local `clientes/_conceitos.md` (o que já foi usado)
-- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, texto, HUD. Catálogo e bancada de teste em `tecnicas/README.md` e `tecnicas/demo.html`
+- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (18 sistemas visuais), `referencias.md` (o nível a atingir e as galerias onde garimpar) e o registro local `clientes/_conceitos.md` (o que já foi usado)
+- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, texto, HUD. Catálogo em `tecnicas/README.md`; bancadas em `tecnicas/demo.html` e `tecnicas/mostruario.html`
 - **Infraestrutura pronta:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
 - **Regras de design:** `.claude/skills/site-premium/design.md` — o que vale pra todo mundo (conversão, desempenho, SEO, honestidade) e o detalhe do mundo Noturno
@@ -51,10 +53,10 @@ Puxar o que já existe (pasta do cliente, diagnóstico) e perguntar só o que fa
 Seguir o `direcao.md`:
 
 1. **Matéria-prima** (o que a empresa move, antes → depois, o que o nome sugere, a prova física) em `clientes/<Nome>/conceito.md`
-2. **Três conceitos** bem diferentes (mundo + técnica-assinatura + interação + capítulos + tipografia + paleta + detalhe de marca), checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
+2. **Três conceitos** bem diferentes (norte + mundo + técnica-assinatura + interação + estrutura de história + tipografia + paleta + detalhe de marca), checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
 3. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
 
-A técnica sai de `tecnicas/` (testar a peça na `tecnicas/demo.html` antes, se for mexer nela). Técnica nova que o conceito pedir (distorção, vídeo pela rolagem, termostato arrastável…): escrever como módulo em `tecnicas/`, com `progresso(p)`, e pôr na bancada.
+A técnica sai de `tecnicas/` (testar a peça na bancada antes, se for mexer nela). Técnica nova que o conceito pedir (som, nuvem de pontos, galeria em disco…): escrever como módulo em `tecnicas/`, com `progresso(p)`, e pôr no `tecnicas/mostruario.html`. Ramo sem referência: garimpar nas galerias de `referencias.md` antes de propor.
 
 #### Quando o conceito for o mundo Noturno cinematográfico (hero em capítulos)
 

@@ -93,6 +93,116 @@ Fontes: só Google Fonts ou a fonte da própria marca (com licença). As referê
 - **Movimento:** mínimo — texto entra palavra a palavra; fotos revelam de cima pra baixo.
 - **Técnicas:** texto; zoom contínuo com moldura para "abrir" uma foto.
 
+## 9. Luz natural — a manhã entrando pela janela
+
+- **Sensação:** cozinha às sete da manhã. Calor de casa, nada de vitrine.
+- **Quando:** padaria, café, confeitaria, pousada pequena, decoração, móveis, cerâmica, floricultura, empório, restaurante de almoço e jantar.
+- **Paleta:** creme quente, madeira e **uma** cor viva (coral, terracota). Sem branco puro nem preto puro. A noite é azul-tinta, não preta.
+- **Tipo:** serifada óptica leve (Fraunces 300, Newsreader) + mono pequena só pras horas.
+- **Layout:** poucas frases grandes embaixo, muito ar em cima pra sombra aparecer. Foto com luz de janela de verdade, sem flash.
+- **Movimento:** a mancha de sol e a sombra de folhas andam na parede; a página clareia e depois anoitece com a rolagem.
+- **Técnicas:** `luz.js`; sequência (massa crescendo, forno abrindo); texto.
+- **Detalhe de marca:** a hora em cada capítulo ("5h40"), como um diário do dia.
+
+## 10. Catálogo industrial — tudo tem número
+
+- **Sensação:** manual de fábrica impresso. O estoque é o espetáculo. Inspiração: catálogos suíços do Refero, teenage engineering.
+- **Quando:** ferragens, autopeças, distribuidora, material de construção, parafusos, ferramentas, peças de reposição, tudo que vende pelo tamanho do catálogo.
+- **Paleta:** concreto (`#e2e0da`) + preto + **um** laranja ou amarelo industrial, usado só no item em destaque.
+- **Tipo:** grotesca condensada enorme (Archivo Narrow 700, Barlow Condensed) + mono em tudo que é dado (IBM Plex Mono).
+- **Layout:** grade de 12 colunas visível, cabeçalho de edição ("CATÁLOGO GERAL · 14.200 ITENS"), número de página, fichas com código, medida e estoque. Desenho técnico em vez de foto.
+- **Movimento:** quase nenhum: a fileira de fichas arrasta com inércia; filtros trocam a grade.
+- **Técnicas:** `arrastar.js` (faixa), linhas nas peças, texto (`data-contar` no estoque).
+- **Detalhe de marca:** cada seção com número de página; o item em oferta ganha a ficha colorida.
+
+## 11. Cartaz de bairro — a loja que grita na calçada
+
+- **Sensação:** mercado de sábado, cartaz pintado à mão. Brasileiro, alegre, sem vergonha de vender.
+- **Quando:** mercado, açougue, sacolão, lanchonete, pizzaria de bairro, loja de roupa popular, feira, oficina simples.
+- **Paleta:** amarelo-oferta + vermelho + branco de cartolina. Cores de placa, não de marca de luxo.
+- **Tipo:** letra de cartazista (Caveat Brush, Rubik Mono One bem usada) + preço em grotesca muito pesada (Bowlby One).
+- **Layout:** palavra enorme atravessando a tela, cartazes tortos colados, faixa de oferta correndo no topo, preço maior que o nome do produto.
+- **Movimento:** letreiro correndo; cartazes endireitam ao passar o dedo.
+- **Técnicas:** `data-letreiro`; o conteúdo de verdade é a lista de ofertas da semana, fácil de trocar.
+- **Detalhe de marca:** frases de balcão reais do dono ("Fiado só amanhã"). Preço fictício nunca: sem preço real, deixar a oferta sem número.
+
+## 12. Quadrinho — a marca vira personagem
+
+- **Sensação:** gibi aberto na mesa. Humor e história. Inspiração: Santioni Spirits (Awwwards).
+- **Quando:** cervejaria, hamburgueria, sorveteria, escola, curso infantil, brinquedos, pet, qualquer marca que tenha uma história engraçada pra contar.
+- **Paleta:** cores chapadas com retícula (pontinhos), contorno preto grosso, papel branco.
+- **Tipo:** onomatopeia em Bangers, balões em Comic Neue Bold. Só aqui essas fontes são permitidas.
+- **Layout:** uma página de HQ de verdade. A câmera guia de vinheta em vinheta e, no fim, se afasta e mostra a página inteira, que é o momento do botão.
+- **Movimento:** vinhetas se abrem de lados diferentes; balões entram com salto.
+- **Técnicas:** `vinhetas.js`; arte gerada por IA no mesmo traço e rotulada, ou ilustrador.
+- **Detalhe de marca:** o dono ou o produto como personagem. Combinar com a pessoa antes de desenhá-la.
+
+## 13. Álbum — quem esteve aqui sabe
+
+- **Sensação:** fotos espalhadas numa mesa. Memória, afeto, gente de verdade. Inspiração: estilo "polaroids no caderno" do Refero.
+- **Quando:** escola, creche, buffet, fotógrafo, ONG, igreja, pet shop de bairro, clube, time, qualquer lugar cuja prova é a comunidade.
+- **Paleta:** papel quadriculado claro + as cores das próprias fotos; fita adesiva amarelada.
+- **Tipo:** manuscrita legível (Caveat 700) pras legendas + uma serifada simples pro texto.
+- **Layout:** a primeira dobra é a mesa com as fotos soltas. O visitante pega, move e joga de lado. Fotos reais são obrigatórias: esse mundo não funciona com banco de imagem.
+- **Movimento:** arrastar com giro leve; a foto pega vai pra frente.
+- **Técnicas:** `arrastar.js` (mesa). Pedir autorização de imagem, principalmente com criança.
+- **Detalhe de marca:** legendas escritas com as palavras da própria escola ou família.
+
+## 14. Museu de objetos — cada peça com sua ficha
+
+- **Sensação:** sala branca de museu com três coisas no mundo. Inspiração: "museu flutuante de curiosidades" do Refero.
+- **Quando:** relojoaria, joalheria, ótica, antiquário, sebo, ateliê de sapatos, marcenaria fina, instrumentos musicais.
+- **Paleta:** branco e preto; a cor vem do objeto. Sombra suave embaixo de cada peça.
+- **Tipo:** serifada de display fina e itálica (Cormorant Garamond 300) + mono mínima nas etiquetas (Space Mono).
+- **Layout:** poucas peças por sala, muito vazio, etiqueta de museu ("Nº 03 · Anel em ouro 18k · Pedra lapidada na casa"). Foto recortada sem fundo ou 3D.
+- **Movimento:** objetos flutuam devagar; ao tocar, abre a ficha ou o raio-X.
+- **Técnicas:** `raiox.js`, 3D (`hero3d.js`), `arrastar.js` (faixa) pra andar entre as salas.
+- **Detalhe de marca:** numeração de acervo e o ano de cada peça.
+
+## 15. Cartografia — o site é um lugar
+
+- **Sensação:** abrir um mapa e sair andando. Inspiração: Overworld Audio e Colonia Zacamil (Awwwards).
+- **Quando:** loteamento, condomínio, imobiliária de lançamento, rede de lojas, fazenda, sítio de eventos, turismo, escola com campus, empresa com obras pela região.
+- **Paleta:** papel de mapa, verdes e azuis de carta topográfica, e uma cor por estado (livre, reservado, vendido).
+- **Tipo:** serifada de atlas (Fraunces) + grotesca pequena nos rótulos.
+- **Layout:** o mapa ocupa quase a tela toda e **é** a navegação. Ficha discreta no canto com o que foi tocado e o botão de pedir.
+- **Movimento:** voar até o ponto, arrastar, aproximar. Com palco, vira passeio guiado pela rolagem.
+- **Técnicas:** `territorio.js`, com mapa desenhado em SVG a partir da planta real. Rotular "ilustração fora de escala" quando for o caso.
+- **Detalhe de marca:** cada quadra, unidade ou loja com nome próprio e estado atualizado de verdade.
+
+## 16. Cartaz tipográfico — só a palavra
+
+- **Sensação:** cartaz suíço. Coragem. **É o mundo de quem não tem foto boa.**
+- **Quando:** advocacia, consultoria, escola de idiomas, academia, psicologia, empresa nova, qualquer um com posicionamento forte e pouco material.
+- **Paleta:** papel + preto + **um** vermelho. Nada mais.
+- **Tipo:** uma condensada gigante (Anton, Oswald 700, Big Shoulders Display) ocupando a tela. Uma família só.
+- **Layout:** frases cortadas pela borda, tela cheia de letra, nenhuma imagem.
+- **Movimento:** as linhas correm em sentidos opostos com a rolagem (`--p`). Não precisa de mais nada.
+- **Técnicas:** palco + `--p`, `data-letreiro`, `data-dividir`.
+- **Detalhe de marca:** o texto é o design: exige uma frase que só aquela empresa diria.
+
+## 17. Produto vivo — o sistema trabalhando na tela
+
+- **Sensação:** o software já funcionando antes do cadastro. Inspiração: Godly (SaaS, fintech), Refero (Linear, Raycast, Ramp).
+- **Quando:** software, app, fintech, sistema próprio de escola ou clínica, contabilidade digital, delivery próprio, qualquer empresa cujo produto é uma tela.
+- **Paleta:** uma cor cheia e confiante (cobalto, verde-lima) no fundo + cartões brancos; ou grafite com **uma** luz.
+- **Tipo:** grotesca neutra apertada (Inter Tight 600, Geist) + mono em rótulos.
+- **Layout:** blocos de tamanhos diferentes (`.bento`), cada um mostrando uma tela real: número subindo, conversa acontecendo, gráfico. Prova social de clientes logo abaixo.
+- **Movimento:** a interface se mexe sozinha, como se alguém a usasse.
+- **Técnicas:** `.bento`, `controle.js` (simular plano ou preço), `data-contar`.
+- **Detalhe de marca:** dados da demonstração rotulados como exemplo.
+
+## 18. Luxo silencioso — quase nada acontece
+
+- **Sensação:** recepção de hotel pequeno às quatro da tarde. Inspiração: Odyssée e Tengile MalaMala (Awwwards).
+- **Quando:** pousada, clínica de estética, spa, dermatologia, imobiliária de alto padrão, arquitetura de interiores.
+- **Paleta:** off-white quente (`#fbf8f3`), taupe, pedra. Nenhuma cor de destaque; o botão é um contorno.
+- **Tipo:** serifada de alto contraste muito leve (Cormorant Garamond 300, Newsreader) + grotesca pequena.
+- **Layout:** imagem em moldura com forma (arco, retângulo alto), listas numeradas entre parênteses "(1)", muito espaço. Vídeo lento em vez de carrossel.
+- **Movimento:** abertura longa e calma; água ou pano se mexendo de leve; transições lentas.
+- **Técnicas:** `superficie.js` (água), `abertura.js`, texto palavra a palavra.
+- **Detalhe de marca:** o que **não** tem ("Doze quartos, nenhum televisor"). A falta é o argumento.
+
 ---
 
 ## Como aplicar a marca do cliente dentro do mundo

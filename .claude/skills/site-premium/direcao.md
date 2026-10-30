@@ -20,6 +20,7 @@ Responder por escrito, em `clientes/<Nome>/conceito.md` (ou `vendas/demos/<slug>
 3. **O que o nome ou o logo sugere?** Às vezes o conceito está ali (um nome de árvore, de pedra, de animal, uma sigla com som).
 4. **Qual é a prova física?** Números reais, certificações, máquinas, anos, obras, avaliações.
 5. **Onde o cliente decide?** (celular no Instagram, comprador de empresa no desktop, síndico no WhatsApp) — decide o peso da técnica.
+6. **Que material existe de verdade?** Fotos boas, vídeo, logo em vetor, planta, catálogo, histórias. Decide quais mundos são possíveis (ver "Sem foto boa", abaixo).
 
 ## Passo B — Três conceitos, o usuário escolhe um
 
@@ -29,7 +30,9 @@ antes de construir. Formato de cada um:
 ```
 CONCEITO — <nome curto>
 Metáfora: <uma frase: "o site é ___">
+Norte: <lugar + material + luz, ex.: "balcão de madeira às sete da manhã, farinha no ar">
 Mundo: <mundos.md>          Técnica-assinatura: <tecnicas/>      Interação: <o que o visitante FAZ>
+Estrutura: <ver "Estruturas de história">
 História (capítulos): 1 … → 2 … → 3 … → 4 …
 Tipografia: <título> + <rótulo>     Paleta: <papel de cada cor da marca>
 Detalhe de marca: <loader, carimbo, etiqueta, cursor…>
@@ -37,8 +40,35 @@ Não vai ter: <o que fica de fora de propósito>
 Por que vende: <ligação com o que o cliente compra>
 ```
 
-**Interação** é o que torna o site memorável: ligar o raio-X, arrastar o termostato e ver o ar mudar, girar a
-peça, ouvir o produto, desenhar a planta rolando. Todo conceito precisa de uma.
+**Interação** é o que torna o site memorável: ligar o raio-X, arrastar o termostato e ver o ar mudar, limpar
+o sofá com o dedo, escolher o lote no mapa, mover as fotos da mesa, girar a peça, ouvir o produto, desenhar a
+planta rolando. Todo conceito precisa de uma.
+
+**Norte** é o teste do mundo: se a frase não dá pra imaginar com os olhos fechados, ela ainda é adjetivo
+("moderno, elegante, clean") e o site vai sair genérico. Lugar, material e luz, sempre.
+
+### Estruturas de história
+
+O mundo diz como o site parece; a estrutura diz como ele anda. Não usar sempre "antes → depois".
+
+| Estrutura | Como anda | Serve pra |
+|---|---|---|
+| **Transformação** | do problema ao alívio | climatização, limpeza, reforma, estética |
+| **Um dia com** | manhã → tarde → noite, a hora muda a cena | padaria, restaurante, pousada, carro, academia |
+| **Do bruto ao pronto** | a matéria passa pelas etapas | metalúrgica, marcenaria, gráfica, cervejaria, confecção |
+| **Mergulho** | do bairro ao detalhe microscópico | usinagem, joalheria, dermatologia, química |
+| **Lugar** | não há ordem: o visitante explora | loteamento, rede de lojas, fazenda, turismo |
+| **Consulta** | catálogo pra achar e pedir | autopeças, ferragens, distribuidora, cardápio |
+| **Coleção** | uma peça de cada vez | relojoaria, antiquário, portfólio de obras |
+| **Personagem** | alguém vive a história em cenas | cervejaria, escola, pet, marca com humor |
+| **Prova** | números, selos e casos em escalada | contabilidade, advocacia, B2B pesado, certificados |
+
+### Sem foto boa
+
+Boa parte das empresas pequenas não tem foto que aguente tela cheia. Antes de pedir ensaio ou gerar imagem,
+considerar os mundos que não dependem disso: **Cartaz tipográfico**, **Cartaz de bairro**, **Quadrinho**,
+**Catálogo industrial**, **Planta técnica**, **Instrumento** e **Laboratório**. **Álbum**, **Luxo silencioso**,
+**Luz natural** e **Galeria pintada** dependem de imagem boa: sem ela, escolher outro.
 
 ## Passo C — Não repetir
 
@@ -48,7 +78,8 @@ novo **não pode repetir, em relação aos 3 últimos sites**:
 - o mesmo **mundo**;
 - a mesma **técnica-assinatura**;
 - o mesmo **par tipográfico**;
-- a mesma **estrutura de primeira dobra** (ex.: "título gigante à esquerda + objeto à direita").
+- a mesma **estrutura de primeira dobra** (ex.: "título gigante à esquerda + objeto à direita");
+- a mesma **estrutura de história**, entre dois sites seguidos.
 
 Depois de aprovado, acrescentar uma linha no registro:
 
@@ -91,8 +122,8 @@ Dois caminhos por ramo, em mundos diferentes. Inventar um terceiro a partir do P
 | Transportadora / logística | rota, tempo | **Rede** — Instrumento; mapa com *fluxo* de rotas acendendo cidades; prazos em mono | **Uma carga, uma história** — Galeria pintada; *zoom contínuo* da carga ao destino |
 | Contabilidade | papelada, ordem | **Do caos à ordem** — Laboratório; *partículas* de papéis soltos que se alinham numa grade | **Livro-razão** — Editorial impresso; colunas de revista, números que contam |
 | Advocacia | causa, proteção | **Pilar** — Editorial impresso; serifada, citações como manchete | **Balança** — Galeria pintada; metáfora pintada em *zoom contínuo* |
-| Marmoraria | pedra, veio | **O veio** — Cor cheia ou Galeria; distorção/zoom na textura real da pedra até a bancada pronta | **Bloco à bancada** — Planta técnica; *linhas* do corte + foto preenchendo |
-| Vidraçaria | luz, transparência | **Refração** — Laboratório claro; receita *distorção WebGL* (vidro) sobre a foto | **Vão aberto** — Planta; *linhas* do caixilho, depois a vista atrás do vidro |
+| Marmoraria | pedra, veio | **O veio** — Museu de objetos; *superfície* (relevo) sobre a foto real da pedra, a luz segue o dedo | **Bloco à bancada** — Planta técnica; *linhas* do corte + foto preenchendo |
+| Vidraçaria | luz, transparência | **Refração** — Laboratório claro; *superfície* (vidro), o dedo limpa uma janela na foto | **Vão aberto** — Planta; *linhas* do caixilho, depois a vista atrás do vidro |
 | Construtora / arquitetura | espaço | **Prancha** — Planta técnica; *linhas* + carimbo no rodapé | **Do terreno à chave** — Galeria; *zoom contínuo* da obra |
 | Móveis planejados | madeira, medida | **Sob medida** — Planta técnica; o ambiente se desenha e ganha textura | **Gaveta aberta** — Cor cheia; *raio-X* do armário (organização interna) |
 | Dedetizadora | invisível, proteção | **O que você não vê** — Instrumento; *raio-X* da casa mostrando onde ficam as pragas; varredura | **Barreira** — Laboratório; *partículas* que formam a barreira em volta da casa |
@@ -104,6 +135,32 @@ Dois caminhos por ramo, em mundos diferentes. Inventar um terceiro a partir do P
 | Barbearia / salão | lâmina, ritual | **Ritual** — Editorial em preto e um metal | **Navalha** — Noturno com *linhas* desenhando o corte |
 | Restaurante / confeitaria | sabor, calor | **Mesa posta** — Galeria; *zoom contínuo* da rua ao prato | **Receita** — Editorial; ingredientes que contam |
 | Academia | energia | **Pulso** — Cor cheia; *fluxo* rápido com o ritmo | **Antes do espelho** — Noturno |
+| Padaria / café | massa, fogo, manhã | **Primeira fornada** — Luz natural; *luz* do amanhecer à noite, hora em cada capítulo | **A massa cresce** — Editorial; *sequência* da fermentação pela rolagem |
+| Mercado / açougue / sacolão | oferta, freguês | **Hoje tem** — Cartaz de bairro; ofertas da semana em cartazes, *letreiro* | **Corredor** — Catálogo industrial; seções por número, busca por produto |
+| Lanchonete / pizzaria de bairro | fome, balcão | **Balcão** — Cartaz de bairro; cardápio como cartazes, pedido no WhatsApp | **A mesa da rua** — Álbum; fotos reais de quem vai lá |
+| Cervejaria / hamburgueria / bar | lúpulo, chapa | **A leva** — Quadrinho; *vinhetas* contam uma leva, onomatopeias | **Fogo** — Noturno; *superfície* (calor) sobre a chapa |
+| Sorveteria / doceria | açúcar, frio | **Sabor do dia** — Cor cheia; cada sabor muda a cor da tela | **Tira diária** — Quadrinho; personagem da casa |
+| Autopeças / ferragens / distribuidora | peça, medida | **Tudo tem número** — Catálogo industrial; *faixa* de fichas, estoque que conta | **A peça certa** — Laboratório; *raio-X* com cotas |
+| Material de construção | saco, obra | **Lista da obra** — Catálogo industrial; *controle* da metragem calcula o pedido | **Da fundação ao telhado** — Planta técnica; *linhas* do que comprar em cada fase |
+| Lavanderia / limpeza de estofados | sujeira, cheiro de limpo | **Passe o dedo** — Cor cheia clara; *pincel* limpa a peça na mão do visitante | **Antes da próxima visita** — Luz natural; a sala limpa de manhã |
+| Pintura / reforma | parede, cor | **Primeira demão** — Cor cheia; *pincel* pinta a parede de vazio | **Por etapas** — Planta técnica; *linhas* + foto da obra pronta |
+| Piscina / caixa d'água | água | **Transparente** — Ambiente; *superfície* (água), o toque abre anéis | **Medido** — Laboratório; pH e cloro em ficha técnica |
+| Churrasqueira / forno / solda | calor | **Brasa** — Noturno; *superfície* (calor) tremendo sobre o fogo | **Projeto e tijolo** — Planta técnica |
+| Loteamento / condomínio | terra, endereço | **Ande pelo bairro** — Cartografia; *território* com o estado de cada lote | **Da mata à chave** — Galeria; *zoom contínuo* |
+| Rede de lojas / franquia | presença | **Perto de você** — Cartografia; *território* com cada unidade | **Número um** — Cartaz tipográfico |
+| Pousada / hotel pequeno | silêncio, tempo | **Nada acontece** — Luxo silencioso; *superfície* (água), lista do que não tem | **Um dia aqui** — Luz natural; *luz* do café ao jantar |
+| Escola / creche | infância, turma | **Quem esteve aqui** — Álbum; *mesa* com fotos reais autorizadas | **O ano todo** — Quadrinho; personagem da escola |
+| ONG / igreja / clube | gente | **Nossa gente** — Álbum; fotos e nomes de verdade | **Um número por vez** — Cartaz tipográfico; o impacto em palavras |
+| Joalheria / relojoaria | ouro, tempo | **Acervo** — Museu de objetos; ficha de cada peça, *raio-X* do mecanismo | **Mícron** — Laboratório; *zoom contínuo* até a lapidação |
+| Psicologia / terapia | escuta | **Uma frase por vez** — Cartaz tipográfico suave; *texto* palavra a palavra | **Consultório** — Luz natural |
+| Software / app / sistema próprio | tela, dado | **Funcionando** — Produto vivo; *bento* com a interface se mexendo, *controle* do plano | **Sem planilha** — Laboratório; *partículas* de dados se organizando |
+| Mineração / terraplenagem / agrimensura | terra, volume | **Subsolo** — Noturno industrial; vídeo CGI + mono, números da operação | **Relevo** — Cartografia; *território* com as obras |
+| Turismo / sítio de eventos | paisagem | **Mapa do sítio** — Cartografia; pontos com foto | **O dia passa** — Ambiente; *luz* pela rolagem |
+
+Caminhos novos pros ramos da primeira parte: **energia solar** com *controle* da conta de luz (o número escolhido já
+vai no WhatsApp), **ar-condicionado** com *controle* em forma de dial, **estética automotiva** com *pincel* tirando a
+sujeira ou Noturno em serifada sobre textura do ofício, **serralheria** com *superfície* (relevo) no aço escovado,
+**restaurante** com *luz* do almoço ao jantar, **pet shop** com Álbum, **academia** com Cartaz tipográfico.
 
 ---
 

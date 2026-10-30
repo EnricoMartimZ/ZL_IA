@@ -4,6 +4,7 @@
 // <h2 data-dividir="palavras">O ar certo, no lugar certo.</h2>   ← .visto quando entra na tela
 // <span data-embaralhar>SISTEMA · 12.000 BTU</span>
 // <b data-contar="582" data-casas="0">0</b>
+// <div data-letreiro data-volta="24">Entrega hoje · Orçamento grátis · </div>   ← faixa que corre sem fim
 //
 // import { texto } from './tecnicas/texto.js';
 // texto();   // procura os atributos na página inteira
@@ -52,8 +53,15 @@ export function contar(el, { duracao = 1400 } = {}) {
   requestAnimationFrame(passo);
 }
 
+export function letreiro(el) {
+  el.setAttribute('aria-label', el.textContent.trim());
+  el.style.setProperty('--volta', `${el.dataset.volta || 24}s`);
+  el.innerHTML = `<div class="t-letreiro" aria-hidden="true">${`<span>${el.innerHTML}</span>`.repeat(6)}</div>`;
+}
+
 export function texto(raiz = document) {
   raiz.querySelectorAll('[data-dividir]').forEach((el) => dividir(el, el.dataset.dividir || 'palavras'));
+  raiz.querySelectorAll('[data-letreiro]').forEach(letreiro);
   const io = new IntersectionObserver((entradas) => {
     for (const e of entradas) {
       if (!e.isIntersecting) continue;

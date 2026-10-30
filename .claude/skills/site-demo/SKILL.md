@@ -59,8 +59,9 @@ Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Prospect B2
 A demo também tem conceito próprio — é ela que faz o dono pensar "isso é a minha empresa". Versão rápida do
 `.claude/skills/site-premium/direcao.md`: matéria-prima em `vendas/demos/<slug>/conceito.md`, **dois** conceitos
 (não três), o usuário escolhe, e checar o `clientes/_conceitos.md` pra não repetir o mundo e a técnica das últimas
-demos. A técnica-assinatura sai pronta de `.claude/skills/site-premium/tecnicas/` (fluxo, partículas, linhas, raio-X,
-zoom contínuo) e entra num palco logo na abertura; o resto da demo pode usar o modelo com o visual do mundo.
+demos. A técnica-assinatura sai pronta de `.claude/skills/site-premium/tecnicas/` (catálogo no `README.md`; pra demo as
+mais rápidas de montar são luz, pincel, controle, território e superfície, que pedem pouca imagem) e entra num palco
+logo na abertura; o resto da demo pode usar o modelo com o visual do mundo.
 
 Sem tempo ou material pra conceito (demo no mesmo dia, nenhuma foto boa): as duas aberturas do modelo, que são o mundo Noturno:
 
