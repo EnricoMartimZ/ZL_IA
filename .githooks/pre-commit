@@ -1,0 +1,3 @@
+#!/bin/sh
+# Roda antes de cada commit: nada de cliente vai pro GitHub. Ativar com: npm run setup
+exec node scripts/checar-clientes.js

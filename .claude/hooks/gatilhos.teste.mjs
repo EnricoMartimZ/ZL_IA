@@ -35,6 +35,9 @@ const casos = [
   ['faz o contrato da ótica', 'contrato'], ['preciso formalizar com a metalúrgica', 'contrato'],
   ['o que eu peço pro cliente novo?', 'entrada-cliente'], ['o cliente mandou as fotos', 'entrada-cliente'], ['o que falta pra entregar a ótica?', 'entrada-cliente'],
   ['quem me deve?', 'cobrancas'], ['a ótica pagou a parcela', 'cobrancas'], ['quanto entra esse mês?', 'cobrancas'], ['caiu o pix da metalúrgica', 'cobrancas'],
+  ['ele achou caro, o que eu respondo?', 'negociar'], ['disse que vai ver e te aviso, como respondo isso?', 'negociar'], ['quer desconto no site', 'negociar'],
+  ['faz a página de links da ótica', 'links-bio'], ['arruma o link da bio', 'links-bio'], ['ajusta o perfil do google da ótica', 'seo'],
+  ['os sites estão no ar?', 'vigia'], ['quais demos eu tiro do ar?', 'vigia'], ['pede um depoimento pra ótica', 'estudo-de-caso'], ['monta o case da metalúrgica', 'estudo-de-caso'],
 ];
 let ok = 0;
 for (const [frase, esperado] of casos) {

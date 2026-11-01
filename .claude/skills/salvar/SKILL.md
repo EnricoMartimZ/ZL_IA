@@ -31,7 +31,9 @@ Detectar com `git rev-parse --is-inside-work-tree`. Se falhar:
 
 O GitHub guarda **só o sistema**: skills, scripts, modelos, `CLAUDE.md`, `identidade/`. O `.gitignore` deixa de fora o trabalho do dia a dia, que fica só neste computador: `_memoria/`, `clientes/`, `vendas/`, `projetos/`, `saidas/`, `dados/` e o `.env`. Nunca forçar (`git add -f`) arquivo dessas pastas.
 
-Ao salvar, lembrar em uma linha: "Clientes, funil e memória não vão pro GitHub — faça backup dessas pastas por fora de vez em quando (HD ou Drive)."
+Ao salvar, lembrar em uma linha: "Clientes, funil e memória não vão pro GitHub: `node --env-file=.env scripts/backup.js` guarda essas pastas criptografadas pra levar pro HD ou pra nuvem."
+
+Se o commit parar com "Dado de cliente no que vai pro GitHub", é a trava (`scripts/checar-clientes.js`) fazendo o trabalho dela: tirar o nome ou o arquivo e tentar de novo, em vez de pular com `--no-verify`.
 
 ### Commits seguintes (já configurado)
 

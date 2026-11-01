@@ -96,8 +96,12 @@ gratuito em PDF com os pontos de perda e quanto custam por mês ·
 (e cria `_memoria/servicos.md` na primeira vez) · `/contrato` escreve o contrato
 só com o que foi vendido, em PDF e Word, pronto pra assinar grátis pelo gov.br ·
 `/entrada-cliente` pede o material e os acessos de uma vez, conta o prazo e confere
-a entrega · `/cobrancas` mostra quem paga, o que atrasou e quanto entra no mês,
-com o lembrete pronto · `/relatorio-resultados` fecha o mês do cliente com antes/depois e retorno estimado · `/funil` mostra
+a entrega · `/negociar` conduz quem respondeu e não fechou: acha a objeção real,
+reduz o escopo em vez do preço e deixa a próxima mensagem pronta · `/links-bio` faz a
+página de links do Instagram · `/cobrancas` mostra quem paga, o que atrasou e quanto
+entra no mês, com o lembrete pronto · `/vigia` confere sites, domínios e demos ·
+`/estudo-de-caso` pede depoimento e indicação e monta o caso ·
+`/relatorio-resultados` fecha o mês do cliente com antes/depois e retorno estimado · `/funil` mostra
 todas as lojas por etapa e quem precisa de follow-up hoje, com mensagem
 pronta · `/aprendizado` registra por que cada venda fechou ou foi perdida e
 vira regra pras outras skills.

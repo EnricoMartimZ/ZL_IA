@@ -173,6 +173,24 @@
       ]
     },
     {
+      "skill": "negociar",
+      "grupo": "Fechar a venda",
+      "quando": "conduzir a conversa com quem respondeu: objeção, oferta menor e a próxima mensagem com a data certa",
+      "exemplos": [
+        "ele achou caro, o que eu respondo?",
+        "disse que vai ver e sumiu"
+      ],
+      "gatilhos": [
+        "\\bnegociar\\b|\\bnegociacao\\b",
+        "(achou|acharam|ta|esta|ficou|e muito|muito) caro",
+        "(alto|altos) (pra|para) (nos|mim|gente|ele|ela)",
+        "(quer|pediu|pedindo) (um )?desconto",
+        "(vai|vou|ia) (ver|verificar|pensar|falar com)[^.]{0,30}(aviso|esposa|marido|socio|mulher)?\\b.*(aviso|esposa|marido|socio|mulher)",
+        "sumiu depois|parou de responder|nao respondeu mais",
+        "como (eu )?respondo (isso|esse|essa|ele|ela|o cliente|a loja)"
+      ]
+    },
+    {
       "skill": "email-profissional",
       "grupo": "Fechar a venda",
       "quando": "rascunhar um e-mail profissional no tom certo",
@@ -251,6 +269,22 @@
         "\\bvercel\\b|\\bnetlify\\b",
         "search console",
         "manutencao (do|de|mensal do) site"
+      ]
+    },
+    {
+      "skill": "links-bio",
+      "grupo": "Entregar: site",
+      "quando": "página de links da bio do Instagram, com a marca da loja e o WhatsApp em destaque",
+      "exemplos": [
+        "faz a página de links da ótica",
+        "arruma o link da bio"
+      ],
+      "gatilhos": [
+        "link.{0,6}da bio|links? (na|da|pra) bio",
+        "pagina de links",
+        "\\blinktree\\b",
+        "bio do (instagram|insta)",
+        "\\bpagina\\b.*\\blinks\\b"
       ]
     },
     {
@@ -388,7 +422,9 @@
         "aparecer (no|na|nas) (google|chatgpt|gemini|perplexity|ias?|busca)",
         "primeira pagina( do google)?",
         "ranque",
-        "aparec\\w* no google"
+        "aparec\\w* no google",
+        "(ajust|arrum|corrig)\\w* (o )?perfil (do|no) google",
+        "perfil (do|no) google"
       ]
     },
     {
@@ -441,6 +477,21 @@
       ]
     },
     {
+      "skill": "estudo-de-caso",
+      "grupo": "Manter o cliente",
+      "quando": "pedir depoimento, montar o estudo de caso e pedir indicação depois da entrega",
+      "exemplos": [
+        "pede um depoimento pra ótica",
+        "monta o case da metalúrgica"
+      ],
+      "gatilhos": [
+        "\\bdepoimentos?\\b",
+        "estudo de caso|\\bcase\\b do|\\bcase\\b da|o case\\b",
+        "(pedir|pede|pedindo) indicac|indicacao de cliente",
+        "quem (ele|ela|esse cliente) pode indicar"
+      ]
+    },
+    {
       "skill": "relatorio-resultados",
       "grupo": "Manter o cliente",
       "quando": "relatório mensal do cliente: o que foi entregue, antes e depois, retorno e plano do mês",
@@ -455,6 +506,22 @@
         ],
         "prestar contas",
         "mostrar (o )?resultado (pro|para o|ao) cliente"
+      ]
+    },
+    {
+      "skill": "vigia",
+      "grupo": "Manter o cliente",
+      "quando": "conferir sites no ar, domínios vencendo e demos que passaram da data",
+      "exemplos": [
+        "os sites estão no ar?",
+        "quais demos eu tiro do ar?"
+      ],
+      "gatilhos": [
+        "\\bvigia\\b",
+        "(sites?|demos?) (dos clientes |do cliente )?(esta|estao|ta|tao) no ar",
+        "site (do cliente )?(caiu|fora do ar)",
+        "dominios? venc",
+        "demos? (eu )?(tiro|tirar|remover|apagar)|tirar (as |a )?demos?"
       ]
     },
     {

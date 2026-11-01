@@ -149,4 +149,9 @@ gatilho, testes e mensagens de commit.
   "a metalúrgica". Nunca tirar exemplo do funil real
 - Nunca `git add -f` em arquivo das pastas locais
 - Antes de commit, olhar o `git diff --cached` procurando nome de empresa
-  ou pessoa
+  ou pessoa. A trava `scripts/checar-clientes.js` roda sozinha em cada commit
+  (`.githooks/pre-commit`, ativada pelo `npm run setup`): nunca pular com
+  `--no-verify`. Nome curto que ela não conhece entra em
+  `_memoria/nomes-proibidos.txt`
+- Backup das pastas locais: `node --env-file=.env scripts/backup.js`,
+  criptografado, fora do GitHub

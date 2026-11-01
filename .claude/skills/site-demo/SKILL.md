@@ -108,7 +108,7 @@ Mensagem curta, no tom de `_memoria/preferencias.md`, pro canal onde a loja resp
 
 > "Oi, [nome]! Sou [você], faço sites pra lojas aqui de [cidade]. Montei uma prévia de como poderia ficar o site da [loja], usando as fotos e avaliações que vocês já têm: [link]. É só uma demonstração, ninguém mais tem o link. Se curtir, te mostro o que dá pra fazer — se não, sem problema, tiro do ar."
 
-Atualizar `vendas/funil.md`: etapa **demo enviada**, próximo passo em 2 dias. Se responder: `/proposta-servico` com o pacote de site. Se não fechar em 30 dias: tirar do ar (`npx vercel remove demo-<slug>-<letras> --yes`) e registrar no `/aprendizado`.
+Pôr a demo em `clientes/_sites.json` (`tipo: demo`, com `remover_ate` em 30 dias) pro `/vigia` lembrar de tirar do ar. Atualizar `vendas/funil.md`: etapa **demo enviada**, próximo passo em 2 dias. Se responder: `/proposta-servico` com o pacote de site. Se não fechar em 30 dias: tirar do ar (`npx vercel remove demo-<slug>-<letras> --yes`) e registrar no `/aprendizado`.
 
 ---
 

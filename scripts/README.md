@@ -19,6 +19,9 @@ Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chr
 | `montar-lote.js` | `/abordagem-whatsapp` | Lê as buscas do Google Maps, escolhe quem tem celular e ponto fraco verificável, compara com o líder local do nicho, audita os sites e escreve uma mensagem curta e diferente pra cada loja (`lote.md`, `fila.json`, `lote.csv`) |
 | `mapa-ruas.js` | `/site-premium` (seção "Onde fica") | Baixa as ruas reais em volta da loja (OpenStreetMap), calcula a rota de carro até ela e salva o `mapa.json` da animação |
 | `kie.js` | `/foto-produto`, `/video-ia` | Gera imagem, vídeo e lip sync pelo kie.ai (motor do Open Higgsfield AI); sobe arquivos locais marcados com `@` |
+| `checar-clientes.js` | todo commit (`.githooks/pre-commit`) | Trava o commit se entrar arquivo local, nome de cliente, CPF ou CNPJ. Com `--tudo`, revisa o repositório inteiro |
+| `backup.js` | `/salvar`, rotina semanal | Guarda `vendas/`, `clientes/`, `_memoria/` e `.env` num arquivo criptografado, confere se abre e restaura com `--restaurar` |
+| `vigia.js` | `/vigia`, rotina semanal | Confere sites no ar, certificado, vencimento de domínio e demos na data de sair |
 
 ```bash
 node scripts/render.js marketing/conteudo/<pasta>/carrossel.html --png marketing/conteudo/<pasta>/instagram

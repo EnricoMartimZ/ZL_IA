@@ -84,6 +84,8 @@ description: >
 
 **Objetivo:** Montar o perfil completo do Google Business Profile pra aparecer no Maps e Local Pack.
 
+**Ajuste rápido (o serviço de 1 hora, sem plano de SEO):** com o convite de gerente aceito, conferir e corrigir só o essencial e parar: link "Site" apontando pro site certo, categoria principal, descrição, telefone, endereço e horário. Mostrar ao cliente o antes e o depois e confirmar o que mudou. Sem esse acesso, entregar o texto pronto pro cliente colar. Nada de pedir senha; o caminho completo abaixo fica pra quem comprou SEO.
+
 1. Pesquisar como está o perfil atual (se existir): buscar o nome da empresa no Google
 2. Criar documento com **tudo que precisa ser preenchido/otimizado:**
 

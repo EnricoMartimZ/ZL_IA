@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Scripts de apoio das skills do MazyOS",
   "scripts": {
-    "setup": "npm install && npx playwright install chromium"
+    "setup": "npm install && npx playwright install chromium && git config core.hooksPath .githooks"
   },
   "dependencies": {
     "playwright": "^1.48.0"

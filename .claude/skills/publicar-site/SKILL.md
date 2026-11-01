@@ -80,6 +80,8 @@ E-mail no domínio (contato@dominio.com.br): fora do escopo do site — indicar 
 
 ### Passo 5 — Entrega
 
+Pôr o site em `clientes/_sites.json` (`tipo: cliente`, com `dominio`) pro `/vigia` cuidar dele. Com a entrega concluída, avisar `/entrada-cliente` e `/cobrancas`, que liberam a parcela final.
+
 Criar `clientes/<Nome>/site/ENTREGA.md`:
 
 ```markdown
