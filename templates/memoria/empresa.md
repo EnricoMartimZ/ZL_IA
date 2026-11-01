@@ -13,3 +13,12 @@
 **Principais entregas:**
 
 ## Contexto adicional
+
+## Dados do contratado
+
+> Usados pelo `/contrato` e pelo `/cobrancas`. Este arquivo é local: não vai pro GitHub.
+
+**Nome completo:**
+**CPF ou CNPJ:**
+**Endereço:**
+**Chave Pix:**

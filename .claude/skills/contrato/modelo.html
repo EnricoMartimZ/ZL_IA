@@ -1,0 +1,158 @@
+<!doctype html>
+<!--
+  Modelo do /contrato. Trocar todo {{CAMPO}} e apagar os blocos do que não foi vendido.
+  Blocos: <!-- site -> … <!-- /site ->. Nada de cliente neste arquivo: ele vai pro GitHub.
+  O contrato preenchido fica em clientes/<Nome>/contrato/ (local).
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Contrato de prestação de serviços · {{CLIENTE}}</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --texto: #16161A; --muted: #6B6B73; --destaque: #1F4FFF; --linha: #E6E4DE; --fundo: #FFFFFF; }
+  @page { size: A4; margin: 16mm 17mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: var(--texto); background: var(--fundo); font-size: 9.3pt; line-height: 1.5; }
+  header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--linha); padding-bottom: 3mm; margin-bottom: 6mm; }
+  .marca { font-weight: 800; letter-spacing: -0.02em; font-size: 11pt; }
+  .meta { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
+  h1 { font-size: 19pt; font-weight: 800; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 2mm; }
+  .sub { color: var(--muted); margin-bottom: 6mm; }
+  h2 { font-size: 10.5pt; font-weight: 800; letter-spacing: -0.01em; margin: 4.6mm 0 1.6mm; break-after: avoid; }
+  p { margin-bottom: 2mm; text-align: justify; }
+  p:has(+ ol) { break-after: avoid; } /* subtítulo não fica sozinho no pé da página */
+  ol { padding-left: 5.5mm; margin-bottom: 2mm; }
+  ol li { margin-bottom: 1mm; text-align: justify; }
+  ol ol { list-style: lower-alpha; margin-top: 1mm; }
+  .partes { border: 1px solid var(--linha); border-radius: 8px; padding: 3.2mm 5mm; margin-bottom: 3mm; }
+  .partes p { text-align: left; margin-bottom: 1.1mm; }
+  .partes .rotulo { font-size: 7.5pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; color: var(--destaque); margin-bottom: 1.5mm; }
+  table.resumo { width: 100%; border-collapse: collapse; margin: 1mm 0 2mm; font-size: 9.2pt; }
+  table.resumo td { padding: 1.8mm 2mm; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  table.resumo td:first-child { width: 38mm; font-weight: 700; padding-left: 0; }
+  .assinaturas { display: grid; grid-template-columns: 1fr 1fr; gap: 11mm 14mm; margin-top: 13mm; break-inside: avoid; }
+  .assinatura { border-top: 1px solid var(--texto); padding-top: 2mm; font-size: 8.6pt; }
+  .assinatura b { display: block; }
+  .local { margin-top: 7mm; break-before: avoid; }
+  .bloco-final { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">{{NEGOCIO}}</div>
+  <div class="meta">Contrato · {{CLIENTE}}</div>
+</header>
+
+<h1>Contrato de prestação de serviços de marketing digital</h1>
+<p class="sub">{{SUBTITULO}}</p>
+
+<h2>1. As partes</h2>
+<div class="partes">
+  <p class="rotulo">Contratante</p>
+  <p><b>{{CLIENTE}}</b></p>
+  <p>Nome empresarial: {{RAZAO_SOCIAL}}</p>
+  <p>CNPJ ou CPF: {{DOCUMENTO}}</p>
+  <p>Endereço: {{ENDERECO}}</p>
+  <p>Representante (nome completo): {{REPRESENTANTE}}</p>
+  <p>CPF do representante: {{CPF_REPRESENTANTE}} · WhatsApp: {{WHATSAPP}}</p>
+</div>
+<div class="partes">
+  <p class="rotulo">Contratado</p>
+  <p><b>{{CONTRATADO_NOME}}</b> ({{NEGOCIO}})</p>
+  <p>CPF: {{CONTRATADO_CPF}}</p>
+  <p>Endereço: {{CONTRATADO_ENDERECO}}</p>
+  <p>WhatsApp: {{CONTRATADO_WHATSAPP}} · e-mail: {{CONTRATADO_EMAIL}}</p>
+</div>
+
+<h2>2. Resumo do que foi combinado</h2>
+<table class="resumo">
+  <tr><td>Serviço</td><td>{{RESUMO_SERVICO}}</td></tr>
+  <tr><td>Implantação</td><td><b>{{VALOR_IMPLANTACAO}}</b> {{RESUMO_PARCELAS}}</td></tr>
+  <!-- mensal --><tr><td>Mensal</td><td><b>{{VALOR_MENSAL}} por mês</b> via Pix, todo dia {{DIA_MENSAL}}, a partir do mês seguinte à entrega</td></tr><!-- /mensal -->
+  <tr><td>Prazo</td><td>Entrega em até {{PRAZO_DIAS}} dias depois do recebimento do material e dos acessos (cláusula 5)</td></tr>
+  <!-- mensal --><tr><td>Fidelidade</td><td>Nenhuma. O mensal pode ser cancelado por qualquer uma das partes com 30 dias de aviso</td></tr><!-- /mensal -->
+  <!-- site --><tr><td>Domínio</td><td>Registrado no nome do Contratante. {{DOMINIO_QUEM_PAGA}}</td></tr><!-- /site -->
+</table>
+
+<h2>3. O que será entregue</h2>
+<p><b>Implantação (entrega única):</b></p>
+<ol>
+  <!-- site -->
+  <li><b>{{NOME_SITE}}</b>, adaptado para celular, com o logo e as cores de {{CLIENTE}}. {{DESCRICAO_SITE}} O botão principal abre o WhatsApp do Contratante com o pedido já escrito.</li>
+  <li><b>Publicação do site</b> no domínio próprio do Contratante, com hospedagem sem custo por um ano, contado da publicação. Depois disso, a hospedagem poderá ser cobrada mediante acordo por escrito.</li>
+  <!-- /site -->
+  <!-- links --><li><b>Página de links para a bio do Instagram</b>, com {{LINKS_BIO}}.</li><!-- /links -->
+  <!-- google --><li><b>Perfil da Empresa no Google</b>: {{AJUSTES_GOOGLE}}.</li><!-- /google -->
+</ol>
+<!-- mensal -->
+<p><b>Mensal (enquanto o contrato estiver em vigor):</b></p>
+<ol start="{{PRIMEIRO_ITEM_MENSAL}}">
+  <!-- carrosseis --><li><b>{{QTD_CARROSSEIS}} carrosséis por mês</b> para o Instagram (texto, arte e legenda), aprovados pelo Contratante antes de publicar.</li><!-- /carrosseis -->
+  <!-- avaliacoes --><li><b>Resposta às avaliações do Google</b> recebidas no mês.</li><!-- /avaliacoes -->
+  <!-- site --><li><b>Ajustes no site</b> quando o Contratante precisar (trocar foto, preço, serviço ou texto), até 1 hora por mês. As horas que não forem usadas não acumulam para o mês seguinte.</li><!-- /site -->
+</ol>
+<!-- /mensal -->
+<p><b>Não está incluso:</b> {{NAO_INCLUSO}} Esses itens podem ser orçados à parte.</p>
+
+<h2>4. Valores e pagamento</h2>
+<ol>
+  <li>A implantação custa <b>{{VALOR_IMPLANTACAO}} ({{VALOR_IMPLANTACAO_EXTENSO}})</b>, pagos via Pix{{PARCELAS_INTRO}}
+    <ol>
+      <!-- repetir uma linha por parcela --><li>{{VALOR_PARCELA}} ({{VALOR_PARCELA_EXTENSO}}) {{QUANDO_PARCELA}};</li>
+    </ol>
+  </li>
+  <!-- mensal --><li>O mensal custa <b>{{VALOR_MENSAL}} ({{VALOR_MENSAL_EXTENSO}}) por mês</b>, pago via Pix até o dia {{DIA_MENSAL}} de cada mês. A primeira mensalidade vence no dia {{DIA_MENSAL}} do mês seguinte à entrega.</li><!-- /mensal -->
+  <li>Pagamento em atraso tem multa de 2% e juros de 1% ao mês. <!-- mensal -->Depois de 15 dias de atraso, o Contratado pode pausar o serviço mensal até o pagamento, avisando antes pelo WhatsApp.<!-- /mensal --></li>
+</ol>
+
+<h2>5. Prazos e aprovação</h2>
+<ol>
+  <li>A entrega acontece em até <b>{{PRAZO_DIAS}} dias</b> depois que o Contratante enviar o material ({{MATERIAL}}) e der os acessos da cláusula 6. Se o material atrasar, o prazo conta a partir do dia em que ele chegar.</li>
+  <li>Antes de publicar, o Contratado envia cada entrega pelo WhatsApp para aprovação. O Contratante responde em até 2 dias úteis. Cada entrega inclui até 2 rodadas de ajustes.</li>
+  <li>Nada é publicado sem a aprovação do Contratante.</li>
+</ol>
+
+<h2>6. Responsabilidades</h2>
+<p><b>Do Contratante:</b></p>
+<ol>
+  <li>Enviar o material e dar os acessos: {{ACESSOS}}.</li>
+  <li>Garantir que tem o direito de usar as fotos, logos e textos que enviar.</li>
+  <li>Avisar quando mudar preço, serviço, telefone ou endereço.</li>
+</ol>
+<p><b>Do Contratado:</b></p>
+<ol start="4">
+  <li>Entregar o que está na cláusula 3, nos prazos combinados, seguindo a identidade visual do Contratante.</li>
+  <li>Guardar em sigilo os acessos e as informações do Contratante, não trocar senhas e não usar as contas para nada além deste contrato.</li>
+  <li>Quando usar imagens ilustrativas (de banco ou geradas por IA), identificá-las como ilustrativas, para não parecerem fotos da equipe ou de serviços do Contratante.</li>
+</ol>
+
+<h2>7. Resultados</h2>
+<p>O Contratado não garante número de clientes, de pedidos de orçamento, de seguidores ou posição no Google, porque isso depende de fatores fora do controle das partes. O compromisso é entregar o que está na cláusula 3 com a qualidade e na quantidade combinadas.</p>
+
+<h2>8. Propriedade e fim do contrato</h2>
+<ol>
+  <li>Depois de paga a implantação, o que foi entregue passa a ser do Contratante.</li>
+  <!-- mensal --><li>O mensal não tem fidelidade e pode ser cancelado por qualquer uma das partes com 30 dias de aviso, por escrito (WhatsApp ou e-mail valem). O serviço do período de aviso é entregue e pago normalmente.</li><!-- /mensal -->
+  <li>No fim do contrato, o Contratado entrega os arquivos, ajuda a transferir a hospedagem para uma conta do Contratante e deixa de usar os acessos.</li>
+  <li>O Contratado pode mostrar o trabalho no seu portfólio, a menos que o Contratante peça o contrário por escrito.</li>
+</ol>
+
+<h2>9. Dados pessoais</h2>
+<p>{{DADOS_SITE}} As duas partes tratam os dados pessoais a que tiverem acesso conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018), só para o que este contrato precisa.</p>
+
+<div class="bloco-final">
+<h2>10. Foro</h2>
+<p>As partes tentam resolver qualquer divergência conversando. Se não der, fica eleito o foro da comarca de {{FORO}}.</p>
+
+<p class="local">{{CIDADE_ASSINATURA}}, ______ de __________________ de {{ANO}}.</p>
+
+<div class="assinaturas">
+  <div class="assinatura"><b>Contratante</b>{{CLIENTE}} · representante</div>
+  <div class="assinatura"><b>Contratado</b>{{CONTRATADO_NOME}}</div>
+</div>
+</div>
+
+</body>
+</html>

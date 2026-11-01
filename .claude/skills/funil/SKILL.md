@@ -48,7 +48,7 @@ Datas sempre `YYYY-MM-DD`. `Valor/mês` vazio até existir proposta.
 | reunião | conversa marcada ou feita | proposta em até 1 dia após a reunião |
 | proposta enviada | `/proposta-servico` | cobrar em 3 dias |
 | negociando | pediu ajuste, desconto, prazo | responder em 1 dia |
-| fechou | aceitou | `/novo-projeto` + onboarding — hoje |
+| fechou | aceitou | `/contrato` e `/entrada-cliente` — hoje |
 | perdeu | disse não | `/aprendizado` — registrar motivo |
 | sem resposta | 3 follow-ups sem retorno | reabrir em 60 dias |
 
@@ -69,6 +69,8 @@ FOLLOW-UP HOJE (N)
 
 ATRASADOS (data do próximo passo já passou) — mesmo formato, mais antigos primeiro
 
+PAGAMENTOS (de `vendas/cobrancas.md`, se existir: só o que venceu ou vence até amanhã; detalhes em /cobrancas)
+
 RESUMO
 a abordar 12 · abordada 5 · respondeu 2 · diagnóstico enviado 3 · proposta enviada 2 · negociando 1
 Em proposta/negociação: R$ 2.970/mês · Fechados no mês: 1 (R$ 990/mês)
@@ -85,7 +87,7 @@ Exemplos: `/funil <loja> respondeu, quer ver o diagnóstico`, `/funil <loja> fec
 2. Mudar a etapa, `Último contato` = hoje, `Próximo passo` e `Data próx. passo` pela tabela de etapas, e anotar o que aconteceu em `Notas`.
 3. Contar follow-ups sem resposta pelas notas: no terceiro, mover pra **sem resposta**.
 4. Mostrar a linha antes e depois.
-5. Se virou **fechou**: sugerir `/novo-projeto` pra criar a pasta do cliente e chamar `/aprendizado` pra registrar o que fez fechar.
+5. Se virou **fechou**: sugerir `/novo-projeto` pra criar a pasta do cliente, `/contrato` e `/entrada-cliente`, e chamar `/aprendizado` pra registrar o que fez fechar.
 6. Se virou **perdeu**: chamar `/aprendizado` pra registrar o motivo (o motivo de perda é a informação mais valiosa do funil).
 
 ---

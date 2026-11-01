@@ -105,6 +105,38 @@
       ]
     },
     {
+      "skill": "contrato",
+      "grupo": "Fechar a venda",
+      "quando": "contrato do que foi vendido em PDF e Word, com a mensagem e a assinatura grátis pelo gov.br",
+      "exemplos": [
+        "faz o contrato da ótica",
+        "preciso formalizar com a metalúrgica"
+      ],
+      "gatilhos": [
+        "\\bcontrato\\b",
+        "(formalizar|oficializar) (com|o acordo|a venda|o servico)",
+        "assinar (com|o acordo)",
+        "acordo por escrito"
+      ]
+    },
+    {
+      "skill": "entrada-cliente",
+      "grupo": "Fechar a venda",
+      "quando": "começar o trabalho com quem fechou: o que pedir, o que falta e o que libera a entrega",
+      "exemplos": [
+        "o que eu peço pro cliente novo?",
+        "o que falta pra entregar a ótica?"
+      ],
+      "gatilhos": [
+        "\\bonboarding\\b",
+        "o que (eu )?(peco|pedir|preciso pedir|tenho que pedir) (pro|pra|para o|para a|ao|a) (cliente|loja|empresa)",
+        "o que falta (pra|para|pro) (entregar|comecar)",
+        "(cliente|ele|ela|a loja|a empresa) (ja )?(assinou|mandou as fotos|mandou o material|deu o acesso|deu os acessos)",
+        "(comecar|comeca|iniciar) o trabalho com",
+        "(pedir|cobrar) (o |os )?(material|acessos)"
+      ]
+    },
+    {
       "skill": "funil",
       "grupo": "Fechar a venda",
       "quando": "painel de vendas: em que etapa está cada loja, quem precisa de follow-up hoje (com a mensagem pronta) e mover etapas",
@@ -386,6 +418,26 @@
           "(relatorio|como (foram|estao|tao|ta|esta)|desempenho|performance|resultado)",
           "\\b(ads|anuncios?|campanhas?|trafego|meta ads|facebook ads)\\b"
         ]
+      ]
+    },
+    {
+      "skill": "cobrancas",
+      "grupo": "Manter o cliente",
+      "quando": "quem paga e quando: parcelas, mensalidades, atrasos e lembrete pronto pra aprovar",
+      "exemplos": [
+        "quem me deve?",
+        "a ótica pagou a parcela"
+      ],
+      "gatilhos": [
+        "\\bcobrancas?\\b",
+        "quem (me )?(deve|paga|pagou|ta devendo|esta devendo)",
+        "\\bparcelas?\\b",
+        "\\bmensalidades?\\b",
+        "\\bpagou\\b",
+        "(caiu|recebi|mandou) o pix",
+        "a receber\\b",
+        "quanto (entra|vou receber|tenho pra receber)",
+        "(atrasou|atrasado|atrasada) o pagamento|pagamento (atrasado|em atraso)"
       ]
     },
     {
