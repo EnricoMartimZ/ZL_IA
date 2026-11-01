@@ -129,6 +129,7 @@ com mais seções.
 ## Ideias por ramo (ponto de partida, não receita)
 
 Dois caminhos por ramo, em mundos diferentes. Inventar um terceiro a partir do Passo A é sempre melhor.
+Escolher pelo que mais combina com o ramo e com a empresa, nunca pela técnica mais nova ou mais vistosa.
 
 | Ramo | Matéria | Caminho 1 | Caminho 2 |
 |---|---|---|---|
