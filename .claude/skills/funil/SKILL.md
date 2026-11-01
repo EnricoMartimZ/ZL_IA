@@ -51,6 +51,7 @@ Datas sempre `YYYY-MM-DD`. `Valor/mês` vazio até existir proposta.
 | fechou | aceitou | `/contrato` e `/entrada-cliente` — hoje |
 | perdeu | disse não | `/aprendizado` — registrar motivo |
 | sem resposta | 3 follow-ups sem retorno | reabrir em 60 dias |
+| arquivada | nunca abordada e fora da estratégia atual | nenhum |
 
 ## Workflow
 
@@ -95,7 +96,7 @@ Exemplos: `/funil <loja> respondeu, quer ver o diagnóstico`, `/funil <loja> fec
 ## Regras
 
 - **`vendas/funil.md` é a fonte da verdade.** As planilhas de prospecção são histórico; status vale o que está no funil.
-- **Toda linha tem próximo passo com data**, exceto `fechou` e `perdeu`. Linha sem próximo passo é venda esquecida.
+- **Toda linha tem próximo passo com data**, exceto `fechou`, `perdeu` e `arquivada`. Linha sem próximo passo é venda esquecida.
 - **Não reescrever a tabela inteira** ao atualizar uma loja — editar só a linha.
 - **Não enviar nada.** O `/funil` escreve as mensagens; quem manda é o usuário.
 - **Números do resumo vêm da tabela.** Sem dado suficiente pra uma taxa (menos de 5 lojas na etapa), mostrar o número absoluto, não percentual.

@@ -117,9 +117,9 @@ a partir de uma planilha.
 `/identidade-loja` levanta a marca da loja antes de tudo — cores com o papel de cada
 uma, logo recortado, fontes e as frases que ela usa, do site atual e de prints do
 Instagram e da fachada — e o `/checar-site` acusa site que não usa a cor da marca ·
-`/site-premium` cria site com hero cinematográfico que conta o antes → depois do
-serviço — cenas geradas por IA costuradas com transições (padrão), 3D ou foto —, visual escuro de alto padrão e agenda pelo
-WhatsApp (ou "Pedir orçamento" pra empresa B2B) — com tema claro ou escuro, hero 3D ou foto, página por serviço, SEO local
+`/site-premium` cria um site com conceito próprio pra cada empresa: pelo ramo, escolhe um entre 20
+mundos visuais e uma técnica-assinatura (do ar que esfria a tela ao cardápio que gira) e conta a história pela rolagem, com agenda pelo
+WhatsApp (ou "Pedir orçamento" pra empresa B2B), página por serviço, SEO local
 e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-demo` monta uma prévia do site da loja antes de vender
 (marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de
 exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com

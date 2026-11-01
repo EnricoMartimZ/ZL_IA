@@ -59,7 +59,7 @@ Mostrar no chat a tabela do `lote.md` e 3 mensagens de exemplo. **Só enviar dep
    - `navigate` pra `https://web.whatsapp.com/send?phone=<whatsapp>&text=<mensagem codificada com encodeURIComponent>`
    - esperar a conversa carregar; se aparecer "número de telefone compartilhado via url é inválido", marcar `status: "sem whatsapp"` e seguir
    - conferir que o texto na caixa é o aprovado, enviar (Enter) e conferir que a mensagem apareceu na conversa com o relógio/visto
-   - registrar com `node ../../../.claude/skills/abordagem-whatsapp/marcar.cjs <índice> enviada "<observação>"` (rodando da pasta do lote): atualiza o `fila.json` e põe a loja no `vendas/funil.md` como **abordada** (próximo passo: ver resposta em 2 dias). Resposta automática ("agradece seu contato") não conta como resposta: anotar na observação
+   - registrar com `node ../../../.claude/skills/abordagem-whatsapp/marcar.cjs <índice> enviada "<observação>"` (rodando da pasta do lote): atualiza o `fila.json` e põe a loja no `vendas/funil.md` como **abordada** (próximo passo: follow-up em 7 dias, se não responder). Resposta automática ("agradece seu contato") não conta como resposta: anotar na observação
    - **reler a mensagem antes de clicar em enviar**: se algo estiver errado (elogio a nota baixa, nome cortado), não enviar — marcar `segurada` e corrigir pro próximo lote
    - **esperar 2 a 5 minutos** (aleatório) antes da próxima
 3. **Limites:** no máximo **20 por dia** (começar com 10 nos primeiros dias de um número novo). Parar na hora se o WhatsApp mostrar aviso, pedir verificação ou começar a falhar
@@ -69,7 +69,8 @@ Mostrar no chat a tabela do `lote.md` e 3 mensagens de exemplo. **Só enviar dep
 
 No WhatsApp Web, abrir cada conversa enviada (busca pelo número) e **só ler**:
 - Respondeu → resumir o que disse, mover no funil pra **respondeu** e sugerir o próximo passo: interessado → `/diagnostico-loja` ou `/site-demo` (agora sim, o material completo); dúvida → resposta curta; "não quero" → **não mandar mais nada** e marcar `status: "pediu pra parar"`
-- Não respondeu em 3 dias → **um** follow-up só, com algo novo (outro fato, o print do site, uma ideia), aprovado pelo usuário. Sem resposta depois disso: arquivar
+- Não respondeu em 7 dias → **um** follow-up só, com algo novo (outro fato, o print do site, uma ideia), aprovado pelo usuário. Sem resposta depois disso: arquivar
+- Só resposta automática (boas-vindas, "em breve retornamos", fora do horário, menu) → conta como não respondeu, e o follow-up de 7 dias vira **recado pro responsável**: começa com "Mensagem pro responsável pela <loja>, por favor", vai direto ao fato conferido e diz que esse cliente está se perdendo, sem exagero. Anotar no `fila.json` que foi robô. Continua um só e aprovado pelo usuário
 - As respostas e a conversa com a loja são do usuário: sugerir o texto, ele aprova antes de enviar
 
 ---

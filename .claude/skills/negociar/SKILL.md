@@ -38,6 +38,8 @@ Objeção real: <ver Passo 2>
 Próximo passo: <o quê, em que data>
 ```
 
+**Conferir quem respondeu.** Mensagem com o selo "AI" do WhatsApp, ou texto perfeito segundos depois, pode ser a IA da conta comercial: o dono talvez nunca tenha lido. Isso não conta como interesse. Tratar como lead morno e tentar chegar na pessoa, de preferência por ligação.
+
 **Valor passado em áudio ou ligação não existe por escrito.** Se não souber o número, perguntar ao usuário antes de sugerir qualquer coisa: a próxima oferta depende disso.
 
 ### Passo 2 — Achar a objeção real
