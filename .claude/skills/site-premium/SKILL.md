@@ -2,9 +2,10 @@
 name: site-premium
 description: >
   Cria um site premium com um conceito próprio pra cada empresa: tira do ramo (ou do nome) uma metáfora,
-  escolhe um entre 18 mundos visuais (de cartaz de mercado a luxo silencioso, de quadrinho a catálogo
+  escolhe um entre 20 mundos visuais (de cartaz de mercado a luxo silencioso, de quadrinho a catálogo
   industrial) e uma técnica-assinatura (fluxo de ar, partículas, planta que se desenha, zoom contínuo, raio-X,
-  luz do dia, mapa pra explorar, limpar com o dedo, foto que vira pedra ou água, cenas de IA, 3D) e monta a
+  luz do dia, mapa pra explorar, limpar com o dedo, foto que vira pedra ou água, esteira de pratos, objetos
+  pendurados, página que vira, placar mecânico, cenas de IA, 3D) e monta a
   história pela rolagem — nunca o mesmo visual de um site pro outro. Serve de padaria a mineradora, de
   loteamento a software. Por baixo, a infraestrutura testada do modelo/: agenda que abre
   o WhatsApp com a mensagem pronta ou, pra B2B, "Pedir orçamento" (WhatsApp ou e-mail), SEO, medição, LGPD
@@ -21,8 +22,8 @@ O `modelo/` é a **infraestrutura** (agenda/orçamento, SEO, JSON-LD, medição,
 
 ## Dependências
 
-- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (18 sistemas visuais), `referencias.md` (o nível a atingir e as galerias onde garimpar) e o registro local `clientes/_conceitos.md` (o que já foi usado)
-- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, texto, HUD. Catálogo em `tecnicas/README.md`; bancadas em `tecnicas/demo.html` e `tecnicas/mostruario.html`
+- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (20 sistemas visuais), `referencias.md` (o nível a atingir e as galerias onde garimpar) e o registro local `clientes/_conceitos.md` (o que já foi usado)
+- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, esteira, varal, folha, pontilhado, placar, física, texto, HUD. Catálogo e o "Padrão de peça premiada" em `tecnicas/README.md`; bancadas em `tecnicas/demo.html`, `tecnicas/mostruario.html` e `tecnicas/objetos.html`
 - **Infraestrutura pronta:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
 - **Regras de design:** `.claude/skills/site-premium/design.md` — o que vale pra todo mundo (conversão, desempenho, SEO, honestidade) e o detalhe do mundo Noturno
@@ -56,7 +57,7 @@ Seguir o `direcao.md`:
 2. **Três conceitos** bem diferentes (norte + mundo + técnica-assinatura + interação + estrutura de história + tipografia + paleta + detalhe de marca), checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
 3. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
 
-A técnica sai de `tecnicas/` (testar a peça na bancada antes, se for mexer nela). Técnica nova que o conceito pedir (som, nuvem de pontos, galeria em disco…): escrever como módulo em `tecnicas/`, com `progresso(p)`, e pôr no `tecnicas/mostruario.html`. Ramo sem referência: garimpar nas galerias de `referencias.md` antes de propor.
+A técnica sai de `tecnicas/` (testar a peça na bancada antes, se for mexer nela). Técnica nova que o conceito pedir (som, nuvem de pontos, galeria em disco…): escrever como módulo em `tecnicas/`, com `progresso(p)`, seguindo o "Padrão de peça premiada" do `tecnicas/README.md`, e pôr numa bancada. Antes de inventar, testar o "O objeto é a interface" do `direcao.md`. Ramo sem referência: garimpar nas galerias de `referencias.md` antes de propor.
 
 #### Quando o conceito for o mundo Noturno cinematográfico (hero em capítulos)
 

@@ -203,6 +203,28 @@ Fontes: só Google Fonts ou a fonte da própria marca (com licença). As referê
 - **Técnicas:** `superficie.js` (água), `abertura.js`, texto palavra a palavra.
 - **Detalhe de marca:** o que **não** tem ("Doze quartos, nenhum televisor"). A falta é o argumento.
 
+## 19. Vitrine viva — o produto é a interface
+
+- **Sensação:** um estúdio branco com os objetos da loja de verdade, ao alcance da mão. Inspiração: peças de DHxWhy no 21st.dev.
+- **Quando:** loja de iluminação, decoração, restaurante, moda, ótica, papelaria, adega, ferramentas, qualquer um com produto bonito e pouca variedade.
+- **Paleta:** off-white (`#f7f6f3`) e preto; a cor vem dos objetos. A sala pode escurecer quando algo acende.
+- **Tipo:** grotesca média bem apertada (Inter Tight 500) + mono minúscula em caixa alta pro rótulo acima do título.
+- **Layout:** rótulo mínimo, uma frase no formato "uma loja de X que você Y", o objeto ocupando a tela e uma legenda embaixo que muda com o que está na mão. Sem grade de cards.
+- **Movimento:** física de verdade: balança, gira, levanta, arremessa. Nada de animação decorativa.
+- **Técnicas:** `varal.js`, `esteira.js`, `arrastar.js`. Fotos recortadas com fundo transparente, todas com a mesma luz.
+- **Detalhe de marca:** o elogio da peça é a frase-título. Se a frase não fecha, o objeto escolhido está errado.
+
+## 20. Painel mecânico — máquina que funciona
+
+- **Sensação:** painel de oficina, rodoviária antiga, bomba de gasolina. Metal, número e confiança.
+- **Quando:** transportadora, oficina, auto elétrica, estacionamento, posto, rodoviária, bar, barbearia clássica, gráfica antiga.
+- **Paleta:** preto fosco ou verde-oficina, creme de mostrador e **um** vermelho ou âmbar de luz-piloto. Alumínio escovado nos selos.
+- **Tipo:** mono pesada nos mostradores (JetBrains Mono 700, IBM Plex Mono) + grotesca condensada nos títulos.
+- **Layout:** quadro de saídas com o que está acontecendo hoje, contadores em tambor, selos como placas parafusadas, botões grandes. A informação real é o enfeite.
+- **Movimento:** palhetas caindo, tambores girando no vácuo, ponteiro assentando.
+- **Técnicas:** `placar.js`, `.placa`, `controle.js` (dial). Dado do quadro precisa ser verdadeiro e atualizado: placar parado em dado velho é pior que nenhum.
+- **Detalhe de marca:** a frota, os anos e os quilômetros reais no odômetro.
+
 ---
 
 ## Como aplicar a marca do cliente dentro do mundo

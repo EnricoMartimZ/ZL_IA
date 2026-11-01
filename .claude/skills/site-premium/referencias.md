@@ -66,6 +66,7 @@ Quando o ramo do cliente for novo ou o conceito travar, procurar aqui **antes** 
 | **styles.refero.design** | 2.000+ sites reduzidos a um sistema de design (cores com papel, escala de tipo, componentes) | Buscar por sensação ("Warm nonprofit", "Luxury e-commerce") ou por ramo. Ler o **norte**: uma frase que descreve o site como lugar, material e luz |
 | **godly.design** | Cortes de página: heros, CTAs, rodapés, de empresas de tecnologia | Bom pro mundo Produto vivo e pra resolver um pedaço (seção de preço, rodapé). Quase nada de comércio local |
 | **dribbble.com** | Composição de tela por ramo, inclusive ramos pequenos | Buscar `<ramo> website` (ex.: `plumbing website`, `bakery website`). São **maquetes**, não sites: serve pra layout e tipografia, nunca pra movimento ou técnica. Vale mais olhar 5 ramos vizinhos que 50 do mesmo |
+| **21st.dev** | 12 mil peças de interface funcionando, com prévia ao vivo, e 350 modelos de site | Procurar por categoria (`/community/components/s/footer`, `gallery`, `cursor`, `text`, `number`). Ler a descrição, ver a dependência e testar a prévia. O código é React e a conta gratuita abre 2 fontes por dia: gastar nas peças difíceis e reescrever sem React. Conferir a licença de cada uma |
 
 ### O que elas ensinaram
 
@@ -88,3 +89,14 @@ Quando o ramo do cliente for novo ou o conceito travar, procurar aqui **antes** 
 - **santionispirits.com (coquetéis):** abre em universo de quadrinhos, com escolha de sabor e bebida sendo servida pelo mouse. Só vi a entrada: a verificação de idade não foi passada. **Levar:** mundo *Quadrinho*.
 
 Por ficha do Awwwards, sem abrir: **cartier.com/lechoeurdespierres** (a pintura original revelada pela rolagem), **lpas.com** (arquitetura: abertura, menu cheio), **tengilemalamala.com** (hospedagem: linha do tempo e fotos grandes), **belgradearbor.rs** (residencial em 3D com filtro de unidades), **drone.riotters.com** (nuvem de pontos de drone no navegador), **a24.raviklaassens.com** (galeria em discos 3D).
+
+### 21st.dev (estudado em 01/11/2026)
+
+Varredura de 2.608 peças por categoria, cerca de 60 descrições lidas, 12 prévias abertas e o código completo de duas, ambas com licença MIT: a esteira de sushi de DHxWhy e a folha que dobra de Kedhareswer Naidu. Quase tudo é feito pra empresa de tecnologia, então o que serve é a mecânica. Como elas funcionam por dentro está em `tecnicas/README.md`, seção "Padrão de peça premiada".
+
+- **O produto vira interface:** luminárias num trilho, quadros na parede, crachás, pratos numa esteira, janela de avião, roda-gigante. A peça leva o nome do objeto, não da função. Virou `direcao.md` ("O objeto é a interface") e o mundo *Vitrine viva*.
+- **O rodapé é o último palco:** nome enorme em retícula cortado pela borda, folha rasgada presa com alfinete, envelope que se fecha com barbante, tíquete destacável, assinatura escrita à mão, adesivo colado. Ninguém mais trata rodapé como rodapé. `pontilhado.js`; as outras formas seguem como receita.
+- **Material finge ser físico:** placas de alumínio parafusadas pros logos de clientes, tambores de odômetro, palhetas de aeroporto, crachás com código de barras. `.placa` e `placar.js`.
+- **Transição de imagem com matéria:** mancha de tinta, dissolver em partículas, persiana, diafragma de câmera, ondas na água. Trocar foto nunca é só um desvanecer. `folha.js`; as demais seguem como receita.
+- **Fundos vivos em shader:** metal líquido, retícula, ASCII, topografia, tinta nanquim. São bonitos e fáceis de virar enfeite: só usar quando a matéria for a da empresa. Terra e relevo pra terraplenagem, tinta pra tatuador.
+- **Modelos prontos por ramo:** clínica odontológica, pilates, restaurante, skincare, arquitetura e construção repetem a mesma ordem: serviços, equipe, avaliações, preços, perguntas e contato. É a ordem que converte. Usar como checklist de conteúdo, não como visual.

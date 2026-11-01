@@ -4,10 +4,12 @@ Peças de movimento prontas e testadas pra montar a experiência que o **conceit
 Cada site usa **uma técnica-assinatura**, no máximo duas. Elas não têm cor nem fonte: isso vem do
 mundo escolhido (`../mundos.md`).
 
-Duas bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas) e `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica, e as peças de interação pra testar com a mão).
+Três bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas), `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica) e `objetos.html` (esteira, varal, folha, placar e pontilhado).
+
+Rodar de dentro da pasta `mazyos`, senão a pasta não é achada e toda página dá 404:
 
 ```bash
-python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas   # → http://localhost:4174/mostruario.html
+python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas   # → http://localhost:4174/objetos.html
 ```
 
 ## Como entram num site
@@ -57,7 +59,13 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
 | **Sequência** | `sequencia.js` | Vídeo que anda com a rolagem (quadros em canvas ou `<video>`) | Processo filmado: solda, corte, forno, drone | 4–8 MB por 120 quadros |
 | **Abertura** | `abertura.js` | Logo se desenha, porcentagem real, cortina abre o site. Uma vez por visita, nunca segura além do `maximo` | Acabamento de qualquer site | Levíssimo |
 | **Trilho** | `trilho.js` | Índice lateral preso, um traço por capítulo com a sua cor. Fora do celular | Sites longos de produto ou serviço | Levíssimo |
-| **Acabamento** | `tecnicas.css`, `texto.js` | `.grao` (grão de filme), `.pilha` (cartões que empilham), `.bento` (blocos de tamanhos diferentes), `data-letreiro` (faixa sem fim), troca de página com `@view-transition` | Qualquer mundo | CSS |
+| **Física** | `fisica.js` | Mola, balanço, laço que dorme, arremesso e voo do objeto até a ficha. Base de toda peça que reage ao dedo | Módulos novos | Levíssimo |
+| **Esteira** | `esteira.js` | Produtos girando numa pista com perspectiva falsa: para sob o mouse, gira com inércia, abre ficha e pede | Restaurante, pizzaria, padaria, doceria, adega | SVG + DOM, sem WebGL |
+| **Varal** | `varal.js` | Objetos pendurados num trilho ou corda que balançam com o arrasto; acendem ou viram | Iluminação, moda, galeria, equipe, obras | Levíssimo |
+| **Folha** | `folha.js` | A foto vira papel: a beira enrola sobre um cilindro, mostra o verso e faz sombra | Cardápio, catálogo, gráfica, papelaria | WebGL puro, sem three |
+| **Pontilhado** | `pontilhado.js` | Nome enorme em retícula, cortado pela borda, que abre caminho em volta do dedo | Rodapé de qualquer site | Canvas 2D |
+| **Placar** | `placar.js` | `odometro()`: tambores que giram no vácuo. `palhetas()`: quadro de aeroporto | Transportadora, oficina, rodoviária, bar | Levíssimo |
+| **Acabamento** | `tecnicas.css`, `texto.js` | `.grao` (grão de filme), `.pilha` (cartões que empilham), `.bento` (blocos de tamanhos diferentes), `.placa` (alumínio parafusado), `data-letreiro` (faixa sem fim), troca de página com `@view-transition` | Qualquer mundo | CSS |
 
 ### Material que cada uma precisa
 
@@ -76,6 +84,9 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
 - **Vinhetas:** a arte de cada vinheta no mesmo traço. Página com tamanho fixo em px (1200 × 1500 funciona), porque a câmera é quem encaixa na tela.
 - **Sequência:** comandos de `ffmpeg` no topo do `sequencia.js`. No bruto, câmera parada ou movimento lento: tremido de celular fica pior quando o visitante controla o tempo.
 - **Abertura:** logo em SVG. Precisa do `<script>` no `<head>` descrito no topo do arquivo, senão o site pisca antes da cortina.
+- **Esteira:** foto do produto de cima, recortada num quadrado transparente, todas com a mesma luz. 6 a 10 itens: com menos, a pista fica vazia.
+- **Varal:** objeto recortado com o ponto de pendurar no centro do topo, que é o eixo do balanço.
+- **Folha:** imagens do mesmo site, na proporção do quadro. Precisam de contraste: página clara demais some contra o verso.
 
 ## Receitas que ainda não estão prontas (montar quando o conceito pedir)
 
@@ -87,6 +98,46 @@ Escrever como módulo novo aqui, com `progresso(p)`, e pôr na bancada `mostruar
 - **Galeria em disco 3D**: anel de cartões girando em CSS 3D. Cardápio, modelos, coleção.
 - **Menu de tela cheia**: transição por `clip-path` abrindo do botão. Sites com muitas páginas.
 - **Revelação por rolagem**: a imagem se desenha sob uma máscara de pincel, como uma pintura sendo feita. Base: `pincel.js`.
+- **Troca de foto com matéria**: mancha de tinta (máscara SVG com ruído), dissolver em partículas, persiana, diafragma. Base: `superficie.js`.
+- **Rodapés-objeto**: folha rasgada presa com alfinete, envelope com barbante, tíquete destacável, assinatura escrita. Base: `linhas.js` e `clip-path`.
+- **Metrô de marcos**: linhas de metrô com a foto em cada estação, pra história da empresa ou etapas da obra. Base: `linhas.js`.
+- **Escrita à mão**: uma palavra que se escreve traço a traço, como o "hello" da Apple. Base: `linhas.js`.
+- **Imagem atrás do cursor**: fotos que nascem no rastro do mouse. Só computador, pra portfólio.
+- **Fundos em shader**: metal líquido, retícula, ASCII, topografia, nanquim. Só quando a matéria for a da empresa.
+
+## Padrão de peça premiada
+
+Lido no código de duas peças do 21st.dev. É o que separa "tem animação" de "parece um objeto de verdade". Toda técnica nova segue isso.
+
+**Peso**
+- Tempo em passos de ~17 ms e `dt` limitado: a física não explode em celular lento. `laco()` faz isso.
+- O laço dorme quando nada se mexe e para fora da tela e com a aba escondida.
+- Mola sem passar do ponto pra ir a um lugar, com balanço pra levantar ou pendurar. A mesma velocidade não serve pras duas.
+- Mola só se aproxima: mirar além do destino e parar nele faz a peça chegar andando. Sair mais rápido que chegar.
+- Ao soltar, passar a velocidade do dedo pra física: não pode ter emenda. Arremesso é média de velocidade, e segurar parado antes de soltar cancela o impulso.
+
+**Mão**
+- Só vira arrasto depois de 6 px e se andou mais de lado que de pé. `touch-action: pan-y` no resto: a página continua rolando.
+- Objeto que se move embaixo de um mouse parado precisa de teste por conta a cada quadro: o navegador só avisa quando o mouse anda.
+- Depois de soltar, nada reage ao mouse até ele andar de novo.
+- No toque, o primeiro toque levanta e o segundo abre. Com mouse, passar levanta e clicar abre.
+- O canto reage antes do clique: passar perto da beira já levanta um pouco a folha.
+
+**Parecer físico**
+- Volume em camadas: sombra borrada, lateral (a mesma forma descida), tampo, detalhes, fio de luz branco de menos de 1 px por cima.
+- Escurecer só o objeto com `mask: url(foto.png)`, não um retângulo por cima.
+- Perspectiva falsa (escala e achatamento por conta) em vez de 3D, quando basta: roda em qualquer celular.
+- Grão preso à matéria, não à tela: o grão do papel anda com o papel.
+- Abrir a ficha: o objeto voa em arco de onde estava até lá (`voar()`) e a miniatura some enquanto isso.
+
+**Não quebrar**
+- Teclado completo: uma parada de Tab no grupo, setas pra andar, Enter abre, Esc fecha, foco volta ao objeto. `<dialog>` resolve a maior parte.
+- Decoração com `aria-hidden` e uma região `aria-live` dizendo o que está na mão.
+- "Reduzir movimento" muda o comportamento em vez de desligar: passa a andar item por item.
+- Botão de pausa em tudo que se move sozinho. Autoplay pausa onde a pessoa vai agir e para de vez quando ela assume.
+- Começar a desenhar na primeira imagem que chegar. Imagem quebrada custa um item, nunca a peça inteira, e sem WebGL mostra a foto.
+- Medir o tamanho do próprio bloco com `ResizeObserver`, não o da tela: a peça funciona em coluna estreita.
+- Cor com `color-mix` a partir de tinta e fundo: a peça herda o tema do cliente sozinha.
 
 ## Regras
 

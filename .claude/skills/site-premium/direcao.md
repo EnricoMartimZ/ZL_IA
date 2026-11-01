@@ -63,6 +63,25 @@ O mundo diz como o site parece; a estrutura diz como ele anda. Não usar sempre 
 | **Personagem** | alguém vive a história em cenas | cervejaria, escola, pet, marca com humor |
 | **Prova** | números, selos e casos em escalada | contabilidade, advocacia, B2B pesado, certificados |
 
+### O objeto é a interface
+
+O melhor padrão achado no 21st.dev: em vez de falar do produto, a página **é** o produto. Teste da frase: "uma loja de ___ que você ___, aqui na página". Luminárias que você acende. Um cardápio que dá voltas. Se a frase fecha, o site já tem conceito. Se não fecha, procurar outro objeto.
+
+| Ramo | Objeto na tela | O visitante | Técnica |
+|---|---|---|---|
+| Iluminação | pendentes num trilho | passa a mão e acende, a sala escurece | `varal` com `acender` |
+| Restaurante / rodízio / pizzaria | pratos numa esteira | para, gira, escolhe, pede | `esteira` |
+| Moda / uniformes | cabides numa arara | empurra e vê a peça balançar | `varal` |
+| Ferragens / ferramentas | painel perfurado | pega a ferramenta do gancho | `varal` + `mesa` |
+| Gráfica / papelaria / catálogo | folhas impressas | vira a página com o dedo | `folha` |
+| Galeria / fotógrafo / molduras | quadros na parede | rearranja, abre a ficha | `varal` |
+| Equipe de qualquer empresa | crachás pendurados | vira e lê quem é | `varal` com `virar` |
+| Pousada / hotel | quadro de chaves | pega a chave do quarto | `varal` com `virar` |
+| Oficina / transportadora | quadro de saídas, odômetro | vê o que sai hoje | `placar` |
+| Limpeza / funilaria | a peça suja | limpa com o dedo | `pincel` |
+| Loteamento / rede de lojas | o mapa | anda até o lugar | `territorio` |
+| Clientes e certificações | placas parafusadas | só olha: já é prova | `.placa` |
+
 ### Sem foto boa
 
 Boa parte das empresas pequenas não tem foto que aguente tela cheia. Antes de pedir ensaio ou gerar imagem,
