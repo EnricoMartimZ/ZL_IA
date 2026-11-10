@@ -258,3 +258,137 @@
   .t-letreiro, .dia-folhas svg { animation: none; }
   [data-vinheta], .abertura { transition: none; }
 }
+
+/* ==========================================================================================
+   Peças da segunda passada (roda, medida, carta, troca, lista, profundidade, cursor, menu)
+   ========================================================================================== */
+
+/* ---------- roda: produtos numa roda com o centro abaixo da tela ---------- */
+.roda { position: relative; overflow: hidden; height: min(86svh, 760px); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.roda-disco { position: absolute; border-radius: 50%; background: var(--roda-cor, #7a2230); }
+.roda-disco svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.roda-disco text { font-size: 62px; letter-spacing: .05em; text-transform: uppercase; fill: var(--roda-frase, #f0e6d6); }
+.roda-pista { position: absolute; inset: 0; outline: none; cursor: grab; }
+.roda-pista.pegando { cursor: grabbing; }
+.roda-pista:focus-visible { outline: 2px solid var(--tec-tinta); outline-offset: -6px; }
+.roda-item { position: absolute; left: 0; top: 0; translate: -50% -50%; width: var(--roda-item, 240px); padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; will-change: transform; -webkit-tap-highlight-color: transparent; }
+.roda-item > * { display: block; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 18px 20px #00000038); }
+.roda-legenda { position: absolute; left: 0; right: 0; bottom: clamp(14px, 4vh, 36px); margin: 0; text-align: center; pointer-events: none; z-index: 120; color: var(--roda-legenda, #fff); }
+.roda-legenda b { display: block; font-size: clamp(20px, 2.4vw, 30px); font-weight: 600; }
+.roda-legenda span { font: 500 11px/1.6 var(--tec-mono); letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+
+/* ---------- medida: um número por tela + régua na unidade do ofício ---------- */
+.num { position: absolute; inset: 0; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 0 clamp(16px, 4vw, 56px); color: var(--tec-tinta); pointer-events: none; }
+.num-anel { position: absolute; left: 50%; top: 50%; width: min(72svh, 82vw); aspect-ratio: 1; translate: -50% -50%; overflow: visible; }
+.num-anel circle { fill: none; stroke: currentColor; stroke-width: 5; stroke-dasharray: .2 .8; opacity: .55; }
+.num-rotulo { justify-self: start; font-size: clamp(17px, 2.3vw, 34px); letter-spacing: -.01em; }
+.num-valor { font-size: clamp(64px, 17vw, 270px); line-height: 1; letter-spacing: -.045em; font-variant-numeric: tabular-nums; opacity: min(1, calc(.2 + var(--t, 1) * 5)); white-space: nowrap; }
+.num-valor b { font-weight: inherit; }
+.num-valor small { display: inline-block; margin-left: .5em; font: 500 max(11px, .07em)/1 var(--tec-mono); letter-spacing: .16em; text-transform: uppercase; vertical-align: top; translate: 0 1.2em; opacity: .75; }
+.num-indice { justify-self: end; font: 500 clamp(15px, 2vw, 28px)/1 var(--tec-mono); opacity: .7; }
+.num-leitura { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.regua { position: fixed; inset: 0 0 auto 0; z-index: 60; display: flex; align-items: center; gap: 14px; padding: 10px clamp(12px, 2.4vw, 32px); font: 500 11px/1 var(--tec-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--tec-tinta); pointer-events: none; }
+.regua-marcas { flex: 1; display: flex; gap: 3px; height: 12px; }
+.regua-marcas i { flex: 1; background: currentColor; opacity: .16; transition: opacity .35s, background-color .35s; }
+.regua-marcas i.cheia { opacity: 1; background: var(--regua-cor, currentColor); }
+.regua-valor { min-width: 8ch; text-align: right; font-variant-numeric: tabular-nums; }
+/* site que alterna seção clara e escura: a régua inverte sozinha sobre o que estiver atrás */
+.regua.contraste { color: #fff; --regua-cor: #fff; mix-blend-mode: difference; }
+
+/* ---------- carta: figurinha que inclina, brilha e vira ---------- */
+.carta { position: relative; perspective: 900px; touch-action: pan-y; -webkit-tap-highlight-color: transparent; --carta-raio: 14px; }
+.carta[role="button"] { cursor: pointer; }
+.carta:focus-visible { outline: 2px solid var(--tec-tinta); outline-offset: 6px; border-radius: var(--carta-raio); }
+.carta-giro { position: relative; height: 100%; transform-style: preserve-3d; will-change: transform; }
+.carta-frente, .carta-verso { border-radius: var(--carta-raio); overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.carta-frente { position: relative; height: 100%; }
+.carta-verso { position: absolute; inset: 0; transform: rotateY(180deg); }
+.carta-brilho { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .45s; mix-blend-mode: color-dodge;
+  background:
+    radial-gradient(circle at var(--mx, 50%) var(--my, 50%), #ffffffb8, transparent 46%),
+    repeating-linear-gradient(115deg, #ff5e7e 0%, #ffd76b 10%, #6bffb1 20%, #6bc8ff 30%, #b88cff 40%, #ff5e7e 50%);
+  background-size: 100% 100%, 240% 240%;
+  background-position: center, var(--mx, 50%) var(--my, 50%); }
+.carta.viva .carta-brilho { opacity: var(--carta-brilho, .5); }
+
+/* ---------- troca: foto que troca com matéria (o canvas cobre as <img>, que são o plano B) ---------- */
+.troca { position: relative; overflow: hidden; }
+.troca-foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s; }
+.troca-foto.ativa { opacity: 1; }
+.troca .tec-canvas { z-index: 1; }
+
+/* ---------- lista viva: a cena se monta pro item apontado ---------- */
+.lista [data-item] { transition: opacity .35s; }
+.lista [data-item]:not(.ativo) { opacity: .46; }
+.lista-cenas { position: relative; }
+.lista [data-cena] { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; }
+.lista [data-cena].ativa { opacity: 1; visibility: visible; animation: lista-entra .7s var(--tec-ease) both; }
+.lista [data-cena].saindo { visibility: visible; z-index: 1; animation: lista-cai .6s cubic-bezier(.5, 0, .9, .4) both; }
+@keyframes lista-entra { from { opacity: 0; transform: translateX(14%) rotate(5deg); } }
+@keyframes lista-cai { from { opacity: 1; } to { opacity: 0; transform: translateY(28%) rotate(-16deg); } }
+
+/* ---------- profundidade: fila pro fundo da tela ---------- */
+.fila { position: relative; overflow: hidden; height: min(84svh, 760px); outline: none; touch-action: pan-y; }
+.fila:focus-visible { outline: 2px solid var(--tec-tinta); outline-offset: -6px; }
+.fila [data-fila] { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; will-change: transform, opacity; }
+.fila-legenda { position: absolute; left: 0; right: 0; bottom: clamp(12px, 3vh, 28px); margin: 0; z-index: 300; text-align: center; pointer-events: none; font: 500 12px/1 var(--tec-mono); letter-spacing: .2em; text-transform: uppercase; }
+
+/* ---------- cursor: rótulo de intenção, ímã, rastro e lupa ---------- */
+.cursor { position: fixed; left: 0; top: 0; z-index: 9999; pointer-events: none; }
+.cursor-rotulo { position: absolute; left: 16px; top: 16px; padding: 8px 13px; border-radius: 99px; background: var(--cursor-fundo, #111); color: var(--cursor-tinta, #fff); font: 500 11px/1 var(--tec-mono); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; opacity: 0; scale: .6; transform-origin: 0 0; transition: opacity .25s, scale .35s var(--tec-ease); }
+.cursor.com-rotulo .cursor-rotulo { opacity: 1; scale: 1; }
+[data-ima] { transition: translate .18s ease-out; }
+.rastro { position: relative; overflow: hidden; }
+.rastro-foto { position: absolute; width: clamp(140px, 16vw, 240px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; opacity: 0; pointer-events: none; }
+.lupa { position: relative; touch-action: pan-y; cursor: zoom-in; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.lupa img { display: block; width: 100%; -webkit-user-drag: none; }
+.lupa-lente { position: absolute; z-index: 5; width: clamp(130px, 22vw, 210px); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background-color: var(--tec-fundo, #fff); background-repeat: no-repeat; box-shadow: 0 0 0 2px #fff, 0 18px 40px #00000059; opacity: 0; scale: .4; transition: opacity .2s, scale .3s var(--tec-ease); pointer-events: none; }
+.lupa.ampliando .lupa-lente { opacity: 1; scale: 1; }
+@media (hover: none) { .lupa-lente { translate: -50% -118%; } }   /* no toque a lente sobe: o dedo não cobre */
+
+/* ---------- menu de tela cheia: abre em círculo a partir do botão ---------- */
+/* O botão (ou o cabeçalho onde ele mora) precisa ficar acima do painel: z-index maior que 900. */
+.menu-botao { position: relative; z-index: 901; }
+.menu-cheio { position: fixed; inset: 0; z-index: 900; display: grid; place-content: center; gap: .1em; padding: clamp(72px, 12vh, 120px) clamp(20px, 6vw, 80px); background: var(--menu-fundo, #111); color: var(--menu-tinta, #fff); visibility: hidden; overflow: auto; clip-path: circle(0 at var(--mx, 100%) var(--my, 0)); transition: clip-path .7s var(--tec-ease), visibility 0s .7s; }
+.menu-cheio.aberto { visibility: visible; clip-path: circle(150vmax at var(--mx, 100%) var(--my, 0)); transition: clip-path .9s var(--tec-ease); }
+.menu-cheio a { display: block; color: inherit; text-decoration: none; font-size: clamp(34px, 7vw, 96px); line-height: 1.02; letter-spacing: -.03em; opacity: 0; transform: translateY(26px); transition: opacity .3s, transform .3s; }
+.menu-cheio.aberto a { opacity: 1; transform: none; transition: opacity .6s calc(.22s + var(--i, 0) * 55ms), transform .8s var(--tec-ease) calc(.22s + var(--i, 0) * 55ms); }
+html.menu-travado { overflow: hidden; }
+
+/* ---------- acabamento novo ---------- */
+/* sanduíche: a palavra gigante atrás, o objeto recortado na frente e o contorno da mesma palavra por cima */
+.sanduiche { display: grid; place-items: center; isolation: isolate; overflow: hidden; }
+.sanduiche > * { grid-area: 1 / 1; }
+.sanduiche-palavra { z-index: 0; margin: 0; font-size: clamp(90px, 25vw, 420px); line-height: .8; letter-spacing: -.05em; white-space: nowrap; }
+.sanduiche-objeto { z-index: 1; }
+.sanduiche-contorno { z-index: 2; color: transparent; -webkit-text-stroke: 1.5px var(--tec-tinta); pointer-events: none; }
+/* selo redondo com o texto girando em volta (o SVG com textPath está no README) */
+.selo-giro { display: inline-grid; place-items: center; width: clamp(92px, 11vw, 140px); aspect-ratio: 1; border-radius: 50%; }
+.selo-giro > * { grid-area: 1 / 1; }
+.selo-giro svg { width: 100%; height: 100%; overflow: visible; animation: selo-gira 16s linear infinite; }
+.selo-giro text { font: 600 13.5px/1 var(--tec-mono); letter-spacing: .16em; text-transform: uppercase; fill: currentColor; }
+@keyframes selo-gira { to { rotate: 360deg; } }
+/* meio-tom: a foto vira retícula de jornal só com CSS. --ponto muda o tamanho do grão */
+.meio-tom { position: relative; overflow: hidden; background: #fff; filter: grayscale(1) contrast(22); isolation: isolate; }
+.meio-tom img { display: block; width: 100%; height: 100%; object-fit: cover; filter: blur(.7px); }
+.meio-tom::after { content: ""; position: absolute; inset: -50%; background: radial-gradient(circle at center, #000 0, #fff 82%); background-size: var(--ponto, 5px) var(--ponto, 5px); mix-blend-mode: multiply; rotate: 22deg; pointer-events: none; }
+/* vidro: barra, cartão ou selo que deixa ver e entorta de leve o que passa atrás */
+.vidro { background: linear-gradient(135deg, #ffffff3d, #ffffff14); border: 1px solid #ffffff5c; -webkit-backdrop-filter: blur(14px) saturate(1.6); backdrop-filter: blur(14px) saturate(1.6); box-shadow: inset 0 1px 0 #ffffff8a, inset 0 -10px 18px -10px #ffffff4d, 0 10px 30px #0000002e; }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .vidro { background: color-mix(in srgb, var(--tec-fundo, #fff) 88%, transparent); } }
+/* dois pesos: a mesma frase em grotesca pesada e, no <em>, serifada leve */
+.dois-pesos { text-transform: uppercase; line-height: .92; letter-spacing: -.03em; font-weight: 800; }
+.dois-pesos em { font-style: normal; font-weight: 300; letter-spacing: -.01em; font-family: var(--tec-serifada, "Fraunces", Georgia, serif); }
+
+@media (max-width: 560px) {
+  .num { grid-template-columns: 1fr; grid-template-rows: 1fr auto 1fr; justify-items: center; text-align: center; }
+  .num-rotulo { justify-self: center; align-self: end; }
+  .num-indice { justify-self: center; align-self: start; }
+  .regua-marcas { gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selo-giro svg { animation: none; }
+  .lista [data-cena].ativa, .lista [data-cena].saindo { animation: none; }
+  .lista [data-cena].saindo { visibility: hidden; }
+  .menu-cheio, .menu-cheio.aberto { transition: none; }
+  .menu-cheio a, .menu-cheio.aberto a { transition: none; }
+}

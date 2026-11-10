@@ -6,7 +6,8 @@ vem da direção criativa (`direcao.md`) e do mundo escolhido (`mundos.md`) — 
 - **§1 a §4** detalham o mundo *Noturno cinematográfico* (o `modelo/`). Nos outros mundos, valem a ideia de
   restrição (poucas cores com papel definido, duas vozes tipográficas, muito espaço, movimento com significado) e
   as regras do mundo em `mundos.md`.
-- **§5 a §8** (conversão, honestidade, desempenho, ser encontrado) valem pra **todo** site, em qualquer mundo.
+- **§5 a §10** (conversão, honestidade, desempenho, ser encontrado, contrato de design, chamada final e rodapé)
+  valem pra **todo** site, em qualquer mundo.
 
 ## 1. Cor: escuro + um destaque (mundo Noturno)
 
@@ -100,3 +101,49 @@ vem da direção criativa (`direcao.md`) e do mundo escolhido (`mundos.md`) — 
 - Dados estruturados (JSON-LD) com o tipo mais específico do negócio, endereço, horário e coordenadas — é o que alimenta o Google e o Maps. Nunca `aggregateRating` com avaliações do Google.
 - Uma página por serviço importante, com perguntas frequentes reais (viram resultado no Google).
 - Todo botão que gera contato é medido (`clique_whatsapp`, `agenda_enviada`, `orcamento_enviado`...). Site que não mede não justifica mensalidade.
+
+## 9. Contrato de design (`DESIGN.md` do site)
+
+Antes do CSS, escrever `clientes/<Nome>/DESIGN.md` (fica ao lado do `conceito.md`, fora da pasta publicada). É o
+que mantém o site coerente da primeira seção à última, e o que deixa a manutenção de daqui a seis meses com a
+mesma cara. Formato aprendido no Refero, que reduz cada site a regras que uma IA consegue seguir:
+
+```
+# DESIGN — <cliente>
+Norte: <lugar + material + luz>
+Resumo: <três linhas: como a página se comporta, o que domina, o que fica quieto>
+
+## Cores (cada uma com papel)
+--fundo #…… a tela        --superficie #…… faixas e cartões     --tinta #…… texto
+--apagado #…… rótulos     --acao #…… só botão e link            --fio rgba(…) linhas de 1 px
+
+## Tipografia
+Título: <fonte> <peso>. Escala <razão> a partir de <base> px: 14 / 17 / 21 / 28 / 40 / 64 / 96.
+Aperto por tamanho: -0,035em em 96 · -0,02em em 40 · normal em 17. Entrelinha: 0,95 no título, 1,5 no texto.
+Rótulo: <fonte>, 11 px, caixa alta, 0,16em.     Texto: no máximo 62 caracteres por linha.
+
+## Espaço e forma
+Respiro entre seções: <px>. Vão entre itens: <px>. Raio: <px>, só em <onde>. Sombra: <sim/não>. Fio: 1 px.
+
+## Movimento
+Assinatura: <técnica e o que ela significa>. Resto: <a única regra>. Duração e curva: <…>.
+
+## Fazer
+- <regra com número. Ex.: a cor de ação aparece no botão e em uma palavra do último título, em mais nada>
+
+## Não fazer
+- <o erro provável. Ex.: não usar degradê; a foto do produto é a única fonte de cor>
+```
+
+- Toda regra tem **número ou lugar**. "Usar bastante espaço" não é regra; "140 px entre seções" é.
+- Decisão nova que o contrato não cobre: decidir, **escrever no contrato** e só então aplicar.
+- No fim, conferir o site contra o contrato, linha por linha. O que fugiu, ou volta, ou muda o contrato de propósito.
+
+## 10. Chamada final e rodapé
+
+Vistos nos cortes de página do Godly e nos rodapés do 21st.dev:
+
+- **A chamada final é uma frase, um botão e a textura do mundo.** Não é formulário, não tem três botões. A frase é a promessa do site dita de novo, em outras palavras.
+- **"O que acontece depois"** ao lado do botão, em três linhas com prazo de verdade: você manda a mensagem, a gente responde em até X, o serviço é marcado. Tira o medo de clicar.
+- **O rodapé fecha o mundo que a abertura abriu.** A grama da primeira tela vira o chão dos links; o nome da empresa gigante em retícula (`pontilhado.js`); o carimbo da prancha; as colinas. Rodapé nunca é só uma lista de links cinza.
+- **B2B:** logos ou nomes de clientes atendidos (com autorização) em faixa logo depois da abertura, antes de qualquer explicação.

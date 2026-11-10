@@ -239,7 +239,7 @@
   window.__folha = folha(document.querySelector('#cardapio'), { paginas, papel: '#ede8dc', aoMudar: (i) => { legF.innerHTML = `<span>Página ${i + 1} de 4. Puxe a beira da folha.</span>`; } });
 
   // placar
-  document.querySelectorAll('[data-saida]').forEach((el) => palhetas(el, { texto: el.dataset.saida, largura: 30 }));
+  document.querySelectorAll('[data-saida]').forEach((el) => palhetas(el, { texto: el.dataset.saida, largura: 31 }));
   odometro(document.querySelector('#km'), { valor: 1284093, casas: 7 });
 
   pontilhado(document.querySelector('#assinatura'), { texto: 'marca', fonte: '800 100px "Inter Tight"', tinta: '#e7e2d6', quente: '#ff7a2f', corte: 0.18 });

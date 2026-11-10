@@ -1,0 +1,308 @@
+<!doctype html>
+<!--
+  Quarta bancada: as peças da segunda passada pelas galerias (roda, medida, carta, troca, lista viva,
+  profundidade, cursor, lupa, menu e o acabamento novo). A arte é toda desenhada aqui (SVG e canvas),
+  só pra testar: num site de verdade entram as fotos e os dados do cliente.
+  Rodar: python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas  → http://localhost:4174/arsenal.html
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arsenal · bancada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=Inter+Tight:wght@400;500;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tecnicas.css">
+<style>
+  :root { --tec-tinta: #111; --tec-fundo: #f7f3ea; --tec-mono: "JetBrains Mono", monospace; --regua-cor: #e4572e; }
+  * { box-sizing: border-box; }
+  html { background: #f7f3ea; color: #111; }
+  body { margin: 0; font: 400 17px/1.5 "Inter Tight", system-ui, sans-serif; overflow-x: clip; }
+  h1, h2, p, figure, ul { margin: 0; padding: 0; }
+  ul { list-style: none; }
+  section { position: relative; }
+  .marca { display: block; font: 500 11px var(--tec-mono); letter-spacing: .24em; text-transform: uppercase; color: #6b6a66; }
+  h2 { font-weight: 500; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+  .d { max-width: 46ch; color: #55544f; }
+  .cabeca { display: grid; justify-items: center; gap: 8px; text-align: center; padding: clamp(56px, 10vh, 100px) 16px 28px; }
+  .chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 0; border-radius: 99px; background: #111; color: #fff; font: 600 15px "Inter Tight", sans-serif; text-decoration: none; cursor: pointer; }
+  .chip.claro { background: #fff; color: #111; box-shadow: inset 0 0 0 1px #0000002b; }
+  .chip[aria-pressed="true"] { background: #e4572e; color: #fff; box-shadow: none; }
+  .fileira { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+
+  .capa { min-height: 70svh; display: grid; align-content: end; gap: 16px; padding: clamp(16px, 4vw, 56px); }
+  .capa h1 { font-size: clamp(44px, 9vw, 150px); }
+  #abre-menu { position: fixed; top: 34px; right: clamp(12px, 2.4vw, 32px); }
+
+  #s-roda { background: #fdf3e7; }
+  #s-roda .roda { --roda-frase: #f0652f; font-family: "Fraunces", serif; }
+
+  #s-num { background: #0b0c0e; color: #f1ede4; --tec-tinta: #f1ede4; }
+  #s-num .marca { color: #8f8b82; }
+  #s-num .peca { position: absolute; left: 50%; top: 50%; width: min(60svh, 64vw); translate: -50% -50%; opacity: .5; rotate: calc(var(--p, 0) * 140deg); }
+  #s-num .titulo { position: absolute; left: clamp(16px, 4vw, 56px); top: 54px; z-index: 4; display: grid; gap: 6px; }
+
+  #cartas { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: clamp(16px, 3vw, 36px); max-width: 1000px; margin: 0 auto; padding: 12px clamp(16px, 4vw, 56px) 72px; }
+  .figurinha { aspect-ratio: 5 / 7; }
+  .figurinha .carta-frente { display: grid; grid-template-rows: 1fr auto; background: var(--c); color: #fff; box-shadow: 0 16px 34px #00000030; border: 5px solid #f3d27a; }
+  .figurinha .rosto { display: grid; place-items: center; font: 800 clamp(64px, 9vw, 110px)/1 "Inter Tight"; background: radial-gradient(circle at 50% 38%, #ffffff40, transparent 62%); }
+  .figurinha .nome { padding: 10px 12px 12px; background: #00000047; font: 500 11px/1.5 var(--tec-mono); letter-spacing: .14em; text-transform: uppercase; }
+  .figurinha .nome b { display: block; font: 600 17px/1.2 "Inter Tight"; letter-spacing: 0; text-transform: none; }
+  .figurinha .carta-verso { display: grid; align-content: center; gap: 8px; padding: 18px; background: #14130f; color: #f3ecd9; font-size: 14px; border: 5px solid #f3d27a; }
+
+  #galeria { width: min(100% - 32px, 1020px); aspect-ratio: 16 / 9; margin: 0 auto 18px; border-radius: 8px; box-shadow: 0 24px 60px #00000030; cursor: pointer; }
+
+  #s-lista .lista { display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 26rem); gap: clamp(24px, 6vw, 80px); justify-content: center; align-items: center; padding: 8px clamp(16px, 4vw, 56px) 80px; }
+  #s-lista [data-item] { display: block; padding: 10px 16px; border-radius: 14px; color: inherit; text-decoration: none; font: 500 clamp(26px, 3.4vw, 44px)/1.1 "Fraunces", serif; }
+  #s-lista [data-item] small { display: block; font: 500 11px/1.8 var(--tec-mono); letter-spacing: .14em; text-transform: uppercase; color: #8a6a4d; }
+  #s-lista [data-item].ativo { background: #fff; box-shadow: 0 8px 24px #0000001a; }
+  #s-lista .lista-cenas { aspect-ratio: 1; border-radius: 28px; background: radial-gradient(circle at 50% 40%, #fff8ec, #e8cfae); overflow: hidden; }
+  #s-lista [data-cena] { display: grid; place-items: center; }
+  #s-lista [data-cena] svg { width: 68%; overflow: visible; }
+  #s-lista .liquido { transform-box: fill-box; transform-origin: 50% 100%; }
+  #s-lista .ativa .liquido { animation: enche 1.1s .45s cubic-bezier(.3, .7, .2, 1) both; }
+  #s-lista .ativa .fio { animation: fio 1.1s .3s ease-in both; }
+  @keyframes enche { from { transform: scaleY(0); } }
+  @keyframes fio { 0% { opacity: 0; transform: scaleY(0); } 15%, 80% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; } }
+  @media (max-width: 760px) { #s-lista .lista { grid-template-columns: 1fr; } #s-lista .lista-cenas { order: -1; max-width: 320px; width: 100%; margin: auto; } }
+
+  #s-fila { background: #101012; color: #f4f1ea; --tec-tinta: #f4f1ea; }
+  #s-fila .marca { color: #9a968c; }
+  #s-fila .fila { height: 100%; }
+  #s-fila [data-fila] { width: min(46svh, 62vw); aspect-ratio: 3 / 4; border-radius: 10px; background: var(--c); display: grid; place-items: center; font: 800 clamp(60px, 12vw, 150px)/1 "Inter Tight"; color: #ffffffd9; box-shadow: 0 30px 60px #00000080; }
+  #s-fila .titulo { position: absolute; left: clamp(16px, 4vw, 56px); top: 54px; z-index: 400; display: grid; gap: 6px; }
+
+  #obras { height: min(64svh, 520px); display: grid; place-items: center; background: #ece6d8; margin: 0 clamp(16px, 4vw, 56px); border-radius: 12px; }
+  #obras p { font: 300 italic clamp(28px, 5vw, 64px)/1 "Fraunces", serif; pointer-events: none; }
+  #produto { width: min(100% - 32px, 560px); margin: 40px auto 0; border-radius: 12px; overflow: hidden; }
+
+  #s-acab { display: grid; gap: 40px; padding: 0 clamp(16px, 4vw, 56px) 90px; }
+  #s-acab .sanduiche { height: min(70svh, 560px); background: #e4572e; color: #111; border-radius: 12px; --tec-tinta: #111; font-weight: 800; }
+  #s-acab .sanduiche svg { width: min(38svh, 44vw); filter: drop-shadow(0 30px 30px #00000052); }
+  .dupla { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: center; }
+  .dupla .meio-tom { aspect-ratio: 4 / 3; border-radius: 8px; }
+  .cena-vidro { position: relative; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; display: grid; place-items: center; background: conic-gradient(from 40deg at 40% 50%, #e4572e, #f3d27a, #2e86ab, #7a2230, #e4572e); }
+  .cena-vidro .vidro { padding: 22px 28px; border-radius: 22px; color: #fff; font-weight: 600; font-size: 20px; }
+  .selos { display: flex; gap: 28px; align-items: center; justify-content: center; flex-wrap: wrap; }
+  .selo-giro { background: #111; color: #f7f3ea; }
+  .selo-giro b { font-size: 26px; }
+  .dois-pesos { font-size: clamp(40px, 8vw, 120px); text-align: center; }
+
+  #menu { --menu-fundo: #e4572e; --menu-tinta: #111; }
+  #menu small { font: 500 11px/1.8 var(--tec-mono); letter-spacing: .16em; text-transform: uppercase; margin-top: 2em; }
+  footer { padding: 40px 16px 80px; text-align: center; color: #6b6a66; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div id="regua"></div>
+<button class="chip" id="abre-menu">Menu</button>
+<nav id="menu" aria-label="Menu da bancada">
+  <a href="#s-roda">Roda</a>
+  <a href="#s-num">Número por tela</a>
+  <a href="#s-cartas">Figurinhas</a>
+  <a href="#s-troca">Troca com matéria</a>
+  <a href="#s-lista">Lista viva</a>
+  <a href="#s-fila">Profundidade</a>
+  <small>Rua de exemplo, 100 · seg a sáb, 8h às 18h</small>
+</nav>
+
+<header class="capa">
+  <span class="marca">/site-premium · bancada 04</span>
+  <h1 class="dois-pesos">Arsenal <em>completo</em></h1>
+  <p class="d">Nove peças novas e o acabamento que veio com elas. A régua lá em cima mede a página em quilômetros: é a régua do ofício. O botão Menu abre em círculo.</p>
+</header>
+
+<section id="s-roda">
+  <div class="cabeca"><span class="marca">roda.js</span><h2>Uma conserva que você gira, aqui na página</h2><p class="d">Arraste, use as setas ou toque num pote ao lado. O disco toma a cor de cada um.</p></div>
+  <div id="potes"></div>
+</section>
+
+<section class="palco" data-telas="4" id="s-num">
+  <div class="palco-quadro" id="q-num">
+    <div class="titulo"><span class="marca">medida.js · numeros()</span><h2>Um número por tela</h2></div>
+    <svg class="peca" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+      <circle cx="100" cy="100" r="92"/><circle cx="100" cy="100" r="60"/><circle cx="100" cy="100" r="22"/>
+      <g id="furos"></g>
+    </svg>
+  </div>
+</section>
+
+<section id="s-cartas">
+  <div class="cabeca"><span class="marca">carta.js</span><h2>O time em figurinhas</h2><p class="d">Passe o mouse pra ver a película. Toque, Enter ou Espaço vira a carta.</p></div>
+  <div id="cartas"></div>
+</section>
+
+<section id="s-troca">
+  <div class="cabeca"><span class="marca">troca.js</span><h2>Trocar de foto com matéria</h2><p class="d">Toque na foto: a próxima nasce de onde o dedo encostou.</p>
+    <div class="fileira" id="modos"></div></div>
+  <div id="galeria"></div>
+</section>
+
+<section id="s-lista">
+  <div class="cabeca"><span class="marca">lista.js</span><h2>Um cardápio que se serve</h2><p class="d">Aponte um item: a xícara chega e enche; a anterior tomba.</p></div>
+  <div id="cardapio">
+    <ul id="itens"></ul>
+    <div class="lista-cenas" id="cenas"></div>
+  </div>
+</section>
+
+<section class="palco" data-telas="4" id="s-fila">
+  <div class="palco-quadro">
+    <div class="titulo"><span class="marca">profundidade.js</span><h2>A fila anda com a rolagem</h2>
+      <div class="fileira" style="justify-content:start"><button class="chip claro" id="b-fila" aria-pressed="true">Passarela</button><button class="chip claro" id="b-tunel" aria-pressed="false">Túnel</button></div></div>
+    <div id="fila"></div>
+  </div>
+</section>
+
+<section id="s-cursor">
+  <div class="cabeca"><span class="marca">cursor.js</span><h2>O mouse entra no mundo da marca</h2><p class="d">Só no computador: o rótulo diz o que o clique faz, os botões puxam o ponteiro e as fotos nascem no rastro. A lupa funciona também com o dedo: segure e arraste.</p>
+    <div class="fileira"><a class="chip" href="#s-roda" data-ima data-cursor="Voltar pra roda">Botão com ímã</a><a class="chip claro" href="#s-fila" data-ima data-cursor="Ver a fila">Outro ímã</a></div></div>
+  <div id="obras" data-cursor="Mexa o mouse"><p>mexa o mouse aqui</p></div>
+  <figure id="produto" data-cursor="Segure pra ampliar"></figure>
+</section>
+
+<section>
+  <div class="cabeca"><span class="marca">tecnicas.css</span><h2>Acabamento novo</h2><p class="d">Sanduíche, selo girando, meio-tom, vidro e título em dois pesos.</p></div>
+  <div id="s-acab">
+    <div class="sanduiche">
+      <p class="sanduiche-palavra">POLIDO</p>
+      <svg class="sanduiche-objeto" viewBox="0 0 200 200" aria-hidden="true"><defs><radialGradient id="aco" cx="35%" cy="30%"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#b9bcc2"/><stop offset="1" stop-color="#4b4e55"/></radialGradient></defs><path fill="url(#aco)" fill-rule="evenodd" d="M100 8a92 92 0 1 0 0 184a92 92 0 0 0 0-184zm0 54a38 38 0 1 1 0 76a38 38 0 0 1 0-76z"/></svg>
+      <p class="sanduiche-palavra sanduiche-contorno" aria-hidden="true">POLIDO</p>
+    </div>
+    <div class="dupla">
+      <div class="meio-tom" id="tom"></div>
+      <div class="cena-vidro"><div class="vidro">Vidro sobre a cena</div></div>
+    </div>
+    <div class="selos">
+      <span class="selo-giro"><svg viewBox="0 0 120 120" aria-hidden="true"><path id="volta" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0" fill="none"/><text><textPath href="#volta">feito na casa · desde sempre · feito na casa · </textPath></text></svg><b>★</b></span>
+      <p class="dois-pesos">Ferro <em>e fogo</em></p>
+    </div>
+  </div>
+</section>
+
+<footer>Fim da bancada. Tudo aqui é arte de teste desenhada em código.</footer>
+
+<script type="module">
+  import { palco, rolagemSuave } from './palco.js';
+  import { roda } from './roda.js';
+  import { numeros, regua } from './medida.js';
+  import { carta } from './carta.js';
+  import { troca } from './troca.js';
+  import { lista } from './lista.js';
+  import { fila } from './profundidade.js';
+  import { cursor, rastro, lupa } from './cursor.js';
+  import { menu } from './menu.js';
+
+  rolagemSuave();
+  const $ = (s) => document.querySelector(s);
+
+  // arte de teste: uma "foto" pintada em canvas
+  function arte(c1, c2, texto, w = 1280, h = 720) {
+    const cv = Object.assign(document.createElement('canvas'), { width: w, height: h });
+    const x = cv.getContext('2d');
+    const g = x.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, c1); g.addColorStop(1, c2);
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    for (let i = 0; i < 26; i++) {
+      x.fillStyle = `rgba(255,255,255,${0.04 + (i % 5) * 0.03})`;
+      x.beginPath(); x.arc((i * 197) % w, (i * 331) % h, 30 + ((i * 53) % 150), 0, 7); x.fill();
+    }
+    x.fillStyle = 'rgba(0,0,0,.55)'; x.font = `800 ${h * 0.5}px "Inter Tight", sans-serif`; x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText(texto, w / 2, h / 2);
+    return cv.toDataURL('image/jpeg', 0.86);
+  }
+
+  regua($('#regua'), { de: 0, ate: 1284, unidade: 'km', marcas: 56 });
+  $('#regua').classList.add('contraste');
+  menu($('#abre-menu'), $('#menu'));
+
+  // ----- roda -----
+  const pote = (cor, tampa, nome) => `<svg viewBox="0 0 200 260" role="img" aria-label="${nome}">
+    <rect x="36" y="6" width="128" height="40" rx="8" fill="${tampa}"/><rect x="36" y="30" width="128" height="6" fill="#00000026"/>
+    <rect x="26" y="44" width="148" height="206" rx="26" fill="#f6efe2"/><rect x="26" y="96" width="148" height="112" fill="${cor}"/>
+    <rect x="38" y="52" width="10" height="186" rx="5" fill="#ffffff7a"/>
+    <text x="100" y="158" text-anchor="middle" font-family="Fraunces, serif" font-size="25" fill="#fff">${nome}</text></svg>`;
+  const sabores = [['Laranja', '#d9641e', '#7a2230'], ['Morango', '#b81f2d', '#5c1220'], ['Pistache', '#6f8f3a', '#2f4a2a'], ['Amora', '#3b3f7a', '#1d2147'], ['Figo', '#7a3b5e', '#3e1a30'], ['Pimenta', '#c8401c', '#6b1e12'], ['Limão', '#b9a52a', '#4f4a16']];
+  const r = roda($('#potes'), {
+    itens: sabores.map(([nome, cor, fundo]) => ({ nome: `Geleia de ${nome.toLowerCase()}`, detalhe: '240 g · lote de exemplo', cor: fundo, html: pote(cor, '#c9ccd1', nome) })),
+    frase: 'plantamos · colhemos · conservamos · ',
+    aoAbrir: (item) => alert(`Aqui abriria a ficha: ${item.nome}`),
+  });
+
+  // ----- números -----
+  $('#furos').innerHTML = Array.from({ length: 8 }, (_, i) => `<circle cx="${100 + 76 * Math.cos(i * Math.PI / 4)}" cy="${100 + 76 * Math.sin(i * Math.PI / 4)}" r="7"/>`).join('');
+  const ficha = numeros($('#q-num'), { itens: [
+    { rotulo: 'Carga de ruptura', valor: 4200, unidade: 'kgf' },
+    { rotulo: 'Tolerância', valor: 0.02, unidade: 'mm', casas: 2, de: 1 },
+    { rotulo: 'Itens em estoque', valor: 14200, unidade: 'un', de: 0 },
+    { rotulo: 'Despacho', valor: 24, unidade: 'horas', de: 72 },
+  ]});
+  palco($('#s-num'), ficha.progresso);
+
+  // ----- cartas -----
+  const time = [['A', 'Camisa 9', '#7a2230'], ['B', 'Goleira', '#2e5d86'], ['C', 'Zagueiro', '#3d6b3a'], ['D', 'Treinadora', '#8a5a1c']];
+  $('#cartas').innerHTML = time.map(([l, papel, c], i) => `
+    <div class="carta figurinha" style="--c:${c}">
+      <div class="carta-frente"><div class="rosto">${l}</div><p class="nome">Nº ${String(i + 7).padStart(2, '0')}<b>${papel}</b></p></div>
+      <div class="carta-verso"><b>${papel}</b><p>Aqui vai a ficha: desde quando, o que faz de melhor, uma frase dela.</p></div>
+    </div>`).join('');
+  document.querySelectorAll('.carta').forEach((c) => carta(c));
+
+  // ----- troca -----
+  const fotos = [['#e4572e', '#7a2230', '1'], ['#2e86ab', '#12324a', '2'], ['#6f8f3a', '#1f3a1c', '3'], ['#f3d27a', '#a8641a', '4']].map(([a, b, t]) => ({ src: arte(a, b, t), alt: `Foto de teste ${t}` }));
+  const opcoes = { imagens: fotos, modo: 'tinta' };
+  const t = troca($('#galeria'), opcoes);
+  $('#galeria').addEventListener('click', (e) => t.proxima(e));
+  $('#modos').innerHTML = ['tinta', 'queima', 'persiana', 'iris'].map((m, i) => `<button class="chip claro" aria-pressed="${i === 0}" data-modo="${m}">${m}</button>`).join('');
+  $('#modos').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-modo]');
+    if (!b) return;
+    opcoes.modo = b.dataset.modo;
+    $('#modos').querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    t.proxima();
+  });
+
+  // ----- lista viva -----
+  const bebidas = [['Espresso', '30 ml · encorpado', '#3b2416', 0.34], ['Americano', '240 ml · suave', '#5a3a22', 0.8], ['Cappuccino', '180 ml · aveludado', '#b98a5e', 0.72], ['Latte', '300 ml · leve', '#d9b990', 0.9]];
+  $('#itens').innerHTML = bebidas.map(([n, d]) => `<li><a data-item href="#s-lista">${n}<small>${d}</small></a></li>`).join('');
+  $('#cenas').innerHTML = bebidas.map(([n, , cor, nivel]) => `<figure data-cena><svg viewBox="0 0 200 200" role="img" aria-label="Xícara de ${n}">
+      <rect class="fio" x="96" y="0" width="8" height="${150 - nivel * 70}" fill="${cor}" style="transform-box:fill-box;transform-origin:50% 0"/>
+      <ellipse cx="100" cy="176" rx="78" ry="14" fill="#00000014"/>
+      <path d="M40 80h120l-14 78a12 12 0 0 1-12 10H66a12 12 0 0 1-12-10z" fill="#fffaf2" stroke="#d8c4a6" stroke-width="2"/>
+      <path d="M158 96c26-4 30 34-4 38" fill="none" stroke="#d8c4a6" stroke-width="9" stroke-linecap="round"/>
+      <clipPath id="copo-${n}"><path d="M46 84h108l-12 70a8 8 0 0 1-8 8H66a8 8 0 0 1-8-8z"/></clipPath>
+      <rect class="liquido" clip-path="url(#copo-${n})" x="40" y="${162 - nivel * 78}" width="120" height="${nivel * 78}" fill="${cor}"/></svg></figure>`).join('');
+  lista($('#cardapio'));
+
+  // ----- fila -----
+  const cores = ['#b81f2d', '#6f8f3a', '#2e86ab', '#e4572e', '#3b3f7a', '#a8641a', '#7a3b5e'];
+  let f;
+  function montarFila(modo) {
+    $('#fila').outerHTML = '<div id="fila"></div>';
+    $('#fila').innerHTML = cores.map((c, i) => `<figure data-fila data-nome="Look ${i + 21}" style="--c:${c}">${i + 21}</figure>`).join('');
+    f = fila($('#fila'), { modo });
+    $('#b-fila').setAttribute('aria-pressed', String(modo === 'fila'));
+    $('#b-tunel').setAttribute('aria-pressed', String(modo === 'tunel'));
+    f.progresso(estado.p);
+  }
+  const estado = palco($('#s-fila'), (p) => f?.progresso(p));
+  montarFila('fila');
+  $('#b-fila').onclick = () => montarFila('fila');
+  $('#b-tunel').onclick = () => montarFila('tunel');
+
+  // ----- cursor, rastro, lupa -----
+  cursor();
+  rastro($('#obras'), cores.slice(0, 5).map((c, i) => arte(c, '#111', String(i + 1), 400, 500)));
+  const grande = arte('#2e86ab', '#7a2230', 'ZOOM', 1600, 1000);
+  $('#produto').innerHTML = `<img src="${grande}" alt="Foto de teste pra lupa">`;
+  lupa($('#produto'));
+
+  // ----- meio-tom -----
+  $('#tom').innerHTML = `<img src="${arte('#ffffff', '#222222', '½')}" alt="Foto de teste em retícula">`;
+
+  window.__arsenal = { r, t, f: () => f, ficha };
+</script>
+</body>
+</html>

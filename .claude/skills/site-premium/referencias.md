@@ -100,3 +100,53 @@ Varredura de 2.608 peças por categoria, cerca de 60 descrições lidas, 12 pré
 - **Transição de imagem com matéria:** mancha de tinta, dissolver em partículas, persiana, diafragma de câmera, ondas na água. Trocar foto nunca é só um desvanecer. `folha.js`; as demais seguem como receita.
 - **Fundos vivos em shader:** metal líquido, retícula, ASCII, topografia, tinta nanquim. São bonitos e fáceis de virar enfeite: só usar quando a matéria for a da empresa. Terra e relevo pra terraplenagem, tinta pra tatuador.
 - **Modelos prontos por ramo:** clínica odontológica, pilates, restaurante, skincare, arquitetura e construção repetem a mesma ordem: serviços, equipe, avaliações, preços, perguntas e contato. É a ordem que converte. Usar como checklist de conteúdo, não como visual.
+
+---
+
+## Segunda passada pelas cinco galerias (10/11/2026)
+
+Refeita com outro modelo, procurando só o que ainda não estava no arsenal. O que entrou virou código em
+`tecnicas/` (bancada `arsenal.html`), três mundos novos (`mundos.md` 21 a 23), o Passo A2 e os motores de ideia
+do `direcao.md`, o contrato de design (`design.md` §9) e o pedido de imagens (`imagens.md`).
+
+### 21st.dev — peças novas
+
+- **O produto se apresenta sozinho:** pratos que entram em órbita pela rolagem com a faixa de fundo mudando de cor, xícara que desliza, enche e tomba quando outra é apontada, prateleira de cosméticos desenhada inteira em SVG cujo frasco sai voando e vira a página do produto. Viraram `roda.js` e `lista.js`; a prateleira ficou como receita.
+- **Profundidade sem 3D:** passarela em que o próximo look vem pra frente e os outros desfocam, baralho de páginas que tomba, túnel de cartões em espiral. Virou `profundidade.js`.
+- **Produto com lupa:** segurar pra ampliar, palavra gigante atrás do tênis, preço que conta. Viraram `lupa()` e `.sanduiche`.
+- **Troca de foto por ruído**, com a foto nova queimando a antiga. Virou `troca.js`, com tinta, queima, persiana e íris.
+- **Vidro líquido** em barra de menu, pastas e logo: é a moda do ano. `.vidro` cobre o uso comum; a refração de verdade ficou como receita.
+- **Rodapé como paisagem:** colinas pintadas em canvas que sobem com a rolagem, turma de bonecos rabiscados, bando de pássaros que forma o nome. Receitas.
+- **Categoria cursor:** rótulo de intenção, ímã, rastro de fotos, olhos que seguem o mouse. Virou `cursor.js`.
+
+### Awwwards — Sites do Dia abertos no navegador
+
+- **agrumeafarm.it (conservas sicilianas):** a página inicial é um palco só: potes em 3D numa roda, o do meio em foco e os outros desfocados, sobre um disco bordô com a frase da marca correndo em curva. Serifada de alto contraste, creme, bordô e laranja. **Levar:** `roda.js`, mundo *Empório*.
+- **zrk.technology (produto técnico):** barra de marcas no topo que enche com a rolagem, ao lado do relógio da cidade; depois **um número por tela** com a peça girando atrás, rótulo à esquerda e índice à direita, dentro de um anel de marcas. Grotesca + mono, 42 mil px. **Levar:** `medida.js`; ficha técnica pode ser a história inteira.
+- **mecha (automação industrial, B2B):** coluna esquerda parada com índice e um desenho isométrico em linha que evolui; a direita rola com os casos, três números cada. Fotos em meio-tom. Botão-bloco bordô preso no canto que vira o formulário no fim. **Levar:** mundo *Dossiê*, `.meio-tom`.
+- **extrafazant.nl (estúdio de vídeo):** título em dois pesos (grotesca pesada e serifada leve na mesma frase), logos de clientes em faixa, molduras de cor empilhadas atrás dos vídeos, até o aviso de cookies com humor. **Levar:** `.dois-pesos`.
+- **jjettas.com (site de atleta):** retrato recortado sobre o monograma gigante, cartas douradas de jogador, assinatura à mão, e a linha do tempo desenhada como o campo, com as jardas marcando a rolagem. **Levar:** mundo *Figurinhas*, `carta.js`, a régua do ofício.
+- **vivmgmt.com (agência de artistas):** uma tela só, o logo enorme e um mosaico de fotos passando por cima dele; cada foto nasce de um bloco de cor. **Levar:** logo como paisagem; imagem que carrega a partir da sua cor média.
+- **grail-app.com (aplicativo):** título serifado de ponta a ponta, cartões flutuando em 3D e um cronômetro gigante atrás do celular; a cor da página muda a cada capítulo. **Levar:** número vivo como pano de fundo.
+
+### Refero Styles
+
+Agora cada estilo vem com um **DESIGN.md** pronto pra IA: norte, cores com papel, escala de tipo com razão e
+aperto por tamanho, espaço e forma, e listas de fazer e não fazer **com números** ("raio de 28 px nos cartões,
+sem sombra"; "azul só em botão pequeno, nunca em fundo"). Virou o contrato de design do `design.md` §9. Nortes
+lidos nesta passada, bons de imitar na forma: "catálogo industrial sob luz de estúdio", "concreto branco, uma
+brasa", "caderno de laboratório ao meio-dia", "estufa cheia à meia-noite", "banco alpino na hora azul".
+
+### Godly
+
+Continua quase só tecnologia, mas os cortes ensinam: chamada final de **uma frase e um botão** sobre a textura do
+mundo (nuvem, areia, retícula); lista de "o que acontece depois" ao lado do botão; rodapé com o nome gigante ou
+com a mesma paisagem da abertura; tela do produto dentro de uma foto de céu; cena pintada em pixel no lugar da
+captura de tela. Virou o `design.md` §10 e a variação *Janela sobre a paisagem*.
+
+### Dribbble
+
+Maquetes, então só composição. Indústria: palavra enorme com a peça atravessando as letras, tela do site inclinada
+em perspectiva, faixa de ficha técnica com código de barras, laranja sobre preto. Comida: produto recortado saindo
+da moldura, selos redondos ("feito na casa"), molduras em arco, palavra entortada. Viraram `.sanduiche` e
+`.selo-giro`. A busca por um dos ramos caiu em verificação anti-robô e não foi feita.

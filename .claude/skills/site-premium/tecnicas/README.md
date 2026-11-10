@@ -4,7 +4,7 @@ Peças de movimento prontas e testadas pra montar a experiência que o **conceit
 Cada site usa **uma técnica-assinatura**, no máximo duas. Elas não têm cor nem fonte: isso vem do
 mundo escolhido (`../mundos.md`).
 
-Três bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas), `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica) e `objetos.html` (esteira, varal, folha, placar e pontilhado).
+Quatro bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas), `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica), `objetos.html` (esteira, varal, folha, placar e pontilhado) e `arsenal.html` (roda, medida, carta, troca, lista viva, profundidade, cursor, lupa, menu e o acabamento novo).
 
 Rodar de dentro da pasta `mazyos`, senão a pasta não é achada e toda página dá 404:
 
@@ -65,7 +65,15 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
 | **Folha** | `folha.js` | A foto vira papel: a beira enrola sobre um cilindro, mostra o verso e faz sombra | Cardápio, catálogo, gráfica, papelaria | WebGL puro, sem three |
 | **Pontilhado** | `pontilhado.js` | Nome enorme em retícula, cortado pela borda, que abre caminho em volta do dedo | Rodapé de qualquer site | Canvas 2D |
 | **Placar** | `placar.js` | `odometro()`: tambores que giram no vácuo. `palhetas()`: quadro de aeroporto | Transportadora, oficina, rodoviária, bar | Levíssimo |
-| **Acabamento** | `tecnicas.css`, `texto.js` | `.grao` (grão de filme), `.pilha` (cartões que empilham), `.bento` (blocos de tamanhos diferentes), `.placa` (alumínio parafusado), `data-letreiro` (faixa sem fim), troca de página com `@view-transition` | Qualquer mundo | CSS |
+| **Roda** | `roda.js` | Produtos numa roda com o centro abaixo da tela: o do meio em foco, os vizinhos inclinados e desfocados, a frase da marca em curva girando ao contrário e o disco tomando a cor de cada item. Dedo, setas ou rolagem | Conservas, cervejas, cosméticos, vinhos, cafés, hambúrgueres: linha de 5 a 12 produtos com rótulo bonito | DOM + CSS, sem WebGL |
+| **Medida** | `medida.js` | `numeros()`: um número por tela, gigante, contando até o valor, com anel de marcas e o produto atrás. `regua()`: o progresso da página na unidade do ofício (°C, km, andares, horas) | Indústria, autopeças, usinagem, transportadora, energia, construção: quem vende especificação e capacidade | Levíssimo |
+| **Carta** | `carta.js` | Figurinha que inclina com o dedo, ganha película holográfica e vira pra mostrar a ficha | Equipe, time, pratos da casa, carros do estoque, lotes, obras entregues | CSS + mola |
+| **Troca** | `troca.js` | Uma foto vira a outra com matéria: mancha de tinta que nasce no toque, queima, persiana ou íris. Também anda pela rolagem | Galeria de obras, antes e depois, hero com várias fotos | WebGL puro; sem ele, desvanece |
+| **Lista viva** | `lista.js` | Apontar um item da lista monta a cena dele ao lado, e a anterior tomba e cai | Cardápio, serviços, linhas de produto, planos | Levíssimo |
+| **Profundidade** | `profundidade.js` | `fila()`: os itens em fila pro fundo da tela; a rolagem traz o próximo pro foco. Modos passarela e túnel | Looks, modelos, pratos, cases, linha do tempo | CSS. Desfoque custa: até 12 itens |
+| **Cursor** | `cursor.js` | `cursor()`: rótulo que diz o que o clique faz e botões com ímã. `rastro()`: fotos no caminho do mouse. `lupa()`: segurar pra ampliar, com mouse ou dedo | Acabamento de site visto no computador; lupa em produto com detalhe | Levíssimo |
+| **Menu cheio** | `menu.js` | Menu de tela cheia que abre em círculo a partir do botão, com os links entrando em fila | Site com várias páginas | CSS |
+| **Acabamento** | `tecnicas.css`, `texto.js` | `.grao` (grão de filme), `.pilha` (cartões que empilham), `.bento` (blocos de tamanhos diferentes), `.placa` (alumínio parafusado), `.sanduiche` (palavra gigante atrás do objeto e o contorno dela na frente), `.selo-giro` (selo redondo com o texto girando), `.meio-tom` (foto em retícula de jornal), `.vidro` (vidro fosco com fio de luz), `.dois-pesos` (grotesca pesada e serifada leve na mesma frase), `data-letreiro` (faixa sem fim), troca de página com `@view-transition` | Qualquer mundo | CSS |
 
 ### Material que cada uma precisa
 
@@ -87,23 +95,58 @@ Toda técnica devolve `progresso(p)` (p de 0 a 1). Dá pra ligar duas ao mesmo p
 - **Esteira:** foto do produto de cima, recortada num quadrado transparente, todas com a mesma luz. 6 a 10 itens: com menos, a pista fica vazia.
 - **Varal:** objeto recortado com o ponto de pendurar no centro do topo, que é o eixo do balanço.
 - **Folha:** imagens do mesmo site, na proporção do quadro. Precisam de contraste: página clara demais some contra o verso.
+- **Roda:** produto recortado sem fundo, de frente, todos do mesmo ângulo e com a mesma luz, e uma cor de fundo por item (a do rótulo, escurecida). 5 a 12 itens.
+- **Medida:** os números com a fonte de cada um (catálogo, laudo, placa da máquina) e a peça pra ficar atrás: foto recortada, vídeo curto ou desenho técnico.
+- **Carta:** retrato ou foto do item em pé (5:7), a mesma luz em todas. Com gente, autorização de imagem.
+- **Troca:** 3 a 6 fotos do próprio site (ou de domínio com CORS liberado), de qualquer proporção.
+- **Lista viva:** uma cena por item, todas no mesmo enquadramento: foto, vídeo curto em laço ou SVG animado.
+- **Profundidade:** itens recortados dão a ilusão de fundo; foto retangular entra como cartão.
+- **Lupa:** a mesma foto em versão grande (`data-grande`, uns 2.400 px), senão a lente amplia borrão.
+
+O que faltar dessa lista vira um **pedido de imagens** ao usuário (`../imagens.md`), com o prompt pronto. Não tapar buraco com banco de imagem nem seguir com a caixa vazia.
 
 ## Receitas que ainda não estão prontas (montar quando o conceito pedir)
 
 Escrever como módulo novo aqui, com `progresso(p)`, e pôr na bancada `mostruario.html`:
 
 - **Som**: tela de entrada "com som / sem som"; ambiente sutil + clique. Só quando o produto *é* som/sensação (áudio, spa, música). Nunca tocar sem o clique.
-- **Cursor de marca**: cursor próprio que muda sobre elementos (lupa no raio-X, pincel na gráfica). Só desktop.
 - **Nuvem de pontos**: foto de drone ou scan como pontos 3D, com a altura vinda do arquivo LIDAR ou da claridade da imagem. Terraplenagem, agrimensura, loteamento. Base: `particulas.js`.
 - **Galeria em disco 3D**: anel de cartões girando em CSS 3D. Cardápio, modelos, coleção.
-- **Menu de tela cheia**: transição por `clip-path` abrindo do botão. Sites com muitas páginas.
 - **Revelação por rolagem**: a imagem se desenha sob uma máscara de pincel, como uma pintura sendo feita. Base: `pincel.js`.
-- **Troca de foto com matéria**: mancha de tinta (máscara SVG com ruído), dissolver em partículas, persiana, diafragma. Base: `superficie.js`.
 - **Rodapés-objeto**: folha rasgada presa com alfinete, envelope com barbante, tíquete destacável, assinatura escrita. Base: `linhas.js` e `clip-path`.
 - **Metrô de marcos**: linhas de metrô com a foto em cada estação, pra história da empresa ou etapas da obra. Base: `linhas.js`.
 - **Escrita à mão**: uma palavra que se escreve traço a traço, como o "hello" da Apple. Base: `linhas.js`.
-- **Imagem atrás do cursor**: fotos que nascem no rastro do mouse. Só computador, pra portfólio.
 - **Fundos em shader**: metal líquido, retícula, ASCII, topografia, nanquim. Só quando a matéria for a da empresa.
+- **Prateleira que vira página**: os produtos numa prateleira; o tocado sai voando (`voar()`), gira enquanto o rótulo dá a volta e a página dele se monta em volta. Dá pra desenhar os frascos em SVG, sem foto. Base: `fisica.js` e `@view-transition`.
+- **Colinas no rodapé**: camadas de morro pintadas em canvas sobem com a rolagem e a mais próxima vira o chão dos links. Sítio, agro, turismo, paisagismo. Base: `palco.js`.
+- **Caderno em 3D**: uma dupla de páginas aberta no meio e as outras em pé dos lados; virar traz a próxima. Recados à mão, fotos coladas com fita. Base: `folha.js`.
+- **Baralho que tomba**: cartões em pé; a rolagem derruba o da frente no chão e o de trás sobe. Base: `profundidade.js` com `rotateX`.
+- **Revoada**: partículas voando como bando de pássaros que pousam formando o nome. Base: `particulas.js`.
+- **Coluna fixa com desenho que evolui**: a metade esquerda parada, com o índice e um desenho isométrico em linha que muda a cada seção; a direita rola. Base: `linhas.js` e `position: sticky`.
+- **Botão-bloco que vira formulário**: um bloco de cor preso no canto acompanha a página e, no fim, se abre no pedido de orçamento. Base: `position: sticky`.
+- **Vidro que entorta**: refração de verdade na beira (filtro SVG `feDisplacementMap`), que só o Chrome desenha. `.vidro` é a versão que funciona em todos.
+
+### Trechos prontos do acabamento novo
+
+```html
+<!-- sanduíche: a palavra duas vezes, a segunda só em contorno, por cima do objeto -->
+<div class="sanduiche">
+  <p class="sanduiche-palavra">POLIDO</p>
+  <img class="sanduiche-objeto" src="img/peca.png" alt="…">
+  <p class="sanduiche-palavra sanduiche-contorno" aria-hidden="true">POLIDO</p>
+</div>
+
+<!-- selo redondo: o texto corre em volta, o miolo é livre -->
+<span class="selo-giro">
+  <svg viewBox="0 0 120 120" aria-hidden="true"><path id="volta" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0" fill="none"/>
+    <text><textPath href="#volta">feito na casa · desde 1987 · </textPath></text></svg>
+  <b>★</b>
+</span>
+
+<div class="meio-tom" style="--ponto: 5px"><img src="img/fabrica.webp" alt="…"></div>
+<h1 class="dois-pesos">Ferro <em>e fogo</em></h1>
+<div id="regua" class="contraste"></div>   <!-- .contraste: inverte sozinha em site que alterna claro e escuro -->
+```
 
 ## Padrão de peça premiada
 

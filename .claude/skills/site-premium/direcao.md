@@ -22,6 +22,52 @@ Responder por escrito, em `clientes/<Nome>/conceito.md` (ou `vendas/demos/<slug>
 5. **Onde o cliente decide?** (celular no Instagram, comprador de empresa no desktop, síndico no WhatsApp) — decide o peso da técnica.
 6. **Que material existe de verdade?** Fotos boas, vídeo, logo em vetor, planta, catálogo, histórias. Decide quais mundos são possíveis (ver "Sem foto boa", abaixo).
 
+## Passo A2 — Ler o cliente e abrir o leque
+
+O melhor design é o que serve **àquela** empresa. Antes dos conceitos, responder no mesmo `conceito.md`:
+
+| Pergunta | Se a resposta for | Então |
+|---|---|---|
+| Quem decide, e onde? | Consumidor no celular, vindo do Instagram | Interação de dedo, uma técnica leve, botão logo na primeira tela |
+| | Comprador de empresa, no computador | Número, ficha, catálogo, prova. O espetáculo é a informação |
+| | Cliente de alto padrão | Silêncio, imagem grande, quase nenhum movimento |
+| Quanto custa errar a compra? | Pouco, é impulso | Ousadia alta: cor cheia, humor, objeto na mão |
+| | Muito, é pensado | Ousadia baixa ou média, com a prova na frente |
+| Qual é a prova mais forte? | O produto é bonito | O objeto é a interface, roda, vitrine |
+| | Números, certificações, capacidade | Medida, placar, Dossiê, Laboratório |
+| | Gente e comunidade | Álbum, Figurinhas |
+| | O lugar | Cartografia, Luz natural |
+| | O processo | Do bruto ao pronto, sequência, zoom |
+| Que material existe? | Foto boa | Qualquer mundo |
+| | Quase nada | Mundo sem foto, ou pedido de imagens (`imagens.md`) |
+| O que os concorrentes da cidade fazem? | Todos iguais (abrir três) | O conceito tem que ser o contrário visível deles |
+| Como é o dono? | Brincalhão, técnico, tradicional | A voz do site é a dele. Site que o dono tem vergonha de mostrar não vende |
+
+**Nota de ousadia**, de 1 a 5, anotada no conceito:
+
+- **1 e 2** (advocacia, contabilidade, saúde, B2B pesado): Editorial, Dossiê, Laboratório, Luxo silencioso. O truque é tipografia e ordem.
+- **3** (clínica estética, arquitetura, restaurante, indústria com produto bonito): uma assinatura forte e o resto quieto.
+- **4 e 5** (hamburgueria, sorveteria, pet, academia, marca jovem): Cor cheia, Quadrinho, Cartaz de bairro, Figurinhas. Pode ter humor.
+
+Dos três conceitos, um fica na nota do cliente, um fica um ponto acima e um é a aposta: **o seguro, o certo e o ousado**.
+
+### Motores de ideia
+
+Pra sair do óbvio, passar a matéria-prima do Passo A por **pelo menos quatro** destes e escrever uma linha pra cada um. Os conceitos saem daí:
+
+1. **O objeto é a interface:** o que a empresa vende está na tela pra pegar (tabela mais abaixo).
+2. **O documento do ofício:** o site toma a forma de um papel que a empresa já usa. Ordem de serviço, romaneio, etiqueta de peça, laudo, comanda, receita, prancha, bilhete de embarque.
+3. **A régua do ofício:** a unidade da empresa mede a página. °C, km, mm, andares, horas, quilos (`regua()`).
+4. **A ferramenta na mão:** o dedo vira o pincel, a lixa, a lanterna, a lupa, o maçarico.
+5. **A escala:** do bairro ao mícron, da fazenda ao grão.
+6. **O tempo:** um dia, uma safra, uma obra, quarenta anos.
+7. **O avesso:** o que ninguém vê. Por dentro, o bastidor, o estoque, a cozinha.
+8. **A falta:** o que não tem vira o argumento.
+9. **O nome:** a metáfora que já mora no nome ou no logo.
+10. **A coleção:** cada item é único e numerado.
+11. **O placar de hoje:** o que está acontecendo agora (a fornada, as saídas, as vagas), com dado de verdade.
+12. **O som e o gesto:** o barulho e o movimento do ofício, sempre opcional.
+
 ## Passo B — Três conceitos, o usuário escolhe um
 
 Escrever **três conceitos bem diferentes entre si** (mundos diferentes, técnicas diferentes) e mostrar ao usuário
@@ -38,6 +84,8 @@ Tipografia: <título> + <rótulo>     Paleta: <papel de cada cor da marca>
 Detalhe de marca: <loader, carimbo, etiqueta, cursor…>
 Não vai ter: <o que fica de fora de propósito>
 Por que vende: <ligação com o que o cliente compra>
+Ousadia: <1 a 5>     Motor: <de qual motor de ideia saiu>
+Imagens que faltam: <nenhuma, ou a lista que vira pedido de imagens>
 ```
 
 **Interação** é o que torna o site memorável: ligar o raio-X, arrastar o termostato e ver o ar mudar, limpar
@@ -81,6 +129,13 @@ O melhor padrão achado no 21st.dev: em vez de falar do produto, a página **é*
 | Limpeza / funilaria | a peça suja | limpa com o dedo | `pincel` |
 | Loteamento / rede de lojas | o mapa | anda até o lugar | `territorio` |
 | Clientes e certificações | placas parafusadas | só olha: já é prova | `.placa` |
+| Conservas / cervejas / cosméticos / cafés | os potes numa roda | gira e escolhe pelo rótulo | `roda` |
+| Autopeças / usinagem / indústria | a peça e os números dela | rola e lê a ficha, um número por tela | `medida` |
+| Time / escolinha / academia / equipe | figurinhas | inclina, vira, completa o álbum | `carta` |
+| Cafeteria / bar / lista de serviços | o cardápio | aponta e vê servir | `lista` |
+| Moda / carros / pratos | a passarela | rola e o próximo vem pra frente | `profundidade` |
+| Joalheria / relojoaria / calçados | a peça de perto | segura e amplia | `lupa` |
+| Fotógrafo / gráfica / reforma | as fotos | toca e uma vira a outra em tinta | `troca` |
 
 ### Sem foto boa
 
@@ -88,6 +143,20 @@ Boa parte das empresas pequenas não tem foto que aguente tela cheia. Antes de p
 considerar os mundos que não dependem disso: **Cartaz tipográfico**, **Cartaz de bairro**, **Quadrinho**,
 **Catálogo industrial**, **Planta técnica**, **Instrumento** e **Laboratório**. **Álbum**, **Luxo silencioso**,
 **Luz natural** e **Galeria pintada** dependem de imagem boa: sem ela, escolher outro.
+
+Quando o conceito certo depende de uma imagem que não existe, não desistir dele calado nem improvisar: fazer o
+**pedido de imagens** (`imagens.md`), com o prompt de cada uma pronto e o plano B, e deixar o usuário decidir.
+
+### Banca antes de mostrar
+
+Cada conceito passa por seis testes. Reprovou em um, refazer antes de mostrar:
+
+1. **Troca de logo:** com o logo do concorrente, o site ainda faria sentido? Se sim, é genérico.
+2. **Olhos fechados:** o norte dá pra imaginar? Lugar, material e luz, sem adjetivo.
+3. **Polegar:** a interação funciona com um dedo, no celular em pé?
+4. **Dono:** ele mostraria esse site com orgulho pro cliente dele?
+5. **Material:** as imagens existem? Se não, o pedido de imagens (`imagens.md`) já está escrito, com o plano B?
+6. **Júri:** dar nota de 0 a 10 em design (peso 4), usabilidade (3), criatividade (2) e conteúdo (1). Média abaixo de 7 não vai.
 
 ## Passo C — Não repetir
 
@@ -181,6 +250,13 @@ Caminhos novos pros ramos da primeira parte: **energia solar** com *controle* da
 vai no WhatsApp), **ar-condicionado** com *controle* em forma de dial, **estética automotiva** com *pincel* tirando a
 sujeira ou Noturno em serifada sobre textura do ofício, **serralheria** com *superfície* (relevo) no aço escovado,
 **restaurante** com *luz* do almoço ao jantar, **pet shop** com Álbum, **academia** com Cartaz tipográfico.
+
+Caminhos da segunda passada: **conservas, cervejas e cosméticos** no Empório com *roda*; **autopeças, usinagem e
+indústria** com a ficha em tela cheia (*medida*: um número por tela e a régua em mm ou kgf) ou no Dossiê;
+**escolinha, time e academia** em Figurinhas com *carta*; **cafeteria e bar** com *lista viva* (o cardápio que se
+serve); **moda e concessionária** com *profundidade* (a passarela); **gráfica e tatuagem** com *troca* em tinta;
+**churrascaria e pizzaria a lenha** com *troca* em queima; **transportadora** com a régua em quilômetros,
+**construtora** em andares, **padaria** em horas.
 
 ---
 

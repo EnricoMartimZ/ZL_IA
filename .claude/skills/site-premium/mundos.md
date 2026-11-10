@@ -225,6 +225,47 @@ Fontes: só Google Fonts ou a fonte da própria marca (com licença). As referê
 - **Técnicas:** `placar.js`, `.placa`, `controle.js` (dial). Dado do quadro precisa ser verdadeiro e atualizado: placar parado em dado velho é pior que nenhum.
 - **Detalhe de marca:** a frota, os anos e os quilômetros reais no odômetro.
 
+## 21. Empório — o rótulo é a arte
+
+- **Sensação:** prateleira de empório ao meio-dia, cada pote uma pintura. Inspiração: Agrumea Farm (Awwwards).
+- **Quando:** conservas, geleias, cervejaria artesanal, café especial, cosmético natural, vinho, azeite, queijaria, chocolate, cachaça: produto embalado com rótulo bonito.
+- **Paleta:** creme (`#fdf3e7`) + uma cor funda da marca no disco de fundo + uma cor viva nas letras. **Cada produto tem a sua cor** e a página a toma quando ele está em foco.
+- **Tipo:** serifada de alto contraste em caixa alta (Fraunces 600, Playfair Display, DM Serif Display) + sans humanista pequena (Figtree). A frase da marca corre em curva.
+- **Layout:** o produto recortado grande no meio, a frase em arco atrás, ficha com origem e ingredientes; a "despensa" (grade com todos) vem depois.
+- **Movimento:** a roda gira, os vizinhos desfocam, o texto em curva corre ao contrário.
+- **Técnicas:** `roda.js`, `lupa()` no rótulo, `.selo-giro`, `carta.js` pros produtores.
+- **Detalhe de marca:** selo redondo girando com a origem ("lote pequeno · feito em <cidade>"); a ilustração do rótulo ampliada como fundo de seção.
+- **Depende de produto recortado, todos na mesma luz.** Sem isso: pedido de imagens (`imagens.md`) ou outro mundo.
+
+## 22. Dossiê — a prova organizada
+
+- **Sensação:** pasta de projeto aberta numa mesa branca, alguém explicando com calma. Inspiração: Mecha (Awwwards).
+- **Quando:** indústria com casos pra mostrar, engenharia, automação, consultoria técnica, laboratório, fabricante B2B: muito número, pouca foto bonita.
+- **Paleta:** branco, preto e **um** bloco de cor (vinho, cobalto) reservado pro botão. Fotos em meio-tom preto e branco.
+- **Tipo:** serifada de texto nos títulos, em caixa normal (Newsreader, Instrument Serif) + grotesca pequena em caixa alta nos rótulos (Inter Tight 500, 11 px).
+- **Layout:** **coluna esquerda parada** (logo, índice numerado, um desenho em linha) e a direita rolando. Fios de 1 px. Cada caso: nome grande, três números, fotos pequenas. Botão-bloco preso no canto.
+- **Movimento:** quase nenhum. O desenho isométrico evolui a cada seção: o logo vira peça, a peça vira máquina.
+- **Técnicas:** `linhas.js`, `.meio-tom`, `data-contar`, `trilho.js`; receitas "Coluna fixa com desenho que evolui" e "Botão-bloco que vira formulário".
+- **Detalhe de marca:** numeração de documento ("DOC 03 / 07") e data de revisão em cada seção.
+
+## 23. Figurinhas — a marca pra colecionar
+
+- **Sensação:** álbum da Copa aberto no chão da sala. Orgulho, torcida, troca. Inspiração: site de atleta premiado no Awwwards (cartas douradas, linha do tempo no campo).
+- **Quando:** escolinha de futebol, time, academia, barbearia (os cortes), hamburgueria (os lanches como craques), loja de carros, cervejaria (os rótulos), a equipe de qualquer empresa, evento.
+- **Paleta:** as cores do "time" da marca + dourado na borda + o monograma repetido como padrão de fundo.
+- **Tipo:** condensada pesada nos nomes (Anton, Big Shoulders Display) + mono nos números ("Nº 07") + uma assinatura à mão.
+- **Layout:** o herói recortado sobre o padrão do monograma; grade de cartas; linha do tempo na régua do ofício; espaços vazios no álbum pro que ainda vem.
+- **Movimento:** as cartas inclinam, brilham e viram; números em matriz de pontos.
+- **Técnicas:** `carta.js`, `regua()`, `pontilhado.js`, `arrastar.js` (mesa).
+- **Detalhe de marca:** número, raridade ("edição da casa") e assinatura em cada carta. Com gente, autorização de imagem; com criança, a dos pais.
+
+### Variações que servem em vários mundos
+
+- **Ficha em tela cheia** (Instrumento, Laboratório, Noturno industrial): a peça atrás e **um número por tela** (`numeros()`), com a régua do ofício no topo. Inspiração: site de produto técnico premiado no Awwwards.
+- **Palavra atrás do produto** (Cor cheia, Vitrine viva, Empório): a palavra gigante, o objeto recortado por cima e o contorno da palavra na frente (`.sanduiche`).
+- **Título em dois pesos** (qualquer mundo de voz forte): grotesca pesada e serifada leve na mesma frase (`.dois-pesos`).
+- **Janela sobre a paisagem** (Produto vivo): a tela do sistema dentro de uma foto de céu, mar ou campo, em vez de solta no fundo liso. Ou uma cena pintada no lugar da captura de tela.
+
 ---
 
 ## Como aplicar a marca do cliente dentro do mundo

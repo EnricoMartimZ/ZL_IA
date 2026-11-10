@@ -2,11 +2,14 @@
 name: site-premium
 description: >
   Cria um site premium com um conceito próprio pra cada empresa: tira do ramo (ou do nome) uma metáfora,
-  escolhe um entre 20 mundos visuais (de cartaz de mercado a luxo silencioso, de quadrinho a catálogo
+  escolhe um entre 23 mundos visuais (de cartaz de mercado a luxo silencioso, de quadrinho a catálogo
   industrial) e uma técnica-assinatura (fluxo de ar, partículas, planta que se desenha, zoom contínuo, raio-X,
   luz do dia, mapa pra explorar, limpar com o dedo, foto que vira pedra ou água, esteira de pratos, objetos
-  pendurados, página que vira, placar mecânico, cenas de IA, 3D) e monta a
-  história pela rolagem — nunca o mesmo visual de um site pro outro. Serve de padaria a mineradora, de
+  pendurados, página que vira, placar mecânico, roda de produtos, um número por tela, figurinhas que viram,
+  cardápio que se serve, fila em profundidade, cenas de IA, 3D) e monta a
+  história pela rolagem — nunca o mesmo visual de um site pro outro. Escolhe pelo cliente (quem decide, a
+  prova mais forte, o material que existe) e, quando falta imagem, pede ao usuário com o prompt pronto.
+  Serve de padaria a mineradora, de
   loteamento a software. Por baixo, a infraestrutura testada do modelo/: agenda que abre
   o WhatsApp com a mensagem pronta ou, pra B2B, "Pedir orçamento" (WhatsApp ou e-mail), SEO, medição, LGPD
   e deploy estático na Vercel ou Netlify. Use quando o usuário pedir
@@ -22,17 +25,20 @@ O `modelo/` é a **infraestrutura** (agenda/orçamento, SEO, JSON-LD, medição,
 
 ## Dependências
 
-- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (20 sistemas visuais), `referencias.md` (o nível a atingir e as galerias onde garimpar) e o registro local `clientes/_conceitos.md` (o que já foi usado)
-- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, esteira, varal, folha, pontilhado, placar, física, texto, HUD. Catálogo e o "Padrão de peça premiada" em `tecnicas/README.md`; bancadas em `tecnicas/demo.html`, `tecnicas/mostruario.html` e `tecnicas/objetos.html`
+- **Direção criativa (antes de tudo, depois da identidade):** `direcao.md` (3 conceitos → o usuário escolhe), `mundos.md` (23 sistemas visuais), `referencias.md` (o nível a atingir e as galerias onde garimpar) e o registro local `clientes/_conceitos.md` (o que já foi usado)
+- **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, esteira, varal, folha, pontilhado, placar, física, roda, medida (número por tela e régua do ofício), carta, troca, lista viva, profundidade, cursor (rótulo, ímã, rastro, lupa), menu cheio, texto, HUD. Catálogo e o "Padrão de peça premiada" em `tecnicas/README.md`; bancadas em `tecnicas/demo.html`, `tecnicas/mostruario.html`, `tecnicas/objetos.html` e `tecnicas/arsenal.html`
 - **Infraestrutura pronta:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
 - **Regras de design:** `.claude/skills/site-premium/design.md` — o que vale pra todo mundo (conversão, desempenho, SEO, honestidade) e o detalhe do mundo Noturno
 - **Cenas de IA do hero:** `.claude/skills/site-premium/cenas.md` — roteiro, prompts e geração consistente (com `scripts/kie.js` ou Higgsfield)
+- **Imagens que faltam:** `.claude/skills/site-premium/imagens.md` — quando parar e pedir ao usuário, o formato do pedido com o prompt de cada imagem, e o roteiro de fotos pro dono da empresa
+- **Contrato de design:** `design.md` §9 → `clientes/<Nome>/DESIGN.md`, escrito antes do CSS
 - **Mapa da seção "Onde fica":** `scripts/mapa-ruas.js` (ruas reais do OpenStreetMap + rota até a loja) e `modelo/mapa.js` (a animação)
 - **Cliente:** `clientes/<Nome>/` — `CLAUDE.md`, briefing, fotos (`fotos/` do `/foto-produto` se houver)
 - **Diagnóstico:** `vendas/diagnosticos/<slug>/dados.md` (avaliações reais, nota, diferenciais)
 - **Tom de voz:** `_memoria/preferencias.md` e o do cliente
 - Sem build, sem npm: HTML + CSS + JS + Three.js por CDN. Abre em qualquer hospedagem estática
+- **Se o projeto for Next.js (App Router):** esta skill dá o conceito e a direção; o código segue o `CLAUDE.md` ("Sites premium"), com o arquétipo do nicho em `docs/archetypes/` e os componentes de `src/components/premium/` (hero 3D de vidro, rolagem suave com seção fixada e texto revelado, botão magnético, cursor com rótulo)
 
 ---
 
@@ -54,8 +60,11 @@ Puxar o que já existe (pasta do cliente, diagnóstico) e perguntar só o que fa
 Seguir o `direcao.md`:
 
 1. **Matéria-prima** (o que a empresa move, antes → depois, o que o nome sugere, a prova física) em `clientes/<Nome>/conceito.md`
-2. **Três conceitos** bem diferentes (norte + mundo + técnica-assinatura + interação + estrutura de história + tipografia + paleta + detalhe de marca), checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
-3. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
+2. **Ler o cliente e abrir o leque** (Passo A2): quem decide e onde, quanto custa errar a compra, a prova mais forte, o material que existe, o que os concorrentes fazem; nota de ousadia de 1 a 5; e a matéria-prima passada por pelo menos quatro motores de ideia
+3. **Três conceitos** bem diferentes, o seguro, o certo e o ousado (norte + mundo + técnica-assinatura + interação + estrutura de história + tipografia + paleta + detalhe de marca + imagens que faltam), aprovados na banca do `direcao.md` e checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
+4. **Pedido de imagens** (`imagens.md`): se o conceito escolhido precisa de imagem que não existe, mandar o pedido com o prompt de cada uma e o plano B, e esperar a resposta. Enquanto isso, adiantar o que não depende delas
+5. **Contrato de design** (`design.md` §9): escrever `clientes/<Nome>/DESIGN.md` antes do CSS
+6. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
 
 A técnica sai de `tecnicas/` (testar a peça na bancada antes, se for mexer nela). Técnica nova que o conceito pedir (som, nuvem de pontos, galeria em disco…): escrever como módulo em `tecnicas/`, com `progresso(p)`, seguindo o "Padrão de peça premiada" do `tecnicas/README.md`, e pôr numa bancada. Antes de inventar, testar o "O objeto é a interface" do `direcao.md`. Ramo sem referência: garimpar nas galerias de `referencias.md` antes de propor.
 
@@ -157,6 +166,8 @@ Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e
 - [ ] Grade de serviços sem card sobrando sozinho
 - [ ] Desligar o WebGL mostra o fundo alternativo e o site continua usável
 - [ ] A técnica-assinatura funciona com o dedo no celular (raio-X por toque, palcos rolando sem travar) e respeita "reduzir movimento"
+- [ ] O site bate com o `DESIGN.md`, linha por linha (cores no papel certo, escala de tipo, respiro, o que não fazer)
+- [ ] Chamada final com uma frase, um botão e "o que acontece depois"; o rodapé fecha o mundo da abertura (`design.md` §10)
 - [ ] **Não parece o site anterior:** abrir lado a lado com o último do `clientes/_conceitos.md` — mundo, primeira dobra, tipografia e técnica diferentes
 
 ### Passo 5 — Publicar
@@ -174,6 +185,8 @@ Mostrar no chat: link do preview/publicado, o conceito em uma frase, e o que ain
 ## Regras
 
 - **Conceito antes de tela.** Sem `conceito.md` aprovado, não começar o visual. Cada site com mundo e técnica-assinatura próprios; nunca dois seguidos iguais.
+- **Escolher pelo cliente, não pela novidade.** A técnica mais nova só entra se for a que mais combina com aquela empresa e com quem compra dela.
+- **Faltou imagem, pede.** Pedido de imagens com prompt pronto e plano B (`imagens.md`). Nunca banco de imagem genérico, `exemplo-*` esquecido ou conceito trocado em silêncio.
 - **Uma técnica-assinatura, profunda.** O movimento significa algo do negócio; efeito sem significado sai. Dentro do mundo escolhido, não adicionar cor, fonte ou animação fora do sistema.
 - **A história conta o serviço.** Cena bonita sem história é enfeite — perguntar qual é a transformação.
 - **Consistência nas cenas de IA:** mesma câmera, mesmo objeto, mesma luz. Cena que não bate, regerar.
