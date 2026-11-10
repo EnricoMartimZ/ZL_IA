@@ -137,6 +137,134 @@ Quando o usuário pedir skill nova:
 
 ---
 
+## Sites premium — regras globais de design
+
+Valem pra todo site, landing page e componente gerado neste repositório.
+São ordens: quebrar uma delas só com o motivo escrito no `DESIGN.md` do
+cliente.
+
+**Dois trilhos, a mesma régua:**
+
+- **Site estático** (padrão pra negócio local, sem build): skill
+  `/site-premium`, com os mundos visuais e as peças de
+  `.claude/skills/site-premium/tecnicas/`
+- **Projeto Next.js (App Router):** arquétipo do nicho em
+  `docs/archetypes/` e componentes prontos em `src/components/premium/`
+  (arquivos soltos: copiar a pasta pro projeto do cliente)
+
+**Escolher o arquétipo pelo cliente, antes de escrever CSS:**
+
+| Cliente | Ler |
+|---|---|
+| Software, API, IA, fintech, ferramenta B2B | `docs/archetypes/saas-tech.md` |
+| Joia, moda, arquitetura, hotel, gastronomia autoral, alto padrão | `docs/archetypes/luxury.md` |
+| Marca que vende produto direto ao consumidor | `docs/archetypes/dtc-ecommerce.md` |
+| Estúdio, agência, portfólio, produtora, evento | `docs/archetypes/creative-agency.md` |
+
+Nenhum serve: usar o `/site-premium` (leitura do cliente em `direcao.md`).
+O arquétipo é ponto de partida: a marca do cliente troca cor, fonte e
+assinatura. Dois sites do mesmo arquétipo nunca saem iguais.
+
+### UI/UX, hierarquia e contraste
+
+- Uma ideia por dobra e uma ação principal por tela. A primeira dobra
+  responde o que é, pra quem é e o que fazer agora
+- Três níveis de texto: título, apoio e detalhe. A diferença vem de
+  tamanho e peso juntos: salto mínimo de 1,25× entre níveis, título da
+  primeira dobra com pelo menos 3× o corpo
+- Título em `clamp()`, entrelinha de 0,9 a 1,1 e espaçamento de −0,02 a
+  −0,04em. Corpo de 16 a 18 px, entrelinha de 1,5 a 1,7, linha de 45 a
+  75 caracteres
+- No máximo 2 famílias e 1 mono. Fonte é escolha de marca, nunca a que
+  veio no projeto
+- Contraste medido: corpo ≥ 4,5:1; texto grande (≥ 24 px, ou 19 px em
+  negrito), ícone e borda de controle ≥ 3:1. Texto sobre foto ou vídeo
+  só com véu que garanta o número
+- Cor: um fundo, uma tinta, um destaque (até 10% da tela, reservado pra
+  ação e estado) e neutros derivados da tinta
+- Espaço em escala de 4 px, grade de 12 colunas (4 no celular), respiro
+  entre seções ≥ 96 px no computador e ≥ 64 px no celular
+- Desenhar primeiro em 375 px, sem rolagem lateral. Alvo de toque ≥
+  44 px, foco visível, tudo operável por teclado
+- Todo controle tem os estados: repouso, hover, foco, pressionado,
+  desabilitado, carregando e erro
+- Proibido o genérico: degradê roxo de enfeite, três cards iguais com
+  ícone, emoji como ícone, a mesma sombra em tudo, texto de exemplo e
+  foto de banco de imagem
+
+### Animação
+
+- **Mola é obrigatória** em tudo que responde a ponteiro, toque ou
+  arrasto: rigidez e amortecimento, nunca duração fixa. No Next, Motion
+  (`useSpring`, `type: 'spring'`); no estático, `fisica.js`. Partida:
+  170/26 (assentada), 260/20 (viva), 120/14 (elástica, só em peça de
+  brincar)
+- **GSAP ScrollTrigger sobre Lenis é obrigatório** em tudo que é ligado
+  à rolagem: seção fixada, scrub e revelação. Proibido listener de
+  `scroll` solto dirigindo animação. No estático, o `palco()` faz esse
+  papel
+- Texto revelado com SplitText (caractere, palavra ou linha) e máscara,
+  mantendo o texto original pro leitor de tela
+- Animar só `transform`, `opacity` e uniform de shader. Nunca largura,
+  altura, posição, sombra ou filtro em laço
+- Uma animação-assinatura por página, o resto discreto. Micro de 150 a
+  250 ms, entrada de 500 a 900 ms, intervalo entre itens de 20 a 60 ms,
+  saída em `cubic-bezier(0.16, 1, 0.3, 1)`
+- `prefers-reduced-motion` troca o comportamento (sem seção fixada, sem
+  parallax, sem mola de enfeite), não só encurta o tempo
+- Cada biblioteca tem um dono: Motion cuida de estado e gesto de
+  componente; GSAP, de rolagem e texto; Lenis, da rolagem suave; R3F, do
+  3D. Duas nunca animam a mesma propriedade do mesmo elemento
+- Limpar ao desmontar: `useGSAP`, `lenis.destroy()`, listeners e
+  geometrias
+
+### Performance e fallback de GPU
+
+- Orçamento em celular médio no 4G: LCP ≤ 2,5 s, CLS ≤ 0,05, INP ≤
+  200 ms, JavaScript da primeira carga ≤ 200 kB (gzip) sem contar o 3D
+- WebGL nunca é o LCP: primeiro o pôster estático (HTML, CSS ou imagem),
+  depois o canvas, montado só no cliente
+- Todo canvas mede o próprio FPS. Abaixo de 30: reduz DPR e amostras do
+  shader; se não recuperar, troca pelo pôster. Sem WebGL, contexto
+  perdido, economia de dados ou movimento reduzido: pôster direto
+- DPR ≤ 2 no computador e ≤ 1,5 no celular. Um canvas por página,
+  pausado fora da tela e com a aba oculta
+- No celular (ponteiro grosso): sem cursor customizado, sem ímã, sem
+  pós-processamento, metade das amostras do shader e rolagem nativa
+- Imagem em AVIF ou WebP com `next/image` e `sizes`; a do LCP com
+  `priority`. Fonte por `next/font`, `display: swap`
+- `will-change` só durante a animação. Sem `backdrop-filter` em área
+  grande que rola no celular
+- Antes de entregar: Lighthouse no celular ≥ 90 em desempenho e em
+  acessibilidade (`/checar-site` no estático)
+
+### Dependências (projeto Next.js)
+
+| Papel | Pacote | Regra |
+|---|---|---|
+| Base | `next` (App Router), `react` 19, TypeScript estrito | Server Component por padrão; `'use client'` só na folha que anima |
+| Estilo | `tailwindcss` 4 | Tokens no `@theme`; valor solto fora do token é exceção |
+| Estado, gesto e mola | `motion` (o Framer Motion; importar de `motion/react`) | Nada de CSS transition em quem a mola já move |
+| Rolagem e texto | `gsap` ≥ 3.13 e `@gsap/react` (ScrollTrigger, SplitText) | Sempre dentro de `useGSAP` |
+| Rolagem suave | `lenis` | Uma instância, a do `SmoothScrollContainer` |
+| 3D | `three` e `@react-three/fiber` (`@react-three/drei` só se precisar) | Shader próprio em GLSL; modelo em `.glb` com Draco |
+
+```bash
+npm i motion gsap @gsap/react lenis three @react-three/fiber && npm i -D @types/three
+```
+
+Biblioteca fora dessa lista entra só com motivo. Os componentes de
+`src/components/premium/` já seguem tudo acima:
+
+| Componente | Serve pra |
+|---|---|
+| `Hero3DCanvas` | Primeira dobra com objeto 3D de vidro que refrata a luz, segue o ponteiro e cai pro pôster se o FPS ficar abaixo de 30 |
+| `SmoothScrollContainer` | Lenis + ScrollTrigger na página toda, com `PinnedSection` (seção fixada) e `SplitReveal` (texto letra a letra) |
+| `MagneticButton` | Chamada principal que o ponteiro atrai, com mola |
+| `CustomCursor` | Cursor fluido que vira rótulo ("View", "Drag") e cresce sobre mídia |
+
+---
+
 ## Clientes ficam só neste computador
 
 Nenhum dado de cliente ou prospect vai pro GitHub: nem funil, lotes,
