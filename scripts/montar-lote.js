@@ -62,8 +62,10 @@ for (const f of (await readdir(path.join(pasta, 'buscas'))).filter((f) => f.ends
   if (!b.L) b.L = (b.lojas || []).map((o) => [o.posicao, o.nome, o.nota, o.avaliacoes, o.categoria, o.endereco || '', o.telefone, o.site, o.lat, o.lon]);
   const lojas = b.L.map(([posicao, nome, nota, avaliacoes, categoria, endereco, telefone, site, lat, lon]) =>
     ({ posicao, nome, nota, avaliacoes: Number(avaliacoes) || 0, categoria, endereco: endereco.trim(), telefone, site, lat, lon, busca: b.busca }));
+  // ler-maps.js novo marca `site_lido` por loja (o site só aparece no painel do lugar); loja não lida não ganha "sem site"
+  (b.lojas || []).forEach((o, i) => { if (o.site_lido === false && lojas[i]) lojas[i].naoLido = true; });
   // a lista só mostra o botão "site" em alguns nichos; sem isso, não dá pra afirmar "não tem site"
-  const mostraSite = b.site_na_lista !== false && lojas.some((l) => l.site);
+  const mostraSite = b.site_na_lista === true || (b.site_na_lista !== false && lojas.some((l) => l.site));
   buscas.push({ busca: b.busca, nicho: f.replace('.json', ''), lojas, mostraSite });
 }
 
@@ -96,10 +98,10 @@ for (const b of buscas) {
     if (!wa || l.avaliacoes < 10 || l.avaliacoes > 1500 || REDES.test(l.nome) || l === lider) continue;
     const link = tipoLink(l.site);
     const fracos = [];
-    if (b.mostraSite && link !== 'site') fracos.push({ tipo: 'link', peso: link === 'nenhum' ? 30 : 22, fato: ROTULO[link] });
+    if (b.mostraSite && !l.naoLido && link !== 'site') fracos.push({ tipo: 'link', peso: link === 'nenhum' ? 30 : 22, fato: ROTULO[link] });
     if (lider && l.avaliacoes < lider.avaliacoes * 0.2) fracos.push({ tipo: 'avaliacoes', peso: 18, fato: `${l.avaliacoes} avaliações no Google, contra ${lider.avaliacoes} da ${curto(lider.nome)}` });
     if (lider && num(l.nota) <= 4.5 && num(lider.nota) >= 4.8) fracos.push({ tipo: 'nota', peso: 15, fato: `nota ${l.nota}, contra ${lider.nota} da ${curto(lider.nome)}` });
-    candidatos.push({ ...l, nicho: b.nicho, whatsapp: wa, link, fracos, lider: lider && { nome: curto(lider.nome), avaliacoes: lider.avaliacoes, nota: lider.nota, temSite: b.mostraSite && tipoLink(lider.site) === 'site', antes: lider.posicao < l.posicao } });
+    candidatos.push({ ...l, nicho: b.nicho, whatsapp: wa, link, fracos, lider: lider && { nome: curto(lider.nome), avaliacoes: lider.avaliacoes, nota: lider.nota, temSite: b.mostraSite && !lider.naoLido && tipoLink(lider.site) === 'site', antes: lider.posicao < l.posicao } });
   }
 }
 

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" stroke="#ffffff" role="img" aria-label="Enrico Martim">
+  <circle cx="60" cy="60" r="54" stroke-width="1.5"/>
+  <path d="M60 2v8M60 110v8M2 60h8M110 60h8" stroke-width="1.5"/>
+  <path d="M51 40H31v40h20M31 60h16" stroke-width="4" stroke-linecap="square"/>
+  <path d="M61 80V40l14 22 14-22v40" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

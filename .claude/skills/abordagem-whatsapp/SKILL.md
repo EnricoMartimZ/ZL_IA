@@ -28,7 +28,11 @@ Em vez de um diagnóstico caprichado pra cada loja (que demora e quase ninguém 
 
 ### Passo 1 — Buscar (navegador do app)
 
-Para cada nicho: abrir `https://www.google.com/maps/search/<nicho>+<cidade>?hl=pt-BR`, janela 1280×1400 (`resize_window`), rodar o conteúdo de `ler-maps.js` no `javascript_tool` e salvar o JSON em `<pasta>/buscas/<nicho>.json` (formato `{"busca":"...","L":[[posição, nome, nota, avaliações, categoria, endereço, telefone, site, lat, lon], ...]}`).
+Para cada nicho: abrir `https://www.google.com/maps/search/<nicho>+<cidade>?hl=pt-BR`, janela 1280×1400 (`resize_window`) e **com o painel do navegador visível** (`show_pane` preview: com o painel oculto o Maps não desenha o painel do lugar e o site não é lido). Rodar o conteúdo de `ler-maps.js` no `javascript_tool` e salvar o JSON em `<pasta>/buscas/<nicho>.json`.
+
+- Desde 09/11/2026 o Maps **não mostra mais o site na lista**, só no painel do lugar. O `ler-maps.js` clica em cada celular (10+ avaliações) e nos 3 mais avaliados, lê o site e volta pra lista; cada loja sai com `site_lido` (true = leu; false = não leu, e o `montar-lote.js` não afirma "sem site" dela)
+- O script roda em segundo plano (clicar muda a URL e a chamada do `javascript_tool` seria cortada): a 1ª chamada devolve `"iniciado"`; repetir `window.__ler.pronto ? window.__ler.json : window.__ler.progresso` até vir o JSON (~2–3 min por busca, ~8 s por lugar). Salvar o JSON como veio (`{"busca","site_na_lista","lojas":[{posicao,nome,nota,avaliacoes,categoria,endereco,telefone,site,site_lido,lat,lon}]}`); o `montar-lote.js` também aceita o formato antigo `L`
+- Rodar o `montar-lote.js` com o Node 22 (`~/.nvm/versions/node/v22.22.2/bin`): o `node` do sistema é o v12 e não abre o script
 
 - Sem login, o Maps mostra ~8–10 negócios por busca: fazer **8+ nichos** por lote
 - Em alguns nichos a lista não mostra o site (layout com fotos: ótica, pet shop, móveis). Marcar `"site_na_lista": false` no JSON: aí o script **não afirma** "não tem site"
