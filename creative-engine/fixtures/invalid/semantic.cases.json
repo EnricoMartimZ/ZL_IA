@@ -1,0 +1,32 @@
+{
+  "_como_funciona": "Cada caso parte do projeto 'base', aplica 'ops' (fixtures/patch.js) e tem que gerar um problema com o código e o caminho de 'expect'. level 'error' torna o projeto inválido; 'warning' não.",
+  "base": "projects/motion-ad-4-scenes/project.mazy.json",
+  "cases": [
+    { "name": "id de camada repetido em outra cena", "level": "error", "ops": [{ "op": "set", "path": "/scenes/1/layers/0/id", "value": "gancho-foto" }], "expect": { "code": "DUPLICATE_ID", "path": "/scenes/1/layers/0/id" } },
+    { "name": "id de cena repetido", "level": "error", "ops": [{ "op": "set", "path": "/scenes/1/id", "value": "cena-gancho" }], "expect": { "code": "DUPLICATE_ID", "path": "/scenes/1/id" } },
+    { "name": "id de asset repetido", "level": "error", "ops": [{ "op": "set", "path": "/assets/1/id", "value": "foto-rosto" }], "expect": { "code": "DUPLICATE_ID", "path": "/assets/1/id" } },
+    { "name": "id de animação repetido na camada", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/3/animations/1/id", "value": "entra-fade" }], "expect": { "code": "DUPLICATE_ID", "path": "/scenes/0/layers/3/animations/1/id" } },
+    { "name": "duração total que não fecha", "level": "error", "ops": [{ "op": "set", "path": "/composition/durationFrames", "value": 451 }], "expect": { "code": "DURATION_MISMATCH", "path": "/composition/durationFrames" } },
+    { "name": "primeira cena com transição", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/transitionIn", "value": { "type": "fade", "durationFrames": 6 } }], "expect": { "code": "FIRST_SCENE_TRANSITION", "path": "/scenes/0/transitionIn" } },
+    { "name": "transição maior que a cena", "level": "error", "ops": [{ "op": "set", "path": "/scenes/1/transitionIn/durationFrames", "value": 200 }], "expect": { "code": "TRANSITION_TOO_LONG", "path": "/scenes/1/transitionIn/durationFrames" } },
+    { "name": "duas transições que se encontram na mesma cena", "level": "error", "ops": [{ "op": "set", "path": "/scenes/1/transitionIn/durationFrames", "value": 70 }, { "op": "set", "path": "/scenes/2/transitionIn/durationFrames", "value": 70 }], "expect": { "code": "TRANSITION_TOO_LONG", "path": "/scenes/2/transitionIn/durationFrames" } },
+    { "name": "camada que passa do fim da cena", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/3/durationFrames", "value": 90 }], "expect": { "code": "LAYER_OUT_OF_SCENE", "path": "/scenes/0/layers/3" } },
+    { "name": "entrada maior que a camada", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/3/animations/0/durationFrames", "value": 90 }], "expect": { "code": "ANIMATION_OVERFLOW", "path": "/scenes/0/layers/3/animations" } },
+    { "name": "keyframes fora de ordem", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/0/keyframes/scale/1/frame", "value": 0 }], "expect": { "code": "KEYFRAME_ORDER", "path": "/scenes/0/layers/0/keyframes/scale/1" } },
+    { "name": "keyframe depois do fim da camada", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/0/keyframes/scale/1/frame", "value": 96 }], "expect": { "code": "KEYFRAME_OUT_OF_LAYER", "path": "/scenes/0/layers/0/keyframes/scale/1" } },
+    { "name": "imagem apontando para asset que não existe", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/0/image/assetId", "value": "nao-existe" }], "expect": { "code": "ASSET_NOT_FOUND", "path": "/scenes/0/layers/0/image/assetId" } },
+    { "name": "logo da marca apontando para asset que não existe", "level": "error", "ops": [{ "op": "set", "path": "/brand/logos/primary", "value": "nao-existe" }], "expect": { "code": "ASSET_NOT_FOUND", "path": "/brand/logos/primary" } },
+    { "name": "camada de logo apontando para uma foto", "level": "error", "ops": [{ "op": "set", "path": "/scenes/3/layers/0/logo/assetId", "value": "foto-rosto" }], "expect": { "code": "ASSET_TYPE_MISMATCH", "path": "/scenes/3/layers/0/logo/assetId" } },
+    { "name": "fonte da marca apontando para uma foto", "level": "error", "ops": [{ "op": "set", "path": "/brand/fonts/body/assetId", "value": "foto-rosto" }], "expect": { "code": "ASSET_TYPE_MISMATCH", "path": "/brand/fonts/body/assetId" } },
+    { "name": "brand.darkBase usado sem estar definido", "level": "error", "ops": [{ "op": "remove", "path": "/brand/colors/darkBase" }], "expect": { "code": "BRAND_TOKEN_UNDEFINED", "path": "/composition/background" } },
+    { "name": "brand.secondary.3 usado sem estar definido", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/2/text/color", "value": "brand.secondary.3" }], "expect": { "code": "BRAND_TOKEN_UNDEFINED", "path": "/scenes/0/layers/2/text/color" } },
+    { "name": "fonte fora da marca", "level": "error", "ops": [{ "op": "set", "path": "/scenes/0/layers/2/text/fontFamily", "value": "Comic Sans MS" }], "expect": { "code": "FONT_NOT_IN_BRAND", "path": "/scenes/0/layers/2/text/fontFamily" } },
+    { "name": "slide sem direção", "level": "error", "ops": [{ "op": "remove", "path": "/scenes/0/layers/3/animations/1/params/direction" }], "expect": { "code": "SLIDE_WITHOUT_DIRECTION", "path": "/scenes/0/layers/3/animations/1/params/direction" } },
+    { "name": "transição slide sem direção", "level": "error", "ops": [{ "op": "remove", "path": "/scenes/2/transitionIn/direction" }], "expect": { "code": "SLIDE_WITHOUT_DIRECTION", "path": "/scenes/2/transitionIn/direction" } },
+    { "name": "texto fora da área segura", "level": "warning", "ops": [{ "op": "set", "path": "/scenes/0/layers/2/box/y", "value": 100 }], "expect": { "code": "TEXT_OUTSIDE_SAFE_AREA", "path": "/scenes/0/layers/2/box" } },
+    { "name": "fonte da marca sem arquivo", "level": "warning", "ops": [{ "op": "remove", "path": "/brand/fonts/heading/assetId" }], "expect": { "code": "FONT_WITHOUT_FILE", "path": "/brand/fonts/heading" } },
+    { "name": "texto pequeno demais", "level": "warning", "ops": [{ "op": "set", "path": "/scenes/0/layers/3/text/fontSize", "value": 20 }], "expect": { "code": "TEXT_TOO_SMALL", "path": "/scenes/0/layers/3/text/fontSize" } },
+    { "name": "asset que ninguém usa", "level": "warning", "ops": [{ "op": "remove", "path": "/brand/logos/primary" }], "expect": { "code": "UNUSED_ASSET", "path": "/assets/2" } },
+    { "name": "cena sem camada e sem fundo", "level": "warning", "ops": [{ "op": "set", "path": "/scenes/0/layers", "value": [] }], "expect": { "code": "EMPTY_SCENE", "path": "/scenes/0" } }
+  ]
+}

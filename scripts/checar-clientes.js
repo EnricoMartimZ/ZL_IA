@@ -2,7 +2,7 @@
 // (.githooks/pre-commit) e olha só o que está entrando no commit.
 //
 // Bloqueia:
-//   - arquivo das pastas locais (vendas/, clientes/, _memoria/, projetos/, .env...)
+//   - arquivo das pastas locais (vendas/, clientes/, _memoria/, projetos/, marketing/criativos/, .env...)
 //   - nome de cliente ou prospect: vem de vendas/funil.md, das pastas de clientes/ e, pros nomes curtos
 //     que a tabela não traz, de _memoria/nomes-proibidos.txt (um por linha)
 //   - CPF ou CNPJ escritos, além dos dados de _memoria/empresa.md ("Dados do contratado")
@@ -24,8 +24,9 @@ const normalizar = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '
 const ler = (f) => (existsSync(path.join(raiz, f)) ? readFileSync(path.join(raiz, f), 'utf8') : '');
 const linhas = (f) => ler(f).split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
 
-const PASTAS = /^(vendas|clientes|_memoria|projetos|\.env(\.|$))/;
+const PASTAS = /^(vendas|clientes|_memoria|projetos|marketing\/criativos\/|\.env(\.|$))/;
 const PERMITIDOS = /(^|\/)(\.gitkeep|\.env\.example)$/;
+export const pastaLocal = (f) => PASTAS.test(f) && !PERMITIDOS.test(f);
 const DOCUMENTO = /\b\d{3}\.\d{3}\.\d{3}-\d{2}\b|\b\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}\b/g;
 const CABECALHO = /^(loja|nome|empresa|cliente)$/;
 
@@ -82,7 +83,7 @@ function principal() {
   const arquivos = inteiro
     ? git('ls-files').split('\n').filter(Boolean)
     : git('diff', '--cached', '--name-only', '--diff-filter=ACMR').split('\n').filter(Boolean);
-  for (const f of arquivos) if (PASTAS.test(f) && !PERMITIDOS.test(f)) problemas.push(`${f}: pasta local, não pode ir pro GitHub`);
+  for (const f of arquivos) if (pastaLocal(f)) problemas.push(`${f}: pasta local, não pode ir pro GitHub`);
 
   const nomes = nomesProibidos();
   const vistos = new Set();

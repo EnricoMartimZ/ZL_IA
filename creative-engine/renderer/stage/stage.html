@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Mazy Creative Engine — palco</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+    * { animation: none !important; transition: none !important; }
+  </style>
+</head>
+<body>
+  <div id="palco"></div>
+  <script type="module">
+    // Página da exportação: carrega o projeto que o servidor local entrega e expõe o palco para o
+    // Playwright pedir quadro a quadro.
+    import { mountStage } from '/engine/renderer/stage/stage.js';
+    window.__stage = { status: 'carregando', error: null };
+    try {
+      const project = await (await fetch('/project.json')).json();
+      const palco = mountStage(document.getElementById('palco'), { project, assetBaseUrl: '/project/' });
+      await palco.ready;
+      await document.fonts.ready;
+      window.__stage = { status: 'pronto', error: null, seek: (frame) => { palco.seek(frame); return true; } };
+    } catch (e) {
+      window.__stage = { status: 'erro', error: { code: e.code ?? 'STAGE_FAILED', message: e.message } };
+    }
+  </script>
+</body>
+</html>

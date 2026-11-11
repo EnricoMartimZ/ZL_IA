@@ -1,0 +1,513 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mazyos.local/schemas/mazy-creative-project/1.0.json",
+  "title": "Mazy Creative Project",
+  "description": "Projeto de conteúdo visual animado do MazyOS Creative Engine. Tempo sempre em quadros inteiros; medidas em pixels da composição.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "project", "clientId", "brand", "composition", "assets", "scenes", "export"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": {
+      "description": "Versão do formato (MAJOR.MINOR.PATCH). Este schema aceita a série 1.0.",
+      "type": "string",
+      "pattern": "^1\\.0\\.[0-9]+$"
+    },
+    "project": { "$ref": "#/$defs/project" },
+    "clientId": {
+      "description": "Identificador do cliente (slug). null quando o criativo é do próprio negócio.",
+      "anyOf": [{ "$ref": "#/$defs/slug" }, { "type": "null" }]
+    },
+    "brand": { "$ref": "#/$defs/brand" },
+    "composition": { "$ref": "#/$defs/composition" },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/scene" }
+    },
+    "export": { "$ref": "#/$defs/export" }
+  },
+  "$defs": {
+    "id": {
+      "description": "Identificador interno: minúsculas, números e hífen, começando por letra.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,47}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "dateTime": {
+      "description": "Data e hora em ISO 8601 com fuso (ex.: 2026-11-11T14:30:00-03:00).",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "relativePath": {
+      "description": "Caminho relativo à pasta do projeto. Não aceita caminho absoluto, '..', barra invertida nem endereço com ':'.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\.\\.)(?!.*:)[^\\\\]+$"
+    },
+    "hexColor": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
+    },
+    "color": {
+      "description": "Cor literal (#RRGGBB ou #RRGGBBAA) ou referência à marca (brand.background, brand.text, brand.accent, brand.darkBase, brand.secondary.N).",
+      "type": "string",
+      "pattern": "^(#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?|brand\\.(background|text|accent|darkBase|secondary\\.[0-9]))$"
+    },
+    "fontRef": {
+      "description": "brand.heading, brand.body ou o nome de uma família declarada na marca.",
+      "type": "string",
+      "minLength": 1
+    },
+    "frames": {
+      "description": "Duração em quadros (mínimo 1).",
+      "type": "integer",
+      "minimum": 1
+    },
+    "frameOffset": {
+      "description": "Posição ou atraso em quadros (mínimo 0).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "unit": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "easing": {
+      "description": "Curva de aceleração: um nome da tabela ou uma Bézier cúbica própria.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "linear",
+            "hold",
+            "ease-in",
+            "ease-out",
+            "ease-in-out",
+            "ease-in-cubic",
+            "ease-out-cubic",
+            "ease-in-out-cubic",
+            "ease-out-expo",
+            "ease-out-back"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "x1", "y1", "x2", "y2"],
+          "properties": {
+            "type": { "const": "cubicBezier" },
+            "x1": { "$ref": "#/$defs/unit" },
+            "y1": { "type": "number" },
+            "x2": { "$ref": "#/$defs/unit" },
+            "y2": { "type": "number" }
+          }
+        }
+      ]
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "kind", "createdAt", "updatedAt", "revision"],
+      "properties": {
+        "id": { "$ref": "#/$defs/slug" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "kind": {
+          "description": "Tipo de peça. A série 1.0 só tem o anúncio animado.",
+          "type": "string",
+          "enum": ["motion-ad"]
+        },
+        "createdAt": { "$ref": "#/$defs/dateTime" },
+        "updatedAt": { "$ref": "#/$defs/dateTime" },
+        "revision": {
+          "description": "Cresce 1 a cada gravação. É o que detecta edição simultânea do Claude e do editor.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "brief": {
+          "description": "O pedido que originou a peça, em texto estruturado. Alimenta a crítica criativa.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objective": { "type": "string", "maxLength": 500 },
+            "audience": { "type": "string", "maxLength": 500 },
+            "offer": { "type": "string", "maxLength": 500 },
+            "callToAction": { "type": "string", "maxLength": 200 },
+            "platforms": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "enum": ["instagram-reels", "instagram-stories", "facebook-reels", "tiktok", "youtube-shorts", "whatsapp-status"] }
+            }
+          }
+        }
+      }
+    },
+    "brand": {
+      "description": "Cópia da identidade da marca usada neste projeto. A origem (marca.json) fica só registrada: o projeto renderiza igual mesmo que a marca mude depois.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["colors", "fonts", "logos"],
+      "properties": {
+        "source": {
+          "description": "Onde a identidade foi lida (ex.: ../../marca/marca.json). Informativo.",
+          "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+        },
+        "syncedAt": { "anyOf": [{ "$ref": "#/$defs/dateTime" }, { "type": "null" }] },
+        "colors": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["background", "text", "accent"],
+          "properties": {
+            "background": { "$ref": "#/$defs/hexColor" },
+            "text": { "$ref": "#/$defs/hexColor" },
+            "accent": { "$ref": "#/$defs/hexColor" },
+            "darkBase": { "$ref": "#/$defs/hexColor" },
+            "secondary": {
+              "type": "array",
+              "maxItems": 10,
+              "items": { "$ref": "#/$defs/hexColor" }
+            }
+          }
+        },
+        "fonts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["heading", "body"],
+          "properties": {
+            "heading": { "$ref": "#/$defs/brandFont" },
+            "body": { "$ref": "#/$defs/brandFont" }
+          }
+        },
+        "logos": {
+          "description": "Ids de assets do tipo logo. Pode ficar vazio enquanto o logo não chegou.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "primary": { "$ref": "#/$defs/id" },
+            "onDark": { "$ref": "#/$defs/id" },
+            "onLight": { "$ref": "#/$defs/id" }
+          }
+        }
+      }
+    },
+    "brandFont": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family"],
+      "properties": {
+        "family": { "type": "string", "minLength": 1 },
+        "assetId": {
+          "description": "Arquivo da fonte (asset do tipo font). Sem ele o render depende da fonte instalada na máquina.",
+          "$ref": "#/$defs/id"
+        },
+        "weights": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 100, "maximum": 900, "multipleOf": 100 }
+        }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "fps", "durationFrames", "background", "safeArea"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 16, "maximum": 4096, "multipleOf": 2 },
+        "height": { "type": "integer", "minimum": 16, "maximum": 4096, "multipleOf": 2 },
+        "fps": { "type": "integer", "enum": [24, 25, 30, 60] },
+        "durationFrames": {
+          "description": "Duração total. Campo derivado: soma das cenas menos as sobreposições das transições. O validador confere.",
+          "$ref": "#/$defs/frames"
+        },
+        "background": { "$ref": "#/$defs/color" },
+        "safeArea": {
+          "description": "Margens em pixels onde texto e produto não entram (barra e botões do aplicativo).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["top", "right", "bottom", "left"],
+          "properties": {
+            "top": { "type": "integer", "minimum": 0 },
+            "right": { "type": "integer", "minimum": 0 },
+            "bottom": { "type": "integer", "minimum": 0 },
+            "left": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "src"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "type": "string", "enum": ["image", "logo", "font"] },
+        "src": { "$ref": "#/$defs/relativePath" },
+        "name": { "type": "string", "maxLength": 120 },
+        "alt": { "type": "string", "maxLength": 300 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "provenance": {
+          "description": "De onde veio o arquivo: do cliente, gerado por IA ou do próprio negócio.",
+          "type": "string",
+          "enum": ["client", "ai-generated", "own"]
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "durationFrames", "layers"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "durationFrames": { "$ref": "#/$defs/frames" },
+        "background": { "$ref": "#/$defs/color" },
+        "beat": {
+          "description": "Papel da cena no roteiro. Alimenta a crítica (gancho na primeira cena, chamada na última).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["role"],
+          "properties": {
+            "role": { "type": "string", "enum": ["hook", "product", "offer", "proof", "deadline", "cta", "other"] },
+            "intent": { "type": "string", "maxLength": 300 }
+          }
+        },
+        "transitionIn": { "$ref": "#/$defs/transition" },
+        "layers": {
+          "description": "Ordem da lista = ordem de empilhamento: a primeira fica no fundo.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/layer" }
+        }
+      }
+    },
+    "transition": {
+      "description": "Como esta cena entra sobre a anterior. A duração é a sobreposição entre as duas. Não vale na primeira cena. direction é o sentido do movimento (left: a cena nova vem da direita).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "durationFrames"],
+      "properties": {
+        "type": { "type": "string", "enum": ["fade", "slide", "wipe"] },
+        "durationFrames": { "$ref": "#/$defs/frames" },
+        "direction": { "type": "string", "enum": ["left", "right", "up", "down"] },
+        "easing": { "$ref": "#/$defs/easing" }
+      }
+    },
+    "layer": {
+      "type": "object",
+      "required": ["id", "name", "type", "startFrame", "durationFrames", "box"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "type": { "type": "string", "enum": ["text", "image", "shape", "logo"] },
+        "startFrame": {
+          "description": "Quadro em que a camada aparece, contado do início da cena.",
+          "$ref": "#/$defs/frameOffset"
+        },
+        "durationFrames": { "$ref": "#/$defs/frames" },
+        "visible": { "type": "boolean", "default": true },
+        "locked": { "type": "boolean", "default": false },
+        "box": {
+          "description": "Caixa da camada em pixels da composição: canto superior esquerdo e tamanho, antes de escala e rotação.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "width", "height"],
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "width": { "type": "number", "exclusiveMinimum": 0 },
+            "height": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        "transform": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scale": { "type": "number", "exclusiveMinimum": 0, "default": 1 },
+            "rotation": { "description": "Graus, sentido horário.", "type": "number", "default": 0 },
+            "anchorX": { "description": "Ponto fixo da escala e da rotação, de 0 (esquerda) a 1 (direita).", "$ref": "#/$defs/unit", "default": 0.5 },
+            "anchorY": { "$ref": "#/$defs/unit", "default": 0.5 }
+          }
+        },
+        "opacity": { "$ref": "#/$defs/unit", "default": 1 },
+        "animations": {
+          "description": "Entradas e saídas prontas. Somam-se aos valores da camada sem apagá-los.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/animation" }
+        },
+        "keyframes": {
+          "description": "Trilhas de quadros-chave por propriedade. Quadro contado do início da camada.",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "x": { "$ref": "#/$defs/track" },
+            "y": { "$ref": "#/$defs/track" },
+            "scale": { "$ref": "#/$defs/track" },
+            "rotation": { "$ref": "#/$defs/track" },
+            "opacity": { "$ref": "#/$defs/track" }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "type": "object", "required": ["type"], "properties": { "type": { "const": "text" } } },
+          "then": { "type": "object", "required": ["text"], "properties": { "text": { "$ref": "#/$defs/textContent" } } }
+        },
+        {
+          "if": { "type": "object", "required": ["type"], "properties": { "type": { "const": "image" } } },
+          "then": { "type": "object", "required": ["image"], "properties": { "image": { "$ref": "#/$defs/imageContent" } } }
+        },
+        {
+          "if": { "type": "object", "required": ["type"], "properties": { "type": { "const": "shape" } } },
+          "then": { "type": "object", "required": ["shape"], "properties": { "shape": { "$ref": "#/$defs/shapeContent" } } }
+        },
+        {
+          "if": { "type": "object", "required": ["type"], "properties": { "type": { "const": "logo" } } },
+          "then": { "type": "object", "required": ["logo"], "properties": { "logo": { "$ref": "#/$defs/logoContent" } } }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "textContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content", "fontFamily", "fontSize", "color"],
+      "properties": {
+        "content": { "description": "Texto. Quebra de linha com \\n.", "type": "string", "minLength": 1, "maxLength": 500 },
+        "fontFamily": { "$ref": "#/$defs/fontRef" },
+        "fontSize": { "description": "Pixels da composição.", "type": "number", "minimum": 8, "maximum": 1000 },
+        "fontWeight": { "type": "integer", "minimum": 100, "maximum": 900, "multipleOf": 100, "default": 400 },
+        "lineHeight": { "description": "Multiplicador do tamanho da fonte.", "type": "number", "minimum": 0.6, "maximum": 3, "default": 1.1 },
+        "letterSpacing": { "description": "Em em.", "type": "number", "minimum": -0.2, "maximum": 1, "default": 0 },
+        "color": { "$ref": "#/$defs/color" },
+        "align": { "type": "string", "enum": ["left", "center", "right"], "default": "left" },
+        "verticalAlign": { "type": "string", "enum": ["top", "middle", "bottom"], "default": "top" },
+        "uppercase": { "type": "boolean", "default": false }
+      }
+    },
+    "imageContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId"],
+      "properties": {
+        "assetId": { "$ref": "#/$defs/id" },
+        "fit": { "description": "cover preenche a caixa cortando sobras; contain mostra a imagem inteira.", "type": "string", "enum": ["cover", "contain"], "default": "cover" },
+        "focusX": { "description": "Ponto da imagem que fica visível no corte, de 0 a 1.", "$ref": "#/$defs/unit", "default": 0.5 },
+        "focusY": { "$ref": "#/$defs/unit", "default": 0.5 },
+        "borderRadius": { "type": "number", "minimum": 0, "default": 0 }
+      }
+    },
+    "shapeContent": {
+      "description": "Forma: precisa de fill, de stroke ou dos dois.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["rect", "ellipse"] },
+        "fill": { "$ref": "#/$defs/color" },
+        "stroke": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color", "width"],
+          "properties": {
+            "color": { "$ref": "#/$defs/color" },
+            "width": { "type": "number", "exclusiveMinimum": 0 }
+          }
+        },
+        "borderRadius": { "type": "number", "minimum": 0, "default": 0 }
+      },
+      "anyOf": [
+        { "type": "object", "properties": { "fill": true }, "required": ["fill"] },
+        { "type": "object", "properties": { "stroke": true }, "required": ["stroke"] }
+      ]
+    },
+    "logoContent": {
+      "description": "O logo entra sempre inteiro e sem distorção dentro da caixa.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assetId"],
+      "properties": {
+        "assetId": { "$ref": "#/$defs/id" }
+      }
+    },
+    "animation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "preset", "role", "durationFrames"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "preset": { "type": "string", "enum": ["fade", "slide", "scale"] },
+        "role": {
+          "description": "in começa no início da camada; out termina no fim da camada.",
+          "type": "string",
+          "enum": ["in", "out"]
+        },
+        "durationFrames": { "$ref": "#/$defs/frames" },
+        "delayFrames": {
+          "description": "in: espera depois do início da camada. out: folga antes do fim da camada.",
+          "$ref": "#/$defs/frameOffset",
+          "default": 0
+        },
+        "easing": { "$ref": "#/$defs/easing" },
+        "params": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "direction": { "description": "slide: sentido do movimento. up quer dizer que a camada sobe (na entrada vem de baixo; na saída vai pra cima).", "type": "string", "enum": ["left", "right", "up", "down"] },
+            "distance": { "description": "slide: deslocamento em pixels.", "type": "number", "exclusiveMinimum": 0 },
+            "scale": { "description": "scale: escala de partida (in) ou de chegada (out).", "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "track": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/keyframe" }
+    },
+    "keyframe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frame", "value"],
+      "properties": {
+        "frame": { "$ref": "#/$defs/frameOffset" },
+        "value": { "type": "number" },
+        "easing": {
+          "description": "Curva do trecho que começa neste quadro-chave e vai até o próximo.",
+          "$ref": "#/$defs/easing"
+        }
+      }
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["container", "videoCodec", "pixelFormat", "crf"],
+      "properties": {
+        "container": { "type": "string", "enum": ["mp4"] },
+        "videoCodec": { "type": "string", "enum": ["h264"] },
+        "pixelFormat": { "type": "string", "enum": ["yuv420p"] },
+        "crf": {
+          "description": "Qualidade do H.264: menor = melhor e mais pesado. 18 é entrega; 28 é rascunho.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 51
+        },
+        "fileName": {
+          "description": "Nome do arquivo final, sem pasta. Vai sempre pra renders/ do projeto.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,100}\\.mp4$"
+        }
+      }
+    }
+  }
+}

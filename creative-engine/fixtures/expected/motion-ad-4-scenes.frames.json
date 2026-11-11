@@ -1,0 +1,1437 @@
+{
+ "0": {
+  "frame": 0,
+  "timeSeconds": 0,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 0,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "6": {
+  "frame": 6,
+  "timeSeconds": 0.2,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 6,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0038,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "12": {
+  "frame": 12,
+  "timeSeconds": 0.4,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 12,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0076,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1250,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "22": {
+  "frame": 22,
+  "timeSeconds": 0.7333,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 22,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0139,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1210,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "83": {
+  "frame": 83,
+  "timeSeconds": 2.7667,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 83,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0524,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1210,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "84": {
+  "frame": 84,
+  "timeSeconds": 2.8,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 84,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0531,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1210,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 0,
+    "background": "#F6F4EF",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 0.0116,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 0.92,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "90": {
+  "frame": 90,
+  "timeSeconds": 3,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 90,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.0568,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.9452,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1210,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 6,
+    "background": "#F6F4EF",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 0.5661,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 0.92,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "95": {
+  "frame": 95,
+  "timeSeconds": 3.1667,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-gancho",
+    "localFrame": 95,
+    "background": null,
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "gancho-foto",
+      "type": "image",
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 1920,
+      "scale": 1.06,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-rosto",
+       "src": "assets/foto-rosto.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.35,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-veu",
+      "type": "shape",
+      "x": 0,
+      "y": 820,
+      "width": 1080,
+      "height": 1100,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.72,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 0
+      }
+     },
+     {
+      "layerId": "gancho-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 900,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0,
+      "content": {
+       "content": "Óculos novos\nainda hoje.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 128,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.03,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "gancho-apoio",
+      "type": "text",
+      "x": 64,
+      "y": 1210,
+      "width": 952,
+      "height": 60,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Sem esperar uma semana.",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 44,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "left",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 11,
+    "background": "#F6F4EF",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 0.9884,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 0.9698,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.7988,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "96": {
+  "frame": 96,
+  "timeSeconds": 3.2,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 12,
+    "background": "#F6F4EF",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 0.9761,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0.8722,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "204": {
+  "frame": 204,
+  "timeSeconds": 6.8,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 120,
+    "background": "#F6F4EF",
+    "container": {
+     "x": -436.6303,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     },
+     {
+      "layerId": "produto-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 1070,
+      "width": 952,
+      "height": 200,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Armação + lentes\nprontas em 1 hora.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 88,
+       "fontWeight": 700,
+       "lineHeight": 1.05,
+       "letterSpacing": -0.02,
+       "color": "#14181F",
+       "align": "center",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-oferta",
+    "localFrame": 0,
+    "background": "#E4572E",
+    "container": {
+     "x": 643.3697,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": []
+   }
+  ]
+ },
+ "210": {
+  "frame": 210,
+  "timeSeconds": 7,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-produto",
+    "localFrame": 126,
+    "background": "#F6F4EF",
+    "container": {
+     "x": -1057.7212,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "produto-foto",
+      "type": "image",
+      "x": 140,
+      "y": 220,
+      "width": 800,
+      "height": 800,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "foto-armacao",
+       "src": "assets/foto-armacao.jpg",
+       "fit": "cover",
+       "focusX": 0.5,
+       "focusY": 0.5,
+       "borderRadius": 24
+      }
+     },
+     {
+      "layerId": "produto-titulo",
+      "type": "text",
+      "x": 64,
+      "y": 1070,
+      "width": 952,
+      "height": 200,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Armação + lentes\nprontas em 1 hora.",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 88,
+       "fontWeight": 700,
+       "lineHeight": 1.05,
+       "letterSpacing": -0.02,
+       "color": "#14181F",
+       "align": "center",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-oferta",
+    "localFrame": 6,
+    "background": "#E4572E",
+    "container": {
+     "x": 22.2788,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "oferta-numero",
+      "type": "text",
+      "x": 64,
+      "y": 520,
+      "width": 952,
+      "height": 300,
+      "scale": 0.6,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 0,
+      "content": {
+       "content": "20% OFF",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 180,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.04,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "middle",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ },
+ "330": {
+  "frame": 330,
+  "timeSeconds": 11,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-oferta",
+    "localFrame": 126,
+    "background": "#E4572E",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "oferta-numero",
+      "type": "text",
+      "x": 64,
+      "y": 520,
+      "width": 952,
+      "height": 300,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "20% OFF",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 180,
+       "fontWeight": 700,
+       "lineHeight": 1,
+       "letterSpacing": -0.04,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "middle",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "oferta-detalhe",
+      "type": "text",
+      "x": 64,
+      "y": 850,
+      "width": 952,
+      "height": 90,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "em todas as armações",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 56,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "oferta-prazo-fundo",
+      "type": "shape",
+      "x": 290,
+      "y": 1010,
+      "width": 500,
+      "height": 110,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "kind": "rect",
+       "fill": "#14181F",
+       "stroke": null,
+       "borderRadius": 55
+      }
+     },
+     {
+      "layerId": "oferta-prazo",
+      "type": "text",
+      "x": 290,
+      "y": 1010,
+      "width": 500,
+      "height": 110,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Só até sexta",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 48,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "middle",
+       "uppercase": false
+      }
+     }
+    ]
+   },
+   {
+    "sceneId": "cena-chamada",
+    "localFrame": 6,
+    "background": "#14181F",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 0.5661,
+     "clip": null
+    },
+    "layers": []
+   }
+  ]
+ },
+ "449": {
+  "frame": 449,
+  "timeSeconds": 14.9667,
+  "width": 1080,
+  "height": 1920,
+  "background": "#14181F",
+  "scenes": [
+   {
+    "sceneId": "cena-chamada",
+    "localFrame": 125,
+    "background": "#14181F",
+    "container": {
+     "x": 0,
+     "y": 0,
+     "opacity": 1,
+     "clip": null
+    },
+    "layers": [
+     {
+      "layerId": "chamada-logo",
+      "type": "logo",
+      "x": 340,
+      "y": 360,
+      "width": 400,
+      "height": 200,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "assetId": "logo-claro",
+       "src": "assets/logo-claro.svg"
+      }
+     },
+     {
+      "layerId": "chamada-botao",
+      "type": "shape",
+      "x": 140,
+      "y": 760,
+      "width": 800,
+      "height": 160,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "kind": "rect",
+       "fill": "#E4572E",
+       "stroke": null,
+       "borderRadius": 80
+      }
+     },
+     {
+      "layerId": "chamada-texto",
+      "type": "text",
+      "x": 140,
+      "y": 760,
+      "width": 800,
+      "height": 160,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "Chama no WhatsApp",
+       "fontFamily": "DejaVu Sans Bold",
+       "fontAssetId": "fonte-titulo",
+       "fontSize": 64,
+       "fontWeight": 700,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "middle",
+       "uppercase": false
+      }
+     },
+     {
+      "layerId": "chamada-prazo",
+      "type": "text",
+      "x": 64,
+      "y": 980,
+      "width": 952,
+      "height": 70,
+      "scale": 1,
+      "rotation": 0,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "opacity": 1,
+      "content": {
+       "content": "20% OFF em armações até sexta",
+       "fontFamily": "DejaVu Sans",
+       "fontAssetId": "fonte-corpo",
+       "fontSize": 40,
+       "fontWeight": 400,
+       "lineHeight": 1.1,
+       "letterSpacing": 0,
+       "color": "#FFFFFF",
+       "align": "center",
+       "verticalAlign": "top",
+       "uppercase": false
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

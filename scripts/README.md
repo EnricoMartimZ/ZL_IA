@@ -32,6 +32,8 @@ node --env-file=.env scripts/postar-instagram.js marketing/conteudo/<slug>-<data
 
 `/video-reels` não usa script daqui: roda o CLI do HyperFrames (`npx hyperframes`, precisa de Node 22+ e FFmpeg).
 
+`/criativo` também não: usa o Creative Engine, que tem pacote próprio em `creative-engine/` (instalar com `npm --prefix creative-engine install`; comandos em `node creative-engine/cli/mazy-creative.js --help`).
+
 `--dry-run` nos scripts de postagem e no `kie.js` mostra as chamadas à API sem publicar nada — use pra conferir antes da primeira vez.
 
 ## Pré-requisitos comuns

@@ -1,0 +1,3 @@
+Fontes de teste: recortes (só o alfabeto latino) da DejaVu Sans e da DejaVu Sans Bold 2.37,
+gerados com pyftsubset a partir das fontes do sistema. Licença no arquivo ao lado.
+As imagens e os logos desta pasta foram desenhados para o teste: não vêm de cliente nem de banco de imagem.

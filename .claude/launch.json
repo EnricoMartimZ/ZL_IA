@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "creative-editor-demo",
+      "runtimeExecutable": "/bin/bash",
+      "runtimeArgs": ["-lc", "node creative-engine/cli/demo.js --port 5177"],
+      "port": 5177
+    }
+  ]
+}

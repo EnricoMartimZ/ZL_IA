@@ -143,6 +143,10 @@ Valem pra todo site, landing page e componente gerado neste repositório.
 São ordens: quebrar uma delas só com o motivo escrito no `DESIGN.md` do
 cliente.
 
+Não valem pro Creative Engine (`creative-engine/`, anúncio em vídeo, skill
+`/criativo`): lá a animação é calculada quadro a quadro pelo próprio motor,
+sem mola, GSAP nem Lenis. As regras dele estão em `docs/creative-engine/`.
+
 **Dois trilhos, a mesma régua:**
 
 - **Site estático** (padrão pra negócio local, sem build): skill
@@ -269,7 +273,7 @@ Biblioteca fora dessa lista entra só com motivo. Os componentes de
 
 Nenhum dado de cliente ou prospect vai pro GitHub: nem funil, lotes,
 prints e telefones (já estão no `.gitignore`: `vendas/`, `clientes/`,
-`_memoria/`, `projetos/`, `saidas/`), nem **nome de loja ou empresa,
+`_memoria/`, `projetos/`, `saidas/`, `marketing/criativos/`), nem **nome de loja ou empresa,
 real ou fictício**, em arquivo versionado — skills, exemplos, frases de
 gatilho, testes e mensagens de commit.
 

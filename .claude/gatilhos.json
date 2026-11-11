@@ -352,6 +352,23 @@
       ]
     },
     {
+      "skill": "criativo",
+      "grupo": "Entregar: conteúdo",
+      "quando": "anúncio animado vertical de 15 s que também abre no editor web: roteiro, marca, crítica, variações e MP4",
+      "exemplos": [
+        "faz um criativo da oferta da ótica",
+        "abre o editor do anúncio",
+        "gera variações do criativo"
+      ],
+      "gatilhos": [
+        "\\b(um|uns|o|os|do|no|novo|outro|esse|este|meu) criativos?\\b|\\bcriativos? (de|do|da|em|animado)\\b",
+        "anuncios? (animados?|em video|em motion)|motion ad",
+        "(abre|abrir|abra|abrindo) (o |no )?editor|editor (de|do) (video|criativo|anuncio)",
+        "(variac(ao|oes)|variantes?) (do|da|de|pro|para) (anuncio|criativo)",
+        "critica (do|da) (anuncio|criativo|peca)"
+      ]
+    },
+    {
       "skill": "video-reels",
       "grupo": "Entregar: conteúdo",
       "quando": "reels, stories e TikTok verticais com gancho, legenda animada e a marca",
