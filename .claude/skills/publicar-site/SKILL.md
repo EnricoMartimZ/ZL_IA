@@ -16,7 +16,7 @@ Site bonito que ninguém acha não vende. Essa skill faz o site do cliente apare
 ## Dependências
 
 - **Site:** `clientes/<Nome>/site/` (do `/site-premium`)
-- **Conferência:** `/checar-site` (`scripts/checar-site.js`)
+- **Conferência:** `/checar-site` (`scripts/checar-site.js`) e a auditoria do `/seo-site` (`scripts/seo-site.js`, `scripts/seo-arquivos.js`)
 - **Contas:** Vercel ou Netlify (sua), Registro.br e Google (**do cliente** — ver regra do domínio)
 - **Saída:** `clientes/<Nome>/site/ENTREGA.md`
 
@@ -47,7 +47,9 @@ Antes do deploy, no site:
 - Trocar `DOMINIO` pelo domínio final em todos os arquivos (canonical, og, JSON-LD, sitemap, robots)
 - `app.js` → `medicao`: Plausible (sem cookies) ou GA4/Pixel do cliente (o aviso de cookies aparece sozinho)
 - Orçamento por formulário (`orcamento.formulario`): o formulário criado na conta **da empresa**, e o item do formulário colado na `privacidade.html`
-- `sitemap.xml` com todas as páginas e `lastmod` de hoje
+- `sitemap.xml` e `robots.txt` gerados de novo com o domínio final e a política pra robôs de IA do plano: `node scripts/seo-arquivos.js clientes/<Nome>/site --dominio dominio.com.br`
+- Auditoria de SEO com zero crítico e zero alto: `node scripts/seo-site.js clientes/<Nome>/site --plano clientes/<Nome>/seo/plano.json --saida clientes/<Nome>/seo/AUDITORIA.md`
+- Relatório de SEO (`clientes/<Nome>/seo/RELATORIO-SEO.md`, do `/seo-site`) mostrado ao usuário. Site sem plano de busca (feito antes desta regra): rodar o `/seo-site` primeiro
 
 ### Passo 2 — Deploy
 
@@ -72,7 +74,10 @@ E-mail no domínio (contato@dominio.com.br): fora do escopo do site — indicar 
 ### Passo 4 — Google e redes
 
 - **Search Console** (search.google.com/search-console): propriedade de domínio, verificação por registro TXT no DNS; enviar `https://dominio/sitemap.xml`; pedir indexação da home
+- **Bing Webmaster Tools** (bing.com/webmasters): importar o site do Search Console e enviar o sitemap. É o índice que alimenta o Copilot
 - **Teste de resultados avançados** (search.google.com/test/rich-results): colar a URL e confirmar que o JSON-LD foi lido
+- **Auditoria no domínio, com o teste real de velocidade:** `node --env-file=.env scripts/seo-site.js https://dominio.com.br --psi --saida clientes/<Nome>/seo/AUDITORIA-publicado.md` (confere HTTPS, versão com e sem `www`, página de erro e o PageSpeed no celular)
+- Indexação: **não** dizer ao cliente que o site "já está no Google". Leva de dias a semanas; só o Search Console confirma, e a data da confirmação vai pro `seo/plano.md`
 - **Google Meu Negócio**: campo "Site" com o domínio; botão "Agendar" apontando pro site se fizer sentido
 - **Instagram**: link na bio
 - **WhatsApp Business**: link no perfil
@@ -90,7 +95,8 @@ Criar `clientes/<Nome>/site/ENTREGA.md`:
 - Site: https://dominio.com.br  ·  Vercel: <projeto>  ·  publicado em <data>
 - Domínio: registrado em nome de <cliente> no Registro.br, vence em <data>
 - DNS: <onde está> · registros: <lista>
-- Search Console: propriedade do cliente (<email>), eu como usuário · sitemap enviado em <data>
+- Search Console: propriedade do cliente (<email>), eu como usuário · sitemap enviado em <data> · Bing Webmaster Tools: <ok / não feito>
+- SEO: plano em seo/plano.json · relatório em seo/RELATORIO-SEO.md · auditoria <n> crítico, <n> alto · robôs de IA: <liberados / só busca / bloqueados>
 - Medição: <Plausible/GA4/Pixel> · eventos: clique_whatsapp, agenda_aberta, agenda_enviada (ou orcamento_aberto, orcamento_enviado), clique_telefone, clique_rota
 - Google Meu Negócio e Instagram com o link: ok
 - Checagem: CHECAGEM.md (0 ❌) · PageSpeed celular: <nota>
@@ -113,7 +119,7 @@ O site avulso paga uma vez; a manutenção paga todo mês. Oferecer junto com a 
 - Uma melhoria por mês a partir dos números (ex: página nova de serviço que as pessoas buscam)
 
 **Rotina mensal** (todo dia 1º, por cliente):
-1. `node scripts/checar-site.js https://dominio --saida clientes/<Nome>/site/checagens/<YYYY-MM>.md`
+1. `node scripts/checar-site.js https://dominio --saida clientes/<Nome>/site/checagens/<YYYY-MM>.md` e, a cada três meses, `node --env-file=.env scripts/seo-site.js https://dominio --psi` (o que apareceu de novo vai pro relatório)
 2. Puxar os números (Plausible/GA4 e Search Console) pro `/relatorio-resultados`
 3. Aplicar os ajustes pedidos no mês, rodar o checar de novo, publicar
 4. Conferir vencimento do domínio

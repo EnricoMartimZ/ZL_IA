@@ -14,6 +14,9 @@ Instalação (uma vez): `npm run setup` na raiz — instala o Playwright e o Chr
 | `postar-facebook.js` | `/aprovar-post` | Publica as fotos num post da Página do Facebook |
 | `lib/meta.js` | scripts de postagem | Funções comuns da Meta Graph API |
 | `checar-site.js` | `/checar-site`, `/site-demo`, `/publicar-site` | Confere um site (pasta ou URL): erros, 404, texto de exemplo, SEO, imagens, celular. Sai com código 1 se houver erro que bloqueia |
+| `seo-site.js` | `/seo-site`, `/site-premium`, `/publicar-site` | Auditoria de SEO e GEO de qualquer site (pasta ou URL): indexação, metadados, títulos, conteúdo raso ou duplicado, links, imagens, dados estruturados, robôs de IA e, com `--plano`, a palavra-chave de cada página. Achados por gravidade; `--psi` roda o PageSpeed Insights; sai com código 1 se houver crítico |
+| `seo-arquivos.js` | `/seo-site`, `/site-premium`, `/publicar-site` | Gera `sitemap.xml`, `robots.txt` (com a política pra robôs de IA) e, com `--llms`, o `llms.txt` de um site estático. Não gera nada em demonstração |
+| `lib/seo.js`, `lib/servir.js` | scripts de site | Leitura do `robots.txt`, lista de robôs de IA e o servidor local temporário |
 | `auditar-site.js` | `/prospectar-b2b` (e qualquer prospecção) | Audita o site de prospects em lote: nota de 0 a 100 com os motivos (sem HTTPS, quebrado no celular, © antigo, sem orçamento...) e prints de desktop e celular |
 | `extrair-marca.js` | `/identidade-loja` (antes de `/site-premium` e `/site-demo`) | Tira a identidade da loja do site atual e de prints/logo: cores com papel (fundo, texto, destaque, base escura), logo recortado, fontes, frases e redes. Gera `marca.json`, `marca.md` com o `:root` pronto e o quadro `marca.png` |
 | `montar-lote.js` | `/abordagem-whatsapp` | Lê as buscas do Google Maps, escolhe quem tem celular e ponto fraco verificável, compara com o líder local do nicho, audita os sites e escreve uma mensagem curta e diferente pra cada loja (`lote.md`, `fila.json`, `lote.csv`) |
@@ -45,6 +48,7 @@ A maioria dos scripts depende de:
 **.env** na raiz do projeto (copie o `.env.example`; o `.env` está no `.gitignore`):
 ```bash
 OPENAI_API_KEY=sk-...               # pra gerar-imagem.js
+PAGESPEED_API_KEY=...               # opcional, pra seo-site.js --psi
 KIE_API_KEY=...                     # pra kie.js (/foto-produto, /video-ia)
 META_PAGE_ACCESS_TOKEN=...          # pra postar-instagram.js + postar-facebook.js
 META_PAGE_ID=...

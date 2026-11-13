@@ -12,6 +12,10 @@ description: >
 
 # /seo — SEO completo + GEO + Google Ads
 
+## O que é desta skill e o que é da `/seo-site`
+
+Esta skill cuida do que fica **fora do site**: demanda e concorrência do nicho, Google Meu Negócio, calendário de conteúdo, Google Ads e monitoramento. O site em si (palavra-chave por página, title e description, títulos, dados estruturados, sitemap, robots, robôs de IA, auditoria e relatório de SEO) é da **`/seo-site`**, que entra sozinha na criação de sites. As duas trocam arquivos: a pesquisa daqui (`01` e `02`) alimenta o plano de lá.
+
 ## Dependências
 
 - **Contexto do negócio:** `_memoria/empresa.md`
@@ -127,6 +131,8 @@ description: >
 ### Passo 4 — ON-PAGE: Otimizar o site
 
 **Objetivo:** Garantir que cada página esteja otimizada pras palavras-chave certas.
+
+**Site feito pelo MazyOS, ou qualquer site que dê pra auditar pela URL:** este passo é a `/seo-site`. Rodar ela (plano por página + `node scripts/seo-site.js <pasta ou URL>`) e salvar aqui só o resumo com o link pro relatório. O roteiro abaixo fica pra quando não há acesso ao site e o resultado é um documento de recomendações.
 
 1. Ler a estrutura atual do site (se `site/` existir; senão, perguntar as páginas)
 2. Pra cada página:
@@ -265,6 +271,8 @@ description: >
    - Incluir **dados concretos** (números, certificações, endereços, fatos verificáveis)
    - Estruturar com **perguntas como H2/H3** (formato Q&A)
    - Evitar texto vago — IAs descartam genérico
+
+> Os itens 2, 3 e 5 (texto, perguntas e dados estruturados **no site**) são executados pela `/seo-site`, que também separa o que é prática comprovada, hipótese e experimental (`.claude/skills/seo-site/geo.md`) e confere quais robôs de IA entram no site. Nunca prometer citação por IA.
 
 3. **FAQ Schema no site:**
    - Seção de FAQ com perguntas reais do nicho

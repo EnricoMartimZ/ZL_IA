@@ -99,7 +99,7 @@ vem da direção criativa (`direcao.md`) e do mundo escolhido (`mundos.md`) — 
 
 - Title de cada página = **serviço + cidade + marca** ("Lentes multifocais em Campinas · <marca>"). O h1 pode ser criativo; o title não.
 - Dados estruturados (JSON-LD) com o tipo mais específico do negócio, endereço, horário e coordenadas — é o que alimenta o Google e o Maps. Nunca `aggregateRating` com avaliações do Google.
-- Uma página por serviço importante, com perguntas frequentes reais (viram resultado no Google).
+- As páginas saem do plano de busca do `/seo-site` (`clientes/<Nome>/seo/plano.json`): uma por serviço que alguém procura pelo nome, cada uma com a sua palavra principal, a linha de apoio que diz o que é, onde e pra quem, e perguntas frequentes reais, visíveis na página. Elas ajudam a busca e as IAs a ler pergunta e resposta; o Google hoje quase não mostra mais o bloco de perguntas no resultado, então não prometer isso.
 - Todo botão que gera contato é medido (`clique_whatsapp`, `agenda_enviada`, `orcamento_enviado`...). Site que não mede não justifica mensalidade.
 
 ## 9. Contrato de design (`DESIGN.md` do site)

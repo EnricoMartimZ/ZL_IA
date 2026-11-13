@@ -29,6 +29,7 @@ O `modelo/` é a **infraestrutura** (agenda/orçamento, SEO, JSON-LD, medição,
 - **Técnicas:** `.claude/skills/site-premium/tecnicas/` — palco (rolagem como linha do tempo), fluxo, partículas, linhas, zoom contínuo, raio-X, superfície, pincel, controle, território, arrastar, vinhetas, luz, sequência, abertura, trilho, esteira, varal, folha, pontilhado, placar, física, roda, medida (número por tela e régua do ofício), carta, troca, lista viva, profundidade, cursor (rótulo, ímã, rastro, lupa), menu cheio, texto, HUD. Catálogo e o "Padrão de peça premiada" em `tecnicas/README.md`; bancadas em `tecnicas/demo.html`, `tecnicas/mostruario.html`, `tecnicas/objetos.html` e `tecnicas/arsenal.html`
 - **Infraestrutura pronta:** `.claude/skills/site-premium/modelo/` (index.html, estilo.css, app.js, hero-seq.js, hero3d.js, img/)
 - **Identidade da loja (antes de tudo):** `/identidade-loja` → `clientes/<Nome>/marca/marca.json` e `marca.md` (cores com papel, logo, fontes, frases da loja, `:root` pronto). Sem ela, não começar
+- **Busca (SEO e GEO), dentro do fluxo:** `/seo-site` — o plano de palavras-chave decide as páginas antes do conceito (Passo 1b), os textos saem do plano (Passo 3), a auditoria roda antes do `/checar-site` (Passo 4) e o relatório de SEO vem antes do "ok" de publicar (Passo 5). Arquivos em `clientes/<Nome>/seo/`
 - **Regras de design:** `.claude/skills/site-premium/design.md` — o que vale pra todo mundo (conversão, desempenho, SEO, honestidade) e o detalhe do mundo Noturno
 - **Cenas de IA do hero:** `.claude/skills/site-premium/cenas.md` — roteiro, prompts e geração consistente (com `scripts/kie.js` ou Higgsfield)
 - **Imagens que faltam:** `.claude/skills/site-premium/imagens.md` — quando parar e pedir ao usuário, o formato do pedido com o prompt de cada imagem, e o roteiro de fotos pro dono da empresa
@@ -55,6 +56,16 @@ Puxar o que já existe (pasta do cliente, diagnóstico) e perguntar só o que fa
 5. 4+ fotos reais do lugar/trabalho e 3 avaliações reais do Google
 6. **A transformação** — ver Passo 2
 
+### Passo 1b — Plano de busca (antes do conceito)
+
+O site existe pra ser achado: a busca decide quais páginas ele tem. Rodar os Passos 1 a 3 do **`/seo-site`** com o que o briefing já trouxe (ele lê a pasta do cliente e só pergunta o que faltar: cidades atendidas, o serviço que dá mais dinheiro, as perguntas que o cliente faz, se robôs de IA podem ler o site):
+
+1. Como o cliente procura, por intenção (contratar, escolher, entender, achar a empresa)
+2. Uma palavra principal por página, secundárias e perguntas
+3. A lista de páginas (inicial + uma por serviço que alguém procura pelo nome), com endereço, title, description e a linha de apoio de cada uma
+
+Sai `clientes/<Nome>/seo/plano.json` e a tabela de páginas, **mostrada ao usuário**. A direção criativa trabalha em cima dela: pode trocar a forma de tudo, não o que cada página precisa responder.
+
 ### Passo 2 — Direção criativa (o mais importante)
 
 Seguir o `direcao.md`:
@@ -64,7 +75,7 @@ Seguir o `direcao.md`:
 3. **Três conceitos** bem diferentes, o seguro, o certo e o ousado (norte + mundo + técnica-assinatura + interação + estrutura de história + tipografia + paleta + detalhe de marca + imagens que faltam), aprovados na banca do `direcao.md` e checados contra os 3 últimos do `clientes/_conceitos.md` — mostrar ao usuário e **ele escolhe um**
 4. **Pedido de imagens** (`imagens.md`): se o conceito escolhido precisa de imagem que não existe, mandar o pedido com o prompt de cada uma e o plano B, e esperar a resposta. Enquanto isso, adiantar o que não depende delas
 5. **Contrato de design** (`design.md` §9): escrever `clientes/<Nome>/DESIGN.md` antes do CSS
-6. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto
+6. **Primeira dobra primeiro:** montar só o palco de abertura com a técnica escolhida e mostrar. Aprovado, segue o resto. O h1 pode ser a frase do conceito; a **linha de apoio** do plano (o que é, onde, pra quem, em texto corrido) fica logo abaixo dele, visível sem rolar
 
 A técnica sai de `tecnicas/` (testar a peça na bancada antes, se for mexer nela). Técnica nova que o conceito pedir (som, nuvem de pontos, galeria em disco…): escrever como módulo em `tecnicas/`, com `progresso(p)`, seguindo o "Padrão de peça premiada" do `tecnicas/README.md`, e pôr numa bancada. Antes de inventar, testar o "O objeto é a interface" do `direcao.md`. Ramo sem referência: garimpar nas galerias de `referencias.md` antes de propor.
 
@@ -102,7 +113,7 @@ Mostrar a frase e os capítulos pro usuário antes de construir.
 | **Hero foto** | `data-modo="foto"` + foto real em `img/hero.*` (sem WebGL) | Orçamento menor, demo rápida |
 | **Tema escuro** | `data-tema="escuro"` no `<html>` (padrão) | Automotivo, barbearia, bar, tecnologia, luxo |
 | **Tema claro** | `data-tema="claro"` + cores no bloco `:root[data-tema="claro"]` | Clínica, ótica, confeitaria, infantil, pet, moda feminina |
-| **Página de serviço** | `servico.html` copiada como `servico-<nome>.html` | Cada serviço que as pessoas buscam no Google ("lentes multifocais campinas") |
+| **Página de serviço** | `servico.html` copiada como `servico-<nome>.html` | As páginas do plano de busca (Passo 1b): uma por serviço que as pessoas procuram pelo nome ("lentes multifocais campinas") |
 | **Loja online** | link comentado no `<nav>` do `index.html` | Loja com Nuvemshop/Shopify |
 | **Mapa animado** | seção `#onde` + `mapa.json` (padrão) | Todo negócio com endereço físico. Só online: apagar a seção, o link "Onde fica" e o `mapa.js` |
 | **Agenda** | `contato: 'agenda'` no `app.js` (padrão): serviço → dia → período → nome → WhatsApp | Loja, estética, oficina, clínica: quem vende horário |
@@ -129,7 +140,7 @@ O comprador de empresa não marca horário: ele cota. O painel pergunta o que o 
 1. Copiar `modelo/` inteiro pra `clientes/<Nome>/site/`
 2. **Variações** acima: modo do hero, tema, quais páginas de serviço
 3. **Visual do mundo escolhido** (`mundos.md`): reescrever o `estilo.css` com a paleta, as fontes e o layout do mundo — o `estilo.css` do modelo só serve como está no mundo Noturno. Copiar `tecnicas/` pra pasta do site e montar a história em palcos (`tecnicas/README.md`). Seções do modelo (prova, serviços, galeria, avaliações, mapa, final) podem mudar de forma, de ordem ou sair: o que fica obrigatório é o que converte e o que o Google lê (botão de agenda/orçamento, avaliações reais, endereço, JSON-LD). No mundo Noturno: colar o `:root` sugerido no `marca.md` da loja (tema claro ou escuro conforme a marca, base escura da marca no `--bg`; fonte de título da marca se for Google Font). Logo real no `.logo` do topo e do rodapé; frases da loja (`frases` do `marca.json`) no hero e nos títulos. Checklist completo no Passo 5 do `/identidade-loja`
-4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title de cada página = serviço + cidade + marca
+4. **HTML** (`index.html`, `servico*.html`, `privacidade.html`) → trocar todo elemento com `data-editar`: textos, avaliações, endereço, meta tags **e o JSON-LD** (dados do negócio pro Google: tipo específico como `Optician`/`AutoRepair`/`BeautySalon`, endereço, horário, coordenadas, Instagram). Títulos seguindo `design.md` §2. Title, description, h1, linha de apoio, subtítulos e perguntas de cada página vêm do `clientes/<Nome>/seo/plano.json`; os textos seguem o `/seo-site` (`plano.md` §4: resposta primeiro, fato no lugar de adjetivo, perguntas visíveis). O JSON-LD só repete o que a página mostra
 5. **`DOMINIO`** → buscar e trocar em todos os arquivos (canonical, og, JSON-LD, `sitemap.xml`, `robots.txt`). Sem domínio ainda: deixar e trocar no `/publicar-site`
 6. **`app.js`** → `CONFIG`: WhatsApp, `contato` (`'agenda'` ou `'orcamento'`), serviços (os mesmos nomes dos cards), `agenda` (períodos, dias fechados) **ou** `orcamento` (pergunta do nicho, prazos, resposta, formulário), **medição** (Plausible sem cookies, ou GA4/Pixel do cliente — o aviso de cookies aparece sozinho)
 7. **Abertura** → nos outros mundos, é o palco da técnica-assinatura aprovado no Passo 2 (apagar `#palco`, `hero-seq.js` e `hero3d.js` se não forem usados). **Mundo Noturno:** no `index.html`, os blocos `.beat` (um por capítulo: título em duas frases curtas, linha técnica, o último com o botão) e o rótulo `.tag-ia`. Modo sequência: `hero-seq.js` → `CONFIG.cenas` e `CONFIG.passos` (ver `cenas.md` §4). Modo 3D: `hero3d.js` → `CONFIG`: caminho do .glb em `modelo`, `corSujeira`, `corDestaque`, e os `capitulos` do Passo 2 (rótulo, `limpo`, `brilho`, posição da câmera). Pra negócio sem "sujeira", deixar `limpo: 1` em todos e contar a história com `brilho`, câmera e `giro`. Cor do estúdio acompanha o tema sozinha
@@ -141,7 +152,7 @@ O comprador de empresa não marca horário: ele cota. O painel pergunta o que o 
    O carro sai sozinho de uma avenida a uns 400–550 m; pra escolher de onde (a avenida que todo mundo conhece, a saída do shopping): `--de <lat,lon>`. Depois, no `index.html`: `data-mapa="mapa.json"` e `data-loja="<nome curto da loja>"` no `.mapa-caixa`, endereço, horário e o link "Como chegar" com `destination=<lat,lon>`. Apagar o `mapa-exemplo.json`. O crédito "© OpenStreetMap contributors" fica (é exigência da licença dos dados)
 10. **Avaliações** → nota e número **reais** do perfil no Google (no dia), 4 a 6 avaliações reais copiadas com nome abreviado e data, e o link do perfil no botão "Ver todas no Google"
 11. **`privacidade.html`** → dados do cliente; sem GA4/Pixel, apagar a seção de cookies
-12. **`sitemap.xml`** → uma `<url>` por página indexável
+12. **`sitemap.xml` e `robots.txt`** → gerados, com a política pra robôs de IA que o cliente escolheu: `node scripts/seo-arquivos.js clientes/<Nome>/site --dominio <dominio>` (sem domínio ainda, fica `DOMINIO`). Apagar da pasta do site as bancadas de `tecnicas/` que não são usadas (`demo.html`, `mostruario.html`...)
 13. Apagar os comentários de instrução do topo dos arquivos
 
 ### Passo 4 — Ver e conferir
@@ -150,7 +161,15 @@ O comprador de empresa não marca horário: ele cota. O painel pergunta o que o 
 python3 -m http.server 4173 --directory clientes/<Nome>/site
 ```
 
-Rodar o **`/checar-site`** (pega texto de exemplo esquecido, WhatsApp de exemplo, erros, 404, SEO, imagens, rolagem lateral):
+Rodar a auditoria do **`/seo-site`** (indexação, títulos, conteúdo raso ou duplicado, links, dados estruturados que não batem com a página, robôs de IA, e se cada página cumpre a palavra do plano):
+
+```bash
+node scripts/seo-site.js clientes/<Nome>/site --plano clientes/<Nome>/seo/plano.json --saida clientes/<Nome>/seo/AUDITORIA.md
+```
+
+Zero crítico e zero alto (o único alto que pode esperar o `/publicar-site` é o domínio de exemplo).
+
+Depois o **`/checar-site`**, a trava de entrega (pega texto de exemplo esquecido, WhatsApp de exemplo, erros, 404, imagens, rolagem lateral):
 
 ```bash
 node scripts/checar-site.js clientes/<Nome>/site --marca clientes/<Nome>/marca/marca.json --saida clientes/<Nome>/site/CHECAGEM.md
@@ -171,6 +190,8 @@ Zero ❌. Depois abrir `http://localhost:4173` e olhar, no desktop (1440 px) **e
 - [ ] **Não parece o site anterior:** abrir lado a lado com o último do `clientes/_conceitos.md` — mundo, primeira dobra, tipografia e técnica diferentes
 
 ### Passo 5 — Publicar
+
+Antes de pedir a aprovação, montar e mostrar o **relatório de SEO** (`/seo-site` Passo 7 → `clientes/<Nome>/seo/RELATORIO-SEO.md`): as buscas escolhidas, a página de cada uma, como cada página aparece no Google, o que foi implementado, o que a auditoria achou e o que depende do cliente.
 
 Com o cliente aprovando a versão: **`/publicar-site`** — deploy, domínio, Search Console, Google Meu Negócio, documento de entrega e oferta de manutenção mensal. **Publicar só com o "ok" do usuário** — o site vai pro ar com o nome do cliente.
 
@@ -193,5 +214,6 @@ Mostrar no chat: link do preview/publicado, o conceito em uma frase, e o que ain
 - **Licença de tudo:** modelo 3D, fotos, fontes. Na dúvida, não usar. Nada de marca/modelo reconhecível gerado por IA.
 - **Rótulos de honestidade ficam:** "imagens geradas por IA · ilustrativas" (ou "animação 3D ilustrativa") no hero, e fotos reais no resto do site.
 - **Nada inventado:** avaliações, números da faixa de prova e preços vêm do cliente ou do Google.
+- **A busca vem antes da tela.** Sem `seo/plano.json`, não escolher páginas nem escrever título. E nenhuma promessa de posição no Google ou de citação por IA.
 - **Celular primeiro na conferência:** a maioria dos acessos de loja local vem do Instagram, no celular.
 - **Não publicar sem aprovação.**

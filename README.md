@@ -4,7 +4,7 @@
 
 Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
 ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 32 skills prontas pra fazer marketing, SEO, ads
+o sistema gerar, e 42 skills prontas pra fazer marketing, SEO, ads
 e operação rodarem com você dirigindo.
 
 Bora voar.
@@ -79,7 +79,7 @@ em skill personalizada.
 `/carrossel` cria carrosséis 1080×1350 com identidade da marca (com ou
 sem foto IA) · `/publicar-tema` pega um tema e entrega artigo de blog +
 carrossel + 3 legendas amarradas · `/seo` roda fluxo completo de 8 passos
-(demanda, concorrência, GMB, on-page, conteúdo, ads, monitoramento, GEO)
+(demanda, concorrência, GMB, on-page, conteúdo, ads, monitoramento, GEO; o SEO dentro do site é da `/seo-site`)
 · `/responder-avaliacoes` escreve respostas humanas pras reviews do
 Google · `/aprovar-post` publica blog + Instagram + Facebook num comando.
 
@@ -121,7 +121,10 @@ Instagram e da fachada — e o `/checar-site` acusa site que não usa a cor da m
 mundos visuais e uma técnica-assinatura (do ar que esfria a tela ao cardápio que gira) e conta a história pela rolagem, com agenda pelo
 WhatsApp (ou "Pedir orçamento" pra empresa B2B), página por serviço, SEO local
 e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-demo` monta uma prévia do site da loja antes de vender
-(marcada como demonstração, fora do Google) · `/checar-site` confere erros, texto de
+(marcada como demonstração, fora do Google) · `/seo-site` cuida da busca do site, no Google e nas IAs: decide as
+páginas pelas palavras-chave antes de o site existir, escreve title, description e textos, implementa dados
+estruturados, sitemap e robots, audita qualquer site por gravidade e entrega o relatório de SEO. Entra sozinha
+na criação de sites · `/checar-site` confere erros, texto de
 exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com
 domínio, Search Console e Google Meu Negócio, e organiza a manutenção mensal.
 

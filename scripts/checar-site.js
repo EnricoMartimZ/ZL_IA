@@ -10,10 +10,10 @@
 // Sai com código 1 se houver ❌ (erro que bloqueia a entrega).
 
 import { chromium } from 'playwright';
-import { createServer } from 'node:http';
-import { readFile, stat, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { servir } from './lib/servir.js';
 
 const argv = process.argv.slice(2);
 const alvo = argv.find((a, i) => !a.startsWith('--') && !['--saida', '--marca'].includes(argv[i - 1]));
@@ -34,30 +34,6 @@ const EXEMPLOS = [
   '000 avaliações', 'O que acontece nessa etapa', 'Uma que fale de atendimento', 'NOME-DO-SERVIÇO',
   'Uma frase do que a marca', 'Duas frases', 'Resposta real', 'Etapa um', '{{',
 ];
-
-const TIPOS = {
-  '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json',
-  '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp',
-  '.avif': 'image/avif', '.glb': 'model/gltf-binary', '.txt': 'text/plain', '.xml': 'application/xml',
-  '.mp4': 'video/mp4', '.webm': 'video/webm', '.woff2': 'font/woff2', '.ico': 'image/x-icon',
-};
-
-async function servir(pasta) {
-  const raiz = path.resolve(pasta);
-  const srv = createServer(async (req, res) => {
-    let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-    if (p.endsWith('/')) p += 'index.html';
-    const arq = path.join(raiz, p);
-    if (!arq.startsWith(raiz) || !existsSync(arq) || (await stat(arq)).isDirectory()) {
-      res.writeHead(404).end('404');
-      return;
-    }
-    res.writeHead(200, { 'Content-Type': TIPOS[path.extname(arq).toLowerCase()] || 'application/octet-stream' });
-    res.end(await readFile(arq));
-  });
-  await new Promise((r) => srv.listen(0, '127.0.0.1', r));
-  return { srv, base: `http://127.0.0.1:${srv.address().port}/` };
-}
 
 const achados = []; // { nivel: 'erro'|'aviso'|'ok', pagina, item, detalhe }
 

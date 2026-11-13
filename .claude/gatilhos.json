@@ -425,6 +425,34 @@
       ]
     },
     {
+      "skill": "seo-site",
+      "grupo": "Entregar: site",
+      "quando": "SEO e GEO do site em si: palavras-chave por página, title e description, dados estruturados, sitemap, robôs de IA, auditoria por gravidade e relatório de SEO",
+      "exemplos": [
+        "faz o SEO do site da ótica",
+        "audita esse site: https://...",
+        "por que o site não aparece no Google?"
+      ],
+      "gatilhos": [
+        [
+          "\\b(seo|geo)\\b",
+          "\\b(site|pagina|paginas|landing|url)\\b|https?://"
+        ],
+        "seo (do|no|pro|para o|desse|deste|dele) |seo on.?page|seo tecnico|on.?page",
+        "(audita|auditar|auditoria|analisa|analisar)\\b.{0,30}\\b(seo|site|https?://)",
+        "relatorio de seo",
+        "meta ?(tags?|description)|title e (a )?description|json.?ld|dados estruturados|\\bschema\\b|sitemap|robots\\.txt|canonical|llms\\.txt|core web vitals|pagespeed|lighthouse",
+        [
+          "\\bsite\\b",
+          "(aparec|ach|encontr|index|ranque|posicion)\\w*\\b.{0,40}\\b(google|bing|chatgpt|gemini|perplexity|ia|ias|busca)\\b"
+        ],
+        [
+          "\\bsite\\b",
+          "(otimiz|melhor)\\w*\\b.{0,40}\\b(google|busca|buscadores|ia|ias|chatgpt)\\b"
+        ]
+      ]
+    },
+    {
       "skill": "seo",
       "grupo": "Entregar: Google e anúncios",
       "quando": "SEO, GEO e palavras-chave: aparecer no Google e nas IAs",

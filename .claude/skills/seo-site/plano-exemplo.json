@@ -1,0 +1,43 @@
+{
+  "_como_usar": "Copiar pra clientes/<Nome>/seo/plano.json e preencher. O scripts/seo-site.js --plano confere: uma principal por página, a principal no title e no h1 ou no começo do texto, e title e description iguais aos do plano.",
+  "atualizado": "AAAA-MM-DD",
+  "negocio": {
+    "nome": "<nome exato, igual ao do Google>",
+    "tipo_schema": "Optician",
+    "cidade": "<cidade>",
+    "area_atendida": ["<bairro ou cidade>", "<bairro ou cidade>"]
+  },
+  "paginas": [
+    {
+      "pagina": "index.html",
+      "principal": "ótica em <cidade>",
+      "secundarias": ["óculos de grau <cidade>", "ótica no centro de <cidade>"],
+      "intencao": "contratar",
+      "title": "Ótica em <cidade> · <marca>",
+      "description": "Óculos de grau e de sol com lentes feitas em laboratório próprio, no centro de <cidade>. Entrega em 3 dias. Agende pelo WhatsApp.",
+      "h1": "<frase do conceito ou o serviço>",
+      "apoio": "A <marca> é uma ótica no centro de <cidade> que faz lentes em laboratório próprio, com entrega em 3 dias.",
+      "perguntas": []
+    },
+    {
+      "pagina": "servico-lentes-multifocais.html",
+      "principal": "lentes multifocais em <cidade>",
+      "secundarias": ["óculos multifocal preço", "adaptação lente multifocal"],
+      "intencao": "contratar",
+      "title": "Lentes multifocais em <cidade> · <marca>",
+      "description": "Lentes multifocais com medição digital e garantia de adaptação de 30 dias, em <cidade>. A partir de R$ 000. Veja como funciona.",
+      "h1": "Lentes multifocais",
+      "apoio": "Medição digital, lente feita aqui e 30 dias pra adaptar ou trocar.",
+      "perguntas": ["Quanto tempo leva pra ficar pronto?", "E se eu não me adaptar?", "Quanto custa?"]
+    }
+  ],
+  "descartadas": [
+    { "busca": "<busca>", "motivo": "<não atende / só portal aparece / marca de terceiro>" }
+  ],
+  "decisoes": {
+    "robos_ia": "permitir",
+    "llms_txt": false,
+    "paginas_de_regiao": "não: atende só na cidade, vira a seção Onde atendemos",
+    "observacoes": ""
+  }
+}

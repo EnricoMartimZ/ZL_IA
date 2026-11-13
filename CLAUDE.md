@@ -242,6 +242,16 @@ assinatura. Dois sites do mesmo arquétipo nunca saem iguais.
 - Antes de entregar: Lighthouse no celular ≥ 90 em desempenho e em
   acessibilidade (`/checar-site` no estático)
 
+### SEO e GEO (os dois trilhos)
+
+A busca entra antes do visual. Em todo site criado aqui, a skill `/seo-site` roda dentro do fluxo, sem o usuário pedir:
+
+- **Antes do conceito:** plano de busca (intenção, uma palavra principal por página, quais páginas existem), salvo em `clientes/<Nome>/seo/plano.json`. Sem plano, não escolher páginas nem escrever título
+- **Na escrita:** title e description próprios por página, um `<h1>`, e logo abaixo dele a linha de apoio que diz o que é, onde e pra quem. Resposta na primeira frase de cada bloco, fato no lugar de adjetivo
+- **Na implementação:** canonical, Open Graph, JSON-LD só com o que a página mostra, sitemap, robots com a política pra robôs de IA decidida, texto no HTML que o servidor entrega (no Next, o texto fica em Server Component). Onde cada coisa mora: `.claude/skills/seo-site/stacks.md`
+- **Antes de entregar:** `node scripts/seo-site.js <pasta | URL> --plano <plano.json>` com zero crítico e zero alto, e o relatório de SEO mostrado ao usuário antes do "ok" de publicar
+- **Nunca:** prometer posição no Google ou citação por IA, afirmar indexação sem o Search Console, repetir palavra-chave pra forçar, dado estruturado que a página não mostra, avaliação inventada. Demonstração (`/site-demo`) fica com `noindex` e robots bloqueado: nenhuma auditoria "corrige" isso
+
 ### Dependências (projeto Next.js)
 
 | Papel | Pacote | Regra |

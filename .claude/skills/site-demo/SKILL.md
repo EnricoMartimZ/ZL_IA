@@ -52,6 +52,8 @@ Do Google Meu Negócio, Instagram e site atual (se houver):
 - **Identidade:** rodar o `/identidade-loja` → `vendas/marcas/<slug>/` (cores, logo, fontes, frases). Sem site, pedir ao usuário prints do Instagram, do logo e da fachada — **não escolher cor pelo nome da loja**
 - O diferencial que eles mesmos repetem ("desde 1998", "atendimento em casa", "laboratório próprio")
 
+**Busca, versão curta** (`/seo-site`): anotar na coleta a palavra principal da página inicial (o que a loja é + cidade) e a de cada página de serviço que entrar, e escrever title, h1 e linha de apoio com elas. A demo não vai pro Google, mas o dono lê o título da aba e, se fechar, o site já nasce com o plano.
+
 Salvar em `vendas/demos/<slug>/coleta.md`, com a fonte de cada item. Prospect B2B (veio do `/prospectar-b2b`): `contato: 'orcamento'` no `app.js` (troca o painel e os botões pra "Pedir orçamento"), com a pergunta do nicho em `orcamento.quantidade` (tabela em `prospectar-b2b/nichos.md`) e `formulario` **vazio**, e usar os prints da auditoria como "antes" na mensagem. Anotar também a coordenada da porta (Google Maps) — com ela o `scripts/mapa-ruas.js` gera o mapa animado do bairro da loja, que impressiona muito na demo.
 
 ### Passo 2 — Conceito e abertura
@@ -91,6 +93,8 @@ Tema: claro ou escuro conforme a marca (`design.md` §1).
 ```bash
 node scripts/checar-site.js vendas/demos/<slug> --demo --marca vendas/marcas/<slug>/marca.json --saida vendas/demos/<slug>/CHECAGEM.md
 ```
+
+Opcional, pra demo que tem boa chance de virar site: `node scripts/seo-site.js vendas/demos/<slug> --demo` confere títulos, conteúdo e links **exigindo** o noindex e o robots bloqueado. Nenhuma auditoria "corrige" isso: demo com sitemap, JSON-LD ou `index, follow` está errada.
 
 Zero ❌. Abrir no celular e no desktop e olhar como o dono vai olhar: o nome dele está certo? A foto mais bonita está no topo?
 

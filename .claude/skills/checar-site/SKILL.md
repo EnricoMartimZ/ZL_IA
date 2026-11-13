@@ -13,6 +13,8 @@ description: >
 
 Evita o constrangimento de o cliente achar "Serviço dois" no site dele, ou de o botão do WhatsApp mandar mensagem pro número de exemplo.
 
+Fronteira: esta é a **trava de entrega** dos sites do MazyOS (o que não pode ir pro ar). A análise de busca a fundo (palavra-chave por página, conteúdo raso ou duplicado, dados estruturados que não batem com a página, robôs de IA, site de terceiros) é do `/seo-site`, que roda antes desta no `/site-premium`.
+
 ## Dependências
 
 - `scripts/checar-site.js` (Playwright — se faltar, `npm run setup` na raiz)

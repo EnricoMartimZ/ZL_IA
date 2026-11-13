@@ -40,6 +40,8 @@ const casos = [
   ['os sites estão no ar?', 'vigia'], ['quais demos eu tiro do ar?', 'vigia'], ['pede um depoimento pra ótica', 'estudo-de-caso'], ['monta o case da metalúrgica', 'estudo-de-caso'],
   ['faz um criativo da oferta da ótica', 'criativo'], ['monta um anúncio animado de 15 segundos pra metalúrgica', 'criativo'], ['abre o editor do anúncio', 'criativo'],
   ['gera variações do criativo', 'criativo'], ['faz a crítica do criativo da ótica', 'criativo'], ['vídeo vertical do antes e depois', 'video-reels'],
+  ['faz o seo do site da ótica', 'seo-site'], ['audita o seo desse site', 'seo-site'], ['por que o site da metalúrgica não aparece no google?', 'seo-site'],
+  ['o site aparece no chatgpt?', 'seo-site'], ['gera o sitemap e o robots.txt', 'seo-site'], ['pesquisa de palavras-chave pra transportadora', 'seo'],
   ['faz um vídeo de oferta pro tiktok', 'video-reels'], ['faz um reels com a oferta da semana', 'video-reels'], ['quero um texto mais criativo pro hero', null],
 ];
 let ok = 0;
