@@ -1,182 +1,181 @@
-# MazyOS
+# ZL_IA
 
-> O sistema operacional do seu negócio dentro do Claude Code.
+> O sistema que roda o meu negócio de marketing com IA dentro do Claude Code.
+> Criado e mantido por **Enrico Martim**.
 
-Você acaba de instalar o MazyOS. Em alguns minutos, sua empresa vai
-ter uma memória própria, uma identidade visual aplicada em tudo que
-o sistema gerar, e 42 skills prontas pra fazer marketing, SEO, ads
-e operação rodarem com você dirigindo.
-
-Bora voar.
+O ZL_IA junta num lugar só tudo o que eu preciso pra vender e entregar marketing
+para empresas locais: achar o cliente, abordar, fechar, montar o site, cuidar do
+Google, fazer o conteúdo e cobrar. São 42 skills, scripts de apoio, modelos e um
+motor de anúncio animado próprio. O Claude lê a memória do negócio antes de cada
+resposta e escolhe a skill certa pelo que eu escrevo, sem eu precisar lembrar de
+nenhum comando.
 
 ---
 
-## Ligando o sistema
+## Instalar
 
-Dois caminhos. Escolhe o que combina contigo.
-
-### Pelo Claude (mais rápido)
-
-Abre o Claude Code em qualquer pasta e cola:
-
-```
-Clona o https://github.com/mazzeoia/MazyOS.git na pasta atual,
-entra nela e roda o /instalar.
+```bash
+git clone https://github.com/EnricoMartimZ/ZL_IA.git
+cd ZL_IA
+npm run setup
 ```
 
-Ele clona, entra na pasta nova e dispara a entrevista de setup. Você
-só responde.
+O `npm run setup` instala o Playwright com o Chromium (usado em carrossel, PDF e
+auditoria de site) e liga a trava de sigilo nos commits. As chaves de API (kie.ai,
+OpenAI, Meta) vão num `.env`, copiado do `.env.example`.
 
-### Pelo terminal (mais previsível)
+Depois é abrir o Claude Code na pasta e rodar `/instalar` uma vez: ele faz a
+entrevista sobre o negócio, monta a memória e aplica o perfil certo (freelancer,
+agência, empresa ou marca pessoal).
 
+Para o motor de anúncio animado:
+
+```bash
+npm --prefix creative-engine install
 ```
-git clone https://github.com/mazzeoia/MazyOS.git
-cd MazyOS
-code .
-```
-
-Na janela do VS Code que abrir: terminal integrado → `claude` → `/instalar`.
-
-**Para carrossel e PDFs** (diagnóstico, proposta, relatório), instale uma vez
-o Playwright: `npm run setup` na raiz. Chaves de API (OpenAI, Meta) vão num
-`.env` — copie o `.env.example`. O `.env` nunca vai pro GitHub.
 
 ---
 
-Quando o `/instalar` terminar, renomeia a pasta `MazyOS/` pro nome do teu
-negócio (fecha o VS Code, renomeia no Explorer/Finder, abre de novo). A
-pasta não fica como "MazyOS" — ela é o teu negócio agora.
+## Como funciona
 
-O `/instalar` roda uma vez só. Te entrevista sobre o negócio, monta a
-memória e configura o sistema. Depois disso, é só usar.
+**Fala normal, skill certa.** Escrevo do jeito que falaria ("acha metalúrgicas com
+site ruim em Sorocaba", "fechei com a ótica", "quem eu chamo hoje?") e a skill certa
+entra sozinha, avisando com "⚡ /skill". Quem decide é o mapa `.claude/gatilhos.json`,
+lido a cada mensagem pelo hook `.claude/hooks/gatilhos.mjs`. Para ver tudo o que
+existe, basta perguntar "o que você sabe fazer?" (`/menu`).
 
----
+**Memória do negócio.** `_memoria/` guarda quem eu sou, como eu falo, o que vendo e
+por quanto, o foco da semana e o que aprendi com cada venda. `identidade/` guarda
+cores, fontes e logo, aplicados em tudo que o sistema gera.
 
-## O sistema
-
-**O que fica onde.** O GitHub guarda só o sistema (skills, scripts, modelos). Seu
-trabalho — `_memoria/`, `clientes/`, `vendas/`, `saidas/`, `dados/`, `.env` — fica
-só no seu computador e nunca é enviado; o backup dessas pastas é por fora (HD ou
-Drive). Num computador novo: `git clone`, `npm run setup`, copiar o `.env` e
-abrir o Claude na pasta. Pra pegar as novidades: `git pull`.
-
-**Não precisa decorar comando.** Fala do jeito normal — "acha metalúrgicas
-com site ruim em Sorocaba", "fechei com a ótica", "quem eu chamo hoje?" — e a
-skill certa entra sozinha (aparece "⚡ /skill"). Quem decide é o mapa
-`.claude/gatilhos.json`, lido a cada mensagem pelo hook
-`.claude/hooks/gatilhos.mjs`. Esqueceu o que existe? Pergunta "o que você sabe
-fazer?" (`/menu`): ele lista tudo por objetivo, com frase de exemplo, e diz o
-que fazer hoje olhando o funil.
-
-**Núcleo** — o jeito de operar o dia a dia
-`/abrir` carrega o contexto antes de cada sessão de trabalho · `/salvar`
-faz commit + push no GitHub · `/atualizar` varre o projeto e atualiza
-a memória · `/novo-projeto` cria pasta isolada pra cada cliente ou
-iniciativa · `/mapear-rotinas` descobre o que você repete e transforma
-em skill personalizada.
-
-**Conteúdo e SEO** — vitrine pública da empresa
-`/carrossel` cria carrosséis 1080×1350 com identidade da marca (com ou
-sem foto IA) · `/publicar-tema` pega um tema e entrega artigo de blog +
-carrossel + 3 legendas amarradas · `/seo` roda fluxo completo de 8 passos
-(demanda, concorrência, GMB, on-page, conteúdo, ads, monitoramento, GEO; o SEO dentro do site é da `/seo-site`)
-· `/responder-avaliacoes` escreve respostas humanas pras reviews do
-Google · `/aprovar-post` publica blog + Instagram + Facebook num comando.
-
-**Anúncios pagos** — onde o dinheiro entra
-`/anuncio-google` monta a campanha inteira em CSV pronto pra importar
-no Google Ads Editor · `/relatorio-ads` lê os exports de Google + Meta
-e devolve relatório semanal com alertas e recomendações.
-
-**Vender serviço de IA pra lojas** — do lead ao cliente que renova
-`/prospectar-lojas` monta lista de lojas por nicho e região com nota de
-oportunidade e gancho de abordagem · `/diagnostico-loja` gera diagnóstico
-gratuito em PDF com os pontos de perda e quanto custam por mês ·
-`/proposta-servico` monta proposta com três pacotes em cima do diagnóstico
-(e cria `_memoria/servicos.md` na primeira vez) · `/contrato` escreve o contrato
-só com o que foi vendido, em PDF e Word, pronto pra assinar grátis pelo gov.br ·
-`/entrada-cliente` pede o material e os acessos de uma vez, conta o prazo e confere
-a entrega · `/negociar` conduz quem respondeu e não fechou: acha a objeção real,
-reduz o escopo em vez do preço e deixa a próxima mensagem pronta · `/links-bio` faz a
-página de links do Instagram · `/cobrancas` mostra quem paga, o que atrasou e quanto
-entra no mês, com o lembrete pronto · `/vigia` confere sites, domínios e demos ·
-`/estudo-de-caso` pede depoimento e indicação e monta o caso ·
-`/relatorio-resultados` fecha o mês do cliente com antes/depois e retorno estimado · `/funil` mostra
-todas as lojas por etapa e quem precisa de follow-up hoje, com mensagem
-pronta · `/aprendizado` registra por que cada venda fechou ou foi perdida e
-vira regra pras outras skills.
-
-**Foto e vídeo com IA** — entregas que a loja vê na hora
-`/foto-produto` transforma foto de celular em foto de catálogo, lifestyle ou
-sazonal mantendo o produto idêntico (kie.ai ou Higgsfield) · `/video-ia`
-anima foto de produto e faz apresentador falar com lip sync · `/video-reels`
-monta reels e TikToks 9:16 com o HyperFrames, inclusive um vídeo por produto
-a partir de uma planilha.
-
-**Sites** — a vitrine que vale dinheiro
-`/identidade-loja` levanta a marca da loja antes de tudo — cores com o papel de cada
-uma, logo recortado, fontes e as frases que ela usa, do site atual e de prints do
-Instagram e da fachada — e o `/checar-site` acusa site que não usa a cor da marca ·
-`/site-premium` cria um site com conceito próprio pra cada empresa: pelo ramo, escolhe um entre 20
-mundos visuais e uma técnica-assinatura (do ar que esfria a tela ao cardápio que gira) e conta a história pela rolagem, com agenda pelo
-WhatsApp (ou "Pedir orçamento" pra empresa B2B), página por serviço, SEO local
-e medição de cliques, e mapa animado com as ruas reais do bairro · `/site-demo` monta uma prévia do site da loja antes de vender
-(marcada como demonstração, fora do Google) · `/seo-site` cuida da busca do site, no Google e nas IAs: decide as
-páginas pelas palavras-chave antes de o site existir, escreve title, description e textos, implementa dados
-estruturados, sitemap e robots, audita qualquer site por gravidade e entrega o relatório de SEO. Entra sozinha
-na criação de sites · `/checar-site` confere erros, texto de
-exemplo esquecido, SEO e celular antes de entregar · `/publicar-site` põe no ar com
-domínio, Search Console e Google Meu Negócio, e organiza a manutenção mensal.
-
-**Abordagem em lote** — muitas lojas, mensagem curta
-`/abordagem-whatsapp` busca negócios de vários nichos no Google Maps, acha o ponto fraco
-que o dono confere em 10 segundos (sem site, poucas avaliações perto do líder do nicho,
-site quebrado), escreve uma mensagem curta e diferente pra cada um e, depois da sua
-aprovação, envia pelo seu WhatsApp Web devagar e com limite diário. PDF e demo só pra
-quem responder.
-
-**Prospecção B2B** — onde o ticket é maior
-`/prospectar-b2b` mapeia indústrias, distribuidoras, transportadoras e outras
-empresas B2B da região com site ruim e presença fraca: audita os sites em lote
-(sem HTTPS, quebrado no celular, © antigo, sem caminho pra orçamento) com print,
-confere Google, Instagram e LinkedIn, pesa quem pode pagar e entrega a lista
-priorizada com gancho, decisor e mensagens.
-
-**Produção** — ferramentas do dia a dia
-`/analisar-dados` lê CSV/XLSX/PDF e gera resumo executivo ·
-`/email-profissional` rascunha email a partir de contexto livre.
+**Sigilo de cliente.** O GitHub guarda só o sistema. O trabalho de cada cliente
+(`_memoria/`, `clientes/`, `vendas/`, `saidas/`, `dados/`, `.env`) fica só no meu
+computador. Antes de cada commit, `scripts/checar-clientes.js` bloqueia arquivo
+dessas pastas, nome de cliente ou prospect e CPF/CNPJ. O backup das pastas locais é
+criptografado por `scripts/backup.js` e vai para o Drive.
 
 ---
 
-## A tese
+## Skills
 
-IA não é uma ferramenta que sua empresa usa. É o sistema operacional em
-que ela roda.
+### Núcleo
+- `/abrir` carrega o contexto antes de uma sessão de trabalho
+- `/salvar` faz commit e push, passando pela trava de sigilo
+- `/atualizar` varre o projeto e atualiza a memória
+- `/novo-projeto` cria uma pasta isolada para um cliente ou iniciativa
+- `/mapear-rotinas` descobre o que eu repito e transforma em skill
+- `/instalar` monta o sistema numa pasta nova (o meu negócio ou o de um cliente)
+- `/menu` lista tudo por objetivo e sugere o próximo passo olhando o funil
 
-A diferença não é velocidade. É capacidade nova — uma pessoa com IA
-constrói o que antes exigia time inteiro. Cada processo crítico que hoje
-roda em open loop (decide → executa → não mede → repete cego) vira
-closed loop dentro do MazyOS (decide → executa → captura → realimenta →
-ajusta sozinho).
+### Achar clientes
+- `/abordagem-whatsapp` busca negócios de vários ramos no Google Maps, acha o ponto
+  fraco que o dono confere em 10 segundos, escreve uma mensagem curta para cada um e,
+  com a minha aprovação, envia pelo WhatsApp Web devagar e com limite diário
+- `/prospectar-lojas` monta lista de lojas por cidade ou ramo, com nota de
+  oportunidade e gancho de abordagem
+- `/prospectar-b2b` mapeia indústrias, distribuidoras e outras empresas B2B com site
+  fraco: audita os sites em lote com print, pesa quem pode pagar e entrega a lista
+  com decisor e mensagens
 
-O sistema não substitui você. Vira parte da sua empresa.
+### Fechar a venda
+- `/diagnostico-loja` gera um diagnóstico gratuito em PDF com o que a empresa perde
+  por mês
+- `/proposta-servico` monta proposta com três pacotes em cima do diagnóstico
+- `/negociar` conduz quem respondeu e não fechou: acha a objeção real e reduz escopo
+  em vez de preço
+- `/contrato` escreve o contrato só com o que foi vendido, em PDF e Word, para
+  assinar pelo gov.br
+- `/funil` mostra todos os contatos por etapa e quem precisa de follow-up hoje
+- `/aprendizado` registra por que cada venda fechou ou foi perdida e vira regra para
+  as outras skills
+
+### Entregar e manter o cliente
+- `/entrada-cliente` pede material e acessos de uma vez, conta o prazo e confere a
+  entrega
+- `/cobrancas` mostra quem paga, o que atrasou e quanto entra no mês, com o lembrete
+  pronto
+- `/relatorio-resultados` fecha o mês do cliente com antes e depois e retorno
+  estimado
+- `/estudo-de-caso` pede depoimento e indicação e monta o caso
+- `/vigia` confere sites, domínios, demos, cobranças e backup
+
+### Sites
+- `/identidade-loja` levanta a marca do cliente antes de tudo (cores com o papel de
+  cada uma, logo, fontes e frases) a partir do site, do Instagram e da fachada
+- `/site-premium` cria um site com conceito próprio do ramo: escolhe um mundo visual
+  e uma técnica-assinatura, conta a história pela rolagem e já sai com WhatsApp,
+  página por serviço, SEO local, medição de cliques e mapa com as ruas do bairro
+- `/site-demo` monta uma prévia do site antes da venda, marcada como demonstração e
+  fora do Google
+- `/seo-site` cuida da busca no Google e nas IAs: palavras-chave por página, títulos,
+  dados estruturados, sitemap, robots e auditoria por gravidade
+- `/checar-site` confere erros, texto de exemplo esquecido, cor da marca, SEO e
+  celular antes de entregar
+- `/publicar-site` põe no ar com domínio, Search Console e perfil do Google
+- `/links-bio` faz a página de links do Instagram
+
+### Conteúdo e Google
+- `/carrossel` cria carrosséis 1080×1350 com a identidade da marca, com ou sem foto
+  de IA
+- `/carrossel-semanal` gera sozinho os carrosséis da semana a partir da pauta
+- `/publicar-tema` transforma um tema em artigo de blog, carrossel e três legendas
+- `/aprovar-post` publica blog, Instagram e Facebook num comando
+- `/seo` roda o fluxo completo de SEO local: demanda, concorrência, perfil do Google,
+  conteúdo, anúncios e GEO
+- `/responder-avaliacoes` escreve respostas humanas para as avaliações do Google
+
+### Foto, vídeo e anúncio
+- `/foto-produto` transforma foto de celular em foto de catálogo, lifestyle ou
+  sazonal, mantendo o produto idêntico
+- `/video-ia` anima foto de produto (primeiro no Google Flow) e faz apresentador
+  falar com lip sync
+- `/video-reels` monta reels e TikToks 9:16, inclusive um vídeo por produto a partir
+  de uma planilha
+- `/criativo` cria anúncios animados 1080×1920 no Creative Engine, com editor web
+  para ajuste à mão e exportação em MP4
+- `/anuncio-google` monta a campanha inteira em CSV para o Google Ads Editor
+- `/relatorio-ads` lê os exports de Google e Meta e devolve o relatório semanal
+
+### Produção
+- `/analisar-dados` lê CSV, XLSX ou PDF e devolve um resumo executivo
+- `/email-profissional` rascunha e-mail a partir de contexto livre
 
 ---
 
-## Como o MazyOS pensa
+## O que tem em cada pasta
 
-`_memoria/` é o cérebro. Tudo que importa do seu negócio mora aqui —
-quem é a empresa, como ela fala, o que tá em foco essa semana. O Claude
-lê isso antes de cada resposta. Quanto melhor a memória, melhor o sistema.
-
-`identidade/` é o rosto. Cores, fontes, logo, padrão visual. Todo
-carrossel, slide, peça que o sistema gera respeita isso.
-
-`marketing/`, `saidas/` e `scripts/` são o resultado. O sistema produz,
-versiona no GitHub, fica tudo seu.
+| Pasta | O que guarda |
+|---|---|
+| `.claude/skills/` | As 42 skills |
+| `.claude/hooks/` e `.claude/gatilhos.json` | O roteamento automático de skill pela mensagem |
+| `scripts/` | Utilitários Node: render de HTML em PNG/PDF, imagem por IA, postagem na Meta, auditoria e SEO de site, mapa de ruas, vigia, backup e a trava de sigilo ([detalhes](scripts/README.md)) |
+| `creative-engine/` | Motor de anúncio animado: core, renderer, editor web e CLI ([detalhes](creative-engine/README.md)) |
+| `src/components/premium/` e `docs/archetypes/` | Componentes e arquétipos de design dos sites premium |
+| `docs/creative-engine/` | Arquitetura, roadmap e formato de projeto do Creative Engine |
+| `templates/` | Modelos de memória, identidade, perfis de negócio e catálogos de skills e ferramentas |
+| `rotinas/` | Cópia das tarefas agendadas (lote diário, vigia semanal) para recriar em outro computador |
+| `identidade/` | A minha identidade visual |
+| `marketing/`, `saidas/`, `dados/` | Produção do próprio negócio (só o README vai para o GitHub) |
 
 ---
 
-## Quando precisar
+## Rotinas agendadas
 
-[mazzeoia.com.br](https://mazzeoia.com.br)
+As tarefas agendadas ficam no app do Claude, fora do repositório. Em `rotinas/` está
+o texto de cada uma para recriar num computador novo:
+
+- **Lote diário** (segunda a sexta): mapeia empresas da região e prepara as mensagens
+  do dia para eu aprovar antes de qualquer envio
+- **Vigia semanal** (segunda cedo): confere sites, domínios, demos, cobranças, backup
+  e sigilo do repositório
+
+---
+
+## Num computador novo
+
+1. `git clone` e `npm run setup`
+2. Copiar o `.env` e restaurar o backup das pastas locais
+3. Recriar as tarefas de `rotinas/`
+4. Abrir o Claude Code na pasta
+
+Para pegar as novidades: `git pull`.
