@@ -19,7 +19,7 @@ const copiaDoExemplo = (t) => { const d = pastaNova(t); cpSync(exemploDir, d, { 
 
 test('sem comando mostra a ajuda; comando desconhecido e falta de argumento são uso errado (2)', () => {
   assert.equal(rodar([]).codigo, 0);
-  assert.match(rodar(['--help']).saida, /Creative Engine do MazyOS/);
+  assert.match(rodar(['--help']).saida, /Creative Engine do ZL_IA/);
   assert.equal(rodar(['explodir', 'x']).codigo, 2);
   assert.equal(rodar(['validate']).codigo, 2);
   const j = rodar(['apply', exemploDir, '--json']);

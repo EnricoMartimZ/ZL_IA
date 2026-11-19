@@ -21,7 +21,7 @@ async function noAr(url) {
   const c = new AbortController();
   const t = setTimeout(() => c.abort(), 15000);
   try {
-    const r = await fetch(url, { redirect: 'follow', signal: c.signal, headers: { 'user-agent': 'vigia-mazyos' } });
+    const r = await fetch(url, { redirect: 'follow', signal: c.signal, headers: { 'user-agent': 'vigia-zl_ia' } });
     return { ok: r.ok, status: r.status };
   } catch (e) {
     return { ok: false, status: e.name === 'AbortError' ? 'demorou demais' : (e.cause?.code || e.message) };

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mazyos.local/schemas/mazy-creative-project/1.0.json",
-  "title": "Mazy Creative Project",
-  "description": "Projeto de conteúdo visual animado do MazyOS Creative Engine. Tempo sempre em quadros inteiros; medidas em pixels da composição.",
+  "$id": "https://zl-ia.local/schemas/mazy-creative-project/1.0.json",
+  "title": "ZL_IA Creative Project",
+  "description": "Projeto de conteúdo visual animado do Creative Engine do ZL_IA. Tempo sempre em quadros inteiros; medidas em pixels da composição.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "project", "clientId", "brand", "composition", "assets", "scenes", "export"],

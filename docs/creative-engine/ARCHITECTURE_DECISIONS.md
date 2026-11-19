@@ -1,4 +1,4 @@
-# MazyOS Creative Engine — Decisões de arquitetura
+# Creative Engine do ZL_IA — Decisões de arquitetura
 
 > **Situação:** as sete decisões marcadas com ★ foram **aprovadas pelo dono em 11/11/2026**, como
 > propostas. As outras onze são detalhes técnicos que decorrem delas e foram seguidas na
@@ -39,7 +39,7 @@ Cada decisão tem contexto, decisão, alternativas descartadas e consequência. 
 
 **Contexto.** O repositório não tem aplicativo: tem skills, scripts soltos e uma prateleira de
 componentes em `src/components/premium/`, que o `CLAUDE.md` descreve como peças para copiar em
-projeto de cliente. O repositório original (remoto `mazyos`) ainda manda atualizações.
+projeto de cliente. O repositório original (remoto `upstream`) não é mais seguido.
 
 **Decisão.** Uma pasta nova na raiz, `creative-engine/`, com tudo do motor dentro: Core, Renderer,
 editor, CLI, inteligência e exemplos.
@@ -48,7 +48,7 @@ editor, CLI, inteligência e exemplos.
 - `src/creative-engine/`: mistura um aplicativo que roda com uma prateleira de peças para copiar.
 - Espalhar pelo que já existe (`scripts/` para a CLI, `templates/` para os modelos): o motor
   deixaria de ser uma unidade e os testes ficariam sem casa.
-- Repositório separado: quebraria o "subsistema nativo do MazyOS" e a skill não acharia o motor.
+- Repositório separado: quebraria o "subsistema nativo do ZL_IA" e a skill não acharia o motor.
 
 **Consequência.** O motor pode ser lido, testado e removido como um bloco. Atualizações do
 repositório original quase não conflitam, porque a pasta é nova. A raiz ganha uma pasta a mais.
@@ -68,7 +68,7 @@ dele (`^20.19 || >=22.12`, que é o que o Vite 8 pede). Instalação por um coma
 instalado de novo: o motor o encontra no `node_modules/` da raiz, um nível acima.
 
 **Alternativas descartadas.**
-- Pôr tudo no `package.json` da raiz: todo clone do MazyOS instalaria React e Vite.
+- Pôr tudo no `package.json` da raiz: todo clone do ZL_IA instalaria React e Vite.
 - `workspaces` do npm na raiz: muda como o `npm install` da raiz se comporta, para um ganho
   pequeno.
 - Vários pacotes (core, renderer, editor): mais peças para manter sem ganho no tamanho atual. A
@@ -415,7 +415,7 @@ os de uso comum na web, não cópia de tabela dele.
 - Partir de uma cópia (fork): herdaria 606 arquivos e um formato que aceita chave solta.
 
 **Consequência.** Nenhuma obrigação de licença além do crédito, que fica nos documentos. Tudo é
-escrito do zero, o que custa mais e deixa o motor do tamanho do que o MazyOS precisa.
+escrito do zero, o que custa mais e deixa o motor do tamanho do que o ZL_IA precisa.
 
 ---
 

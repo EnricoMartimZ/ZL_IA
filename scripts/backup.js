@@ -4,7 +4,7 @@
 // node --env-file=.env scripts/backup.js                         cria o backup e confere se abre
 // node --env-file=.env scripts/backup.js --restaurar <arquivo> <pasta vazia>
 //
-// No .env: BACKUP_SENHA (obrigatória) e BACKUP_DESTINO (pasta; padrão ~/backups/mazyos).
+// No .env: BACKUP_SENHA (obrigatória) e BACKUP_DESTINO (pasta; padrão ~/backups/zl_ia).
 // A senha precisa estar guardada FORA deste computador: sem ela, o backup não abre nunca mais.
 // Mantém os últimos BACKUP_MANTER (padrão 8) e apaga os mais antigos.
 
@@ -35,12 +35,12 @@ function comSenha(args, stdio) {
 const terminou = (p, nome) => new Promise((ok, erro) => p.on('close', (c) => (c === 0 ? ok() : erro(new Error(`${nome} falhou (código ${c})`)))));
 
 async function criar() {
-  const destino = process.env.BACKUP_DESTINO || path.join(homedir(), 'backups', 'mazyos');
+  const destino = process.env.BACKUP_DESTINO || path.join(homedir(), 'backups', 'zl_ia');
   mkdirSync(destino, { recursive: true });
   const existem = PASTAS.filter((p) => existsSync(path.join(raiz, p)));
   if (!existem.length) morrer('Nenhuma pasta pra guardar.');
   const carimbo = new Date().toISOString().slice(0, 16).replace('T', '-').replace(':', '');
-  const arquivo = path.join(destino, `mazyos-${carimbo}.tar.gz.gpg`);
+  const arquivo = path.join(destino, `zl_ia-${carimbo}.tar.gz.gpg`);
 
   const tar = spawn('tar', ['-czf', '-', ...FORA.map((f) => `--exclude=${f}`), '-C', raiz, ...existem], { stdio: ['ignore', 'pipe', 'inherit'] });
   const gpg = comSenha(['--symmetric', '--cipher-algo', 'AES256', '--compress-algo', 'none'], ['pipe', 'pipe', 'inherit']);
@@ -58,7 +58,7 @@ async function criar() {
   await Promise.all([terminou(abre, 'conferência'), terminou(lista, 'conferência')]);
 
   const manter = Number(process.env.BACKUP_MANTER) || 8;
-  const antigos = readdirSync(destino).filter((f) => /^mazyos-.*\.gpg$/.test(f)).sort().reverse().slice(manter);
+  const antigos = readdirSync(destino).filter((f) => /^(zl_ia|mazyos)-.*\.gpg$/.test(f)).sort().reverse().slice(manter);
   antigos.forEach((f) => unlinkSync(path.join(destino, f)));
 
   const mb = (statSync(arquivo).size / 1048576).toFixed(1);

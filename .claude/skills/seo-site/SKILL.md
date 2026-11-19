@@ -27,7 +27,7 @@ Duas frentes, a mesma página:
 |---|---|---|
 | **`/seo-site`** (esta) | O site: palavras-chave por página, arquitetura, textos, metadados, dados estruturados, rastreamento, auditoria e relatório | Mercado, perfil do Google, anúncios |
 | **`/seo`** | Fora do site: demanda e concorrência do nicho, Google Meu Negócio, calendário de conteúdo, Google Ads, monitoramento mensal | Mexer no site. O passo 4 dela (on-page) é esta skill |
-| **`/checar-site`** | Trava de entrega dos sites do MazyOS: texto de exemplo, WhatsApp de exemplo, console, painel de contato, cor da marca. Zero ❌ pra entregar | Estratégia, conteúdo, duplicata, robôs de IA, site de terceiros |
+| **`/checar-site`** | Trava de entrega dos sites do ZL_IA: texto de exemplo, WhatsApp de exemplo, console, painel de contato, cor da marca. Zero ❌ pra entregar | Estratégia, conteúdo, duplicata, robôs de IA, site de terceiros |
 | **`/publicar-site`** | Deploy, domínio, Search Console, Bing, entrega | Decidir o que o site diz |
 
 Se o `/seo` já rodou, `marketing/seo/01-pesquisa-demanda.md` e `02-analise-concorrencia.md` são a matéria-prima do plano: não pesquisar de novo.
@@ -136,7 +136,7 @@ Gravidade:
 - **Médio** — corrigir nesta rodada
 - **Baixo** — acabamento; listar o que ficou
 
-Site do MazyOS: **zero crítico e zero alto** antes de publicar. Único alto que pode ficar pro `/publicar-site` é o domínio de exemplo (`DOMINIO`), quando o domínio ainda não existe. Depois rodar o `/checar-site`, que é a trava de entrega.
+Site do ZL_IA: **zero crítico e zero alto** antes de publicar. Único alto que pode ficar pro `/publicar-site` é o domínio de exemplo (`DOMINIO`), quando o domínio ainda não existe. Depois rodar o `/checar-site`, que é a trava de entrega.
 
 O script não substitui: Teste de resultados avançados e validator.schema.org (dados estruturados), PageSpeed Insights ou Lighthouse (velocidade real), Search Console e Bing Webmaster Tools (indexação e posição). Como usar cada um, sem expor chave, em `stacks.md` §"Ferramentas".
 

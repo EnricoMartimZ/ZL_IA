@@ -70,7 +70,7 @@ async function subir(arquivo, dryRun) {
   }
   const form = new FormData();
   form.append('file', new Blob([await readFile(arquivo)]), path.basename(arquivo));
-  form.append('uploadPath', 'mazyos');
+  form.append('uploadPath', 'zl_ia');
   form.append('fileName', path.basename(arquivo));
   const data = await api('/api/v1/file-stream-upload', { method: 'POST', body: form });
   const url = data?.fileUrl || data?.downloadUrl || data?.url;

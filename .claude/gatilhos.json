@@ -672,14 +672,14 @@
     {
       "skill": "instalar",
       "grupo": "Organizar",
-      "quando": "primeira configuração do MazyOS (empresa, tom de voz, identidade visual)",
+      "quando": "primeira configuração do ZL_IA (empresa, tom de voz, identidade visual)",
       "exemplos": [
-        "instalar o MazyOS"
+        "instalar o ZL_IA"
       ],
       "gatilhos": [
-        "instala(r)? o (mazyos|sistema)",
+        "instala(r)? o (zl[ _]?ia|sistema)",
         "primeiro setup",
-        "configurar o (mazyos|sistema)"
+        "configurar o (zl[ _]?ia|sistema)"
       ]
     }
   ]

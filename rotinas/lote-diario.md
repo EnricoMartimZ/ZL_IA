@@ -2,7 +2,7 @@
 
 Segunda a sexta, 9h. Nome no app: `lote-b2b-sbo`. Prompt:
 
-Pasta de trabalho: a raiz do MazyOS. Fale em português, direto e curto.
+Pasta de trabalho: a raiz do ZL_IA. Fale em português, direto e curto.
 
 Objetivo: prospecção diária de 7 lojas (comércio e serviço pro consumidor) e 7 empresas B2B de Santa Bárbara d'Oeste e região (Americana, Nova Odessa, Sumaré) que NÃO têm site ou têm site ruim, com abordagem curta pelo WhatsApp. São 14 por dia, no lugar dos 10 de antes (decisão do Enrico em 31/10/2026).
 

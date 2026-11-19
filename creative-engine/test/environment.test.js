@@ -57,7 +57,7 @@ test('o motor só tem dependência que foi aprovada', () => {
   assert.deepEqual(fora(pacote.devDependencies, DEV_APROVADAS), []);
 });
 
-test('a raiz do MazyOS continua com uma dependência só e sem workspaces', () => {
+test('a raiz do ZL_IA continua com uma dependência só e sem workspaces', () => {
   const pacote = lerJson(path.join(raiz, 'package.json'));
   assert.deepEqual(Object.keys(pacote.dependencies ?? {}), ['playwright']);
   assert.deepEqual(Object.keys(pacote.devDependencies ?? {}), []);

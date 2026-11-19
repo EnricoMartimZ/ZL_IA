@@ -1,7 +1,7 @@
-# MazyOS — Sistema operacional do negócio
+# ZL_IA — Sistema operacional do negócio
 
 Sua empresa roda em cima desse arquivo. Aqui ficam as regras de operação
-do MazyOS — como o Claude lê o contexto, aprende com correções, mantém
+do ZL_IA — como o Claude lê o contexto, aprende com correções, mantém
 tudo atualizado e cria skills novas conforme a operação evolui.
 
 Esse arquivo é editável. Quando o `/instalar` rodar, ele complementa o

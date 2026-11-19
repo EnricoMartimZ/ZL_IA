@@ -1,9 +1,9 @@
 {
-  "name": "mazyos-creative-engine",
+  "name": "zl-ia-creative-engine",
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Motor de conteúdo visual animado do MazyOS: Core, Renderer, editor e CLI",
+  "description": "Motor de conteúdo visual animado do ZL_IA: Core, Renderer, editor e CLI",
   "scripts": {
     "test": "node --test",
     "demo": "node cli/demo.js"

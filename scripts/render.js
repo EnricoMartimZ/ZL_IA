@@ -1,4 +1,4 @@
-// Renderiza um HTML do MazyOS em PNG (um arquivo por .slide) ou em PDF A4.
+// Renderiza um HTML do ZL_IA em PNG (um arquivo por .slide) ou em PDF A4.
 //
 // Uso:
 //   node scripts/render.js <arquivo.html> --png <pasta-saida> [--size 1080x1350]

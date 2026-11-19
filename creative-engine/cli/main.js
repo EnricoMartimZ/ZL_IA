@@ -16,7 +16,7 @@ const usar = (mensagem) => { throw new Uso(mensagem); };
 const slug = (texto) => texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const segundos = (quadros, fps) => `${(quadros / fps).toFixed(2).replace('.', ',')} s`;
 
-const AJUDA = `Creative Engine do MazyOS
+const AJUDA = `Creative Engine do ZL_IA
 
   node creative-engine/cli/mazy-creative.js <comando> <pasta-do-projeto> [opções]
 

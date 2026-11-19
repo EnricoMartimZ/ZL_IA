@@ -27,7 +27,7 @@ export function loadForRender(dir) {
 async function abrirPalco({ dir, project }) {
   let chromium;
   try { ({ chromium } = await import('playwright')); } catch {
-    throw new RenderError('ENVIRONMENT', 'Playwright não encontrado. Rode "npm run setup" na raiz do MazyOS.');
+    throw new RenderError('ENVIRONMENT', 'Playwright não encontrado. Rode "npm run setup" na raiz do ZL_IA.');
   }
   const servidor = await startStageServer({ projectDir: dir, project });
   let navegador;
@@ -35,7 +35,7 @@ async function abrirPalco({ dir, project }) {
     navegador = await chromium.launch();
   } catch (e) {
     await servidor.close();
-    throw new RenderError('ENVIRONMENT', `Não consegui abrir o Chromium do Playwright. Rode "npm run setup" na raiz do MazyOS. (${e.message.split('\n')[0]})`);
+    throw new RenderError('ENVIRONMENT', `Não consegui abrir o Chromium do Playwright. Rode "npm run setup" na raiz do ZL_IA. (${e.message.split('\n')[0]})`);
   }
   const fechar = async () => { await navegador.close().catch(() => {}); await servidor.close(); };
   try {

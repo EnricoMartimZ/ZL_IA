@@ -132,7 +132,7 @@ Esta skill cuida do que fica **fora do site**: demanda e concorrência do nicho,
 
 **Objetivo:** Garantir que cada página esteja otimizada pras palavras-chave certas.
 
-**Site feito pelo MazyOS, ou qualquer site que dê pra auditar pela URL:** este passo é a `/seo-site`. Rodar ela (plano por página + `node scripts/seo-site.js <pasta ou URL>`) e salvar aqui só o resumo com o link pro relatório. O roteiro abaixo fica pra quando não há acesso ao site e o resultado é um documento de recomendações.
+**Site feito pelo ZL_IA, ou qualquer site que dê pra auditar pela URL:** este passo é a `/seo-site`. Rodar ela (plano por página + `node scripts/seo-site.js <pasta ou URL>`) e salvar aqui só o resumo com o link pro relatório. O roteiro abaixo fica pra quando não há acesso ao site e o resultado é um documento de recomendações.
 
 1. Ler a estrutura atual do site (se `site/` existir; senão, perguntar as páginas)
 2. Pra cada página:

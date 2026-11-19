@@ -1,7 +1,7 @@
 ---
 name: menu
 description: >
-  Mostra o que o MazyOS sabe fazer, em linguagem normal e agrupado pelo objetivo (achar clientes, fechar a
+  Mostra o que o ZL_IA sabe fazer, em linguagem normal e agrupado pelo objetivo (achar clientes, fechar a
   venda, entregar site, conteúdo, Google e anúncios, manter o cliente), com uma frase de exemplo pra cada
   coisa — e sugere o próximo passo olhando o funil e o foco atual. Use quando o usuário perguntar "o que você
   sabe fazer", "quais skills eu tenho", "esqueci o comando", "não lembro o nome", "me ajuda", "por onde eu

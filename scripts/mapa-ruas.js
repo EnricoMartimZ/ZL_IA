@@ -32,7 +32,7 @@ if (!loja || !saida) {
   process.exit(1);
 }
 
-const AGENTE = 'MazyOS-site-premium/1.0 (mapa de loja)';
+const AGENTE = 'ZL_IA-site-premium/1.0 (mapa de loja)';
 const CLASSE = {
   motorway: 'p', trunk: 'p', primary: 'p', motorway_link: 'p', trunk_link: 'p', primary_link: 'p',
   secondary: 's', tertiary: 's', secondary_link: 's', tertiary_link: 's',

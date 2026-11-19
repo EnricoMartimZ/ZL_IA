@@ -1,6 +1,6 @@
-# MazyOS Creative Engine
+# Creative Engine do ZL_IA
 
-Motor de conteúdo visual animado do MazyOS. O Claude Code cria e edita o projeto por comandos; um
+Motor de conteúdo visual animado do ZL_IA. O Claude Code cria e edita o projeto por comandos; um
 editor web abre o mesmo projeto para ajuste à mão; os dois usam o mesmo Core. A skill que dirige
 tudo é a `/criativo`.
 
@@ -18,7 +18,7 @@ timeline, preview e MP4.
 ## Instalar e testar
 
 Pede Node `^20.19.0` ou `>=22.12.0`, o Chromium do Playwright (o `npm run setup` da raiz instala) e,
-para exportar MP4, o FFmpeg do sistema. Na raiz do MazyOS:
+para exportar MP4, o FFmpeg do sistema. Na raiz do ZL_IA:
 
 ```bash
 npm --prefix creative-engine install

@@ -1,4 +1,4 @@
-# MazyOS Creative Engine — Arquitetura
+# Creative Engine do ZL_IA — Arquitetura
 
 > **Situação:** implementada em 11/11/2026 (MVP completo, etapas 0.1 a 7.3). A seção 12 lista o que
 > a implementação fez diferente deste desenho. As seções 1 e 11 são o retrato do dia da auditoria.
@@ -6,7 +6,7 @@
 > **Documentos irmãos:** [roadmap e plano de testes](CREATIVE_ENGINE_ROADMAP.md) ·
 > [formato do projeto](CREATIVE_PROJECT_SCHEMA.md) · [decisões](ARCHITECTURE_DECISIONS.md)
 
-O Creative Engine é a parte do MazyOS que produz conteúdo visual animado de marketing. Tem duas
+O Creative Engine é a parte do ZL_IA que produz conteúdo visual animado de marketing. Tem duas
 portas de entrada para o mesmo projeto: o Claude Code, que dirige a criação e opera por comandos, e
 um editor web, onde se ajusta à mão. As duas portas usam o mesmo núcleo (o Core) e o mesmo arquivo
 de projeto. Não há MCP em lugar nenhum: a interface entre o Claude e o editor é o arquivo no disco.
@@ -30,7 +30,7 @@ Tudo abaixo foi lido ou executado nesta máquina. O que não deu para verificar 
 | `marketing/` | **Versionada** (hoje só tem o `README.md`). A `/video-reels` grava vídeo do próprio negócio em `marketing/videos/` |
 | `src/` | Só `src/components/premium/`: 4 componentes React soltos para copiar em projeto Next de cliente. Não é um aplicativo que roda |
 | `docs/` | Só `docs/archetypes/` (4 arquétipos de design de site) |
-| Remotos | `origin` (o repositório do usuário) e `mazyos` (o MazyOS original, de onde vêm atualizações) |
+| Remotos | `origin` (o repositório do usuário) e `upstream` (o sistema original de onde o ZL_IA nasceu; não é mais seguido) |
 | Licença do repositório | Não há arquivo `LICENSE` na raiz |
 
 ### O que já gera imagem e vídeo
@@ -69,7 +69,7 @@ commit de 17/08/2026). **Licença: MIT, "Copyright (c) 2026 Yuan-Man".**
 
 A licença MIT permite usar, copiar e modificar, desde que o aviso de copyright e o texto da licença
 acompanhem qualquer cópia ou parte substancial do código. A regra deste projeto é mais estreita:
-**extraímos ideias, não código.** Nenhum arquivo, função ou trecho do OpenMotion entra no MazyOS. Se
+**extraímos ideias, não código.** Nenhum arquivo, função ou trecho do OpenMotion entra no ZL_IA. Se
 um dia isso mudar, o trecho copiado leva o aviso MIT no cabeçalho e a mudança vira uma decisão
 registrada.
 
@@ -95,7 +95,7 @@ com Zod. Exportação de vídeo com `puppeteer-core` e `ffmpeg-static`, ambos op
 | **Rollback** | Volta ao checkpoint e antes fotografa o estado atual, para dar para desfazer o desfazer | Igual | Igual |
 | **Versões** | Fotografias com nome numa tabela do banco, com limite e descarte das mais antigas | Versão com nome ("aprovada pelo cliente") | Arquivo em disco, sem descarte automático |
 | **Plan-then-execute** | Um compositor por regras transforma o pedido em ações tipadas; o plano aparece para revisão e pode ser cancelado | Plano revisável antes de executar; execução atômica | Quem planeja é o Claude Code. O plano é um arquivo de comandos, com `--dry-run` |
-| **Brand Pack** | Identidade de movimento (durações, curvas, "personalidade") guardada como texto dentro de `tokens` | A marca como parte do projeto | Bloco `brand` tipado, importado do `marca.json` que o MazyOS já gera |
+| **Brand Pack** | Identidade de movimento (durações, curvas, "personalidade") guardada como texto dentro de `tokens` | A marca como parte do projeto | Bloco `brand` tipado, importado do `marca.json` que o ZL_IA já gera |
 
 ### O que não adotamos, e por quê
 
@@ -460,7 +460,7 @@ editar, `validate`; se a validação falhar e não der para corrigir, `rollback`
 continua sendo `apply`, que faz as três coisas sozinho.
 
 **Plano antes de executar.** Para um pedido grande, o Claude escreve o roteiro e o arquivo de
-comandos, roda `apply --dry-run`, mostra o resumo e espera o "pode". As skills do MazyOS já
+comandos, roda `apply --dry-run`, mostra o resumo e espera o "pode". As skills do ZL_IA já
 trabalham assim (a `/video-reels` para no roteiro e espera aprovação).
 
 **Memória do cliente.** A skill lê `_memoria/preferencias.md` (tom de voz), o `marca.json` do
@@ -556,7 +556,7 @@ O que **não** entra, e o que cobre a falta:
 | 7 | **Dependências novas na raiz** fariam todo mundo que usa só as skills instalar React e Vite | Média | `package.json` separado dentro de `creative-engine/` (ADR-002). `npm run setup` não muda |
 | 8 | **As regras de animação do `CLAUDE.md`** (mola obrigatória, GSAP sobre Lenis) parecem valer para tudo | Baixa | Elas são da seção "Sites premium". Quando a etapa 5 entrar, uma linha no `CLAUDE.md` diz que não se aplicam ao motor de vídeo |
 | 9 | **`marketing/` é versionada** | Média | Tirar `marketing/criativos/` do Git (ADR-010) |
-| 10 | **O repositório original (`mazyos`) pode mudar arquivos da raiz** | Baixa | O motor numa pasta nova e isolada quase não gera conflito de merge. As únicas edições em arquivo existente são linhas novas no `.gitignore`, no `gatilhos.json`, no teste de gatilhos e no `CLAUDE.md` |
+| 10 | **O repositório original (`upstream`) pode mudar arquivos da raiz** | Baixa | O motor numa pasta nova e isolada quase não gera conflito de merge. As únicas edições em arquivo existente são linhas novas no `.gitignore`, no `gatilhos.json`, no teste de gatilhos e no `CLAUDE.md` |
 | 11 | **Fontes.** O `marca.json` guarda o nome da fonte, não o arquivo | Média | O projeto pede o arquivo da fonte como asset. Sem ele, a validação avisa que o render depende da fonte instalada |
 | 12 | **O clone de trabalho de um cliente** (dentro de `clientes/`) tem o push desligado de propósito | Baixa | O motor é desenvolvido e commitado só no repositório principal. O clone recebe por `git pull` |
 

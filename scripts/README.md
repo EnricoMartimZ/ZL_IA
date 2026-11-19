@@ -1,4 +1,4 @@
-# scripts/ — utilitários do MazyOS
+# scripts/ — utilitários do ZL_IA
 
 Scripts Node.js e Python que as skills chamam quando precisam fazer coisas fora do alcance da IA pura (gerar imagem, postar em rede social, renderizar HTML em PNG).
 
@@ -62,7 +62,7 @@ npm install playwright
 npx playwright install chromium
 ```
 
-## Como o MazyOS lida com isso
+## Como o ZL_IA lida com isso
 
 Quando você roda uma skill que precisa de script ausente, o Claude vai:
 

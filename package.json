@@ -1,8 +1,8 @@
 {
-  "name": "mazyos",
+  "name": "zl_ia",
   "private": true,
   "type": "module",
-  "description": "Scripts de apoio das skills do MazyOS",
+  "description": "Scripts de apoio das skills do ZL_IA",
   "scripts": {
     "setup": "npm install && npx playwright install chromium && git config core.hooksPath .githooks"
   },

@@ -1,6 +1,6 @@
 ---
 name: carrossel-semanal
-description: "Gera sozinho, sem pausas pra aprovação, os carrosséis da semana (padrão: 2) pro Instagram de um negócio no MazyOS: escolhe ideias da pauta, escreve o texto, monta o HTML com a identidade da marca, renderiza os PNGs 1080x1350, confere o visual, escreve a legenda, atualiza a pauta e faz commit. Feita pra rodar em rotina agendada; entrega rascunhos prontos pra revisão e nunca publica. Use quando o usuário (ou uma rotina) pedir \"carrossel semanal\", \"carrosséis da semana\", \"gera os posts da semana\" ou /carrossel-semanal [quantidade].\n"
+description: "Gera sozinho, sem pausas pra aprovação, os carrosséis da semana (padrão: 2) pro Instagram de um negócio no ZL_IA: escolhe ideias da pauta, escreve o texto, monta o HTML com a identidade da marca, renderiza os PNGs 1080x1350, confere o visual, escreve a legenda, atualiza a pauta e faz commit. Feita pra rodar em rotina agendada; entrega rascunhos prontos pra revisão e nunca publica. Use quando o usuário (ou uma rotina) pedir \"carrossel semanal\", \"carrosséis da semana\", \"gera os posts da semana\" ou /carrossel-semanal [quantidade].\n"
 ---
 
 # /carrossel-semanal — Carrosséis da semana no automático

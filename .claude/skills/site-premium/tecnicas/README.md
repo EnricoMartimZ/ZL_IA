@@ -6,7 +6,7 @@ mundo escolhido (`../mundos.md`).
 
 Quatro bancadas de teste, com tudo funcionando: `demo.html` (as primeiras técnicas), `mostruario.html` (os mundos 09 a 18, cada um com a sua técnica), `objetos.html` (esteira, varal, folha, placar e pontilhado) e `arsenal.html` (roda, medida, carta, troca, lista viva, profundidade, cursor, lupa, menu e o acabamento novo).
 
-Rodar de dentro da pasta `mazyos`, senão a pasta não é achada e toda página dá 404:
+Rodar de dentro da pasta `ZL_IA`, senão a pasta não é achada e toda página dá 404:
 
 ```bash
 python3 -m http.server 4174 --directory .claude/skills/site-premium/tecnicas   # → http://localhost:4174/objetos.html

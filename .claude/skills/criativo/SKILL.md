@@ -2,7 +2,7 @@
 name: criativo
 description: >
   Cria e edita anúncios animados verticais (1080x1920, 30 fps, 15 s em 4 cenas) com o Creative
-  Engine do MazyOS: um projeto em JSON que o Claude monta por comandos e que também abre num editor
+  Engine do ZL_IA: um projeto em JSON que o Claude monta por comandos e que também abre num editor
   web pra ajustar à mão. Roteiro em batidas, marca da loja, textos, fotos, formas e logo, entradas,
   saídas e transições, crítica por regras, variações e exportação em MP4. Use quando o usuário pedir
   "criativo", "anúncio animado", "anúncio em vídeo", "motion", "abrir no editor", "variações do

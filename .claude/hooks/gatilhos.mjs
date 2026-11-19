@@ -41,7 +41,7 @@ function principal() {
     systemMessage: `⚡ ${achadas.map((s) => '/' + s.skill).join(' · ')}`,
     hookSpecificOutput: {
       hookEventName: 'UserPromptSubmit',
-      additionalContext: `Gatilho de skill do MazyOS: este pedido parece com ${lista}. `
+      additionalContext: `Gatilho de skill do ZL_IA: este pedido parece com ${lista}. `
         + 'Se for mesmo isso, invoque a skill mais adequada com a ferramenta Skill antes de responder e siga as instruções dela, '
         + 'sem pedir pro usuário digitar o comando. Se o pedido não for isso, ignore este aviso.',
     },

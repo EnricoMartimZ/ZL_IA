@@ -1,4 +1,4 @@
-# MazyOS Creative Engine — Roadmap técnico e plano de testes
+# Creative Engine do ZL_IA — Roadmap técnico e plano de testes
 
 > **Situação:** todas as etapas, de 0.1 a 7.3, concluídas em 11/11/2026. Os quatro marcos (A, B, C
 > e D) foram atingidos. Nada foi commitado ainda. O que mudou em relação ao plano está na seção

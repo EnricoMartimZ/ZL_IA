@@ -13,7 +13,7 @@
 // --externos: confere também os links pra fora do site.
 // Sai com código 1 se houver achado crítico.
 //
-// Fronteira: o checar-site.js é a trava de entrega dos sites do MazyOS (texto de exemplo, console,
+// Fronteira: o checar-site.js é a trava de entrega dos sites do ZL_IA (texto de exemplo, console,
 // painel de contato, cor da marca). Este aqui serve pra qualquer site e vai fundo em busca.
 
 import { chromium } from 'playwright';
